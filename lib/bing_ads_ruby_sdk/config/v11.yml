@@ -1,0 +1,15 @@
+PRODUCTION:
+  AdInsight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
+  Bulk:               https://bulk.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v11/BulkService.svc?singleWsdl
+  CampaignManagement: https://campaign.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v11/CampaignManagementService.svc?singleWsdl
+  CustomerBilling:    https://clientcenter.api.bingads.microsoft.com/Api/Billing/v11/CustomerBillingService.svc?singleWsdl
+  CustomerManagement: https://clientcenter.api.bingads.microsoft.com/Api/CustomerManagement/v11/CustomerManagementService.svc?singleWsdl
+  Reporting:          https://reporting.api.bingads.microsoft.com/Api/Advertiser/Reporting/v11/ReportingService.svc?singleWsdl
+
+SANDBOX:
+  AdInsight:          https://adinsight.api.sandbox.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
+  Bulk:               https://bulk.api.sandbox.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v11/BulkService.svc?singleWsdl
+  CampaignManagement: https://campaign.api.sandbox.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v11/CampaignManagementService.svc?singleWsdl
+  CustomerBilling:    https://clientcenter.api.sandbox.bingads.microsoft.com/Api/Billing/v11/CustomerBillingService.svc?singleWsdl
+  CustomerManagement: https://clientcenter.api.sandbox.bingads.microsoft.com/Api/CustomerManagement/v11/CustomerManagementService.svc?singleWsdl
+  Reporting:          https://reporting.api.sandbox.bingads.microsoft.com/Api/Advertiser/Reporting/v11/ReportingService.svc?singleWsdl
