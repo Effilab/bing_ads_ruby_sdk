@@ -10,8 +10,6 @@ module BingAdsRubySdk
     attr_reader :credentials
 
     def initialize(url, credentials)
-      puts 'url', url
-
       @client = LolSoap::Client.new(File.read(open(url)))
       @token  = BingAdsRubySdk::OAuth2::AuthorizationCode.new(
         developer_token: credentials[:developer_token],
@@ -19,7 +17,7 @@ module BingAdsRubySdk
       )
       @credentials = credentials
       operations.keys.each do |op|
-        define_singleton_method(snakize(op)) { |body| request(op, body) }
+        define_singleton_method(snakize(op)) { |body = false| request(op, body) }
       end
     end
 
@@ -39,6 +37,7 @@ module BingAdsRubySdk
       req.header.content(
         authentication_token: token.fetch_or_refresh,
         developer_token:      credentials[:developer_token],
+        customer_id:          credentials[:customer_id],
         customer_account_id:  credentials[:customer_account_id]
       )
 
