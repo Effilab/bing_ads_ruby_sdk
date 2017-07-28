@@ -11,15 +11,6 @@ module BingAdsRubySdk
 
     def initialize(url, credentials)
       puts 'url', url
-      bing_ads_callbacks = LolSoap::Callbacks.new
-      bing_ads_callbacks.for('hash_params.before_build') << lambda do |args, node, type|
-        matcher = type.elements.keys.map { |name| name.tr('_', '').downcase }
-        args.each do |h|
-          found_at = matcher.index(h[:name].tr('_', '').downcase)
-          h[:name] = type.elements.keys[found_at] if found_at
-        end
-        args.sort_by! { |h| type.elements.keys.index(h[:name]) || 1 / 0.0 }
-      end
 
       @client = LolSoap::Client.new(File.read(open(url)))
       @token  = BingAdsRubySdk::OAuth2::AuthorizationCode.new(
