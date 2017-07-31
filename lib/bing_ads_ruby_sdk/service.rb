@@ -1,22 +1,19 @@
 require 'lolsoap'
+require 'bing_ads_ruby_sdk/lolsoap_callbacks/initialize'
 require 'net/http'
 require 'open-uri'
-require 'bing_ads_ruby_sdk/oauth2/authorization_code'
 
 module BingAdsRubySdk
   class Service
-    attr_reader :client
-    attr_reader :token
-    attr_reader :credentials
+    attr_reader :client, :shared_header
 
-    def initialize(url, credentials)
+    def initialize(url, shared_header)
       @client = LolSoap::Client.new(File.read(open(url)))
-      @token  = BingAdsRubySdk::OAuth2::AuthorizationCode.new(
-        developer_token: credentials[:developer_token],
-        client_id:       credentials[:client_id]
-      )
-      @credentials = credentials
+      @shared_header = shared_header
+      puts "Parsing WSDL : #{url}"
+
       operations.keys.each do |op|
+        puts "Defining opération : #{op}"
         define_singleton_method(snakize(op)) { |body = false| request(op, body) }
       end
     end
@@ -34,13 +31,7 @@ module BingAdsRubySdk
 
     def request(name, body)
       req = client.request(name)
-      req.header.content(
-        authentication_token: token.fetch_or_refresh,
-        developer_token:      credentials[:developer_token],
-        customer_id:          credentials[:customer_id],
-        customer_account_id:  credentials[:customer_account_id]
-      )
-
+      req.header.content(shared_header.content)
       req.body.content(body) if body
       puts req.content
       raw_response = Net::HTTP.post(URI(req.url), req.content, req.headers)
