@@ -1,9 +1,6 @@
-# require 'lolsoap'
 require 'YAML'
 require 'bing_ads_ruby_sdk/service'
 require 'bing_ads_ruby_sdk/header'
-
-# require 'open-uri'
 
 module BingAdsRubySdk
   class Api
