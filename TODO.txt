@@ -1,0 +1,6 @@
+replace "puts" by stdlib logger
+raise on blocking errors (oauth token, ...?)
+responses callbacks (also in lolsoap)
+  to convert keys to snakecase (and to sym?)
+  to replace long: %w[1 2 3] by [1, 2, 3]
+  to suppress intermediary useless hash keys
