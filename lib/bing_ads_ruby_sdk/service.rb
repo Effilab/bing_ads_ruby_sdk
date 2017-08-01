@@ -33,6 +33,7 @@ module BingAdsRubySdk
       req = client.request(name)
       req.header.content(shared_header.content)
       req.body.content(body) if body
+      BingAdsRubySdk.logger.info("Opération : #{name}")
       BingAdsRubySdk.logger.debug(req.content)
       raw_response = Net::HTTP.post(URI(req.url), req.content, req.headers)
       client.response(req, raw_response.body).body_hash

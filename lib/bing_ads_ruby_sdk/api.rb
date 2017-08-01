@@ -17,7 +17,7 @@ module BingAdsRubySdk
 
     def initialize(version: :v11,
                    environment: :production,
-                   log_level: Logger::WARN,
+                   log_level: Logger::INFO,
                    credentials: {})
 
       @header = Header.new(credentials)
