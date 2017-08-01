@@ -10,6 +10,7 @@ module BingAdsRubySdk
     def initialize(url, shared_header)
       @client = LolSoap::Client.new(File.read(open(url)))
       @shared_header = shared_header
+
       BingAdsRubySdk.logger.info("Parsing WSDL : #{url}")
 
       operations.keys.each do |op|
@@ -35,7 +36,13 @@ module BingAdsRubySdk
       req.body.content(body) if body
       BingAdsRubySdk.logger.info("Opération : #{name}")
       BingAdsRubySdk.logger.debug(req.content)
-      raw_response = Net::HTTP.post(URI(req.url), req.content, req.headers)
+      url = URI(req.url)
+      raw_response =
+        Net::HTTP.start(url.hostname,
+                        url.port,
+                        use_ssl: url.scheme == 'https') do |http|
+          http.post(url.path, req.content, req.headers)
+        end
       client.response(req, raw_response.body).body_hash
     end
   end
