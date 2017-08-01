@@ -10,10 +10,10 @@ module BingAdsRubySdk
     def initialize(url, shared_header)
       @client = LolSoap::Client.new(File.read(open(url)))
       @shared_header = shared_header
-      puts "Parsing WSDL : #{url}"
+      BingAdsRubySdk.logger.info("Parsing WSDL : #{url}")
 
       operations.keys.each do |op|
-        puts "Defining opération : #{op}"
+        BingAdsRubySdk.logger.info("Defining opération : #{op}")
         define_singleton_method(snakize(op)) { |body = false| request(op, body) }
       end
     end
@@ -33,7 +33,7 @@ module BingAdsRubySdk
       req = client.request(name)
       req.header.content(shared_header.content)
       req.body.content(body) if body
-      puts req.content
+      BingAdsRubySdk.logger.debug(req.content)
       raw_response = Net::HTTP.post(URI(req.url), req.content, req.headers)
       client.response(req, raw_response.body).body_hash
     end
