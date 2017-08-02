@@ -18,5 +18,10 @@ end
 
 response_callback = LolSoap::Callbacks.new
 response_callback.for('hash_builder.after_children_hash') << lambda do |hash, node, type|
-  hash.keys.each { |k| hash[BingAdsRubySdk::Utils.snakize(k).to_sym] = hash.delete(k) }
+  hash.keys.each do |k|
+    val = hash.delete(k)
+    # TODO : use the type from wsdl instead ?
+    val = val[:long] if val.is_a?(Hash) && val[:long].is_a?(Array)
+    hash[BingAdsRubySdk::Utils.snakize(k).to_sym] = val
+  end
 end
