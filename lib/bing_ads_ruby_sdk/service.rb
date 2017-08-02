@@ -1,5 +1,6 @@
 require 'lolsoap'
 require 'bing_ads_ruby_sdk/lolsoap_callbacks/initialize'
+require 'bing_ads_ruby_sdk/utils'
 require 'net/http'
 require 'open-uri'
 
@@ -15,15 +16,8 @@ module BingAdsRubySdk
 
       operations.keys.each do |op|
         BingAdsRubySdk.logger.info("Defining opération : #{op}")
-        define_singleton_method(snakize(op)) { |body = false| request(op, body) }
+        define_singleton_method(Utils.snakize(op)) { |body = false| request(op, body) }
       end
-    end
-
-    def snakize(string)
-      string.gsub(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
-            .gsub(/([a-z\d])([A-Z])/, '\1_\2')
-            .tr('-', '_')
-            .downcase
     end
 
     def operations
@@ -43,7 +37,9 @@ module BingAdsRubySdk
                         use_ssl: url.scheme == 'https') do |http|
           http.post(url.path, req.content, req.headers)
         end
-      client.response(req, raw_response.body).body_hash
+      client.response(req, raw_response.body).body_hash.tap do |b_h|
+        BingAdsRubySdk.logger.debug(b_h)
+      end
     end
   end
 end

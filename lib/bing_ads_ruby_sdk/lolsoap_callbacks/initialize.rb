@@ -1,3 +1,5 @@
+require 'bing_ads_ruby_sdk/utils'
+
 request_callback = LolSoap::Callbacks.new
 request_callback.for('hash_params.before_build') << lambda do |args, node, type|
   matcher = type.elements.keys.map { |name| name.tr('_', '').downcase }
@@ -12,4 +14,9 @@ request_callback.for('hash_params.before_build') << lambda do |args, node, type|
     end
   end
   args.sort_by! { |h| type.elements.keys.index(h[:name]) || 1 / 0.0 }
+end
+
+response_callback = LolSoap::Callbacks.new
+response_callback.for('hash_builder.after_children_hash') << lambda do |hash, node, type|
+  hash.keys.each { |k| hash[BingAdsRubySdk::Utils.snakize(k).to_sym] = hash.delete(k) }
 end
