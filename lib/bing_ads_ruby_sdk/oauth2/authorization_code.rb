@@ -5,11 +5,13 @@ require 'bing_ads_ruby_sdk/oauth2/fs_store'
 
 module BingAdsRubySdk
   module OAuth2
-    # Adds some usefull methods to Signet::OAuth2::Client
+    # Adds some useful methods to Signet::OAuth2::Client
     class AuthorizationCode
       attr_reader :client
       attr_reader :store
-      # get or fech an access token
+
+      # Get or fetch an access token
+      # @return [String] The access token
       def fetch_or_refresh
         if client.expired?
           client.refresh!
@@ -29,15 +31,20 @@ module BingAdsRubySdk
         refresh_from_store
       end
 
+      # Get the access token from the API and write it to the store
       # @param [String] code authorization code from bing's ads.
       # @see Rake oauth2 tasks
+      # @return [File] the file the code was written to
       def fetch_from_code(code)
         client.code = code
         client.fetch_access_token!
         store.write(token_data)
       end
 
-      # Refresh token from previous refresh!
+      # Refresh existing authorization token
+      # @return [Signet::OAuth2::Client, nil] an instance of the client or
+      #   nil if the token can't be read from the store
+      # @todo check if this return value is expected
       def refresh_from_store
         ext_token = store.read
         client.update_token!(ext_token) if ext_token
