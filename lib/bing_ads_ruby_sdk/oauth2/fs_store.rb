@@ -2,7 +2,7 @@ require 'json'
 
 module BingAdsRubySdk
   module OAuth2
-    # Ouath2 token default uncripted File System store
+    # Oauth2 token default non-encrypted File System store
     class FsStore
       attr_reader :token_key
 

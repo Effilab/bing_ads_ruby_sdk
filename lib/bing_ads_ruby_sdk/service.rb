@@ -1,5 +1,4 @@
 require 'lolsoap'
-require 'bing_ads_ruby_sdk/lolsoap_callbacks/initialize'
 require 'bing_ads_ruby_sdk/utils'
 require 'net/http'
 require 'open-uri'
@@ -7,6 +6,29 @@ require 'open-uri'
 module BingAdsRubySdk
   class Service
     attr_reader :client, :shared_header
+
+    def abstract_map
+      { 'SignupCustomer' => { 'AdvertiserAccount' => 'Account' } }
+    end
+
+    def with_abstract(abstract_types, wsdl)
+      return yield if abstract_types.nil?
+      BingAdsRubySdk.abstract_callback.for('hash_params.before_build') << lambda do |args, node, type|
+        args.each do |h|
+          abstract_types.each do |concrete, abstract|
+            next unless concrete.tr('_', '').casecmp(h[:name].tr('_', '')).zero?
+
+            BingAdsRubySdk.logger.info("Building concrete type : #{concrete}")
+            node.add_namespace_definition('xsi', 'http://www.w3.org/2001/XMLSchema-instance')
+            h[:args] << { 'xsi:type' => wsdl.types[concrete].prefix_and_name }
+            h[:name] = abstract
+            h[:sub_type] = wsdl.types[concrete]
+          end
+        end
+      end
+      yield
+      BingAdsRubySdk.abstract_callback.for('hash_params.before_build').clear
+    end
 
     def initialize(url, shared_header)
       @client = LolSoap::Client.new(File.read(open(url)))
@@ -16,7 +38,9 @@ module BingAdsRubySdk
 
       operations.keys.each do |op|
         BingAdsRubySdk.logger.info("Defining opération : #{op}")
-        define_singleton_method(Utils.snakize(op)) { |body = false| request(op, body) }
+        define_singleton_method(Utils.snakize(op)) do |body = false|
+          request(op, body, abstract_map[op])
+        end
       end
     end
 
@@ -24,10 +48,14 @@ module BingAdsRubySdk
       client.wsdl.operations
     end
 
-    def request(name, body)
+    def request(name, body, abstract_types)
       req = client.request(name)
       req.header.content(shared_header.content)
-      req.body.content(body) if body
+
+      with_abstract(abstract_types, client.wsdl) do
+        req.body.content(body) if body
+      end
+
       BingAdsRubySdk.logger.info("Opération : #{name}")
       BingAdsRubySdk.logger.debug(req.content)
       url = URI(req.url)
