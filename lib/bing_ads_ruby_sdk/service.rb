@@ -9,12 +9,9 @@ module BingAdsRubySdk
   class Service
     attr_reader :client, :shared_header
 
-    def abstract_map
-      { 'SignupCustomer' => { 'AdvertiserAccount' => 'Account' } }
-    end
-
     def with_abstract(abstract_types, wsdl)
       return yield if abstract_types.nil?
+
       BingAdsRubySdk.abstract_callback.for('hash_params.before_build') << lambda do |args, node, type|
         args.each do |h|
           abstract_types.each do |concrete, abstract|
@@ -32,14 +29,14 @@ module BingAdsRubySdk
       BingAdsRubySdk.abstract_callback.for('hash_params.before_build').clear
     end
 
-    def initialize(url, shared_header)
+    def initialize(url, shared_header, abstract_map)
       @client = LolSoap::Client.new(File.read(open(url)))
       @shared_header = shared_header
-
+      abstract_map ||= {}
       BingAdsRubySdk.logger.info("Parsing WSDL : #{url}")
 
       operations.keys.each do |op|
-        BingAdsRubySdk.logger.info("Defining opération : #{op}")
+        BingAdsRubySdk.logger.info("Defining operation : #{op}")
         define_singleton_method(Utils.snakize(op)) do |body = false|
           request(op, body, abstract_map[op])
         end
@@ -58,7 +55,7 @@ module BingAdsRubySdk
         req.body.content(body) if body
       end
 
-      BingAdsRubySdk.logger.info("Opération : #{name}")
+      BingAdsRubySdk.logger.info("Operation : #{name}")
       BingAdsRubySdk.logger.debug(req.content)
       url = URI(req.url)
       raw_response =

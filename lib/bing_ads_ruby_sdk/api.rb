@@ -7,7 +7,7 @@ require 'bing_ads_ruby_sdk/header'
 module BingAdsRubySdk
   class Api
 
-    attr_reader :services, :header
+    attr_reader :header
     # , :cache_path
 
     # @param config [Hash] shared soap header customer parameters
@@ -44,17 +44,20 @@ module BingAdsRubySdk
 
       @header = Header.new(credentials)
       # Get the URLs for the WSDL that defines the services on the API
-      @services = YAML.load_file(
+      api_config = YAML.load_file(
         "#{File.expand_path('../', __FILE__)}/config/#{version}.yml"
-      )[environment.to_s.upcase]
+      )
       # @cache_path = "#{File.expand_path('../', __FILE__)}/.cache/#{version}"
       # FileUtils.mkdir_p @cache_path
 
       # Create a service object based on the WSDL in each configuration entry
-      services.each do |serv, url|
+      api_config[environment.to_s.upcase].each do |serv, url|
         BingAdsRubySdk.logger.info("Defining service #{serv} accessors")
         self.class.send(:attr_reader, serv)
-        instance_variable_set("@#{serv}", Service.new(url, header))
+        instance_variable_set(
+          "@#{serv}",
+          Service.new(url, header, api_config['ABSTRACT'][serv])
+        )
       end
     end
   end
