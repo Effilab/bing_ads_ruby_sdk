@@ -1,7 +1,7 @@
 require 'bing_ads_ruby_sdk/oauth2/authorization_code'
 
 module BingAdsRubySdk
-  # Contains information to add to the SOAP Request header
+  # Contains the SOAP Request header informations
   class Header
     attr_reader :credentials, :token
     attr_accessor :customer
