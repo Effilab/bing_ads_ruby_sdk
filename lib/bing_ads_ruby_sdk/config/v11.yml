@@ -1,7 +1,16 @@
 ABSTRACT:
   customer_management:
     SignupCustomer:
-      AdvertiserAccount: 'Account'
+      AdvertiserAccount: Account
+  campaign_management:
+    AddAds:
+      ExpandedTextAd: Ad
+    DeleteAds:
+      ExpandedTextAd: Ad
+    GetAdsByAdGroupId:
+      ExpandedTextAd: Ad
+    UpdateAds:
+      ExpandedTextAd: Ad
 
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
