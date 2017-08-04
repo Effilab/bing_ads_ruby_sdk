@@ -56,7 +56,7 @@ module BingAdsRubySdk
         BingAdsRubySdk.logger.info("Client #{serv} from URL")
         LolSoap::Client.new(File.read(open(url))).tap do |client|
           # TODO as atomic_write does to avoid broken cache
-          Marshal.dump(client, File.open(file, 'w+'))
+          File.open(file, 'w+') { |f| Marshal.dump(client, f) }
         end
       end
     end

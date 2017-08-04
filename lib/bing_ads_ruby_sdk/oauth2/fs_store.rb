@@ -16,7 +16,7 @@ module BingAdsRubySdk
       # @return [nil] if the token_key don't exist.
       def write(value)
         return nil unless token_key
-        JSON.dump(value, File.open(".#{token_key}", 'w+'))
+        File.open(".#{token_key}", 'w+') { JSON.dump(value, f) }
       end
 
       # Reads the token from file
