@@ -1,5 +1,6 @@
 require 'lolsoap'
 require 'bing_ads_ruby_sdk/utils'
+require 'bing_ads_ruby_sdk/abstract_type'
 require 'net/http'
 require 'open-uri'
 
@@ -7,38 +8,17 @@ module BingAdsRubySdk
 
   # Manages communication with the a defined SOAP service on the API
   class Service
-    attr_reader :client, :shared_header
+    attr_reader :client, :shared_header, :abstract_types
 
-    def with_abstract(abstract_types, wsdl)
-      return yield if abstract_types.nil?
-
-      BingAdsRubySdk.abstract_callback.for('hash_params.before_build') << lambda do |args, node, type|
-        args.each do |h|
-          abstract_types.each do |concrete, abstract|
-            next unless concrete.tr('_', '').casecmp(h[:name].tr('_', '')).zero?
-
-            BingAdsRubySdk.logger.info("Building concrete type : #{concrete}")
-            node.add_namespace_definition('xsi', 'http://www.w3.org/2001/XMLSchema-instance')
-            h[:args] << { 'xsi:type' => wsdl.types[concrete].prefix_and_name }
-            h[:name] = abstract
-            h[:sub_type] = wsdl.types[concrete]
-          end
-        end
-      end
-      yield
-      BingAdsRubySdk.abstract_callback.for('hash_params.before_build').clear
-    end
-
-    def initialize(url, shared_header, abstract_map)
-      @client = LolSoap::Client.new(File.read(open(url)))
+    def initialize(client, shared_header, abstract_map)
+      @client = client
       @shared_header = shared_header
-      abstract_map ||= {}
-      BingAdsRubySdk.logger.info("Parsing WSDL : #{url}")
+      @abstract_types = AbstractType.new(@client.wsdl, abstract_map)
 
       operations.keys.each do |op|
         BingAdsRubySdk.logger.info("Defining operation : #{op}")
         define_singleton_method(Utils.snakize(op)) do |body = false|
-          request(op, body, abstract_map[op])
+          request(op, body)
         end
       end
     end
@@ -47,11 +27,11 @@ module BingAdsRubySdk
       client.wsdl.operations
     end
 
-    def request(name, body, abstract_types)
+    def request(name, body)
       req = client.request(name)
       req.header.content(shared_header.content)
 
-      with_abstract(abstract_types, client.wsdl) do
+      abstract_types.with(name) do
         req.body.content(body) if body
       end
 

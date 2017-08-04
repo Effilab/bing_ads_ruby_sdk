@@ -1,6 +1,7 @@
 require 'yaml'
 require 'logger'
 require 'fileutils'
+require 'lolsoap'
 require 'bing_ads_ruby_sdk/service'
 require 'bing_ads_ruby_sdk/header'
 
@@ -8,7 +9,6 @@ module BingAdsRubySdk
   class Api
 
     attr_reader :header
-    # , :cache_path
 
     # @param config [Hash] shared soap header customer parameters
     # @option config [Symbol] :id customer id
@@ -16,20 +16,6 @@ module BingAdsRubySdk
     def customer(config)
       header.customer = config
     end
-
-    # def load_or_parse(service, url, header)
-    #   file = "#{cache_path}/#{service}"
-    #   if File.file?(file)
-    #     BingAdsRubySdk.logger.info('From cache')
-    #     Marshal.load(IO.read(file))
-    #   else
-    #     serv = Service.new(url, header)
-    #     # Marshal don't work with singleton methods
-    #     # Do as atomic_write does to avoid broken cache
-    #     Marshal.dump(serv, File.open(file, 'w+'))
-    #     serv
-    #   end
-    # end
 
     # @param version [Symbol] API version, used to choose WSDL configuration version
     # @param environment [Symbol]
@@ -47,8 +33,8 @@ module BingAdsRubySdk
       api_config = YAML.load_file(
         "#{File.expand_path('../', __FILE__)}/config/#{version}.yml"
       )
-      # @cache_path = "#{File.expand_path('../', __FILE__)}/.cache/#{version}"
-      # FileUtils.mkdir_p @cache_path
+      @cache_path = "#{File.expand_path('../', __FILE__)}/.cache/#{version}"
+      FileUtils.mkdir_p @cache_path
 
       # Create a service object based on the WSDL in each configuration entry
       api_config[environment.to_s.upcase].each do |serv, url|
@@ -56,9 +42,24 @@ module BingAdsRubySdk
         self.class.send(:attr_reader, serv)
         instance_variable_set(
           "@#{serv}",
-          Service.new(url, header, api_config['ABSTRACT'][serv])
+          Service.new(load_or_new(serv, url), header, api_config['ABSTRACT'][serv])
         )
       end
     end
+
+    def load_or_new(serv, url)
+      file = "#{@cache_path}/#{serv}"
+      if File.file?(file)
+        BingAdsRubySdk.logger.info("Client #{serv} from cache")
+        Marshal.load(IO.read(file))
+      else
+        BingAdsRubySdk.logger.info("Client #{serv} from URL")
+        LolSoap::Client.new(File.read(open(url))).tap do |client|
+          # TODO as atomic_write does to avoid broken cache
+          Marshal.dump(client, File.open(file, 'w+'))
+        end
+      end
+    end
+
   end
 end
