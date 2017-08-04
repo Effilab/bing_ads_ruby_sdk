@@ -6,7 +6,7 @@ require 'byebug'
 # The logger is a module instance variable
 # LolSoap callbacks are module instance variable
 module BingAdsRubySdk
-  @logger = Logger.new(STDERR)
+  @logger = Logger.new(STDERR, level: :info)
 
   class << self
     attr_accessor :logger
