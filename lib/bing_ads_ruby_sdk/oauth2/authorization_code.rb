@@ -1,15 +1,18 @@
 require 'signet/oauth_2/client'
 require 'bing_ads_ruby_sdk/oauth2/fs_store'
-# @todo add and verify state with SecureRandom.hex(10)
+# @todo see if we need to add and verify state with SecureRandom.hex(10)
+# We need the state param where we use a web UI.
 # require 'securerandom'
 
 module BingAdsRubySdk
   module OAuth2
-    # Adds some usefull methods to Signet::OAuth2::Client
+    # Adds some useful methods to Signet::OAuth2::Client
     class AuthorizationCode
       attr_reader :client
       attr_reader :store
-      # get or fech an access token
+
+      # Get or fetch an access token.
+      # @return [String] The access token
       def fetch_or_refresh
         if client.expired?
           client.refresh!
@@ -29,15 +32,19 @@ module BingAdsRubySdk
         refresh_from_store
       end
 
+      # Request the Api to exchange the code for the access token.
+      # Save the access token through the store.
       # @param [String] code authorization code from bing's ads.
-      # @see Rake oauth2 tasks
+      # @return [#store.write] store's write output
       def fetch_from_code(code)
         client.code = code
         client.fetch_access_token!
         store.write(token_data)
       end
 
-      # Refresh token from previous refresh!
+      # Refresh existing authorization token
+      # @return [Signet::OAuth2::Client] if everything went well
+      # @return [nil] if the token can't be read from the store
       def refresh_from_store
         ext_token = store.read
         client.update_token!(ext_token) if ext_token
@@ -68,8 +75,4 @@ module BingAdsRubySdk
       end
     end
   end
-
-  # unless ARGV.empty? || ARGV.first.empty?
-  #   OAuth2::AuthorizationCode.token_from_code(ARGV.first)
-  # end
 end
