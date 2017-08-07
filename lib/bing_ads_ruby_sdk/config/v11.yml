@@ -2,6 +2,8 @@ ABSTRACT:
   customer_management:
     SignupCustomer:
       AdvertiserAccount: Account
+    UpdateAccount:
+      AdvertiserAccount: Account
   campaign_management:
     AddAds:
       ExpandedTextAd: Ad
