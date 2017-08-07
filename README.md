@@ -6,9 +6,12 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add those lines to your application's Gemfile:
 
 ```ruby
+# remove after/if merged
+gem 'lolsoap', github: 'effilab/lolsoap', branch: 'edge'
+
 gem 'bing_ads_ruby_sdk'
 ```
 
@@ -21,8 +24,28 @@ Or install it yourself as:
     $ gem install bing_ads_ruby_sdk
 
 ## Usage
+### Configure the app
+```ruby
+BingAdsRubySdk::Logger.level = :debug
 
-TODO: Write usage instructions here
+@api ||= BingAdsRubySdk::Api.new(
+  oauth_store: MyRedisStore,
+  credentials: {
+    developer_token: '123abc',
+    client_id:       '1a-2b-3c'
+  }
+).tap do |api|
+  api.customer(
+    id:         123,
+    account_id: 456
+  )
+end
+```
+### Bootsrap Authorization code flow
+1. Follow Bing Ads's doc to setup a native app
+ > https://msdn.microsoft.com/en-us/library/bing-ads-user-authentication-oauth-guide(v=msads.100).aspx
+
+* Follow the bin/token_from_code instructions to generate the token.
 
 ## Development
 
@@ -32,7 +55,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/bing_ads_ruby_sdk.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Effilab/bing_ads_ruby_sdk.
 
 ## License
 
