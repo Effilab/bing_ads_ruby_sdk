@@ -11,14 +11,18 @@ module BingAdsRubySdk
       args.each do |h|
         @abstract_types.each do |concrete, abstract|
           next unless concrete.tr('_', '').casecmp(h[:name].tr('_', '')).zero?
-
-          BingAdsRubySdk.logger.info("Building concrete type : #{concrete}")
+          BingAdsRubySdk.logger.debug("Add xsi ns for : #{concrete}")
           node.add_namespace_definition('xsi', 'http://www.w3.org/2001/XMLSchema-instance')
-          h[:args] << { 'xsi:type' => wsdl.types[concrete].prefix_and_name }
-          h[:name] = abstract
-          h[:sub_type] = wsdl.types[concrete]
+          change_args(h, abstract, concrete)
         end
       end
+    end
+
+    def change_args(h, abstract, concrete)
+      BingAdsRubySdk.logger.info("Building concrete type : #{concrete}")
+      h[:args] << { 'xsi:type' => wsdl.types[concrete].prefix_and_name }
+      h[:name] = abstract
+      h[:sub_type] = wsdl.types[concrete]
     end
 
     def with(operation)
