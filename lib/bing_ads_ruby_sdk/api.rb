@@ -26,9 +26,10 @@ module BingAdsRubySdk
     # @option credentials [String] :client_id The client ID used to acces the API
     def initialize(version: :v11,
                    environment: :production,
+                   oauth_store: nil,
                    credentials: {})
 
-      @header = Header.new(credentials)
+      @header = Header.new(credentials, oauth_store)
       # Get the URLs for the WSDL that defines the services on the API
       api_config = YAML.load_file(
         "#{File.expand_path('../', __FILE__)}/config/#{version}.yml"

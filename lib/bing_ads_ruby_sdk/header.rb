@@ -9,9 +9,10 @@ module BingAdsRubySdk
     # @param credentials [Hash] to be used for API authorization
     # @option credentials :developer_token [String]
     # @option credentials :client_id [String]
-    def initialize(credentials)
+    def initialize(credentials, oauth_store)
       @credentials = credentials
       @token = BingAdsRubySdk::OAuth2::AuthorizationCode.new(
+        store:           oauth_store,
         developer_token: credentials[:developer_token],
         client_id:       credentials[:client_id]
       )
