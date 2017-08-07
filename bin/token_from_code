@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "bing_ads_ruby_sdk"
+
+args = {
+  developer_token: 'Developer token ?',
+  client_id: 'Client id ?',
+  store: 'Store ? (default FsStore)'
+}
+
+args.keys.each do |key|
+  STDOUT.flush
+  puts args[key]
+  args[key] = gets.chomp
+end
+
+flow = BingAdsRubySdk::OAuth2::AuthorizationCode.new(args)
+
+puts 'Go to this URL and paste full final redirected URL', flow.code_url, nil
+
+full_url = gets.chomp
+query_params = URI.decode_www_form(URI.parse(full_url).query)
+code = query_params.detect { |arg| arg.first.casecmp('CODE').zero? }.last
+
+puts "Writting token with #{flow.store}", flow.fetch_from_code(code)

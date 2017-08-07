@@ -12,7 +12,7 @@ module BingAdsRubySdk
       attr_reader :store
 
       # Get or fetch an access token.
-      # @return [String] The access token
+      # @return [String] The access token.
       def fetch_or_refresh
         if client.expired?
           client.refresh!
@@ -32,10 +32,17 @@ module BingAdsRubySdk
         refresh_from_store
       end
 
+      # @return [String] unless client.client_id url is nil interpolated url.
+      # @return [nil] if client.client_id is nil.
+      def code_url
+        return nil if client.client_id.nil?
+        "https://login.live.com/oauth20_authorize.srf?client_id=#{client.client_id}&scope=bingads.manage&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf"
+      end
+
       # Request the Api to exchange the code for the access token.
       # Save the access token through the store.
       # @param [String] code authorization code from bing's ads.
-      # @return [#store.write] store's write output
+      # @return [#store.write] store's write output.
       def fetch_from_code(code)
         client.code = code
         client.fetch_access_token!
@@ -43,8 +50,8 @@ module BingAdsRubySdk
       end
 
       # Refresh existing authorization token
-      # @return [Signet::OAuth2::Client] if everything went well
-      # @return [nil] if the token can't be read from the store
+      # @return [Signet::OAuth2::Client] if everything went well.
+      # @return [nil] if the token can't be read from the store.
       def refresh_from_store
         ext_token = store.read
         client.update_token!(ext_token) if ext_token
