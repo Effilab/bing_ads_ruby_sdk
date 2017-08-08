@@ -1,15 +1,11 @@
 # BingAdsRubySdk
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/bing_ads_ruby_sdk`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
-Add those lines to your application's Gemfile:
+Add the following to your application's Gemfile:
 
 ```ruby
-# remove after/if merged
+# Once the merge request is approved we will remove github dependence
 gem 'lolsoap', github: 'effilab/lolsoap', branch: 'edge'
 
 gem 'bing_ads_ruby_sdk'
@@ -41,10 +37,10 @@ BingAdsRubySdk::Logger.level = :debug
   )
 end
 ```
-### Bootsrap Authorization code flow
-1. Follow Bing Ads's doc to setup a native app
- > https://msdn.microsoft.com/en-us/library/bing-ads-user-authentication-oauth-guide(v=msads.100).aspx
 
+### Bootsrap Authorization code flow
+* Follow Bing Ads documentation to setup a native app
+  * https://msdn.microsoft.com/en-us/library/bing-ads-user-authentication-oauth-guide(v=msads.100).aspx
 * Follow the bin/token_from_code instructions to generate the token.
 
 ## Development

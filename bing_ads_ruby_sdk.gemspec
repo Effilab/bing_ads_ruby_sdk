@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = %w[sami@effilab-local.com]
 
   spec.summary       = 'Bing Ads Ruby SDK'
-  spec.description   = 'Higher level than lolsoap but as fast !'
+  spec.description   = 'Higher level than lolsoap but just as fast !'
   spec.homepage      = 'https://github.com/Effilab/bing_ads_ruby_sdk'
   spec.license       = 'MIT'
 
