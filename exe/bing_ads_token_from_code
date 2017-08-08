@@ -6,7 +6,7 @@ require "bing_ads_ruby_sdk"
 args = {
   developer_token: 'Developer token ?',
   client_id: 'Client id ?',
-  store: 'Store ? (default FsStore)'
+  store: 'Persistence method ? (default FsStore - File System persistence)'
 }
 
 args.keys.each do |key|
@@ -17,10 +17,12 @@ end
 
 flow = BingAdsRubySdk::OAuth2::AuthorizationCode.new(args)
 
-puts 'Go to this URL and paste full final redirected URL', flow.code_url, nil
+puts 'Follow the instructions at this URL. You will be redirected to a URL at the end. Paste it here in the console',
+     flow.code_url,
+     nil
 
 full_url = gets.chomp
 query_params = URI.decode_www_form(URI.parse(full_url).query)
 code = query_params.detect { |arg| arg.first.casecmp('CODE').zero? }.last
 
-puts "Writting token with #{flow.store}", flow.fetch_from_code(code)
+puts "Writing token with #{ flow.store }", flow.fetch_from_code(code)
