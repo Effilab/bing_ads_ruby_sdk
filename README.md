@@ -39,9 +39,19 @@ end
 ```
 
 ### Bootsrap Authorization code flow
+Before you can connect to the Bing Ads API you need to make an authentication 
+token available to the SDK. Here's how to do it: 
+
 * Follow Bing Ads documentation to setup a native app
   * https://msdn.microsoft.com/en-us/library/bing-ads-user-authentication-oauth-guide(v=msads.100).aspx
-* Follow the bin/token_from_code instructions to generate the token.
+  
+* Run the token generator and follow the instructions
+
+```
+$ bing_ads_token_from_code
+
+$ cat .token* # Should output something like this: {"access_token":"....
+```
 
 ## Development
 
