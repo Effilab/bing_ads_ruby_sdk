@@ -6,7 +6,7 @@ require "bing_ads_ruby_sdk"
 args = {
   developer_token: 'Developer token ?',
   client_id: 'Client id ?',
-  store: 'Persistence method ? (default FsStore - File System persistence)'
+  store: 'Store ? (default FsStore)'
 }
 
 args.keys.each do |key|
