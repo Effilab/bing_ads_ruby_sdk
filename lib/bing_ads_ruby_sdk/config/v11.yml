@@ -13,6 +13,16 @@ ABSTRACT:
       ExpandedTextAd: Ad
     UpdateAds:
       ExpandedTextAd: Ad
+    AddCampaignCriterions:
+      NegativeCampaignCriterion: CampaignCriterion
+      BiddableCampaignCriterion: CampaignCriterion
+      LocationCriterion: Criterion
+    DeleteCampaignCriterions:
+      NegativeCampaignCriterion: CampaignCriterion
+    GetCampaignCriterionsByIds:
+      NegativeCampaignCriterion: CampaignCriterion
+    UpdateCampaignCriterions:
+      NegativeCampaignCriterion: CampaignCriterion
 
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
