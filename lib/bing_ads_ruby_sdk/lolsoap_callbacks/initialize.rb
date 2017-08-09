@@ -1,7 +1,20 @@
 require 'bing_ads_ruby_sdk/utils'
 
+# TODO: move this to a class
+def null_type_fields(args, type)
+  args.select do |arg|
+    type.elements[arg[:name]].type.is_a?(LolSoap::WSDL::NullType) && arg[:args].compact.empty?
+  end
+end
+
+def mark_null_types_with_nil(args, type)
+  null_type_fields(args, type).each { |arg| arg[:args] << { 'xsi:nil' => true } }
+end
+
 # Modify the request data before it is sent via the SOAP client
 BingAdsRubySdk.request_callback.for('hash_params.before_build') << lambda do |args, node, type|
+  # TODO: move all this to a class
+
   # Fuzzy matching for elements names
   matcher = type.elements.keys.map { |name| name.tr('_', '').downcase }
   args.each do |h|
@@ -11,6 +24,8 @@ BingAdsRubySdk.request_callback.for('hash_params.before_build') << lambda do |ar
 
   # Sorts the request data on the wsdl order
   args.sort_by! { |h| type.elements.keys.index(h[:name]) || 1 / 0.0 }
+
+  mark_null_types_with_nil(args, type)
 end
 
 # Modify the response data whilst it is being processed by the SOAP client
