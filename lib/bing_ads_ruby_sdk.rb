@@ -19,4 +19,6 @@ BingAdsRubySdk.abstract_callback = LolSoap::Callbacks.new
 BingAdsRubySdk.request_callback  = LolSoap::Callbacks.new
 BingAdsRubySdk.response_callback = LolSoap::Callbacks.new
 
-require 'bing_ads_ruby_sdk/lolsoap_callbacks/initialize'
+require 'bing_ads_ruby_sdk/soap_callback_manager'
+
+BingAdsRubySdk::SoapCallbackManager.register_callbacks
