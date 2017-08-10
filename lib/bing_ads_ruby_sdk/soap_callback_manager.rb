@@ -68,7 +68,8 @@ module BingAdsRubySdk
 
     def self.null_type_fields(args, type)
       args.select do |arg|
-        type.elements[arg[:name]]&.type.is_a?(LolSoap::WSDL::NullType) &&
+        type.elements[arg[:name]] &&
+          type.elements[arg[:name]].type.is_a?(LolSoap::WSDL::NullType) &&
           arg[:args].compact.empty?
       end
     end
