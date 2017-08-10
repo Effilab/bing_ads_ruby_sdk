@@ -38,25 +38,25 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
         {
           'CamelCase' => generate_non_null_element('CamelCase'),
           'With_Underscore' => generate_non_null_element('With_Underscore'),
-          'Oneword' => generate_non_null_element('Oneword'),
+          'Oneword' => generate_non_null_element('Oneword')
         }
       end
       let(:hashes_to_convert) do
         [
           { name: 'camel_case', args: [] },
           { name: 'with_underscore', args: [] },
-          { name: 'one_word', args: [] },
+          { name: 'one_word', args: [] }
         ]
       end
 
       it 'should be mapped to the WSDL element name' do
         expect(hashes_to_convert).to match_array(
-                          [
-                            { name: 'CamelCase', args: [] },
-                            { name: 'With_Underscore', args: [] },
-                            { name: 'Oneword', args: [] },
-                          ]
-                        )
+          [
+            { name: 'CamelCase', args: [] },
+            { name: 'With_Underscore', args: [] },
+            { name: 'Oneword', args: [] }
+          ]
+        )
       end
     end
 
@@ -65,25 +65,25 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
         {
           'First' => generate_non_null_element('First'),
           'Second' => generate_non_null_element('Second'),
-          'Third' => generate_non_null_element('Third'),
+          'Third' => generate_non_null_element('Third')
         }
       end
       let(:hashes_to_convert) do
         [
           { name: 'third', args: [] },
           { name: 'first', args: [] },
-          { name: 'second', args: [] },
+          { name: 'second', args: [] }
         ]
       end
 
       it 'should order the request data following the WSDL' do
         expect(hashes_to_convert).to eq(
-                                       [
-                                         { name: 'First', args: [] },
-                                         { name: 'Second', args: [] },
-                                         { name: 'Third', args: [] },
-                                       ]
-                                     )
+          [
+            { name: 'First', args: [] },
+            { name: 'Second', args: [] },
+            { name: 'Third', args: [] }
+          ]
+        )
       end
     end
 
@@ -91,21 +91,21 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
       let(:elements) do
         {
           'ShouldHaveNil' => null_element,
-          'ShouldNotHaveNil' => generate_non_null_element('ShouldNotHaveNil'),
+          'ShouldNotHaveNil' => generate_non_null_element('ShouldNotHaveNil')
         }
       end
       let(:hashes_to_convert) do
         [
           { name: 'should_have_nil', args: [nil] },
-          { name: 'should_not_have_nil', args: [] },
+          { name: 'should_not_have_nil', args: [] }
         ]
       end
 
       it 'should mark null types with a nil attribute' do
         expect(hashes_to_convert).to eq(
           [
-            { name: "ShouldHaveNil", args: [nil, { "xsi:nil" => true }] },
-            { name: "ShouldNotHaveNil", args: [] }
+            { name: 'ShouldHaveNil', args: [nil, { 'xsi:nil' => true }] },
+            { name: 'ShouldNotHaveNil', args: [] }
           ]
         )
       end
@@ -117,7 +117,7 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
       {
         'FirstKey' => '',
         'Second' => '',
-        'Thirdkey' => '',
+        'Thirdkey' => ''
       }
     end
 
@@ -137,7 +137,7 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
     end
 
     it 'should convert CamelCase hash to symbols' do
-      expect(keys).to match_array(%i(first_key second thirdkey))
+      expect(keys).to match_array(%i[first_key second thirdkey])
     end
   end
 end
