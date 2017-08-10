@@ -22,82 +22,94 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
   end
 
   describe '::before_build' do
-    let(:elements) do
-      campaign_elements = {
-        'Campaign' => double(LolSoap::WSDL::Element, name: 'Campaigns', type: LolSoap::WSDL::NullType.new)
-      }
-
-      campaigns_type = double(LolSoap::WSDL::Type, name: 'ArrayOfCampaign', elements: campaign_elements)
-
-      {
-        'AccountId' => LolSoap::WSDL::NullElement.new,
-        'Campaigns' => double(LolSoap::WSDL::Element, name: 'Campaigns', type: campaigns_type),
-      }
+    def generate_non_null_element(name)
+      double(LolSoap::WSDL::Element, name: name, type: "#{name}Type")
     end
 
+    let(:null_element) { LolSoap::WSDL::NullElement.new }
     let(:type) do
       LolSoap::WSDL::Type.new('ns0:', nil, elements, [])
     end
 
-    let(:hashes_to_convert) do
-      [
-        {
-          :args=>["173003592"],
-          :name=>"account_id"
-        },
-        {
-          :args=>[],
-          :sub_hash=> {
-            :campaign=> {
-              :name=> "Acceptance Test Campaign bca26dff-2466-4829-8bd1-69ff6b147bd9",
-              :daily_budget=>10,
-              :budget_type=>"DailyBudgetStandard",
-              :time_zone=>"BrusselsCopenhagenMadridParis",
-              :description=>"This campaign was automatically generated in a test"
-            }
-          },
-          :name=>"campaigns"
-        }
-      ]
-    end
-
-    subject(:call_method) { described_class.before_build(hashes_to_convert, type) }
+    before { described_class.before_build(hashes_to_convert, type) }
 
     context 'when the input element name fuzzy matches the WSDL name' do
-      before do
-        allow(described_class).to receive(:mark_null_types_with_nil)
-        call_method
-      end
-
       let(:elements) do
         {
-          'CamelCase' => LolSoap::WSDL::NullElement.new,
-          'With_Underscore' => LolSoap::WSDL::NullElement.new,
-          'Oneword' => LolSoap::WSDL::NullElement.new,
+          'CamelCase' => generate_non_null_element('CamelCase'),
+          'With_Underscore' => generate_non_null_element('With_Underscore'),
+          'Oneword' => generate_non_null_element('Oneword'),
         }
       end
       let(:hashes_to_convert) do
         [
-          { name: 'camel_case' },
-          { name: 'with_underscore' },
-          { name: 'one_word' },
+          { name: 'camel_case', args: [] },
+          { name: 'with_underscore', args: [] },
+          { name: 'one_word', args: [] },
         ]
       end
 
       it 'should be mapped to the WSDL element name' do
         expect(hashes_to_convert).to match_array(
                           [
-                            { name: 'CamelCase' },
-                            { name: 'With_Underscore' },
-                            { name: 'Oneword' },
+                            { name: 'CamelCase', args: [] },
+                            { name: 'With_Underscore', args: [] },
+                            { name: 'Oneword', args: [] },
                           ]
                         )
       end
     end
 
-    it 'should order the request data following the WSDL'
+    context 'when the input hash is in a different order to the WSDL' do
+      let(:elements) do
+        {
+          'First' => generate_non_null_element('First'),
+          'Second' => generate_non_null_element('Second'),
+          'Third' => generate_non_null_element('Third'),
+        }
+      end
+      let(:hashes_to_convert) do
+        [
+          { name: 'third', args: [] },
+          { name: 'first', args: [] },
+          { name: 'second', args: [] },
+        ]
+      end
 
-    it 'should mark null types with a nil attribute'
+      it 'should order the request data following the WSDL' do
+        expect(hashes_to_convert).to eq(
+                                       [
+                                         { name: 'First', args: [] },
+                                         { name: 'Second', args: [] },
+                                         { name: 'Third', args: [] },
+                                       ]
+                                     )
+      end
+    end
+
+    context 'when the request data contains nil and is marked nullable' do
+      let(:elements) do
+        {
+          'ShouldHaveNil' => null_element,
+          'ShouldNotHaveNil' => generate_non_null_element('ShouldNotHaveNil'),
+        }
+      end
+      let(:hashes_to_convert) do
+        [
+          { name: 'should_have_nil', args: [nil] },
+          { name: 'should_not_have_nil', args: [] },
+        ]
+      end
+
+      it 'should mark null types with a nil attribute' do
+        expect(hashes_to_convert).to eq(
+          [
+            { name: "ShouldHaveNil", args: [nil, { "xsi:nil" => true }] },
+            { name: "ShouldNotHaveNil", args: [] }
+          ]
+        )
+      end
+    end
   end
 
   describe '::after_children_hash' do

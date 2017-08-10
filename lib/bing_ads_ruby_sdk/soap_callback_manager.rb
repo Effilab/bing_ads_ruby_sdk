@@ -48,7 +48,6 @@ class BingAdsRubySdk::SoapCallbackManager
 
   def self.null_type_fields(args, type)
     args.select do |arg|
-      # byebug if arg[:name] == 'Campaigns'
       type.elements[arg[:name]].type.is_a?(LolSoap::WSDL::NullType) && arg[:args].compact.empty?
     end
   end
