@@ -5,16 +5,25 @@ require 'bing_ads_ruby_sdk/utils'
 module BingAdsRubySdk
   # Handles of LolSoap callbacks
   class SoapCallbackManager
+    class << self
+      attr_accessor :abstract_callback, :request_callback, :response_callback
+    end
+
     def self.register_callbacks
+      # Instantiate the callbacks in the order they need to be triggered
+      SoapCallbackManager.abstract_callback = LolSoap::Callbacks.new
+      SoapCallbackManager.request_callback  = LolSoap::Callbacks.new
+      SoapCallbackManager.response_callback = LolSoap::Callbacks.new
+
       # Modify the request data before it is sent via the SOAP client
-      BingAdsRubySdk.request_callback
+      SoapCallbackManager.request_callback
                     .for('hash_params.before_build') <<
         lambda do |args, _node, type|
           before_build(args, type)
         end
 
       # Modify the response data whilst it is being processed by the SOAP client
-      BingAdsRubySdk.response_callback
+      SoapCallbackManager.response_callback
                     .for('hash_builder.after_children_hash') <<
         lambda do |hash, _node, _type|
           after_children_hash(hash)
@@ -59,7 +68,7 @@ module BingAdsRubySdk
 
     def self.null_type_fields(args, type)
       args.select do |arg|
-        type.elements[arg[:name]].type.is_a?(LolSoap::WSDL::NullType) &&
+        type.elements[arg[:name]]&.type.is_a?(LolSoap::WSDL::NullType) &&
           arg[:args].compact.empty?
       end
     end

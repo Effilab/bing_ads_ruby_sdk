@@ -29,9 +29,9 @@ module BingAdsRubySdk
       @abstract_types = abstract_map[operation]
       return yield if @abstract_types.nil?
 
-      BingAdsRubySdk.abstract_callback.for('hash_params.before_build') << method(:builder)
+      SoapCallbackManager.abstract_callback.for('hash_params.before_build') << method(:builder)
       yield
-      BingAdsRubySdk.abstract_callback.for('hash_params.before_build').clear
+      SoapCallbackManager.abstract_callback.for('hash_params.before_build').clear
     end
   end
 end
