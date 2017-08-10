@@ -7,16 +7,16 @@ ABSTRACT:
   campaign_management:
     AddAds:
       ExpandedTextAd: Ad
+    AddCampaignCriterions:
+      BiddableCampaignCriterion: CampaignCriterion
+      LocationCriterion: Criterion
+      NegativeCampaignCriterion: CampaignCriterion
     DeleteAds:
       ExpandedTextAd: Ad
     GetAdsByAdGroupId:
       ExpandedTextAd: Ad
     UpdateAds:
       ExpandedTextAd: Ad
-    AddCampaignCriterions:
-      NegativeCampaignCriterion: CampaignCriterion
-      BiddableCampaignCriterion: CampaignCriterion
-      LocationCriterion: Criterion
     DeleteCampaignCriterions:
       NegativeCampaignCriterion: CampaignCriterion
     GetCampaignCriterionsByIds:
