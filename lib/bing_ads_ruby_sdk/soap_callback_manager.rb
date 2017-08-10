@@ -11,9 +11,9 @@ module BingAdsRubySdk
 
     def self.register_callbacks
       # Instantiate the callbacks in the order they need to be triggered
-      SoapCallbackManager.abstract_callback = LolSoap::Callbacks.new
-      SoapCallbackManager.request_callback  = LolSoap::Callbacks.new
-      SoapCallbackManager.response_callback = LolSoap::Callbacks.new
+      self.abstract_callback = LolSoap::Callbacks.new
+      self.request_callback  = LolSoap::Callbacks.new
+      self.response_callback = LolSoap::Callbacks.new
 
       # Modify the request data before it is sent via the SOAP client
       SoapCallbackManager.request_callback
