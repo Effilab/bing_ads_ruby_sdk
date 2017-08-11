@@ -4,15 +4,15 @@ require 'bing_ads_ruby_sdk/soap_callback_manager'
 require 'spec_helper'
 
 RSpec.describe BingAdsRubySdk::SoapCallbackManager do
-  describe '::register_callbacks' do
+  describe '.register_callbacks' do
     let(:request_callback) { instance_double('LolSoap::Callbacks', for: []) }
     let(:response_callback) { instance_double('LolSoap::Callbacks', for: []) }
 
     before do
-      allow(BingAdsRubySdk).to receive(:request_callback).and_return request_callback
-      allow(BingAdsRubySdk).to receive(:response_callback).and_return response_callback
+      allow(described_class).to receive(:request_callback).and_return request_callback
+      allow(described_class).to receive(:response_callback).and_return response_callback
 
-      BingAdsRubySdk::SoapCallbackManager.register_callbacks
+      described_class.register_callbacks
     end
 
     it 'should register the callbacks with Lolsoap' do
@@ -21,24 +21,22 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
     end
   end
 
-  describe '::before_build' do
-    def generate_non_null_element(name)
+  describe '.before_build' do
+    def non_null_element(name)
       double(LolSoap::WSDL::Element, name: name, type: "#{name}Type")
     end
 
     let(:null_element) { LolSoap::WSDL::NullElement.new }
-    let(:type) do
-      LolSoap::WSDL::Type.new('ns0:', nil, elements, [])
-    end
+    let(:type) { LolSoap::WSDL::Type.new('ns0:', nil, elements, []) }
 
     before { described_class.before_build(hashes_to_convert, type) }
 
     context 'when the input element name fuzzy matches the WSDL name' do
       let(:elements) do
         {
-          'CamelCase' => generate_non_null_element('CamelCase'),
-          'With_Underscore' => generate_non_null_element('With_Underscore'),
-          'Oneword' => generate_non_null_element('Oneword')
+          'CamelCase' => non_null_element('CamelCase'),
+          'With_Underscore' => non_null_element('With_Underscore'),
+          'Oneword' => non_null_element('Oneword')
         }
       end
       let(:hashes_to_convert) do
@@ -63,9 +61,9 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
     context 'when the input hash is in a different order to the WSDL' do
       let(:elements) do
         {
-          'First' => generate_non_null_element('First'),
-          'Second' => generate_non_null_element('Second'),
-          'Third' => generate_non_null_element('Third')
+          'First' => non_null_element('First'),
+          'Second' => non_null_element('Second'),
+          'Third' => non_null_element('Third')
         }
       end
       let(:hashes_to_convert) do
@@ -91,7 +89,7 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
       let(:elements) do
         {
           'ShouldHaveNil' => null_element,
-          'ShouldNotHaveNil' => generate_non_null_element('ShouldNotHaveNil')
+          'ShouldNotHaveNil' => non_null_element('ShouldNotHaveNil')
         }
       end
       let(:hashes_to_convert) do
