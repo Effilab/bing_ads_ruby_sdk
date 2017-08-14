@@ -5,3 +5,6 @@ gemspec
 
 # remove after/if merged
 gem 'lolsoap', github: 'effilab/lolsoap', branch: 'edge'
+
+gem 'awesome_print'
+gem 'byebug'
