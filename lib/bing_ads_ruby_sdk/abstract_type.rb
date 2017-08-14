@@ -10,9 +10,9 @@ module BingAdsRubySdk
     def builder(args, node, _)
       args.each do |h|
         @abstract_types.each do |concrete, abstract|
+          # Skip this type if the argument name does not match the abstract type name
           next unless concrete.tr('_', '').casecmp(h[:name].tr('_', '')).zero?
-          BingAdsRubySdk.logger.debug("Add xsi ns for : #{concrete}")
-          node.add_namespace_definition('xsi', 'http://www.w3.org/2001/XMLSchema-instance')
+
           change_args(h, abstract, concrete)
         end
       end

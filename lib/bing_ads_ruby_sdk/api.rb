@@ -41,9 +41,13 @@ module BingAdsRubySdk
       api_config[environment.to_s.upcase].each do |serv, url|
         BingAdsRubySdk.logger.info("Defining service #{serv} accessors")
         self.class.send(:attr_reader, serv)
+
+        client = load_or_new(serv, url)
+        client.wsdl.namespaces['xsi'] = 'http://www.w3.org/2001/XMLSchema-instance'
+
         instance_variable_set(
           "@#{serv}",
-          Service.new(load_or_new(serv, url), header, api_config['ABSTRACT'][serv])
+          Service.new(client, header, api_config['ABSTRACT'][serv])
         )
       end
     end
