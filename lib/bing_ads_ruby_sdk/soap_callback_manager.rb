@@ -64,7 +64,12 @@ module BingAdsRubySdk
 
         argument_hashes.each do |hash|
           found_at = matcher.index(hash[:name].tr('_', '').downcase)
-          hash[:name] = type.elements.keys[found_at] if found_at
+          if found_at
+            hash[:name] = type.elements.keys[found_at]
+          else
+            possible_fields = type.elements.keys.join(', ')
+            raise "#{hash[:name]} not found in WSDL. Possible fields #{possible_fields}"
+          end
         end
       end
 
