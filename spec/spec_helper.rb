@@ -3,10 +3,6 @@ SimpleCov.start
 
 require 'bundler/setup'
 require 'bing_ads_ruby_sdk'
-require 'awesome_print'
-
-require 'byebug'
-require 'rspec'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

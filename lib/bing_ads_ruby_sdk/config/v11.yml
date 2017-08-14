@@ -7,22 +7,12 @@ ABSTRACT:
   campaign_management:
     AddAds:
       ExpandedTextAd: Ad
-    AddCampaignCriterions:
-      BiddableCampaignCriterion: CampaignCriterion
-      LocationCriterion: Criterion
-      NegativeCampaignCriterion: CampaignCriterion
     DeleteAds:
       ExpandedTextAd: Ad
     GetAdsByAdGroupId:
       ExpandedTextAd: Ad
     UpdateAds:
       ExpandedTextAd: Ad
-    DeleteCampaignCriterions:
-      NegativeCampaignCriterion: CampaignCriterion
-    GetCampaignCriterionsByIds:
-      NegativeCampaignCriterion: CampaignCriterion
-    UpdateCampaignCriterions:
-      NegativeCampaignCriterion: CampaignCriterion
 
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
