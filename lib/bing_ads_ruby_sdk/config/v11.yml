@@ -22,6 +22,8 @@ ABSTRACT:
     GetCampaignCriterionsByIds:
       NegativeCampaignCriterion: CampaignCriterion
     UpdateCampaignCriterions:
+      BiddableCampaignCriterion: CampaignCriterion
+      LocationCriterion: Criterion
       NegativeCampaignCriterion: CampaignCriterion
 
 PRODUCTION:
