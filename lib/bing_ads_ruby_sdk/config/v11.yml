@@ -7,24 +7,29 @@ ABSTRACT:
   campaign_management:
     AddAds:
       ExpandedTextAd: Ad
+    AddCampaigns:
+      EnhancedCpcBiddingScheme: BiddingScheme
+      InheritFromParentBiddingScheme: BiddingScheme
+      ManualCpcBiddingScheme: BiddingScheme
+      MaxClicksBiddingScheme: BiddingScheme
+      MaxConversionsBiddingScheme: BiddingScheme
+      TargetCpaBiddingScheme: BiddingScheme
     AddCampaignCriterions:
       BiddableCampaignCriterion: CampaignCriterion
       LocationCriterion: Criterion
       NegativeCampaignCriterion: CampaignCriterion
+      RadiusCriterion: Criterion
     DeleteAds:
       ExpandedTextAd: Ad
     GetAdsByAdGroupId:
       ExpandedTextAd: Ad
     UpdateAds:
       ExpandedTextAd: Ad
-    DeleteCampaignCriterions:
-      NegativeCampaignCriterion: CampaignCriterion
-    GetCampaignCriterionsByIds:
-      NegativeCampaignCriterion: CampaignCriterion
     UpdateCampaignCriterions:
       BiddableCampaignCriterion: CampaignCriterion
       LocationCriterion: Criterion
       NegativeCampaignCriterion: CampaignCriterion
+      RadiusCriterion: Criterion
 
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
