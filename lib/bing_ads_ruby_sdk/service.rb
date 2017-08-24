@@ -16,7 +16,7 @@ module BingAdsRubySdk
       @abstract_types = AbstractType.new(@client.wsdl, abstract_map)
 
       operations.keys.each do |op|
-        BingAdsRubySdk.logger.info("Defining operation : #{op}")
+        BingAdsRubySdk.logger.debug("Defining operation : #{op}")
         define_singleton_method(Utils.snakize(op)) do |body = false|
           request(op, body)
         end
@@ -35,7 +35,7 @@ module BingAdsRubySdk
         req.body.content(body) if body
       end
 
-      BingAdsRubySdk.logger.info("Operation : #{name}")
+      BingAdsRubySdk.logger.debug("Operation : #{name}")
       BingAdsRubySdk.logger.debug(req.content)
       url = URI(req.url)
       raw_response =

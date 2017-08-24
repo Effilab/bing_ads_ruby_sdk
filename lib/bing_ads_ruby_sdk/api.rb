@@ -39,7 +39,7 @@ module BingAdsRubySdk
 
       # Create a service object based on the WSDL in each configuration entry
       api_config[environment.to_s.upcase].each do |serv, url|
-        BingAdsRubySdk.logger.info("Defining service #{serv} accessors")
+        BingAdsRubySdk.logger.debug("Defining service #{serv} accessors")
         self.class.send(:attr_reader, serv)
 
         client = load_or_new(serv, url)
@@ -55,7 +55,7 @@ module BingAdsRubySdk
     def load_or_new(serv, url)
       file = "#{@cache_path}/#{serv}"
       if File.file?(file)
-        BingAdsRubySdk.logger.info("Client #{serv} from cache")
+        BingAdsRubySdk.logger.debug("Client #{serv} from cache")
         Marshal.load(IO.read(file))
       else
         BingAdsRubySdk.logger.info("Client #{serv} from URL")

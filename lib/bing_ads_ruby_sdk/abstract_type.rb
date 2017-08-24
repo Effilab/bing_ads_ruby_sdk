@@ -19,7 +19,7 @@ module BingAdsRubySdk
     end
 
     def change_args(h, abstract, concrete)
-      BingAdsRubySdk.logger.info("Building concrete type : #{concrete}")
+      BingAdsRubySdk.logger.debug("Building concrete type : #{concrete}")
       h[:args] << { 'xsi:type' => wsdl.types[concrete].prefix_and_name }
       h[:name] = abstract
       h[:sub_type] = wsdl.types[concrete]
