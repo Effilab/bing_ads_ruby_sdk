@@ -19,3 +19,5 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
+
+Dir[Pathname(Dir.pwd).join('spec', 'support', '**', '*.rb')].each { |f| require f }
