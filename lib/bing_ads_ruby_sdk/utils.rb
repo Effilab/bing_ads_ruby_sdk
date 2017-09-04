@@ -8,6 +8,11 @@ module BingAdsRubySdk
               .tr('-', '_')
               .downcase
       end
+
+      # Convert snake_case to CamelCase
+      def camelize(string)
+        string.split('_').collect!{ |w| w.capitalize }.join
+      end
     end
   end
 end

@@ -280,7 +280,7 @@ RSpec.describe 'CustomerManagement service' do
     describe '#delete_customer' do
       let(:customer_record) { get_customer[:customer] }
 
-      subject do
+      subject(:delete_customer) do
         api.customer_management.delete_customer(
           customer_id: customer_record[:id],
           time_stamp: customer_record[:time_stamp]
@@ -288,7 +288,8 @@ RSpec.describe 'CustomerManagement service' do
       end
 
       it 'fails because the user lacks rights' do
-        is_expected.to include(faultcode: 's:Server')
+        expect { delete_customer }
+          .to raise_error(BingAdsRubySdk::Errors::ApiFault)
       end
     end
   end

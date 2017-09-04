@@ -4,6 +4,8 @@ require 'fileutils'
 require 'lolsoap'
 require 'bing_ads_ruby_sdk/service'
 require 'bing_ads_ruby_sdk/header'
+require 'bing_ads_ruby_sdk/errors/application_fault'
+require 'bing_ads_ruby_sdk/errors/error_handler'
 
 module BingAdsRubySdk
   class Api
