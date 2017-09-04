@@ -19,6 +19,13 @@ ABSTRACT:
       LocationCriterion: Criterion
       NegativeCampaignCriterion: CampaignCriterion
       RadiusCriterion: Criterion
+
+    # Conversion Goal types
+    AddConversionGoals:
+      EventGoal: ConversionGoal
+    UpdateConversionGoals:
+      EventGoal: ConversionGoal
+
     DeleteAds:
       ExpandedTextAd: Ad
     GetAdsByAdGroupId:

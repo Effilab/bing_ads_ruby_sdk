@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe 'CampaignManagement service' do
   include_context 'use api'
-  include_context 'manages campaign criterions'
+  include_context 'manages campaigns'
 
   describe 'CampaignCriterion methods' do
     let(:criterion_ids) do
