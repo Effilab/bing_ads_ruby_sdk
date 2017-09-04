@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+# TODO: require all files in the directory
 require 'bing_ads_ruby_sdk/version'
 require 'bing_ads_ruby_sdk/api'
+
 require 'logger'
 require 'byebug'
 

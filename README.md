@@ -22,7 +22,7 @@ Or install it yourself as:
 ## Usage
 ### Configure the app
 ```ruby
-BingAdsRubySdk::Logger.level = :debug
+BingAdsRubySdk.logger.level = :debug
 
 @api ||= BingAdsRubySdk::Api.new(
   oauth_store: MyRedisStore,
