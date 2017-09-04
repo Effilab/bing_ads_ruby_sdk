@@ -38,6 +38,8 @@ BingAdsRubySdk::Logger.level = :debug
 end
 ```
 
+Please see `spec/integration/` for a number of examples on how to use the SDK
+
 ### Bootsrap Authorization code flow
 Before you can connect to the Bing Ads API you need to make an authentication 
 token available to the SDK. Here's how to do it: 
@@ -57,7 +59,30 @@ $ cat .token* # Should output something like this: {"access_token":"....
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
+
+You can run unit tests using the following: `bundle exec rspec spec/bing_ads_ruby_sdk` 
+
+If you wish to run full integration tests please understand that this will pollute
+any account that you use, so perhaps it would be best not to use an account with 
+payment information attached.
+
+Currently the credentials are accessed by the integration tests using environment
+variables so you will need to set these first. This could be achieved using 
+[Direnv](https://direnv.net/), or just exporting values at the command line.
+Here is an example:
+```
+export ACCEPTANCE_CUSTOMER_ID=<YOUR CUSTOMER ID>
+export ACCEPTANCE_ACCOUNT_ID=<YOUR ACCOUNT ID>
+export ACCEPTANCE_USER_ID=<YOUR USER ID>
+export ACCEPTANCE_DEVELOPER_TOKEN=<YOUR DEVELOPER TOKEN>
+export ACCEPTANCE_CLIENT_ID=<YOUR CLIENT ID>
+bundle exec rspec spec/integration
+``` 
+
+To release a new version, update the version number in `version.rb`, and then run 
+`bundle exec rake release`, which will create a git tag for the version, push git 
+commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
