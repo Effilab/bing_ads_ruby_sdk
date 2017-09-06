@@ -26,13 +26,13 @@ ABSTRACT:
       NegativeKeywordList: SharedList
     AddSharedEntity:
       NegativeKeyword: SharedListItem
-      NegativeKeywordList: SharedList
+      NegativeKeywordList: SharedEntity
     DeleteAds:
       ExpandedTextAd: Ad
     DeleteListItemsFromSharedList:
       NegativeKeywordList: SharedList
     DeleteSharedEntities:
-      NegativeKeywordList: SharedList
+      NegativeKeywordList: SharedEntity
     GetAdsByAdGroupId:
       ExpandedTextAd: Ad
     GetListItemsBySharedList:
@@ -47,7 +47,7 @@ ABSTRACT:
     UpdateConversionGoals:
       EventGoal: ConversionGoal
     UpdateSharedEntities:
-      NegativeKeywordList: SharedList
+      NegativeKeywordList: SharedEntity
 
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
