@@ -3,7 +3,7 @@ require 'spec_helper'
 module BingAdsRubySdk
   module OAuth2
     RSpec.describe AuthorizationCode do
-      context 'when properly instanciated' do
+      context 'when properly instantiated' do
         let(:store) do
           store = double('subject store')
           allow(store).to receive(:new).with('token_effilab-123') { store }
