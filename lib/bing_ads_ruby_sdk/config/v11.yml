@@ -19,17 +19,24 @@ ABSTRACT:
       LocationCriterion: Criterion
       NegativeCampaignCriterion: CampaignCriterion
       RadiusCriterion: Criterion
-
-    # Conversion Goal types
     AddConversionGoals:
       EventGoal: ConversionGoal
-    UpdateConversionGoals:
-      EventGoal: ConversionGoal
-
+    AddListItemsToSharedList:
+      NegativeKeyword: SharedListItem
+      NegativeKeywordList: SharedList
+    AddSharedEntity:
+      NegativeKeyword: SharedListItem
+      NegativeKeywordList: SharedList
     DeleteAds:
       ExpandedTextAd: Ad
+    DeleteListItemsFromSharedList:
+      NegativeKeywordList: SharedList
+    DeleteSharedEntities:
+      NegativeKeywordList: SharedList
     GetAdsByAdGroupId:
       ExpandedTextAd: Ad
+    GetListItemsBySharedList:
+      NegativeKeywordList: SharedList
     UpdateAds:
       ExpandedTextAd: Ad
     UpdateCampaignCriterions:
@@ -37,6 +44,10 @@ ABSTRACT:
       LocationCriterion: Criterion
       NegativeCampaignCriterion: CampaignCriterion
       RadiusCriterion: Criterion
+    UpdateConversionGoals:
+      EventGoal: ConversionGoal
+    UpdateSharedEntities:
+      NegativeKeywordList: SharedList
 
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
