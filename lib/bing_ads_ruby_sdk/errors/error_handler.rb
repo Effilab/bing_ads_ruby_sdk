@@ -4,7 +4,8 @@ module BingAdsRubySdk
   module Errors
     # Parses the response from the API to raise errors if they are returned
     class ErrorHandler
-      BASE_FAULT = BingAdsRubySdk::Errors::StandardError
+      BASE_FAULT = BingAdsRubySdk::Errors::GeneralError
+      PARTIAL_ERROR_KEYS = %i[partial_errors nested_partial_errors].freeze
 
       class << self
         def parse_errors!(response)
@@ -12,23 +13,55 @@ module BingAdsRubySdk
         end
 
         def contains_error?(response)
-          return unless response.is_a?(Hash)
+          contains_partial_errors?(response) ||
+            contains_fault?(response)
+        end
 
-          error_codes = %i[faultcode error_code]
+        def contains_partial_errors?(response)
+          partial_error_keys(response).any?
+        end
 
-          (error_codes & response.keys).any?
+        # Gets populated partial error keys from the response
+        # @return [Array] array of symbols for keys in the response
+        #   that are populated with errors
+        def partial_error_keys(response)
+          existing_keys = (PARTIAL_ERROR_KEYS & response.keys)
+
+          existing_keys.reject do |key|
+            response[key].nil? || response[key].is_a?(String)
+          end
+        end
+
+        def contains_fault?(response)
+          error_keys = %i[faultcode error_code]
+
+          (error_keys & response.keys).any?
+        end
+
+        def partial_errors(response)
+          keys = partial_error_keys(response)
+          response.select {|key| keys.include?(key)}
+        end
+
+        def klass_name(key)
+          key_string = key.to_s
+
+          # Partial errors are stored in a key with a plural name,
+          # but exception classes are named in the singular by convention
+          key_string = key_string.gsub(/s$/, '') if PARTIAL_ERROR_KEYS.include?(key)
+
+          BingAdsRubySdk::Utils.camelize(key_string)
         end
 
         def fault_class(response)
-          detail = response[:detail]
+          hash_with_error = response[:detail] || partial_errors(response)
 
-          return BASE_FAULT unless detail
+          return BASE_FAULT unless hash_with_error
 
-          first_fault = detail.keys.first
-          class_name = BingAdsRubySdk::Utils.camelize(first_fault.to_s)
+          error = hash_with_error.keys.first
 
           begin
-            Object.const_get("BingAdsRubySdk::Errors::#{class_name}")
+            Object.const_get("BingAdsRubySdk::Errors::#{klass_name(error)}")
           rescue NameError
             BASE_FAULT
           end

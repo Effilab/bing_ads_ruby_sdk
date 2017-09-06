@@ -5,7 +5,6 @@ require 'net/http'
 require 'open-uri'
 
 module BingAdsRubySdk
-
   # Manages communication with the a defined SOAP service on the API
   class Service
     attr_reader :client, :shared_header, :abstract_types
@@ -46,7 +45,12 @@ module BingAdsRubySdk
         end
       client.response(req, raw_response.body).body_hash.tap do |b_h|
         BingAdsRubySdk.logger.debug(b_h)
-        BingAdsRubySdk::Errors::ErrorHandler.parse_errors!(b_h)
+
+        # Some operations don't return a response, for example:
+        # https://msdn.microsoft.com/en-us/library/bing-ads-customer-management-deleteaccount.aspx
+        if b_h.is_a?(Hash)
+          BingAdsRubySdk::Errors::ErrorHandler.parse_errors!(b_h)
+        end
       end
     end
   end
