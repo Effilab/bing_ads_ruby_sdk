@@ -5,7 +5,7 @@ require "bing_ads_ruby_sdk"
 
 args = {
   developer_token: 'Developer token ?',
-  client_id: 'Client id ?',
+  client_id: 'Client id ?'
 }
 
 args.keys.each do |key|
