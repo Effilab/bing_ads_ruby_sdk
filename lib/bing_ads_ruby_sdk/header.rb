@@ -12,9 +12,11 @@ module BingAdsRubySdk
     def initialize(credentials, oauth_store)
       @credentials = credentials
       @token = BingAdsRubySdk::OAuth2::AuthorizationCode.new(
-        store:           oauth_store,
-        developer_token: credentials[:developer_token],
-        client_id:       credentials[:client_id]
+        {
+          developer_token: credentials[:developer_token],
+          client_id:       credentials[:client_id]
+        },
+        store: oauth_store
       )
     end
 
