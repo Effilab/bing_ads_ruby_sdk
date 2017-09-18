@@ -56,7 +56,7 @@ module BingAdsRubySdk
       @cache_path = "#{File.expand_path('../', __FILE__)}/.cache/#{version}"
       FileUtils.mkdir_p @cache_path
       YAML.load_file(
-        "#{File.expand_path('../', __FILE__)}/config/#{version}.yml"
+        File.join(__dir__, 'config', "#{version}.yml")
       )
     end
 
