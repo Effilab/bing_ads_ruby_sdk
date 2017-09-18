@@ -1,6 +1,4 @@
-# frozen_string_literal: true
-
-require 'spec_helper'
+require_relative '../example_helper'
 
 RSpec.describe 'CampaignManagement service' do
   include_context 'use api'
