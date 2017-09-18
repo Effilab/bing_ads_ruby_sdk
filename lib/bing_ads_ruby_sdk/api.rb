@@ -28,16 +28,12 @@ module BingAdsRubySdk
     # @option credentials [String] :client_id The client ID used to acces the API
     def initialize(version: :v11,
                    environment: :production,
-                   oauth_store: nil,
+                   oauth_store: OAuth2::FsStore,
                    credentials: {})
 
       @header = Header.new(credentials, oauth_store)
       # Get the URLs for the WSDL that defines the services on the API
-      api_config = YAML.load_file(
-        "#{File.expand_path('../', __FILE__)}/config/#{version}.yml"
-      )
-      @cache_path = "#{File.expand_path('../', __FILE__)}/.cache/#{version}"
-      FileUtils.mkdir_p @cache_path
+      api_config = env_for(version)
 
       # Create a service object based on the WSDL in each configuration entry
       api_config[environment.to_s.upcase].each do |serv, url|
@@ -54,6 +50,16 @@ module BingAdsRubySdk
       end
     end
 
+    private
+
+    def env_for(version)
+      @cache_path = "#{File.expand_path('../', __FILE__)}/.cache/#{version}"
+      FileUtils.mkdir_p @cache_path
+      YAML.load_file(
+        "#{File.expand_path('../', __FILE__)}/config/#{version}.yml"
+      )
+    end
+
     def load_or_new(serv, url)
       file = "#{@cache_path}/#{serv}"
       if File.file?(file)
@@ -62,7 +68,7 @@ module BingAdsRubySdk
       else
         BingAdsRubySdk.logger.info("Client #{serv} from URL")
         LolSoap::Client.new(File.read(open(url))).tap do |client|
-          # TODO as atomic_write does to avoid broken cache
+          # TODO : as atomic_write does to avoid broken cache
           File.open(file, 'w+') { |f| Marshal.dump(client, f) }
         end
       end
