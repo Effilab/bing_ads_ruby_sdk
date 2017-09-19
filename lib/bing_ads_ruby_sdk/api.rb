@@ -2,6 +2,7 @@ require 'yaml'
 require 'logger'
 require 'fileutils'
 require 'lolsoap'
+require 'bing_ads_ruby_sdk/soap_callback_manager'
 require 'bing_ads_ruby_sdk/service'
 require 'bing_ads_ruby_sdk/header'
 require 'bing_ads_ruby_sdk/errors/application_fault'
@@ -30,7 +31,7 @@ module BingAdsRubySdk
                    environment: :production,
                    oauth_store: OAuth2::FsStore,
                    credentials: {})
-
+      SoapCallbackManager.register_callbacks
       @header = Header.new(credentials, oauth_store)
       # Get the URLs for the WSDL that defines the services on the API
       api_config = env_for(version)
