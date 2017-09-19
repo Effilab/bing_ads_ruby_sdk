@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'bing_ads_ruby_sdk/utils'
 
 module BingAdsRubySdk

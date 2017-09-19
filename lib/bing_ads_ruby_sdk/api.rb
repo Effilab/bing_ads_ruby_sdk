@@ -53,7 +53,7 @@ module BingAdsRubySdk
     private
 
     def env_for(version)
-      @cache_path = "#{File.expand_path('../', __FILE__)}/.cache/#{version}"
+      @cache_path = File.join(__dir__, '.cache', version)
       FileUtils.mkdir_p @cache_path
       YAML.load_file(
         File.join(__dir__, 'config', "#{version}.yml")
@@ -61,7 +61,7 @@ module BingAdsRubySdk
     end
 
     def load_or_new(serv, url)
-      file = "#{@cache_path}/#{serv}"
+      file = File.join(@cache_path, serv)
       if File.file?(file)
         BingAdsRubySdk.logger.debug("Client #{serv} from cache")
         Marshal.load(IO.read(file))
