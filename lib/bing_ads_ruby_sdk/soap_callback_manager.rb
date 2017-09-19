@@ -9,6 +9,9 @@ module BingAdsRubySdk
       attr_accessor :abstract_callback, :request_callback, :response_callback
 
       def register_callbacks
+        # A bit hacky, but let's think about this
+        Thread.current[:registered_callbacks] = []
+
         # Instantiate the callbacks in the order they need to be triggered
         self.abstract_callback = LolSoap::Callbacks.new
         self.request_callback = LolSoap::Callbacks.new
