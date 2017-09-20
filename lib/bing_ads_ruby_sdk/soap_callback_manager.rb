@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'bing_ads_ruby_sdk/utils'
+require 'bing_ads_ruby_sdk/exceptions'
 
 module BingAdsRubySdk
   # Handles of LolSoap callbacks
@@ -60,15 +61,21 @@ module BingAdsRubySdk
 
       def convert_element_names(argument_hashes, type)
         # Fuzzy matching for element names
-        matcher = type.elements.keys.map { |name| name.tr('_', '').downcase }
+        el_keys = type.elements.keys
+        matcher = el_keys.map { |name| name.tr('_', '').downcase }
 
         argument_hashes.each do |hash|
           found_at = matcher.index(hash[:name].tr('_', '').downcase)
           if found_at
-            hash[:name] = type.elements.keys[found_at]
+            hash[:name] = el_keys[found_at]
+          elsif type.prefix_and_name == 'soap:Header'
+            BingAdsRubySdk.logger.info(
+              "#{hash[:name]} not found in #{type.prefix_and_name}."\
+              "Possible fields #{el_keys.join(', ')}"
+            )
           else
-            possible_fields = type.elements.keys.join(', ')
-            raise "#{hash[:name]} not found in WSDL. Possible fields #{possible_fields}"
+            raise ElementMismatch, "#{hash[:name]} not found in #{type.prefix_and_name}."\
+                                   "Possible fields #{el_keys.join(', ')}"
           end
         end
       end
