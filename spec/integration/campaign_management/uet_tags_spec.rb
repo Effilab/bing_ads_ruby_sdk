@@ -62,6 +62,7 @@ RSpec.describe 'CampaignManagement service' do
         add_uet_tags.tap do |list|
           tag = list[:uet_tags][:uet_tag].first
           tag[:description] = "#{tag[:description]} - updated"
+          list.delete(:partial_errors)
         end
       end
 
