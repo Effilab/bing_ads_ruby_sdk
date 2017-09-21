@@ -53,7 +53,7 @@ module BingAdsRubySdk
     private
 
     def env_for(version)
-      @cache_path = File.join(__dir__, '.cache', version)
+      @cache_path = File.join(__dir__, '.cache', version.to_s)
       FileUtils.mkdir_p @cache_path
       YAML.load_file(
         File.join(__dir__, 'config', "#{version}.yml")

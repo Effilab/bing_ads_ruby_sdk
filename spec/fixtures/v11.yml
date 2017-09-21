@@ -45,4 +45,4 @@ ABSTRACT:
       NegativeKeywordList: SharedEntity
 
 TEST:
-  campaign_management: ./CampaignManagementService.wsdl
+  campaign_management: ./spec/fixtures/CampaignManagementService.wsdl
