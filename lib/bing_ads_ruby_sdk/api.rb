@@ -4,6 +4,7 @@ require 'fileutils'
 require 'lolsoap'
 require 'bing_ads_ruby_sdk/service'
 require 'bing_ads_ruby_sdk/header'
+require 'bing_ads_ruby_sdk/oauth2/authorization_code'
 require 'bing_ads_ruby_sdk/errors/application_fault'
 require 'bing_ads_ruby_sdk/errors/error_handler'
 
@@ -30,13 +31,18 @@ module BingAdsRubySdk
                    environment: :production,
                    oauth_store: OAuth2::FsStore,
                    credentials: {})
-
-      @header = Header.new(credentials, oauth_store)
+      @token  = token(credentials, oauth_store)
+      @header = Header.new(credentials, @token)
       # Get the URLs for the WSDL that defines the services on the API
-      api_config = env_for(version)
+      @api_config = env_for(version)
+      # Create services accessors and objects from each named wsdl
+      build_services(environment)
+    end
 
-      # Create a service object based on the WSDL in each configuration entry
-      api_config[environment.to_s.upcase].each do |serv, url|
+    private
+
+    def build_services(environment)
+      @api_config[environment.to_s.upcase].each do |serv, url|
         BingAdsRubySdk.logger.debug("Defining service #{serv} accessors")
         self.class.send(:attr_reader, serv)
 
@@ -45,12 +51,20 @@ module BingAdsRubySdk
 
         instance_variable_set(
           "@#{serv}",
-          Service.new(client, header, api_config['ABSTRACT'][serv])
+          Service.new(client, header, @api_config['ABSTRACT'][serv])
         )
       end
     end
 
-    private
+    def token(credentials, store)
+      OAuth2::AuthorizationCode.new(
+        {
+          developer_token: credentials[:developer_token],
+          client_id:       credentials[:client_id]
+        },
+        store: store
+      )
+    end
 
     def env_for(version)
       @cache_path = File.join(__dir__, '.cache', version.to_s)
