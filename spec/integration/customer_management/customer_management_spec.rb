@@ -358,8 +358,7 @@ RSpec.describe 'CustomerManagement service' do
       subject do
         api.customer_management.get_users_info(
           customer_id: CUSTOMER_ID,
-          status_filter: 'Active',
-          top_n: 1
+          status_filter: 'Active'
         )
       end
 
