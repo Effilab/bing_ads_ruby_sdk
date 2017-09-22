@@ -8,11 +8,7 @@ module BingAdsRubySdk
     class << self
       attr_accessor :request_callback, :response_callback
 
-      # FIXME : That souldt be an instance method to avoid collision in threads
       def register_callbacks
-        # FIXME : needed when instanciating n times the API in the same thread
-        Thread.current[:registered_callbacks] = []
-
         # Instantiate the callbacks in the order they need to be triggered
         self.request_callback = LolSoap::Callbacks.new
         self.response_callback = LolSoap::Callbacks.new
