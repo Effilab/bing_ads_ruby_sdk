@@ -4,7 +4,7 @@ require 'fixtures'
 module BingAdsRubySdk
   RSpec.describe Service do
     before(:all) do
-      SoapCallbackManager.register_callbacks
+      SoapCallbackManager.register_callbacks(Fixtures.api_config['ABSTRACT'])
     end
 
     let(:header) do
@@ -23,8 +23,7 @@ module BingAdsRubySdk
     subject do
       described_class.new(
         Fixtures.lol_campaign_management,
-        header,
-        Fixtures.api_config['ABSTRACT']['campaign_management']
+        header
       )
     end
 
@@ -41,7 +40,7 @@ module BingAdsRubySdk
       context 'concurrent' do
         before do
           Thread.new do
-            SoapCallbackManager.register_callbacks
+            SoapCallbackManager.register_callbacks(Fixtures.api_config['ABSTRACT'])
             @doc1 = subject.add_campaign_criterions(
               campaign_criterions: {
                 campaign_criterion: { location_criterion: 'Montreuil' }
