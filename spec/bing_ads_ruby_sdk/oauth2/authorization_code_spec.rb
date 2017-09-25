@@ -4,16 +4,18 @@ module BingAdsRubySdk
   module OAuth2
     RSpec.describe AuthorizationCode do
       context 'when properly instantiated' do
+        let(:token) do
+          { access_token:  'yes/we/can',
+            refresh_token: 'new/election',
+            issued_at:     Time.now.to_s,
+            expires_in:    3600 }
+        end
+
         let(:store) do
-          store = double('subject store')
-          allow(store).to receive(:new).with('token_effilab-123') { store }
-          allow(store).to receive(:read) do
-            { access_token:  'yes/we/can',
-              refresh_token: 'new/election',
-              issued_at:     Time.now.to_s,
-              expires_in:    3600 }
+          double('subject store').tap do |store|
+            allow(store).to receive(:new).with('token_effilab-123') { store }
+            allow(store).to receive(:read) { token }
           end
-          store
         end
 
         subject do
@@ -29,18 +31,13 @@ module BingAdsRubySdk
         it { expect(subject.fetch_or_refresh).to eq 'yes/we/can' }
 
         context 'with an expired token' do
-          let(:store) do
-            store = double('subject store')
-            allow(store).to receive(:new).with('token_effilab-123') { store }
-            allow(store).to receive(:read) do
-              { access_token:  'yes/we/can',
-                refresh_token: 'new/election',
-                issued_at:     (Time.now - 7200).to_s,
-                expires_in:    3600 }
-            end
-            store
+          before do
+            token[:issued_at] = (Time.now - 7200).to_s
+            allow(store).to receive(:write)
+            allow(subject.client).to receive(:refresh!).and_wrap_original { |_| token }
           end
-          xit { expect(subject.fetch_or_refresh).to eq 'yes/we/can' }
+
+          it { expect(subject.fetch_or_refresh).to eq 'yes/we/can' }
         end
       end
 

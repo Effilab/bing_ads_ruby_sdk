@@ -79,7 +79,7 @@ module BingAdsRubySdk
             it do
               expect(
                 criterion.attribute('type').namespace.href
-              ).to eq doc.namespaces["xmlns:xsi"]
+              ).to eq doc.namespaces['xmlns:xsi']
             end
 
             it do
