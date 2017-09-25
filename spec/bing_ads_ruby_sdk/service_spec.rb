@@ -16,7 +16,7 @@ module BingAdsRubySdk
       end
     end
 
-    let(:subject) do
+    subject do
       described_class.new(
         Fixtures.lol_campaign_management,
         header,

@@ -11,7 +11,7 @@ module BingAdsRubySdk
   end
 
   RSpec.describe Api do
-    let(:subject) do
+    subject do
       described_class.new(environment: :test)
     end
 
