@@ -3,6 +3,10 @@ require 'fixtures'
 
 module BingAdsRubySdk
   RSpec.describe Service do
+    before(:all) do
+      SoapCallbackManager.register_callbacks
+    end
+
     let(:header) do
       double('header').tap do |header|
         allow(header).to receive(:content) do
@@ -36,8 +40,11 @@ module BingAdsRubySdk
 
       context 'xml doc payload' do
         let(:doc) do
-          subject.add_campaign_criterions(location_criterion: 'Montreuil')
-                 .envelope.doc
+          subject.add_campaign_criterions(
+            campaign_criterions: {
+              campaign_criterion: { location_criterion: 'Montreuil' }
+            }
+          ).envelope.doc
         end
 
         describe 'header' do
@@ -69,7 +76,13 @@ module BingAdsRubySdk
         end
 
         describe 'body' do
-          let(:doc_body) { doc.at_xpath('/soap:Envelope/soap:Body/ns0:AddCampaignCriterionsRequest') }
+          let(:doc_body) do
+            doc.at_xpath('/soap:Envelope'\
+                            '/soap:Body'\
+                              '/ns0:AddCampaignCriterionsRequest'\
+                                '/ns0:CampaignCriterions'\
+                                  '/ns0:CampaignCriterion')
+          end
 
           describe 'abtract class' do
             let(:criterion) { doc_body.at_xpath('ns0:Criterion') }
