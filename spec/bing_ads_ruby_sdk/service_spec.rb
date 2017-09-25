@@ -38,6 +38,31 @@ module BingAdsRubySdk
 
       it { expect(subject.add_campaign_criterions.content.empty?).to be false }
 
+      context 'concurrent' do
+        before do
+          Thread.new do
+            SoapCallbackManager.register_callbacks
+            @doc1 = subject.add_campaign_criterions(
+              campaign_criterions: {
+                campaign_criterion: { location_criterion: 'Montreuil' }
+              }
+            ).envelope.doc
+          end.join
+        end
+
+        it do
+          expect(
+            @doc1.at_xpath(
+              '/soap:Envelope'\
+                '/soap:Body'\
+                  '/ns0:AddCampaignCriterionsRequest'\
+                    '/ns0:CampaignCriterions'\
+                      '/ns0:CampaignCriterion'
+            ).content
+          ).to eq 'Montreuil'
+        end
+      end
+
       context 'xml doc payload' do
         let(:doc) do
           subject.add_campaign_criterions(
