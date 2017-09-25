@@ -3,14 +3,11 @@ require 'byebug'
 module BingAdsRubySdk
   class AbstractType
     class << self
-      @abstract_nodes = {}
+      @abstract_types = {}
 
-      attr_accessor :abstract_nodes, :wsdl
+      attr_accessor :abstract_types, :wsdl
 
       def builder(args, node, _type)
-        abstract_types = abstract_nodes[node.name]
-        return true if abstract_types.nil?
-        # byebug
         args.each do |h|
           abstract_types.each do |abstract, concretes|
             concretes.each do |concrete|

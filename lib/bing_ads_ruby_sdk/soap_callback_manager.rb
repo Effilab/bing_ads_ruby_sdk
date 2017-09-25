@@ -8,7 +8,7 @@ module BingAdsRubySdk
     class << self
       attr_accessor :abstract_callback, :request_callback, :response_callback
 
-      def register_callbacks(abstract_nodes)
+      def register_callbacks(abstract_types)
         # A bit hacky, but let's think about this
         Thread.current[:registered_callbacks] = []
 
@@ -17,7 +17,7 @@ module BingAdsRubySdk
         self.request_callback = LolSoap::Callbacks.new
         self.response_callback = LolSoap::Callbacks.new
 
-        AbstractType.abstract_nodes = abstract_nodes
+        AbstractType.abstract_types = abstract_types
         AbstractType.register
 
         # Modify the request data before it is sent via the SOAP client
