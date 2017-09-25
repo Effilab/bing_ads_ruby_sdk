@@ -9,6 +9,9 @@ module BingAdsRubySdk
 
       class << self
         def parse_errors!(response)
+          # Some operations don't return a response, for example:
+          # https://msdn.microsoft.com/en-us/library/bing-ads-customer-management-deleteaccount.aspx
+          return unless response.is_a? Hash
           raise fault_class(response).new(response) if contains_error?(response)
         end
 

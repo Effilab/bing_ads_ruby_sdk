@@ -3,7 +3,7 @@ require 'spec_helper'
 module BingAdsRubySdk
   RSpec.describe Header do
     let(:token) do
-      double('subject token').tap do |token|
+      double.tap do |token|
         allow(token).to receive(:fetch_or_refresh) { 'yes/we/can' }
       end
     end

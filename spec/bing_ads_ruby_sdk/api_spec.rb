@@ -5,7 +5,7 @@ module BingAdsRubySdk
   # TODO : reafactor this or the code
   class Api
     def env_for(version)
-      @cache_path = '/tmp'
+      @cache_path = Dir.tmpdir
       Fixtures.api_config
     end
   end
