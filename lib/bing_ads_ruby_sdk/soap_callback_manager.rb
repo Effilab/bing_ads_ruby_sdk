@@ -1,4 +1,5 @@
 require 'bing_ads_ruby_sdk/utils'
+require 'bing_ads_ruby_sdk/exceptions'
 
 module BingAdsRubySdk
   # Handles of LolSoap callbacks
@@ -7,6 +8,9 @@ module BingAdsRubySdk
       attr_accessor :abstract_callback, :request_callback, :response_callback
 
       def register_callbacks
+        # A bit hacky, but let's think about this
+        Thread.current[:registered_callbacks] = []
+
         # Instantiate the callbacks in the order they need to be triggered
         self.abstract_callback = LolSoap::Callbacks.new
         self.request_callback = LolSoap::Callbacks.new
@@ -55,11 +59,22 @@ module BingAdsRubySdk
 
       def convert_element_names(argument_hashes, type)
         # Fuzzy matching for element names
-        matcher = type.elements.keys.map { |name| name.tr('_', '').downcase }
+        el_keys = type.elements.keys
+        matcher = el_keys.map { |name| name.tr('_', '').downcase }
 
         argument_hashes.each do |hash|
           found_at = matcher.index(hash[:name].tr('_', '').downcase)
-          hash[:name] = type.elements.keys[found_at] if found_at
+          if found_at
+            hash[:name] = el_keys[found_at]
+          elsif type.prefix_and_name == 'soap:Header'
+            BingAdsRubySdk.logger.info(
+              "#{hash[:name]} not found in #{type.prefix_and_name}."\
+              "Possible fields #{el_keys.join(', ')}"
+            )
+          else
+            raise ElementMismatch, "#{hash[:name]} not found in #{type.prefix_and_name}."\
+                                   "Possible fields #{el_keys.join(', ')}"
+          end
         end
       end
 
