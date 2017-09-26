@@ -3,16 +3,33 @@ require 'fixtures'
 
 module BingAdsRubySdk
   RSpec.describe AbstractType do
-    let(:wsdl) { Fixtures.lol_campaign_management }
-    let(:abstract_map) { Fixtures.api_config['ABSTRACT']['campaign_management'] }
-    let(:subject) { described_class.new(wsdl, abstract_map) }
+    let(:wsdl) { Fixtures.lol_campaign_management.wsdl }
+    let(:abstract_map) { Fixtures.api_config['ABSTRACT'] }
 
     before do
-      SoapCallbackManager.register_callbacks
+      SoapCallbackManager.register_callbacks(abstract_map)
+      described_class.wsdl = wsdl
     end
 
-    describe '.with' do
-      it { expect(subject.with('AddConversionGoals') {}).to eq [] }
+    describe '.builder' do
+      it 'changes the args' do
+        expect(
+          described_class.builder(
+            [{ args: ['Montreuil'], name: 'location_criterion' }], nil, nil
+          ).first
+        ).to include(
+          args: ['Montreuil', { 'xsi:type' => 'ns0:LocationCriterion' }],
+          name: 'Criterion'
+        )
+      end
+
+      it 'keeps the args' do
+        expect(
+          described_class.builder(
+            [{ args: ['pomme'], name: 'fruit' }], nil, nil
+          ).first
+        ).to include(args: ['pomme'], name: 'fruit')
+      end
     end
   end
 end
