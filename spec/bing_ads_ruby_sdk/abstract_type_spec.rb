@@ -13,22 +13,28 @@ module BingAdsRubySdk
 
     describe '.builder' do
       it 'changes the args' do
-        expect(
-          described_class.builder(
-            [{ args: ['Montreuil'], name: 'location_criterion' }], nil, nil
-          ).first
-        ).to include(
+        args = [{ args: ['Montreuil'], name: 'location_criterion' }]
+        described_class.builder(
+          args,
+          nil,
+          OpenStruct.new(
+            elements: { 'Criterion' => 'fake' }
+          )
+        )
+        expect(args.first).to include(
           args: ['Montreuil', { 'xsi:type' => 'ns0:LocationCriterion' }],
           name: 'Criterion'
         )
       end
 
       it 'keeps the args' do
-        expect(
-          described_class.builder(
-            [{ args: ['pomme'], name: 'fruit' }], nil, nil
-          ).first
-        ).to include(args: ['pomme'], name: 'fruit')
+        args = [{ args: ['pomme'], name: 'fruit' }]
+        described_class.builder(
+          args,
+          nil,
+          OpenStruct.new(elements: { a: 1 })
+        )
+        expect(args.first).to include(args: ['pomme'], name: 'fruit')
       end
     end
   end

@@ -7,13 +7,14 @@ module BingAdsRubySdk
 
       attr_accessor :abstract_types, :wsdl
 
-      def builder(args, _node, _type)
-        args.each do |h|
-          abstract_types.each do |abstract, concretes|
-            concretes.each do |concrete|
+      def builder(args, _node, type)
+        type.elements.keys.each do |base|
+          next if abstract_types[base].nil?
+          args.each do |h|
+            abstract_types[base].each do |concrete|
               # Skip this type if the argument name does not match the abstract type name
               next unless concrete.tr('_', '').casecmp(h[:name].tr('_', '')).zero?
-              change_args(h, abstract, concrete)
+              change_args(h, base, concrete)
             end
           end
         end

@@ -43,7 +43,11 @@ module BingAdsRubySdk
             SoapCallbackManager.register_callbacks(Fixtures.api_config['ABSTRACT'])
             @doc1 = subject.add_campaign_criterions(
               campaign_criterions: {
-                campaign_criterion: { location_criterion: 'Montreuil' }
+                campaign_criterion: {
+                  location_criterion: {
+                    location_id: 93_100, display_name: 'Montreuil'
+                  }
+                }
               }
             ).envelope.doc
           end.join
@@ -56,7 +60,8 @@ module BingAdsRubySdk
                 '/soap:Body'\
                   '/ns0:AddCampaignCriterionsRequest'\
                     '/ns0:CampaignCriterions'\
-                      '/ns0:CampaignCriterion'
+                      '/ns0:CampaignCriterion'\
+                        '/*/ns0:DisplayName'
             ).content
           ).to eq 'Montreuil'
         end
