@@ -47,7 +47,7 @@ RSpec.describe "CampaignManagement service" do
       ).join(" ")
     end
 
-    subject(:get_ad_extensions) do
+    subject(:get_ad_extensions_by_ids) do
       api.campaign_management.get_ad_extensions_by_ids(
         account_id: ACCOUNT_ID,
         ad_extension_ids: [{ long: id }],
@@ -172,7 +172,7 @@ RSpec.describe "CampaignManagement service" do
       end
 
       it "currently raises an error" do
-        is_expected.to eq(partial_error: "")
+        is_expected.to eq(partial_errors: "")
       end
     end
 
@@ -210,11 +210,11 @@ RSpec.describe "CampaignManagement service" do
       let(:id) { add_ad_extensions[:ad_extension_identities][:ad_extension_identity].first[:id] }
 
       let(:ad_extension_item) do
-        get_ad_extensions[:ad_extensions][:ad_extension].first
+        get_ad_extensions_by_ids[:ad_extensions][:ad_extension].first
       end
 
       it "returns AdExtensions" do
-        is_expected.to include(
+        expect(get_ad_extensions_by_ids).to include(
           ad_extensions: {
             ad_extension: a_kind_of(Array),
           },
