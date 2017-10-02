@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module BingAdsRubySdk
   module OAuth2
     RSpec.describe AuthorizationCode do
