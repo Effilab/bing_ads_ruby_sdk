@@ -59,6 +59,23 @@ RSpec.describe "CampaignManagement service" do
       get_ad_extensions_by_account_id[:ad_extension_ids]
     end
 
+    let(:extension_id) { add_ad_extensions[:ad_extension_identities][:ad_extension_identity].first[:id] }
+
+    subject(:set_ad_extensions_associations) do
+      api.campaign_management.set_ad_extensions_associations(
+        account_id: ACCOUNT_ID,
+        ad_extension_id_to_entity_id_associations: {
+          ad_extension_id_to_entity_id_association: [
+            {
+              ad_extension_id: extension_id,
+              entity_id: campaign_id,
+            },
+          ],
+        },
+        association_type: "Campaign"
+      )
+    end
+
     describe "#add_ad_extensions" do
       subject { add_ad_extensions }
 
@@ -76,24 +93,55 @@ RSpec.describe "CampaignManagement service" do
     end
 
     describe "#set_ad_extensions_associations" do
-      let(:extension_id) { add_ad_extensions[:ad_extension_identities][:ad_extension_identity].first[:id] }
+      it { expect(set_ad_extensions_associations).to eq(partial_errors: "") }
+    end
 
-      subject(:set_ad_extensions_associations) do
-        api.campaign_management.set_ad_extensions_associations(
+    describe "#get_ad_extensions_associations" do
+      before { set_ad_extensions_associations }
+
+      subject(:get_ad_extensions_associations) do
+        api.campaign_management.get_ad_extensions_associations(
           account_id: ACCOUNT_ID,
-          ad_extension_id_to_entity_id_associations: {
-            ad_extension_id_to_entity_id_association: [
-              {
-                ad_extension_id: extension_id,
-                entity_id: campaign_id,
-              },
-            ],
-          },
-          association_type: "Campaign"
+          ad_extension_type: "CallAdExtension",
+          association_type: "Campaign",
+          entity_ids: { long: campaign_id }
         )
       end
 
-      it { is_expected.to eq(partial_errors: "") }
+      it "returns a list of Associations" do
+        is_expected.to include(
+          ad_extension_association_collection: {
+            ad_extension_association_collection: [
+              {
+                ad_extension_associations: {
+                  ad_extension_association: [
+                    {
+                      ad_extension: {
+                        device_preference: nil,
+                        forward_compatibility_map: "",
+                        id: match(/[0-9]*/),
+                        scheduling: nil,
+                        status: "Active",
+                        type: "CallAdExtension",
+                        version: match(/[0-9]*/),
+                        country_code: "NZ",
+                        is_call_only: "false",
+                        is_call_tracking_enabled: "false",
+                        phone_number: match(/[0-9]*/),
+                        require_toll_free_tracking_number: nil,
+                      },
+                      association_type: "Campaign",
+                      editorial_status: "Active",
+                      entity_id: campaign_id.to_s,
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          partial_errors: ""
+        )
+      end
     end
 
     describe "#get_ad_extensions_by_account_id" do
