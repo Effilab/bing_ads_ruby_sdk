@@ -166,12 +166,13 @@ RSpec.describe "CampaignManagement service" do
               ad_extension_id: ad_extension_id,
               entity_id: campaign_id,
             }
-          ]
+          ],
+          association_type: "Campaign"
         )
       end
 
       it "currently raises an error" do
-        expect {delete_ad_extensions_associations}.to raise_error BingAdsRubySdk::Errors::ApiFaultDetail
+        is_expected.to eq(partial_error: "")
       end
     end
 
