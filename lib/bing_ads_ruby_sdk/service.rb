@@ -26,6 +26,8 @@ module BingAdsRubySdk
       client.wsdl.operations
     end
 
+    private
+
     def http_request(req)
       url = URI(req.url)
       Net::HTTP.start(url.hostname,
