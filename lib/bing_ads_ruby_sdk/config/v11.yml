@@ -9,6 +9,7 @@ ABSTRACT:
 
     AdExtension:
       - CallAdExtension
+      - CalloutAdExtension
       - SiteLinksAdExtension
 
     BiddingScheme:
