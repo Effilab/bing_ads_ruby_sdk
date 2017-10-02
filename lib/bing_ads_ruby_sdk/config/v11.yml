@@ -7,6 +7,10 @@ ABSTRACT:
     Ad:
       - ExpandedTextAd
 
+    AdExtension:
+      - CallAdExtension
+      - SiteLinksAdExtension
+
     BiddingScheme:
       - EnhancedCpcBiddingScheme
       - InheritFromParentBiddingScheme
