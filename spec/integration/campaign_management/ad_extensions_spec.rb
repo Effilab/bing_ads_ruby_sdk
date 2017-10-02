@@ -76,6 +76,15 @@ RSpec.describe "CampaignManagement service" do
       )
     end
 
+    subject(:get_ad_extensions_associations) do
+      api.campaign_management.get_ad_extensions_associations(
+        account_id: ACCOUNT_ID,
+        ad_extension_type: "CallAdExtension",
+        association_type: "Campaign",
+        entity_ids: { long: campaign_id }
+      )
+    end
+
     describe "#add_ad_extensions" do
       subject { add_ad_extensions }
 
@@ -98,15 +107,6 @@ RSpec.describe "CampaignManagement service" do
 
     describe "#get_ad_extensions_associations" do
       before { set_ad_extensions_associations }
-
-      subject(:get_ad_extensions_associations) do
-        api.campaign_management.get_ad_extensions_associations(
-          account_id: ACCOUNT_ID,
-          ad_extension_type: "CallAdExtension",
-          association_type: "Campaign",
-          entity_ids: { long: campaign_id }
-        )
-      end
 
       it "returns a list of Associations" do
         is_expected.to include(
@@ -141,6 +141,37 @@ RSpec.describe "CampaignManagement service" do
           },
           partial_errors: ""
         )
+      end
+    end
+
+    describe "#delete_ad_extensions_associations" do
+      before { set_ad_extensions_associations }
+
+      let(:ad_extension) do
+        # This very deep hash is defined on the Bing API
+        get_ad_extensions_associations[
+          :ad_extension_association_collection][
+          :ad_extension_association_collection]
+          .first[:ad_extension_associations][
+          :ad_extension_association].first[:ad_extension]
+      end
+
+      let(:ad_extension_id) { ad_extension[:id] }
+
+      subject(:delete_ad_extensions_associations) do
+        api.campaign_management.delete_ad_extensions_associations(
+          account_id: ACCOUNT_ID,
+          ad_extension_id_to_entity_id_associations: [
+            ad_extension_id_to_entity_id_association: {
+              ad_extension_id: ad_extension_id,
+              entity_id: campaign_id,
+            }
+          ]
+        )
+      end
+
+      it "currently raises an error" do
+        expect {delete_ad_extensions_associations}.to raise_error BingAdsRubySdk::Errors::ApiFaultDetail
       end
     end
 
