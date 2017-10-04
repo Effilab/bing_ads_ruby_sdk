@@ -1,37 +1,39 @@
 ABSTRACT:
-  Account:
-    - AdvertiserAccount
+  customer_management:
+    Account:
+      - AdvertiserAccount
 
-  Ad:
-    - ExpandedTextAd
+  campaign_management:
+    Ad:
+      - ExpandedTextAd
 
-  BiddingScheme:
-    - EnhancedCpcBiddingScheme
-    - InheritFromParentBiddingScheme
-    - ManualCpcBiddingScheme
-    - MaxClicksBiddingScheme
-    - MaxConversionsBiddingScheme
-    - TargetCpaBiddingScheme
+    BiddingScheme:
+      - EnhancedCpcBiddingScheme
+      - InheritFromParentBiddingScheme
+      - ManualCpcBiddingScheme
+      - MaxClicksBiddingScheme
+      - MaxConversionsBiddingScheme
+      - TargetCpaBiddingScheme
 
-  CampaignCriterion:
-    - BiddableCampaignCriterion
-    - NegativeCampaignCriterion
+    CampaignCriterion:
+      - BiddableCampaignCriterion
+      - NegativeCampaignCriterion
 
-  ConversionGoal:
-    - EventGoal
+    ConversionGoal:
+      - EventGoal
 
-  Criterion:
-    - LocationCriterion
-    - RadiusCriterion
+    Criterion:
+      - LocationCriterion
+      - RadiusCriterion
 
-  SharedEntity:
-    - NegativeKeywordList
+    SharedEntity:
+      - NegativeKeywordList
 
-  SharedList:
-    - NegativeKeywordList
+    SharedList:
+      - NegativeKeywordList
 
-  SharedListItem:
-    - NegativeKeyword
+    SharedListItem:
+      - NegativeKeyword
 
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl

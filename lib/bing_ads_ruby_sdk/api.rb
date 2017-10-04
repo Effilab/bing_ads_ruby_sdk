@@ -33,7 +33,7 @@ module BingAdsRubySdk
                    oauth_store: OAuth2::FsStore,
                    credentials: {})
       @api_config = env_for(version)
-      SoapCallbackManager.register_callbacks(@api_config['ABSTRACT'])
+      SoapCallbackManager.register_callbacks
       @token  = token(credentials, oauth_store)
       @header = Header.new(credentials, @token)
       # Get the URLs for the WSDL that defines the services on the API
@@ -80,12 +80,36 @@ module BingAdsRubySdk
         Marshal.load(IO.read(file))
       else
         BingAdsRubySdk.logger.info("Client #{serv} from URL")
-        LolSoap::Client.new(File.read(open(url))).tap do |client|
+        parser = LolSoap::WSDLParser.parse(File.read(open(url)))
+        add_abstract_types(parser, serv)
+        LolSoap::Client.new(LolSoap::WSDL.new(parser)).tap do |client|
           # TODO : as atomic_write does to avoid broken cache
           File.open(file, 'w+') { |f| Marshal.dump(client, f) }
         end
       end
     end
 
+    def abstract_types
+      @api_config['ABSTRACT']
+    end
+
+    def add_abstract_types(parser, serv)
+      # The parser is between the parsed wsdl and LolSoap::WSDL.
+      # The parser organize a structure (see LolSoap::WSDLParser.parse) to build a LolSoap::WSDL
+      parser.types.each do |_full_name, content|
+        content[:elements].keys.each do |base|
+          next if abstract_types[serv].nil? || abstract_types[serv][base].nil?
+          namespace = content[:elements][base][:namespace]
+          abstract_types[serv][base].each do |concrete|
+            elem = parser.elements[[namespace, concrete]]
+            # Inject concrete element in types containing the abstract element
+            # We use the concrete element name as a keyto build the soap body
+            # We'll use the abstract element name as the xml node name
+            # We'll have to add the attribute "type" later
+            content[:elements][elem[:name]] = elem.merge(name: base)
+          end
+        end
+      end
+    end
   end
 end
