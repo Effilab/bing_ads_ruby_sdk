@@ -6,7 +6,7 @@ module BingAdsRubySdk
   # Handles of LolSoap callbacks
   class SoapCallbackManager
     class << self
-      attr_accessor :abstract_callback, :request_callback, :response_callback
+      attr_accessor :request_callback, :response_callback
 
       def register_callbacks
         # A bit hacky, but let's think about this
@@ -77,7 +77,9 @@ module BingAdsRubySdk
               "#{hash[:name]} not found in #{type.prefix_and_name}."\
               "Possible fields #{el_keys.join(', ')}"
             )
+
           else
+            byebug
             raise ElementMismatch, "#{hash[:name]} not found in #{type.prefix_and_name}."\
                                    "Possible fields #{el_keys.join(', ')}"
           end
