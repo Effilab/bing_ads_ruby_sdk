@@ -32,7 +32,7 @@ module BingAdsRubySdk
     def add_abstract(content)
       content.keys.each do |base|
         next if abstract_types[base].nil?
-        # Here the namespace is part of the type full_name
+        # The namespace is part of the base type full_name
         namespace = content[base][:type].first
         abstract_types[base].each do |concrete|
           elem = parser.elements[[namespace, concrete]]
@@ -40,6 +40,7 @@ module BingAdsRubySdk
           # We use the concrete element name as a key to build the soap body
           # We'll use the abstract element name as the xml node name
           # We'll have to add the attribute "type" later
+          BingAdsRubySdk.logger.debug("Adding abstract type #{elem[:name]} inherits from #{base}")
           content[elem[:name]] = elem.merge(name: base)
         end
       end
