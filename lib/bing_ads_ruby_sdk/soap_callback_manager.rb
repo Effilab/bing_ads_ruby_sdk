@@ -79,7 +79,6 @@ module BingAdsRubySdk
             )
 
           else
-            byebug
             raise ElementMismatch, "#{hash[:name]} not found in #{type.prefix_and_name}."\
                                    "Possible fields #{el_keys.join(', ')}"
           end
