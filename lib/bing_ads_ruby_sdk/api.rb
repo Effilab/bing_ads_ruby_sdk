@@ -8,6 +8,7 @@ require 'bing_ads_ruby_sdk/header'
 require 'bing_ads_ruby_sdk/oauth2/authorization_code'
 require 'bing_ads_ruby_sdk/errors/application_fault'
 require 'bing_ads_ruby_sdk/errors/error_handler'
+require 'awesome_print'
 
 module BingAdsRubySdk
   class Api
@@ -80,8 +81,10 @@ module BingAdsRubySdk
         Marshal.load(IO.read(file))
       else
         BingAdsRubySdk.logger.info("Client #{serv} from URL")
+        # The parser is a convenient way to parse the wsdl using nokogiri.
         parser = LolSoap::WSDLParser.parse(File.read(open(url)))
-        add_abstract_types(parser, serv)
+        add_abstract_for_operations(parser, serv)
+        add_abstract_for_types(parser, serv)
         LolSoap::Client.new(LolSoap::WSDL.new(parser)).tap do |client|
           # TODO : as atomic_write does to avoid broken cache
           File.open(file, 'w+') { |f| Marshal.dump(client, f) }
@@ -93,12 +96,37 @@ module BingAdsRubySdk
       @api_config['ABSTRACT']
     end
 
-    def add_abstract_types(parser, serv)
-      # The parser is between the parsed wsdl and LolSoap::WSDL.
-      # The parser organize a structure (see LolSoap::WSDLParser.parse) to build a LolSoap::WSDL
+    def add_abstract_for_operations(parser, serv)
+      return nil if abstract_types[serv].nil?
+
+      parser.operations.each do |_name, content|
+        content[:input][:body].each do |full_name|
+          parser.elements[full_name][:type][:elements].keys.each do |base|
+            next if abstract_types[serv][base].nil?
+
+            # here the namespace is part of the type full_name
+            namespace = parser.elements[full_name][:type][:elements][base][:type].first
+            abstract_types[serv][base].each do |concrete|
+              elem = parser.elements[[namespace, concrete]]
+              byebug if elem.nil?
+              # Inject concrete element in types containing the abstract element
+              # We use the concrete element name as a keyto build the soap body
+              # We'll use the abstract element name as the xml node name
+              # We'll have to add the attribute "type" later
+              parser.elements[full_name][:type][:elements][elem[:name]] = elem.merge(name: base)
+            end
+          end
+        end
+      end
+    end
+
+    def add_abstract_for_types(parser, serv)
+      return nil if abstract_types[serv].nil?
+
       parser.types.each do |_full_name, content|
         content[:elements].keys.each do |base|
-          next if abstract_types[serv].nil? || abstract_types[serv][base].nil?
+          next if abstract_types[serv][base].nil?
+
           namespace = content[:elements][base][:namespace]
           abstract_types[serv][base].each do |concrete|
             elem = parser.elements[[namespace, concrete]]
