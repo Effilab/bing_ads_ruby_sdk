@@ -81,7 +81,10 @@ module BingAdsRubySdk
         Marshal.load(IO.read(file))
       else
         BingAdsRubySdk.logger.info("Client #{serv} from URL")
-        parser = WSDLParser.new(@api_config['ABSTRACT'][serv], url).parser
+        parser = WSDLParser.new(
+          @api_config['ABSTRACT'][serv],
+          File.read(open(url))
+        ).parser
         LolSoap::Client.new(LolSoap::WSDL.new(parser)).tap do |client|
           # TODO : as atomic_write does to avoid broken cache
           File.open(file, 'w+') { |f| Marshal.dump(client, f) }

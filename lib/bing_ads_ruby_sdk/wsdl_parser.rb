@@ -3,10 +3,10 @@ module BingAdsRubySdk
   class WSDLParser
     attr_reader :parser, :abstract_types
 
-    def initialize(abstract_types, url)
+    def initialize(abstract_types, file)
       @abstract_types = abstract_types
       # The parser is a convenient way to parse the wsdl using nokogiri.
-      @parser = LolSoap::WSDLParser.parse(File.read(open(url)))
+      @parser = LolSoap::WSDLParser.parse(file)
       return if @abstract_types.nil?
 
       add_abstract_for_operations
