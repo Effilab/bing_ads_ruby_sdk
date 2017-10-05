@@ -3,10 +3,6 @@ require 'fixtures'
 
 module BingAdsRubySdk
   RSpec.describe Service do
-    before(:all) do
-      SoapCallbackManager.register_callbacks
-    end
-
     let(:header) do
       double('header').tap do |header|
         allow(header).to receive(:content) do

@@ -68,7 +68,6 @@ module BingAdsRubySdk
             name = el_keys[found_at]
             # Abstract types
             if type.elements[name].respond_to?(:name) && name != type.elements[name].name
-              puts name, type.elements[name].name, '* ' * 200
               hash[:name]     = type.elements[name].name
               hash[:sub_type] = type.elements[name].type
               hash[:args] << { 'xsi:type' => type.elements[name].type.prefix_and_name }
