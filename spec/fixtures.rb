@@ -7,13 +7,15 @@ class Fixtures
     end
 
     def lol_campaign_management
-      LolSoap::Client.new(
+      parser = BingAdsRubySdk::WSDLParser.new(
+        Fixtures.api_config['ABSTRACT']['campaign_management'],
         File.read(
           open(
             File.join(__dir__, 'fixtures', 'CampaignManagementService.wsdl')
           )
         )
-      )
+      ).parser
+      LolSoap::Client.new(LolSoap::WSDL.new(parser))
     end
   end
 end

@@ -11,7 +11,7 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
       allow(described_class).to receive(:request_callback).and_return request_callback
       allow(described_class).to receive(:response_callback).and_return response_callback
 
-      described_class.register_callbacks({})
+      described_class.register_callbacks
     end
 
     it 'should register the callbacks with Lolsoap' do
