@@ -20,6 +20,32 @@ RSpec.describe "CampaignManagement service" do
               is_call_only: false,
               phone_number: SecureRandom.random_number(999_999_999),
             },
+            callout_ad_extension: {
+              device_preference: nil,
+              id: nil,
+              scheduling: {},
+              text: "CalloutText",
+            },
+            site_links_ad_extension: {
+              device_preference: nil,
+              id: nil,
+              site_links: [
+                site_link: {
+                  description_1: "Description 1",
+                  description_2: "Description 2",
+                  # destination_url: "Url", # Both Destination and Final Urls not allowed
+                  display_text: "Display Text",
+                  final_mobile_urls: [string: "http://mobile.example.com"],
+                  final_urls: [string: "http://www.example.com"],
+                  scheduling: {},
+                  tracking_url_template: "{lpurl}",
+                  url_custom_parameters: [
+                    parameters: {
+                      custom_parameter: [key: "Key", value: "Value"]
+                    }
+                  ]
+              }]
+            },
           },
         ]
       )
@@ -59,19 +85,20 @@ RSpec.describe "CampaignManagement service" do
       get_ad_extensions_by_account_id[:ad_extension_ids]
     end
 
-    let(:extension_id) { add_ad_extensions[:ad_extension_identities][:ad_extension_identity].first[:id] }
+    let(:extensions) { add_ad_extensions[:ad_extension_identities][:ad_extension_identity] }
 
     subject(:set_ad_extensions_associations) do
       api.campaign_management.set_ad_extensions_associations(
         account_id: ACCOUNT_ID,
-        ad_extension_id_to_entity_id_associations: {
-          ad_extension_id_to_entity_id_association: [
-            {
-              ad_extension_id: extension_id,
-              entity_id: campaign_id,
-            },
-          ],
-        },
+        ad_extension_id_to_entity_id_associations:
+            extensions.map do |extension|
+              {
+                ad_extension_id_to_entity_id_association: {
+                  ad_extension_id: extension[:id],
+                  entity_id: campaign_id,
+                }
+              }
+            end,
         association_type: "Campaign"
       )
     end
@@ -79,7 +106,7 @@ RSpec.describe "CampaignManagement service" do
     subject(:get_ad_extensions_associations) do
       api.campaign_management.get_ad_extensions_associations(
         account_id: ACCOUNT_ID,
-        ad_extension_type: "CallAdExtension",
+        ad_extension_type: "CallAdExtension SiteLinksAdExtension CalloutAdExtension",
         association_type: "Campaign",
         entity_ids: { long: campaign_id }
       )
@@ -92,8 +119,9 @@ RSpec.describe "CampaignManagement service" do
         is_expected.to include(
           ad_extension_identities: {
             ad_extension_identity: [
-              id: a_kind_of(String),
-              version: "1",
+              { id: a_kind_of(String), version: "1" },
+              { id: a_kind_of(String), version: "1" },
+              { id: a_kind_of(String), version: "1" },
             ],
           },
           nested_partial_errors: ""
@@ -108,39 +136,128 @@ RSpec.describe "CampaignManagement service" do
     describe "#get_ad_extensions_associations" do
       before { set_ad_extensions_associations }
 
+      let(:call_ad_extension) do
+        {
+          ad_extension: {
+            device_preference: nil,
+            forward_compatibility_map: "",
+            id: match(/[0-9]*/),
+            scheduling: nil,
+            status: "Active",
+            type: "CallAdExtension",
+            version: match(/[0-9]*/),
+            country_code: "NZ",
+            is_call_only: "false",
+            is_call_tracking_enabled: "false",
+            phone_number: match(/[0-9]*/),
+            require_toll_free_tracking_number: nil,
+          },
+          association_type: "Campaign",
+          editorial_status: "Active",
+          entity_id: campaign_id.to_s,
+        }
+      end
+
+      let(:callout_ad_extension) do
+        {
+          ad_extension: {
+            device_preference: nil,
+            forward_compatibility_map: "",
+            id: match(/[0-9]*/),
+            scheduling: nil,
+            status: "Active",
+            type: "CalloutAdExtension",
+            version: match(/[0-9]*/),
+            text: "CalloutText"
+          },
+          association_type: "Campaign",
+          editorial_status: "Active",
+          entity_id: match(/[0-9]*/)
+        }
+      end
+
+      let(:site_links_ad_extension) do
+        {
+          ad_extension: {
+            device_preference: nil,
+            forward_compatibility_map: "",
+            id: match(/[0-9]*/),
+            scheduling: nil,
+            status: "Active",
+            type: "SiteLinksAdExtension",
+            version: match(/[0-9]*/),
+            site_links: {
+              site_link: {
+                description1: "Description 1",
+                description2: "Description 2",
+                destination_url: nil,
+                device_preference: nil,
+                display_text: "Display Text",
+                final_app_urls: nil,
+                final_mobile_urls: {
+                  string: "http://mobile.example.com"
+                },
+                final_urls: {
+                  string: "http://www.example.com"
+                },
+                scheduling: nil,
+                tracking_url_template: "{lpurl}",
+                url_custom_parameters: {
+                  parameters: {
+                    custom_parameter: {
+                      key: "Key",
+                      value: "Value"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          association_type: "Campaign",
+          editorial_status: "Active",
+          entity_id: match(/[0-9]*/),
+        }
+      end
+
+      let(:associations) do
+        get_ad_extensions_associations[
+          :ad_extension_association_collection][
+          :ad_extension_association_collection].first[
+          :ad_extension_associations][
+          :ad_extension_association]
+      end
+
+      let(:result_site_link_association) do
+
+      end
+
+      def get_association(associations, type)
+        associations.select { |record| record[:ad_extension][:type] == type }.first
+      end
+
       it "returns a list of Associations" do
-        is_expected.to include(
+        expect(get_ad_extensions_associations).to include(
           ad_extension_association_collection: {
             ad_extension_association_collection: [
               {
                 ad_extension_associations: {
-                  ad_extension_association: [
-                    {
-                      ad_extension: {
-                        device_preference: nil,
-                        forward_compatibility_map: "",
-                        id: match(/[0-9]*/),
-                        scheduling: nil,
-                        status: "Active",
-                        type: "CallAdExtension",
-                        version: match(/[0-9]*/),
-                        country_code: "NZ",
-                        is_call_only: "false",
-                        is_call_tracking_enabled: "false",
-                        phone_number: match(/[0-9]*/),
-                        require_toll_free_tracking_number: nil,
-                      },
-                      association_type: "Campaign",
-                      editorial_status: "Active",
-                      entity_id: campaign_id.to_s,
-                    },
-                  ],
-                },
-              },
+                  ad_extension_association: a_kind_of(Array)
+                }
+              }
             ],
           },
           partial_errors: ""
         )
+
+        # These are split apart to make it easier to figure out which one is missing
+        expect(get_association(associations, "CallAdExtension"))
+          .to include(call_ad_extension)
+
+        expect(get_association(associations, "CalloutAdExtension"))
+          .to include(callout_ad_extension)
+
+        expect(get_association(associations, "SiteLinksAdExtension"))
+          .to include(site_links_ad_extension)
       end
     end
 
@@ -235,7 +352,7 @@ RSpec.describe "CampaignManagement service" do
       before { add_ad_extensions }
 
       let(:id) { add_ad_extensions[:ad_extension_identities][:ad_extension_identity].first[:id] }
-      let(:ad_extension) { get_ad_extensions[:ad_extensions][:ad_extension].first }
+      let(:ad_extension) { get_ad_extensions_by_ids[:ad_extensions][:ad_extension].first }
       let(:updated_ad_extension) do
         ad_extension
           .merge(phone_number: "111111111")
