@@ -66,10 +66,14 @@ module BingAdsRubySdk
           found_at = matcher.index(hash[:name].tr('_', '').downcase)
           if found_at
             name = el_keys[found_at]
-            hash[:name] = type.elements[name].name
-            if name != type.elements[name].name
+            # Abstract types
+            if type.elements[name].respond_to?(:name) && name != type.elements[name].name
+              puts name, type.elements[name].name, '* ' * 200
+              hash[:name]     = type.elements[name].name
               hash[:sub_type] = type.elements[name].type
               hash[:args] << { 'xsi:type' => type.elements[name].type.prefix_and_name }
+            else
+              hash[:name] = name
             end
 
           elsif type.prefix_and_name == 'soap:Header'
