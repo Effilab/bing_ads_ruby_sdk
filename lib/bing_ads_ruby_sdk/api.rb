@@ -5,6 +5,7 @@ require 'lolsoap'
 require 'bing_ads_ruby_sdk/soap_callback_manager'
 require 'bing_ads_ruby_sdk/service'
 require 'bing_ads_ruby_sdk/header'
+require 'bing_ads_ruby_sdk/oauth2/authorization_code'
 require 'bing_ads_ruby_sdk/errors/application_fault'
 require 'bing_ads_ruby_sdk/errors/error_handler'
 
@@ -32,37 +33,48 @@ module BingAdsRubySdk
                    oauth_store: OAuth2::FsStore,
                    credentials: {})
       SoapCallbackManager.register_callbacks
-      @header = Header.new(credentials, oauth_store)
+      @token  = token(credentials, oauth_store)
+      @header = Header.new(credentials, @token)
       # Get the URLs for the WSDL that defines the services on the API
-      api_config = env_for(version)
-
-      # Create a service object based on the WSDL in each configuration entry
-      api_config[environment.to_s.upcase].each do |serv, url|
-        BingAdsRubySdk.logger.debug("Defining service #{serv} accessors")
-        self.class.send(:attr_reader, serv)
-
-        client = load_or_new(serv, url)
-        client.wsdl.namespaces['xsi'] = 'http://www.w3.org/2001/XMLSchema-instance'
-
-        instance_variable_set(
-          "@#{serv}",
-          Service.new(client, header, api_config['ABSTRACT'][serv])
-        )
-      end
+      @api_config = env_for(version)
+      # Create services accessors and objects from each named wsdl
+      build_services(environment)
     end
 
     private
 
+    def build_services(environment)
+      @api_config[environment.to_s.upcase].each do |serv, url|
+        BingAdsRubySdk.logger.debug("Defining service #{serv} accessors")
+        self.class.send(:attr_reader, serv)
+        client = load_or_new(serv, url)
+        instance_variable_set(
+          "@#{serv}",
+          Service.new(client, header, @api_config['ABSTRACT'][serv])
+        )
+      end
+    end
+
+    def token(credentials, store)
+      OAuth2::AuthorizationCode.new(
+        {
+          developer_token: credentials[:developer_token],
+          client_id:       credentials[:client_id]
+        },
+        store: store
+      )
+    end
+
     def env_for(version)
-      @cache_path = "#{File.expand_path('../', __FILE__)}/.cache/#{version}"
+      @cache_path = File.join(__dir__, '.cache', version.to_s)
       FileUtils.mkdir_p @cache_path
       YAML.load_file(
-        "#{File.expand_path('../', __FILE__)}/config/#{version}.yml"
+        File.join(__dir__, 'config', "#{version}.yml")
       )
     end
 
     def load_or_new(serv, url)
-      file = "#{@cache_path}/#{serv}"
+      file = File.join(@cache_path, serv)
       if File.file?(file)
         BingAdsRubySdk.logger.debug("Client #{serv} from cache")
         Marshal.load(IO.read(file))

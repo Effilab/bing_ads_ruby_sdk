@@ -1,0 +1,48 @@
+ABSTRACT:
+  campaign_management:
+    AddAds:
+      ExpandedTextAd: Ad
+    AddCampaigns:
+      EnhancedCpcBiddingScheme: BiddingScheme
+      InheritFromParentBiddingScheme: BiddingScheme
+      ManualCpcBiddingScheme: BiddingScheme
+      MaxClicksBiddingScheme: BiddingScheme
+      MaxConversionsBiddingScheme: BiddingScheme
+      TargetCpaBiddingScheme: BiddingScheme
+    AddCampaignCriterions:
+      BiddableCampaignCriterion: CampaignCriterion
+      LocationCriterion: Criterion
+      NegativeCampaignCriterion: CampaignCriterion
+      RadiusCriterion: Criterion
+    AddConversionGoals:
+      EventGoal: ConversionGoal
+    AddListItemsToSharedList:
+      NegativeKeyword: SharedListItem
+      NegativeKeywordList: SharedList
+    AddSharedEntity:
+      NegativeKeyword: SharedListItem
+      NegativeKeywordList: SharedEntity
+    DeleteAds:
+      ExpandedTextAd: Ad
+    DeleteListItemsFromSharedList:
+      NegativeKeywordList: SharedList
+    DeleteSharedEntities:
+      NegativeKeywordList: SharedEntity
+    GetAdsByAdGroupId:
+      ExpandedTextAd: Ad
+    GetListItemsBySharedList:
+      NegativeKeywordList: SharedList
+    UpdateAds:
+      ExpandedTextAd: Ad
+    UpdateCampaignCriterions:
+      BiddableCampaignCriterion: CampaignCriterion
+      LocationCriterion: Criterion
+      NegativeCampaignCriterion: CampaignCriterion
+      RadiusCriterion: Criterion
+    UpdateConversionGoals:
+      EventGoal: ConversionGoal
+    UpdateSharedEntities:
+      NegativeKeywordList: SharedEntity
+
+TEST:
+  campaign_management: ./spec/fixtures/CampaignManagementService.wsdl
