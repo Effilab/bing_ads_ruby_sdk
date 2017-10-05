@@ -1,18 +1,19 @@
 require 'lolsoap'
+require 'thread'
 require 'bing_ads_ruby_sdk/utils'
-require 'bing_ads_ruby_sdk/abstract_type'
 require 'net/http'
 require 'open-uri'
 
 module BingAdsRubySdk
   # Manages communication with the a defined SOAP service on the API
   class Service
+    SEMAPHORE = Mutex.new
+
     attr_reader :client, :shared_header, :abstract_types
 
-    def initialize(client, shared_header, abstract_map)
+    def initialize(client, shared_header)
       @client = client
       @shared_header = shared_header
-      @abstract_types = AbstractType.new(@client.wsdl, abstract_map)
       client.wsdl.namespaces['xsi'] = 'http://www.w3.org/2001/XMLSchema-instance'
       operations.keys.each do |op|
         BingAdsRubySdk.logger.debug("Defining operation : #{op}")
@@ -47,10 +48,10 @@ module BingAdsRubySdk
     def request(name, body)
       req = client.request(name)
       req.header.content(shared_header.content)
-      abstract_types.with(name) do
+      SEMAPHORE.synchronize do
+        AbstractType.wsdl = client.wsdl
         req.body.content(body) if body
       end
-
       BingAdsRubySdk.logger.debug("Operation : #{name}")
       BingAdsRubySdk.logger.debug(req.content)
 

@@ -32,11 +32,11 @@ module BingAdsRubySdk
                    environment: :production,
                    oauth_store: OAuth2::FsStore,
                    credentials: {})
-      SoapCallbackManager.register_callbacks
+      @api_config = env_for(version)
+      SoapCallbackManager.register_callbacks(@api_config['ABSTRACT'])
       @token  = token(credentials, oauth_store)
       @header = Header.new(credentials, @token)
       # Get the URLs for the WSDL that defines the services on the API
-      @api_config = env_for(version)
       # Create services accessors and objects from each named wsdl
       build_services(environment)
     end
@@ -50,7 +50,7 @@ module BingAdsRubySdk
         client = load_or_new(serv, url)
         instance_variable_set(
           "@#{serv}",
-          Service.new(client, header, @api_config['ABSTRACT'][serv])
+          Service.new(client, header)
         )
       end
     end
