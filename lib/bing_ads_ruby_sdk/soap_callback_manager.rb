@@ -1,6 +1,5 @@
 require 'bing_ads_ruby_sdk/utils'
 require 'bing_ads_ruby_sdk/exceptions'
-require 'bing_ads_ruby_sdk/callbacks/abstract_type'
 
 module BingAdsRubySdk
   # Handles of LolSoap callbacks
