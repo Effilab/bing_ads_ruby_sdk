@@ -1,13 +1,12 @@
 require 'lolsoap'
 require 'bing_ads_ruby_sdk/utils'
 require 'net/http'
-require 'open-uri'
 
 module BingAdsRubySdk
   # Manages communication with the a defined SOAP service on the API
   class Service
 
-    attr_reader :client, :shared_header, :abstract_types
+    attr_reader :client, :shared_header
 
     def initialize(client, shared_header)
       @client = client
