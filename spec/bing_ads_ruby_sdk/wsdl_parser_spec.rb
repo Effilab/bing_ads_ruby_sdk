@@ -1,8 +1,7 @@
 require 'spec_helper'
 require 'fixtures'
-require 'byebug'
 require 'bing_ads_ruby_sdk/wsdl_parser'
- 
+
 module BingAdsRubySdk
   RSpec.describe WSDLParser do
     let(:legacy_client) do
