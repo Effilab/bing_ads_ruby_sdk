@@ -27,6 +27,8 @@ module BingAdsRubySdk
           FileUtils.mkdir_p(config.cache_path)
           config.services.each do |serv, url|
             file_path = File.join(config.cache_path, serv)
+            next if File.file?(file_path)
+
             BingAdsRubySdk.logger.info("Caching service to file : #{file_path}")
             parser = WSDLParser.new(
               config.abstract[serv],

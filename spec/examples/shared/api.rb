@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require 'bing_ads_ruby_sdk/cache'
-
 RSpec.shared_context 'use api' do
   # TODO: consider reading a YML file to get these values
   CUSTOMER_ID ||= ENV.fetch('ACCEPTANCE_CUSTOMER_ID')
@@ -21,5 +19,3 @@ RSpec.shared_context 'use api' do
     end
   end
 end
-
-BingAdsRubySdk::Cache.build
