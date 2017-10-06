@@ -2,15 +2,15 @@ require 'spec_helper'
 require 'fixtures'
 
 module BingAdsRubySdk
-  # TODO : reafactor this or the code
-  class Api
-    def env_for(version)
-      @cache_path = Dir.tmpdir
-      Fixtures.api_config
-    end
-  end
+  Configuration::ENVIRONMENTS = %i[test].freeze
+  Configuration::VERSIONS     = %i[v11].freeze
+  Configuration::CACHE_BASE   = Dir.tmpdir
+  Configuration::CONF_PATH    = File.join(__dir__, '..', 'fixtures')
 
   RSpec.describe Api do
+    before(:all) { BingAdsRubySdk::Cache.build }
+    after(:all)  { BingAdsRubySdk::Cache.clear }
+
     subject do
       described_class.new(environment: :test)
     end
