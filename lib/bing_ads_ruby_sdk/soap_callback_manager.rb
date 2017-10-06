@@ -1,24 +1,19 @@
 require 'bing_ads_ruby_sdk/utils'
 require 'bing_ads_ruby_sdk/exceptions'
-require 'bing_ads_ruby_sdk/callbacks/abstract_type'
 
 module BingAdsRubySdk
   # Handles of LolSoap callbacks
   class SoapCallbackManager
     class << self
-      attr_accessor :abstract_callback, :request_callback, :response_callback
+      attr_accessor :request_callback, :response_callback
 
-      def register_callbacks(abstract_types)
+      def register_callbacks
         # A bit hacky, but let's think about this
         Thread.current[:registered_callbacks] = []
 
         # Instantiate the callbacks in the order they need to be triggered
-        self.abstract_callback = LolSoap::Callbacks.new
         self.request_callback = LolSoap::Callbacks.new
         self.response_callback = LolSoap::Callbacks.new
-
-        AbstractType.abstract_types = abstract_types
-        AbstractType.register
 
         # Modify the request data before it is sent via the SOAP client
         request_callback
@@ -69,12 +64,22 @@ module BingAdsRubySdk
         argument_hashes.each do |hash|
           found_at = matcher.index(hash[:name].tr('_', '').downcase)
           if found_at
-            hash[:name] = el_keys[found_at]
+            name = el_keys[found_at]
+            # Abstract types
+            if type.elements[name].respond_to?(:name) && name != type.elements[name].name
+              hash[:name]     = type.elements[name].name
+              hash[:sub_type] = type.elements[name].type
+              hash[:args] << { 'xsi:type' => type.elements[name].type.prefix_and_name }
+            else
+              hash[:name] = name
+            end
+
           elsif type.prefix_and_name == 'soap:Header'
             BingAdsRubySdk.logger.info(
               "#{hash[:name]} not found in #{type.prefix_and_name}."\
               "Possible fields #{el_keys.join(', ')}"
             )
+
           else
             raise ElementMismatch, "#{hash[:name]} not found in #{type.prefix_and_name}."\
                                    "Possible fields #{el_keys.join(', ')}"

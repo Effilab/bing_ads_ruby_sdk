@@ -3,10 +3,6 @@ require 'fixtures'
 
 module BingAdsRubySdk
   RSpec.describe Service do
-    before(:all) do
-      SoapCallbackManager.register_callbacks(Fixtures.api_config['ABSTRACT'])
-    end
-
     let(:header) do
       double('header').tap do |header|
         allow(header).to receive(:content) do
@@ -40,7 +36,7 @@ module BingAdsRubySdk
       context 'concurrent' do
         before do
           Thread.new do
-            SoapCallbackManager.register_callbacks(Fixtures.api_config['ABSTRACT'])
+            SoapCallbackManager.register_callbacks
             @doc1 = subject.add_campaign_criterions(
               campaign_criterions: {
                 campaign_criterion: {

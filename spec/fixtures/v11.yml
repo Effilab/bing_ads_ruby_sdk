@@ -1,34 +1,32 @@
 ABSTRACT:
-  Ad:
-    - ExpandedTextAd
+  campaign_management:
+    BiddingScheme:
+      - EnhancedCpcBiddingScheme
+      - InheritFromParentBiddingScheme
+      - ManualCpcBiddingScheme
+      - MaxClicksBiddingScheme
+      - MaxConversionsBiddingScheme
+      - TargetCpaBiddingScheme
 
-  BiddingScheme:
-    - EnhancedCpcBiddingScheme
-    - InheritFromParentBiddingScheme
-    - ManualCpcBiddingScheme
-    - MaxClicksBiddingScheme
-    - MaxConversionsBiddingScheme
-    - TargetCpaBiddingScheme
+    CampaignCriterion:
+      - BiddableCampaignCriterion
+      - NegativeCampaignCriterion
 
-  CampaignCriterion:
-    - BiddableCampaignCriterion
-    - NegativeCampaignCriterion
+    ConversionGoal:
+      - EventGoal
 
-  ConversionGoal:
-    - EventGoal
+    Criterion:
+      - LocationCriterion
+      - RadiusCriterion
 
-  Criterion:
-    - LocationCriterion
-    - RadiusCriterion
+    SharedEntity:
+      - NegativeKeywordList
 
-  SharedEntity:
-    - NegativeKeywordList
+    SharedList:
+      - NegativeKeywordList
 
-  SharedList:
-    - NegativeKeywordList
-
-  SharedListItem:
-    - NegativeKeyword
+    SharedListItem:
+      - NegativeKeyword
 
 TEST:
   campaign_management: ./spec/fixtures/CampaignManagementService.wsdl

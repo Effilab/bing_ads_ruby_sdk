@@ -5,6 +5,7 @@ require 'lolsoap'
 require 'bing_ads_ruby_sdk/soap_callback_manager'
 require 'bing_ads_ruby_sdk/service'
 require 'bing_ads_ruby_sdk/header'
+require 'bing_ads_ruby_sdk/wsdl_parser'
 require 'bing_ads_ruby_sdk/oauth2/authorization_code'
 require 'bing_ads_ruby_sdk/errors/application_fault'
 require 'bing_ads_ruby_sdk/errors/error_handler'
@@ -33,7 +34,7 @@ module BingAdsRubySdk
                    oauth_store: OAuth2::FsStore,
                    credentials: {})
       @api_config = env_for(version)
-      SoapCallbackManager.register_callbacks(@api_config['ABSTRACT'])
+      SoapCallbackManager.register_callbacks
       @token  = token(credentials, oauth_store)
       @header = Header.new(credentials, @token)
       # Get the URLs for the WSDL that defines the services on the API
@@ -80,12 +81,15 @@ module BingAdsRubySdk
         Marshal.load(IO.read(file))
       else
         BingAdsRubySdk.logger.info("Client #{serv} from URL")
-        LolSoap::Client.new(File.read(open(url))).tap do |client|
+        parser = WSDLParser.new(
+          @api_config['ABSTRACT'][serv],
+          File.read(open(url))
+        ).parser
+        LolSoap::Client.new(LolSoap::WSDL.new(parser)).tap do |client|
           # TODO : as atomic_write does to avoid broken cache
           File.open(file, 'w+') { |f| Marshal.dump(client, f) }
         end
       end
     end
-
   end
 end
