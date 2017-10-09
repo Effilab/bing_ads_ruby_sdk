@@ -18,6 +18,7 @@ RSpec.describe 'CampaignManagement service' do
               },
               bidding_scheme: {
                 type: "InheritFromParent",
+                inherited_bid_strategy_type: "ManualCpc",
               },
               destination_url: "",
               editorial_status: "Active",
