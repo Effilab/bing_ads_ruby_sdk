@@ -27,25 +27,22 @@ RSpec.describe "CampaignManagement service" do
               scheduling: {},
               text: "CalloutText",
             },
-            site_links_ad_extension: {
+            sitelink2_ad_extension: {
               device_preference: nil,
               id: nil,
-              site_links: [
-                site_link: {
-                  description_1: "Description 1",
-                  description_2: "Description 2",
-                  # destination_url: "Url", # Both Destination and Final Urls not allowed
-                  display_text: "Display Text",
-                  final_mobile_urls: [string: "http://mobile.example.com"],
-                  final_urls: [string: "http://www.example.com"],
-                  scheduling: {},
-                  tracking_url_template: "{lpurl}",
-                  url_custom_parameters: [
-                    parameters: {
-                      custom_parameter: [key: "Key", value: "Value"]
-                    }
-                  ]
-              }]
+              description_1: "Description 1",
+              description_2: "Description 2",
+              # destination_url: "Url", # Both Destination and Final Urls not allowed
+              display_text: "Display Text",
+              final_mobile_urls: [string: "http://mobile.example.com"],
+              final_urls: [string: "http://www.example.com"],
+              scheduling: {},
+              tracking_url_template: "{lpurl}",
+              url_custom_parameters: [
+                parameters: {
+                  custom_parameter: [key: "Key", value: "Value"]
+                }
+              ]
             },
           },
         ]
@@ -61,9 +58,8 @@ RSpec.describe "CampaignManagement service" do
     end
 
     let(:types) do
-      # As of writing Sitelink2AdExtension is a pilot that you need to be signed up for to use here
       %w(
-        SiteLinksAdExtension
+        Sitelink2AdExtension
         LocationAdExtension
         CallAdExtension
         ImageAdExtension
@@ -107,7 +103,7 @@ RSpec.describe "CampaignManagement service" do
     subject(:get_ad_extensions_associations) do
       api.campaign_management.get_ad_extensions_associations(
         account_id: ACCOUNT_ID,
-        ad_extension_type: "CallAdExtension SiteLinksAdExtension CalloutAdExtension",
+        ad_extension_type: "CallAdExtension Sitelink2AdExtension CalloutAdExtension",
         association_type: "Campaign",
         entity_ids: { long: campaign_id }
       )
@@ -185,31 +181,27 @@ RSpec.describe "CampaignManagement service" do
             id: match(/[0-9]*/),
             scheduling: nil,
             status: "Active",
-            type: "SiteLinksAdExtension",
+            type: "Sitelink2AdExtension",
             version: match(/[0-9]*/),
-            site_links: {
-              site_link: {
-                description1: "Description 1",
-                description2: "Description 2",
-                destination_url: nil,
-                device_preference: nil,
-                display_text: "Display Text",
-                final_app_urls: nil,
-                final_mobile_urls: {
-                  string: "http://mobile.example.com"
-                },
-                final_urls: {
-                  string: "http://www.example.com"
-                },
-                scheduling: nil,
-                tracking_url_template: "{lpurl}",
-                url_custom_parameters: {
-                  parameters: {
-                    custom_parameter: {
-                      key: "Key",
-                      value: "Value"
-                    }
-                  }
+            description1: "Description 1",
+            description2: "Description 2",
+            destination_url: nil,
+            device_preference: nil,
+            display_text: "Display Text",
+            final_app_urls: nil,
+            final_mobile_urls: {
+              string: "http://mobile.example.com"
+            },
+            final_urls: {
+              string: "http://www.example.com"
+            },
+            scheduling: nil,
+            tracking_url_template: "{lpurl}",
+            url_custom_parameters: {
+              parameters: {
+                custom_parameter: {
+                  key: "Key",
+                  value: "Value"
                 }
               }
             }
@@ -257,7 +249,7 @@ RSpec.describe "CampaignManagement service" do
         expect(get_association(associations, "CalloutAdExtension"))
           .to include(callout_ad_extension)
 
-        expect(get_association(associations, "SiteLinksAdExtension"))
+        expect(get_association(associations, "Sitelink2AdExtension"))
           .to include(site_links_ad_extension)
       end
     end
