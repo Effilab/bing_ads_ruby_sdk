@@ -10,7 +10,7 @@ ABSTRACT:
     AdExtension:
       - CallAdExtension
       - CalloutAdExtension
-      - SiteLinksAdExtension
+      - Sitelink2AdExtension
 
     BiddingScheme:
       - EnhancedCpcBiddingScheme
