@@ -49,7 +49,7 @@ RSpec.describe "CampaignManagement service" do
       )
     end
 
-    subject(:get_ad_extensions_by_account_id) do
+    subject(:get_ad_extension_ids_by_account_id) do
       api.campaign_management.get_ad_extension_ids_by_account_id(
         account_id: ACCOUNT_ID,
         ad_extension_type: "CallAdExtension",
@@ -79,7 +79,7 @@ RSpec.describe "CampaignManagement service" do
     end
 
     let(:ad_extension_ids) do
-      get_ad_extensions_by_account_id[:ad_extension_ids]
+      get_ad_extension_ids_by_account_id[:ad_extension_ids]
     end
 
     let(:extensions) { add_ad_extensions[:ad_extension_identities][:ad_extension_identity] }
@@ -286,11 +286,11 @@ RSpec.describe "CampaignManagement service" do
       end
     end
 
-    describe "#get_ad_extensions_by_account_id" do
+    describe "#get_ad_extension_ids_by_account_id" do
       before { add_ad_extensions }
 
       it "returns a list of IDs" do
-        expect(get_ad_extensions_by_account_id)
+        expect(get_ad_extension_ids_by_account_id)
           .to include(ad_extension_ids: a_collection_including(a_kind_of(Integer)))
       end
     end
