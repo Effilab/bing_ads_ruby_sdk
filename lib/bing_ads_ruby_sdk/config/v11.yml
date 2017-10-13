@@ -41,6 +41,10 @@ ABSTRACT:
     SharedListItem:
       - NegativeKeyword
 
+  reporting:
+    ReportRequest:
+      - AccountPerformanceReportRequest
+
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
   bulk:                https://bulk.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v11/BulkService.svc?singleWsdl
