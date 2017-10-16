@@ -2,11 +2,6 @@ require 'spec_helper'
 require 'bing_ads_ruby_sdk/cache'
 
 module BingAdsRubySdk
-  Configuration::ENVIRONMENTS = %i[test].freeze
-  Configuration::VERSIONS     = %i[v11].freeze
-  Configuration::CACHE_BASE   = Dir.tmpdir
-  Configuration::CONF_PATH    = File.join(__dir__, '..', 'fixtures')
-
   RSpec.describe Cache do
     let(:config) { Configuration.new(version: :v11, environment: :test) }
     after { described_class.clear }

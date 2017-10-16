@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 module BingAdsRubySdk
-  Configuration::ENVIRONMENTS = %i[test].freeze
-  Configuration::VERSIONS     = %i[v11].freeze
-  Configuration::CACHE_BASE   = Dir.tmpdir
-  Configuration::CONF_PATH    = File.join(__dir__, '..', 'fixtures')
-
   RSpec.describe Configuration do
     subject do
       described_class.new(version: :v11, environment: :test)

@@ -2,11 +2,6 @@ require 'spec_helper'
 require 'fixtures'
 
 module BingAdsRubySdk
-  Configuration::ENVIRONMENTS = %i[test].freeze
-  Configuration::VERSIONS     = %i[v11].freeze
-  Configuration::CACHE_BASE   = Dir.tmpdir
-  Configuration::CONF_PATH    = File.join(__dir__, '..', 'fixtures')
-
   RSpec.describe Api do
     before(:all) { BingAdsRubySdk::Cache.build }
     after(:all)  { BingAdsRubySdk::Cache.clear }
