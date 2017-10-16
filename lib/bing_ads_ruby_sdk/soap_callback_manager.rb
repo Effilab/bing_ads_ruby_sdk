@@ -3,12 +3,14 @@ require 'bing_ads_ruby_sdk/exceptions'
 
 module BingAdsRubySdk
   # Handles of LolSoap callbacks
+  # FIXME : that should be splitted in smaller classes in a callbacks folder
   class SoapCallbackManager
     class << self
       attr_accessor :request_callback, :response_callback
 
+      # FIXME : That souldt be an instance method to avoid collision in threads
       def register_callbacks
-        # A bit hacky, but let's think about this
+        # FIXME : needed when instanciating n times the API in the same thread
         Thread.current[:registered_callbacks] = []
 
         # Instantiate the callbacks in the order they need to be triggered
