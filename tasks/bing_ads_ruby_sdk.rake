@@ -23,7 +23,7 @@ namespace :bars do
       BingAdsRubySdk::Cache.clear
     end
 
-    desc 'Reset cache'
+    desc 'Reset cache : clear, build and check'
     task reset: %i[clear build check]
   end
 end
