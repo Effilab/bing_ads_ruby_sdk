@@ -6,6 +6,7 @@ class Fixtures
       )
     end
 
+    # FIXME : tests would be a lot faster by sliming a lot this wsdl
     def wsdl_file
       File.read(
         open(
