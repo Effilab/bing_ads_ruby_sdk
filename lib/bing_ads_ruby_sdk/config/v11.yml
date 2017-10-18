@@ -24,6 +24,7 @@ ABSTRACT:
 
     Criterion:
       - LocationCriterion
+      - LocationIntentCriterion
       - RadiusCriterion
 
     SharedEntity:
