@@ -50,7 +50,7 @@ module BingAdsRubySdk
 
       def populate_error_lists
         self.class.error_lists.each do |key|
-          instance_variable_set("@#{key}", fault_hash[key])
+          instance_variable_set("@#{key}", array_wrap(fault_hash[key]))
         end
       end
 
@@ -60,7 +60,7 @@ module BingAdsRubySdk
 
           # Call sometimes returns an empty string instead of
           # nil for empty lists
-          list.is_a?(String) && list.empty? ? nil : list
+          list.nil? || list.empty? ? nil : list
         end.compact
       end
 
@@ -81,6 +81,15 @@ module BingAdsRubySdk
       def first_error_message(error_list)
         error = error_list.first.values.first
         format_message(error[:error_code], error[:message])
+      end
+
+      def array_wrap(value)
+        case value
+        when Array then value
+        when nil, "" then []
+        else
+          [value]
+        end
       end
 
       class << self

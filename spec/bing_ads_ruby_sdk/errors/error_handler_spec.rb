@@ -65,15 +65,15 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
         ]
       end
 
-      let(:operation_error_list_as_hash) do
-        {
+      let(:operation_errors) do
+        [{
           operation_error: {
             code: '4503',
             details: 'Invalid API Campaign Criterion Type : 0 on API tier',
             error_code: 'TypeInvalid',
             message: "The campaign criterion ..."
           }
-        }
+        }]
       end
 
       let(:error_message) do
@@ -86,15 +86,15 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
             api_fault_detail: {
               tracking_id: '14f89175-e806-4822-8aa7-32b0c7734e11',
               batch_errors: '',
-              operation_errors: operation_error_list_as_hash
+              operation_errors: operation_errors
             }
           }
         end
 
         let(:error_attributes) do
           {
-            batch_errors: '',
-            operation_errors: operation_error_list_as_hash,
+            batch_errors: [],
+            operation_errors: operation_errors,
             message: "TypeInvalid - The campaign criterion ..."
           }
         end
@@ -115,14 +115,14 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
         end
 
         let(:errors) do
-          {
+          [{
             ad_api_error: {
               code: '0000',
               detail: 'Details about error',
               error_code: 'ErrorCode',
               message: 'Fault message'
             }
-          }
+          }]
         end
 
         let(:error_class) { BingAdsRubySdk::Errors::AdApiFaultDetail }
@@ -143,7 +143,7 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
               tracking_id: '14f89175-e806-4822-8aa7-32b0c7734e11',
               batch_errors: batch_error_list,
               editorial_errors: editorial_error_list,
-              operation_errors: operation_error_list_as_hash
+              operation_errors: operation_errors
             }
           }
         end
@@ -154,7 +154,7 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
           {
             batch_errors: batch_error_list,
             editorial_errors: editorial_error_list,
-            operation_errors: operation_error_list_as_hash,
+            operation_errors: operation_errors,
             message: error_message
           }
         end
@@ -203,14 +203,14 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
           {
             api_fault: {
               tracking_id: '14f89175-e806-4822-8aa7-32b0c7734e11',
-              operation_errors: operation_error_list_as_hash
+              operation_errors: operation_errors
             }
           }
         end
 
         let(:error_attributes) do
           {
-            operation_errors: operation_error_list_as_hash,
+            operation_errors: operation_errors,
             message: "TypeInvalid - The campaign criterion ..."
           }
         end
@@ -392,7 +392,7 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
       end
     end
 
-    context 'when there are partial errors' do
+    context 'when there are partial errors - multiple batch_errors' do
       let(:api_response) do
         {
           campaign_ids: [],
@@ -438,6 +438,47 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
 
       context 'when the ignore partial errors switch is on' do
         it 'should return the PartialError as a Hash'
+      end
+    end
+
+    context 'when there are partial errors - one batch_error' do
+      let(:api_response) do
+        {
+          campaign_ids: [],
+          partial_errors: {
+            batch_error: {
+              code: '4701',
+              details: nil,
+              error_code: 'UnsupportedBiddingScheme',
+              field_path: nil,
+              forward_compatibility_map: nil,
+              index: '0',
+              message: 'The bidding...',
+              type: 'BatchError'
+            },
+          }
+        }
+      end
+
+      context 'when the default behaviour is used' do
+        let(:error_class) { BingAdsRubySdk::Errors::PartialError }
+
+        let(:error_attributes) do
+          {
+            raw_response: api_response,
+            message: 'UnsupportedBiddingScheme - The bidding...'
+          }
+        end
+
+        it_behaves_like 'raises an error'
+
+        it "contains a collection of batch_error" do
+          expect { call_method }.to raise_error do |error|
+            expect(error).to respond_to(:batch_error)
+            expect(error.batch_error).to be_a(Array)
+            expect(error.batch_error.size).to eq(1)
+          end
+        end
       end
     end
   end
