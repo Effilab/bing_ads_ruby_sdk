@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 RSpec.shared_context 'use api' do
   # TODO: consider reading a YML file to get these values
   CUSTOMER_ID ||= ENV.fetch('ACCEPTANCE_CUSTOMER_ID')
