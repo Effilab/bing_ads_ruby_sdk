@@ -11,5 +11,4 @@
 # rspec failure tracking
 .rspec_status
 
-lib/bing_ads_ruby_sdk/.cache/
 .byebug_history
