@@ -8,15 +8,18 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
 
     it 'should register the callbacks with Lolsoap' do
       LolSoap::Callbacks.flush_callbacks
-      expect(LolSoap::Callbacks.store.size).to eq(0)
+      expect(LolSoap::Callbacks.store.keys.size).to eq(0)
 
-      LolSoap::Callbacks.register([
-        {'callback_1' => described_class.request_callback_lambda},
-        {'callback_2' => described_class.response_callback_lambda},
-      ])
+      LolSoap::Callbacks.register(
+        {
+          "callback_1" => [described_class.request_callback_lambda],
+          "callback_2" => [described_class.response_callback_lambda],
+        }
+      )
 
-      expect(LolSoap::Callbacks.store.size).to eq(2)
+      expect(LolSoap::Callbacks.store.keys.size).to eq(2)
       LolSoap::Callbacks.flush_callbacks
+      expect(LolSoap::Callbacks.store.keys.size).to eq(0)
     end
   end
 

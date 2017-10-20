@@ -11,10 +11,12 @@ module BingAdsRubySdk
       def register_callbacks
         # Modify the request data before it is sent via the SOAP client
         # Modify the response data whilst it is being processed by the SOAP client
-        LolSoap::Callbacks.register([
-          {"hash_params.before_build" => request_callback_lambda},
-          {"hash_builder.after_children_hash" => response_callback_lambda},
-        ])
+        LolSoap::Callbacks.register(
+          {
+            "hash_params.before_build" => [request_callback_lambda],
+            "hash_builder.after_children_hash" => [response_callback_lambda],
+          }
+        )
       end
 
       def request_callback_lambda
