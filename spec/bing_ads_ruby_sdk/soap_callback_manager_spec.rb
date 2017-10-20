@@ -5,7 +5,6 @@ require 'spec_helper'
 RSpec.describe BingAdsRubySdk::SoapCallbackManager do
   describe '.register_callbacks' do
 
-
     it 'should register the callbacks with Lolsoap' do
       LolSoap::Callbacks.flush_callbacks
       expect(LolSoap::Callbacks.store.keys.size).to eq(0)
