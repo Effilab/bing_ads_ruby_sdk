@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
   describe '::parse_errors' do
     let(:general_error) { BingAdsRubySdk::Errors::GeneralError }

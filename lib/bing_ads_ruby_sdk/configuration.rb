@@ -4,7 +4,7 @@ module BingAdsRubySdk
   # Gem internal configuration
   class Configuration
     # Sets Bing Ads available environments, this will increase cache size.
-    ENVIRONMENTS = %i[production sandbox].freeze
+    ENVIRONMENTS = %i[production sandbox test].freeze
     # Sets Gem supported versions, this will increase cache size.
     VERSIONS     = %i[v11].freeze
     # Sets cache location, will contain ".cache/version[s]/environment[s]/service".

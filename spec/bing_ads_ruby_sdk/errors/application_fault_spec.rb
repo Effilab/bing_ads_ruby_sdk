@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe BingAdsRubySdk::Errors::ApplicationFault do
   describe '#fault_hash' do
     context 'when creating an instance' do

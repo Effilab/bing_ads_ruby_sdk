@@ -8,6 +8,8 @@ require 'bing_ads_ruby_sdk/errors/application_fault'
 require 'bing_ads_ruby_sdk/errors/error_handler'
 
 module BingAdsRubySdk
+  SoapCallbackManager.register_callbacks
+
   class Api
     attr_reader :header, :config
 
@@ -29,7 +31,6 @@ module BingAdsRubySdk
                    environment: :production,
                    oauth_store: OAuth2::FsStore,
                    credentials: {})
-      SoapCallbackManager.register_callbacks
       @config = Configuration.new(version: version, environment: environment)
       @token  = token(credentials, oauth_store)
       @header = Header.new(credentials, @token)
