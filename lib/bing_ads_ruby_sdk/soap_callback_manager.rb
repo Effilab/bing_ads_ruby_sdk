@@ -9,23 +9,26 @@ module BingAdsRubySdk
       attr_accessor :request_callback, :response_callback
 
       def register_callbacks
-        # Instantiate the callbacks in the order they need to be triggered
-        self.request_callback = LolSoap::Callbacks.new
-        self.response_callback = LolSoap::Callbacks.new
-
         # Modify the request data before it is sent via the SOAP client
-        request_callback
-          .for('hash_params.before_build') <<
-          lambda do |args, _node, type|
-            before_build(args, type)
-          end
-
         # Modify the response data whilst it is being processed by the SOAP client
-        response_callback
-          .for('hash_builder.after_children_hash') <<
-          lambda do |hash, _node, _type|
-            after_children_hash(hash)
-          end
+        LolSoap::Callbacks.register(
+          {
+            "hash_params.before_build" => [request_callback_lambda],
+            "hash_builder.after_children_hash" => [response_callback_lambda],
+          }
+        )
+      end
+
+      def request_callback_lambda
+        lambda do |args, _node, type|
+          before_build(args, type)
+        end
+      end
+
+      def response_callback_lambda
+        lambda do |hash, _node, _type|
+          after_children_hash(hash)
+        end
       end
 
       def before_build(args, type)

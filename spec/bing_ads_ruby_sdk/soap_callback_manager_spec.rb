@@ -4,19 +4,22 @@ require 'spec_helper'
 
 RSpec.describe BingAdsRubySdk::SoapCallbackManager do
   describe '.register_callbacks' do
-    let(:request_callback) { instance_double('LolSoap::Callbacks', for: []) }
-    let(:response_callback) { instance_double('LolSoap::Callbacks', for: []) }
 
-    before do
-      allow(described_class).to receive(:request_callback).and_return request_callback
-      allow(described_class).to receive(:response_callback).and_return response_callback
-
-      described_class.register_callbacks
-    end
 
     it 'should register the callbacks with Lolsoap' do
-      expect(request_callback).to have_received(:for).with('hash_params.before_build')
-      expect(response_callback).to have_received(:for).with('hash_builder.after_children_hash')
+      LolSoap::Callbacks.flush_callbacks
+      expect(LolSoap::Callbacks.store.keys.size).to eq(0)
+
+      LolSoap::Callbacks.register(
+        {
+          "callback_1" => [described_class.request_callback_lambda],
+          "callback_2" => [described_class.response_callback_lambda],
+        }
+      )
+
+      expect(LolSoap::Callbacks.store.keys.size).to eq(2)
+      LolSoap::Callbacks.flush_callbacks
+      expect(LolSoap::Callbacks.store.keys.size).to eq(0)
     end
   end
 
