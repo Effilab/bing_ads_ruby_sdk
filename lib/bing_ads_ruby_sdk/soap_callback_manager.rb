@@ -6,8 +6,6 @@ module BingAdsRubySdk
   # FIXME : that should be splitted in smaller classes in a callbacks folder
   class SoapCallbackManager
     class << self
-      attr_accessor :request_callback, :response_callback
-
       def register_callbacks
         # Modify the request data before it is sent via the SOAP client
         # Modify the response data whilst it is being processed by the SOAP client
