@@ -27,86 +27,105 @@ RSpec.describe BingAdsRubySdk::SoapCallbackManager do
       double(LolSoap::WSDL::Element, name: name, type: "#{name}Type")
     end
 
-    let(:null_element) { LolSoap::WSDL::NullElement.new }
-    let(:type) { LolSoap::WSDL::Type.new('ns0:', nil, elements, []) }
+    describe "data handling" do
+      let(:null_element) { LolSoap::WSDL::NullElement.new }
+      let(:type) { LolSoap::WSDL::Type.new('ns0:', nil, elements, []) }
 
-    before { described_class.before_build(hashes_to_convert, type) }
-
-    context 'when the input element name fuzzy matches the WSDL name' do
-      let(:elements) do
-        {
-          'CamelCase' => non_null_element('CamelCase'),
-          'With_Underscore' => non_null_element('With_Underscore'),
-          'Oneword' => non_null_element('Oneword')
-        }
-      end
-      let(:hashes_to_convert) do
-        [
-          { name: 'camel_case', args: [] },
-          { name: 'with_underscore', args: [] },
-          { name: 'one_word', args: [] }
-        ]
-      end
-
-      it 'should be mapped to the WSDL element name' do
-        expect(hashes_to_convert).to match_array(
+      before { described_class.before_build(hashes_to_convert, type) }
+      context 'when the input element name fuzzy matches the WSDL name' do
+        let(:elements) do
+          {
+            'CamelCase' => non_null_element('CamelCase'),
+            'With_Underscore' => non_null_element('With_Underscore'),
+            'Oneword' => non_null_element('Oneword')
+          }
+        end
+        let(:hashes_to_convert) do
           [
-            { name: 'CamelCase', args: [] },
-            { name: 'With_Underscore', args: [] },
-            { name: 'Oneword', args: [] }
+            { name: 'camel_case', args: [] },
+            { name: 'with_underscore', args: [] },
+            { name: 'one_word', args: [] }
           ]
-        )
+        end
+
+        it 'should be mapped to the WSDL element name' do
+          expect(hashes_to_convert).to match_array(
+                                         [
+                                           { name: 'CamelCase', args: [] },
+                                           { name: 'With_Underscore', args: [] },
+                                           { name: 'Oneword', args: [] }
+                                         ]
+                                       )
+        end
+      end
+
+      context 'when the input hash is in a different order to the WSDL' do
+        let(:elements) do
+          {
+            'First' => non_null_element('First'),
+            'Second' => non_null_element('Second'),
+            'Third' => non_null_element('Third')
+          }
+        end
+        let(:hashes_to_convert) do
+          [
+            { name: 'third', args: [] },
+            { name: 'first', args: [] },
+            { name: 'second', args: [] }
+          ]
+        end
+
+        it 'should order the request data following the WSDL' do
+          expect(hashes_to_convert).to eq(
+                                         [
+                                           { name: 'First', args: [] },
+                                           { name: 'Second', args: [] },
+                                           { name: 'Third', args: [] }
+                                         ]
+                                       )
+        end
+      end
+
+      context 'when the request data contains nil and is marked nullable' do
+        let(:elements) do
+          {
+            'ShouldHaveNil' => null_element,
+            'ShouldNotHaveNil' => non_null_element('ShouldNotHaveNil')
+          }
+        end
+        let(:hashes_to_convert) do
+          [
+            { name: 'should_have_nil', args: [nil] },
+            { name: 'should_not_have_nil', args: [] }
+          ]
+        end
+
+        it 'should mark null types with a nil attribute' do
+          expect(hashes_to_convert).to eq(
+                                         [
+                                           { name: 'ShouldHaveNil', args: [nil, { 'xsi:nil' => true }] },
+                                           { name: 'ShouldNotHaveNil', args: [] }
+                                         ]
+                                       )
+        end
       end
     end
 
-    context 'when the input hash is in a different order to the WSDL' do
-      let(:elements) do
-        {
-          'First' => non_null_element('First'),
-          'Second' => non_null_element('Second'),
-          'Third' => non_null_element('Third')
-        }
-      end
-      let(:hashes_to_convert) do
-        [
-          { name: 'third', args: [] },
-          { name: 'first', args: [] },
-          { name: 'second', args: [] }
-        ]
-      end
+    describe "error handling" do
+      context "when the request data contains nested data in a simple type" do
+        let(:elements) do
+          {}
+        end
+        let(:hashes_to_convert) do
+          [{ args: [], name: "nested_field" }]
+        end
+        let(:type) { LolSoap::WSDL::NullType.new }
 
-      it 'should order the request data following the WSDL' do
-        expect(hashes_to_convert).to eq(
-          [
-            { name: 'First', args: [] },
-            { name: 'Second', args: [] },
-            { name: 'Third', args: [] }
-          ]
-        )
-      end
-    end
+        it "should raise a nice error" do
+          expect { described_class.before_build(hashes_to_convert, type) }
+            .to raise_error BingAdsRubySdk::ElementMismatch, "nested_field not permitted on element"
 
-    context 'when the request data contains nil and is marked nullable' do
-      let(:elements) do
-        {
-          'ShouldHaveNil' => null_element,
-          'ShouldNotHaveNil' => non_null_element('ShouldNotHaveNil')
-        }
-      end
-      let(:hashes_to_convert) do
-        [
-          { name: 'should_have_nil', args: [nil] },
-          { name: 'should_not_have_nil', args: [] }
-        ]
-      end
-
-      it 'should mark null types with a nil attribute' do
-        expect(hashes_to_convert).to eq(
-          [
-            { name: 'ShouldHaveNil', args: [nil, { 'xsi:nil' => true }] },
-            { name: 'ShouldNotHaveNil', args: [] }
-          ]
-        )
+        end
       end
     end
   end

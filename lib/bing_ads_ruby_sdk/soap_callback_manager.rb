@@ -65,8 +65,6 @@ module BingAdsRubySdk
           # FIXME : missing element would be more efficient and cleaner by populating an error hash instead of raising
           # More efficient cause raising will give you a hint only on first missing element
           # Cleaner cause you'll see it untangles the conditions
-          # Be careful, LolSoap will raise if you nest anything in a missing element
-          # That would go with moving turning faults and errors hash into exceptions
           if found_at
             name = el_keys[found_at]
             # Abstract types
@@ -78,17 +76,18 @@ module BingAdsRubySdk
               hash[:name] = name
             end
 
-          elsif type.prefix_and_name == 'soap:Header'
-            BingAdsRubySdk.logger.info(
-              "#{hash[:name]} not found in #{type.prefix_and_name}."\
-              "Possible fields #{el_keys.join(', ')}"
-            )
-
+          elsif !type.is_a?(LolSoap::WSDL::NullType) && type.prefix_and_name == 'soap:Header'
+            BingAdsRubySdk.logger.info(get_type_mismatch_message(hash, type))
           else
-            raise ElementMismatch, "#{hash[:name]} not found in #{type.prefix_and_name}."\
-                                   "Possible fields #{el_keys.join(', ')}"
+            raise ElementMismatch, get_type_mismatch_message(hash, type)
           end
         end
+      end
+
+      def get_type_mismatch_message(hash, type)
+        return "#{hash[:name]} not permitted on element" if type.is_a?(LolSoap::WSDL::NullType)
+
+        "#{hash[:name]} not found in #{type.prefix_and_name}. Possible fields #{type.elements.keys.join(', ')}"
       end
 
       def null_type_fields(args, type)
