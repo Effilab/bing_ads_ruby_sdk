@@ -12,7 +12,7 @@ module BingAdsRubySdk
       @client = client
       @shared_header = shared_header
       client.wsdl.namespaces['xsi'] = 'http://www.w3.org/2001/XMLSchema-instance'
-      operations.keys.each do |op|
+      operations.each_key do |op|
         BingAdsRubySdk.logger.debug("Defining operation : #{op}")
         define_singleton_method(Utils.snakize(op)) do |body = false|
           request(op, body)
