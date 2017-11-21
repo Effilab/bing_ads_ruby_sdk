@@ -36,6 +36,8 @@ module BingAdsRubySdk
     end
 
     def parse_response(req, raw)
+      raise BingAdsRubySdk::Errors::ServerError.new(raw) if raw.class <= Net::HTTPServerError
+
       client.response(req, raw.body).body_hash.tap do |b_h|
         BingAdsRubySdk.logger.debug(b_h)
         # FIXME : Is this necessary to transform an error hash in exceptions here ?

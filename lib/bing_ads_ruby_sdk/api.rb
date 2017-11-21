@@ -5,6 +5,7 @@ require 'bing_ads_ruby_sdk/header'
 require 'bing_ads_ruby_sdk/configuration'
 require 'bing_ads_ruby_sdk/oauth2/authorization_code'
 require 'bing_ads_ruby_sdk/errors/application_fault'
+require 'bing_ads_ruby_sdk/errors/server_error'
 require 'bing_ads_ruby_sdk/errors/error_handler'
 
 module BingAdsRubySdk

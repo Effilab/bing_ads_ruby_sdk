@@ -26,104 +26,130 @@ module BingAdsRubySdk
     it { expect(subject.operations.size).to eq 99 }
 
     describe '.request' do
-      before do
-        allow(subject).to receive(:http_request).and_wrap_original { |_, req| req }
-        allow(subject).to receive(:parse_response).and_wrap_original { |_, req, raw| req }
-      end
-
-      it { expect(subject.add_campaign_criterions.content.empty?).to be false }
-
-      context 'concurrent' do
+      context "when there is a HTTP error on the API" do
         before do
-          Thread.new do
-            SoapCallbackManager.register_callbacks
-            @doc1 = subject.add_campaign_criterions(
-              campaign_criterions: {
-                campaign_criterion: {
-                  location_criterion: {
-                    location_id: 93_100, display_name: 'Montreuil'
-                  }
+          # Stub the SDK to return an error
+          allow(subject).to receive(:http_request) do
+            Net::HTTP.start("httpstat.us", "443", use_ssl: true) {|http| http.get("/503")}
+          end
+        end
+        let(:call_method) do
+          subject.add_campaign_criterions(
+            campaign_criterions: {
+              campaign_criterion: {
+                location_criterion: {
+                  location_id: 93_100, display_name: 'Montreuil'
                 }
               }
-            ).envelope.doc
-          end.join
+            }
+          )
+        end
+        # Find a way to call the service from the other tests
+        it "should raise an error" do
+          expect { call_method }.to raise_error BingAdsRubySdk::Errors::ServerError
+        end
+      end
+
+      context "when there are no HTTP errors" do
+        before do
+          allow(subject).to(receive(:http_request).and_wrap_original { |_, req| req })
+          allow(subject).to(receive(:parse_response).and_wrap_original { |_, req, _raw| req })
         end
 
-        it do
-          expect(
-            @doc1.at_xpath(
-              '/soap:Envelope'\
+        it { expect(subject.add_campaign_criterions.content.empty?).to be false }
+
+        context "when run in a thread" do
+          before do
+            Thread.new do
+              SoapCallbackManager.register_callbacks
+              @doc1 = subject.add_campaign_criterions(
+                campaign_criterions: {
+                  campaign_criterion: {
+                    location_criterion: {
+                      location_id: 93_100, display_name: 'Montreuil'
+                    }
+                  }
+                }
+              ).envelope.doc
+            end.join
+          end
+
+          it "should work fine" do
+            expect(
+              @doc1.at_xpath(
+                '/soap:Envelope'\
                 '/soap:Body'\
                   '/ns0:AddCampaignCriterionsRequest'\
                     '/ns0:CampaignCriterions'\
                       '/ns0:CampaignCriterion'\
                         '/*/ns0:DisplayName'
-            ).content
-          ).to eq 'Montreuil'
-        end
-      end
-
-      context 'xml doc payload' do
-        let(:doc) do
-          subject.add_campaign_criterions(
-            campaign_criterions: {
-              campaign_criterion: { location_criterion: 'Montreuil' }
-            }
-          ).envelope.doc
-        end
-
-        describe 'header' do
-          let(:doc_header) { doc.at_xpath('/soap:Envelope/soap:Header') }
-
-          it do
-            expect(
-              doc_header.at_xpath('ns0:AuthenticationToken').content
-            ).to eq 'yes/we/can'
-          end
-
-          it do
-            expect(
-              doc_header.at_xpath('ns0:CustomerAccountId').content
-            ).to eq '666'
-          end
-
-          it do
-            expect(
-              doc_header.at_xpath('ns0:CustomerId').content
-            ).to eq '777'
-          end
-
-          it do
-            expect(
-              doc_header.at_xpath('ns0:DeveloperToken').content
-            ).to eq '123abc'
+              ).content
+            ).to eq 'Montreuil'
           end
         end
 
-        describe 'body' do
-          let(:doc_body) do
-            doc.at_xpath('/soap:Envelope'\
-                            '/soap:Body'\
-                              '/ns0:AddCampaignCriterionsRequest'\
-                                '/ns0:CampaignCriterions'\
-                                  '/ns0:CampaignCriterion')
+        context 'xml doc payload' do
+          let(:doc) do
+            subject.add_campaign_criterions(
+              campaign_criterions: {
+                campaign_criterion: { location_criterion: 'Montreuil' }
+              }
+            ).envelope.doc
           end
 
-          describe 'abtract class' do
-            let(:criterion) { doc_body.at_xpath('ns0:Criterion') }
-
-            it { expect(criterion.content).to eq 'Montreuil' }
+          describe 'header' do
+            let(:doc_header) { doc.at_xpath('/soap:Envelope/soap:Header') }
 
             it do
               expect(
-                criterion.attribute('type').namespace.href
-              ).to eq doc.namespaces['xmlns:xsi']
+                doc_header.at_xpath('ns0:AuthenticationToken').content
+              ).to eq 'yes/we/can'
             end
 
             it do
               expect(
-                criterion.attribute('type').value
-              ).to eq 'ns0:LocationCriterion'
+                doc_header.at_xpath('ns0:CustomerAccountId').content
+              ).to eq '666'
+            end
+
+            it do
+              expect(
+                doc_header.at_xpath('ns0:CustomerId').content
+              ).to eq '777'
+            end
+
+            it do
+              expect(
+                doc_header.at_xpath('ns0:DeveloperToken').content
+              ).to eq '123abc'
+            end
+          end
+
+          describe 'body' do
+            let(:doc_body) do
+              doc.at_xpath('/soap:Envelope'\
+                            '/soap:Body'\
+                              '/ns0:AddCampaignCriterionsRequest'\
+                                '/ns0:CampaignCriterions'\
+                                  '/ns0:CampaignCriterion')
+            end
+
+            describe 'abtract class' do
+              let(:criterion) { doc_body.at_xpath('ns0:Criterion') }
+
+              it { expect(criterion.content).to eq 'Montreuil' }
+
+              it do
+                expect(
+                  criterion.attribute('type').namespace.href
+                ).to eq doc.namespaces['xmlns:xsi']
+              end
+
+              it do
+                expect(
+                  criterion.attribute('type').value
+                ).to eq 'ns0:LocationCriterion'
+              end
             end
           end
         end
