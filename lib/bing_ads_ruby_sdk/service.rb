@@ -36,7 +36,7 @@ module BingAdsRubySdk
     end
 
     def parse_response(req, raw)
-      raise BingAdsRubySdk::Errors::ServerError.new(raw) if raw.class <= Net::HTTPServerError
+      raise BingAdsRubySdk::Errors::ServerError.new(raw) if is_error?(raw)
 
       client.response(req, raw.body).body_hash.tap do |b_h|
         BingAdsRubySdk.logger.debug(b_h)
@@ -44,6 +44,14 @@ module BingAdsRubySdk
         # It might be a good idea to move that in the client instead.
         BingAdsRubySdk::Errors::ErrorHandler.parse_errors!(b_h)
       end
+    end
+
+    # Returns true if the response from the API is a Server error or a Client error
+    def is_error?(response)
+      [
+        Net::HTTPServerError,
+        Net::HTTPClientError
+      ].any? { |http_error_class| response.class <= http_error_class }
     end
 
     def request(name, body)

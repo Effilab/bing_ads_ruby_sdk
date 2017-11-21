@@ -27,11 +27,11 @@ module BingAdsRubySdk
 
     describe '.request' do
       context "when there is a HTTP error on the API" do
-        before do
-          # Stub the SDK to return an error
-          allow(subject).to receive(:http_request) do
-            Net::HTTP.start("httpstat.us", "443", use_ssl: true) {|http| http.get("/503")}
-          end
+        let(:response) do
+          double(Net::HTTPServiceUnavailable,
+                 body: "503 Service Unavailable",
+                 class: Net::HTTPServiceUnavailable
+          )
         end
         let(:call_method) do
           subject.add_campaign_criterions(
@@ -44,6 +44,14 @@ module BingAdsRubySdk
             }
           )
         end
+
+        before do
+          # Stub the SDK to return an error
+          allow(subject)
+            .to receive(:http_request)
+                  .and_return(response)
+        end
+
         # Find a way to call the service from the other tests
         it "should raise an error" do
           expect { call_method }.to raise_error BingAdsRubySdk::Errors::ServerError
