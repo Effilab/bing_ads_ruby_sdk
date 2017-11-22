@@ -36,10 +36,10 @@ module BingAdsRubySdk
       end
     end
 
-    def parse_response(req, raw)
-      raise BingAdsRubySdk::Errors::ServerError, raw if is_error?(raw)
+    def parse_response(req, raw_response)
+      raise BingAdsRubySdk::Errors::ServerError, raw_response if contains_error?(raw_response)
 
-      client.response(req, raw.body).body_hash.tap do |b_h|
+      client.response(req, raw_response.body).body_hash.tap do |b_h|
         BingAdsRubySdk.logger.debug(b_h)
         # FIXME : Is this necessary to transform an error hash in exceptions here ?
         # It might be a good idea to move that in the client instead.
@@ -48,7 +48,7 @@ module BingAdsRubySdk
     end
 
     # Returns true if the response from the API is a Server error or a Client error
-    def is_error?(response)
+    def contains_error?(response)
       [
         Net::HTTPServerError,
         Net::HTTPClientError,
