@@ -55,7 +55,11 @@ module BingAdsRubySdk
 
         # Find a way to call the service from the other tests
         it "should raise an error" do
-          expect { call_method }.to raise_error BingAdsRubySdk::Errors::ServerError
+          expect { call_method }
+            .to raise_error(
+                  BingAdsRubySdk::Errors::ServerError,
+                  "Server raised error 503 Service Unavailable"
+                )
         end
       end
 
