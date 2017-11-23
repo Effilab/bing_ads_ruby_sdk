@@ -1,11 +1,14 @@
-require 'lolsoap'
-require 'bing_ads_ruby_sdk/soap_callback_manager'
-require 'bing_ads_ruby_sdk/service'
-require 'bing_ads_ruby_sdk/header'
-require 'bing_ads_ruby_sdk/configuration'
-require 'bing_ads_ruby_sdk/oauth2/authorization_code'
-require 'bing_ads_ruby_sdk/errors/application_fault'
-require 'bing_ads_ruby_sdk/errors/error_handler'
+# frozen_string_literal: true
+
+require "lolsoap"
+require "bing_ads_ruby_sdk/soap_callback_manager"
+require "bing_ads_ruby_sdk/service"
+require "bing_ads_ruby_sdk/header"
+require "bing_ads_ruby_sdk/configuration"
+require "bing_ads_ruby_sdk/oauth2/authorization_code"
+require "bing_ads_ruby_sdk/errors/application_fault"
+require "bing_ads_ruby_sdk/errors/server_error"
+require "bing_ads_ruby_sdk/errors/error_handler"
 
 module BingAdsRubySdk
   SoapCallbackManager.register_callbacks
@@ -42,7 +45,7 @@ module BingAdsRubySdk
     private
 
     def build_services
-      config.services.keys.each do |serv|
+      config.services.each_key do |serv|
         BingAdsRubySdk.logger.debug("Defining service #{serv} accessors")
         self.class.send(:attr_reader, serv)
         client = config.cached(serv)
@@ -57,9 +60,9 @@ module BingAdsRubySdk
       OAuth2::AuthorizationCode.new(
         {
           developer_token: credentials[:developer_token],
-          client_id:       credentials[:client_id]
+          client_id:       credentials[:client_id],
         },
-        store: store
+        { store: store }
       )
     end
   end

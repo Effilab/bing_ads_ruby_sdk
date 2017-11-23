@@ -1,18 +1,19 @@
-require 'lolsoap'
-require 'bing_ads_ruby_sdk/utils'
-require 'net/http'
+# frozen_string_literal: true
+
+require "lolsoap"
+require "bing_ads_ruby_sdk/utils"
+require "net/http"
 
 module BingAdsRubySdk
   # Manages communication with the a defined SOAP service on the API
   class Service
-
     attr_reader :client, :shared_header
 
     def initialize(client, shared_header)
       @client = client
       @shared_header = shared_header
-      client.wsdl.namespaces['xsi'] = 'http://www.w3.org/2001/XMLSchema-instance'
-      operations.keys.each do |op|
+      client.wsdl.namespaces["xsi"] = "http://www.w3.org/2001/XMLSchema-instance"
+      operations.each_key do |op|
         BingAdsRubySdk.logger.debug("Defining operation : #{op}")
         define_singleton_method(Utils.snakize(op)) do |body = false|
           request(op, body)
@@ -30,18 +31,28 @@ module BingAdsRubySdk
       url = URI(req.url)
       Net::HTTP.start(url.hostname,
                       url.port,
-                      use_ssl: url.scheme == 'https') do |http|
+                      use_ssl: url.scheme == "https") do |http|
         http.post(url.path, req.content, req.headers)
       end
     end
 
-    def parse_response(req, raw)
-      client.response(req, raw.body).body_hash.tap do |b_h|
+    def parse_response(req, raw_response)
+      raise BingAdsRubySdk::Errors::ServerError, raw_response if contains_error?(raw_response)
+
+      client.response(req, raw_response.body).body_hash.tap do |b_h|
         BingAdsRubySdk.logger.debug(b_h)
         # FIXME : Is this necessary to transform an error hash in exceptions here ?
         # It might be a good idea to move that in the client instead.
         BingAdsRubySdk::Errors::ErrorHandler.parse_errors!(b_h)
       end
+    end
+
+    # Returns true if the response from the API is a Server error or a Client error
+    def contains_error?(response)
+      [
+        Net::HTTPServerError,
+        Net::HTTPClientError,
+      ].any? { |http_error_class| response.class <= http_error_class }
     end
 
     def request(name, body)
