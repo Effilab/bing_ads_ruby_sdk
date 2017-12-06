@@ -51,6 +51,8 @@ ABSTRACT:
       - CampaignPerformanceReportRequest
       - ShareOfVoiceReportRequest
       - SearchQueryPerformanceReportRequest
+      - AdExtensionByAdReportRequest
+      - AdExtensionByKeywordReportRequest
 
 PRODUCTION:
   ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v11/AdInsightService.svc?singleWsdl
