@@ -15,7 +15,7 @@ module BingAdsRubySdk
         subject.cache_path
       ).to eq File.join(Configuration::CACHE_BASE, '.cache', 'v11', 'test')
     end
-    it { expect(subject.abstract.keys).to eq ['customer_management', 'campaign_management'] }
+    it { expect(subject.abstract.keys).to eq ['customer_management', 'campaign_management', 'reporting'] }
     it do
       expect(
         subject.services
