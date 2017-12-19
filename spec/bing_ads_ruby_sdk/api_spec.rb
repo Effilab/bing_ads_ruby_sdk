@@ -3,9 +3,6 @@ require 'fixtures'
 
 module BingAdsRubySdk
   RSpec.describe Api do
-    before(:all) { BingAdsRubySdk::Cache.build }
-    after(:all)  { BingAdsRubySdk::Cache.clear }
-
     subject do
       described_class.new(environment: :test)
     end

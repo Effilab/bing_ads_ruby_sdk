@@ -3,10 +3,40 @@
 require "lolsoap"
 require "bing_ads_ruby_sdk/utils"
 require "net/http"
+require "excon"
 
 module BingAdsRubySdk
   # Manages communication with the a defined SOAP service on the API
   class Service
+    @http_connections = {}
+    HTTP_OPEN_TIMEOUT = 10
+    HTTP_READ_TIMEOUT = 20
+    HTTP_RETRY_COUNT_ON_TIMEOUT = 2
+    HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT = 1
+
+    class << self
+      attr_accessor :http_connections
+
+      def connection(host)
+        self.http_connections[host] ||= Excon.new(
+          host,
+          persistent: true,
+          tcp_nodelay: true,
+          retry_limit: HTTP_RETRY_COUNT_ON_TIMEOUT,
+          idempotent: true,
+          retry_interval: HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT,
+          connect_timeout: HTTP_OPEN_TIMEOUT,
+          read_timeout: HTTP_READ_TIMEOUT
+        )
+      end
+
+      def close_http_connections
+        self.http_connections.each do |url, connection|
+          connection.reset
+        end
+      end
+    end
+
     attr_reader :client, :shared_header
 
     def initialize(client, shared_header)
@@ -27,13 +57,21 @@ module BingAdsRubySdk
 
     private
 
-    def http_request(req)
-      url = URI(req.url)
-      Net::HTTP.start(url.hostname,
-                      url.port,
-                      use_ssl: url.scheme == "https") do |http|
-        http.post(url.path, req.content, req.headers)
+    # Defining the http request
+    def net_http_proc
+      proc do |req|
+        uri = URI(req.url)
+        connection = BingAdsRubySdk::Service.connection(req.url)
+        connection.post(
+          path: uri.path,
+          body: req.content,
+          headers: req.headers,
+        )
       end
+    end
+
+    def http_request(req)
+      net_http_proc.call(req)
     end
 
     def parse_response(req, raw_response)
@@ -60,7 +98,6 @@ module BingAdsRubySdk
       req.header.content(shared_header.content)
       req.body.content(body) if body
 
-      BingAdsRubySdk.logger.debug("Operation : #{name}")
       BingAdsRubySdk.logger.debug(req.content)
 
       raw_response = http_request(req)

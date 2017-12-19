@@ -2,9 +2,9 @@ require 'spec_helper'
 require 'bing_ads_ruby_sdk/cache'
 
 module BingAdsRubySdk
-  RSpec.describe Cache do
+  RSpec.describe Cache, cache: true do
     let(:config) { Configuration.new(version: :v11, environment: :test) }
-    after { described_class.clear }
+    after { described_class.build }
 
     describe '.build and .clear' do
       it do
