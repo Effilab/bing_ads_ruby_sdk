@@ -101,6 +101,7 @@ module BingAdsRubySdk
       BingAdsRubySdk.logger.debug(req.content)
 
       raw_response = http_request(req)
+      BingAdsRubySdk.logger.debug(raw_response.body)
       parse_response(req, raw_response)
     end
   end
