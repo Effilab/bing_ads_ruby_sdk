@@ -1,4 +1,5 @@
 --format documentation
 --color
 --exclude-pattern '**/examples/**/*_spec.rb'
+--tag ~cache
 --require spec_helper

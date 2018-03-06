@@ -10,5 +10,6 @@
 
 # rspec failure tracking
 .rspec_status
+.token_*
 
 .byebug_history

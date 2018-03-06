@@ -32,6 +32,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'signet'
   spec.add_dependency 'lolsoap'
+  spec.add_dependency 'excon'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
@@ -40,4 +41,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'awesome_print'
+  spec.add_development_dependency 'httplog'
 end

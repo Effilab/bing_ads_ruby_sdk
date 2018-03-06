@@ -1,3 +1,5 @@
+require "bing_ads_ruby_sdk/wsdl_parser"
+
 class Fixtures
   class << self
     def api_config(version: :v11)
@@ -6,7 +8,7 @@ class Fixtures
       )
     end
 
-    # FIXME : tests would be a lot faster by sliming a lot this wsdl
+    # FIXME : tests would be a lot faster by slimming a lot this wsdl
     def wsdl_file
       File.read(
         open(
