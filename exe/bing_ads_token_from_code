@@ -2,6 +2,7 @@
 
 require "bundler/setup"
 require "bing_ads_ruby_sdk"
+require "time"
 
 args = {
   developer_token: 'Developer token ?',
