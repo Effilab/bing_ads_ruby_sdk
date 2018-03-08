@@ -5,6 +5,9 @@ require "bing_ads_ruby_sdk/utils"
 require "net/http"
 require "excon"
 
+# Set SSl version to TLS 1.2:
+Excon.defaults[:ssl_version] = :TLSv1_2
+
 module BingAdsRubySdk
   # Manages communication with the a defined SOAP service on the API
   class Service
