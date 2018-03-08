@@ -5,10 +5,6 @@ require "bing_ads_ruby_sdk/utils"
 require "net/http"
 require "excon"
 
-# Set SSl version to TLS 1.2:
-Excon.defaults[:ssl_version] = :TLSv1_2
-Excon.defaults[:ciphers] = "TLSv1.2:!aNULL:!eNULL"
-
 module BingAdsRubySdk
   # Manages communication with the a defined SOAP service on the API
   class Service
@@ -30,7 +26,9 @@ module BingAdsRubySdk
           idempotent: true,
           retry_interval: HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT,
           connect_timeout: HTTP_OPEN_TIMEOUT,
-          read_timeout: HTTP_READ_TIMEOUT
+          read_timeout: HTTP_READ_TIMEOUT,
+          ssl_version: :TLSv1_2,
+          ciphers: "TLSv1.2:!aNULL:!eNULL",
         )
       end
 
