@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe BingAdsRubySdk::SoapCallbackManager do
   describe '.register_callbacks' do
 

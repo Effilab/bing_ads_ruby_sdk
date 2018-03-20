@@ -8,27 +8,29 @@ RSpec.describe 'CampaignManagement service' do
     let(:a_campaign_list_hash) do
       {
         campaigns: {
-          campaign: [
-            {
-              bidding_scheme: { type: 'ManualCpc' },
-              budget_type: 'DailyBudgetStandard',
-              daily_budget: '10',
-              description: 'This campaign was automatically generated in a test',
-              forward_compatibility_map: '',
-              id: a_kind_of(String),
-              name: a_string_starting_with('Acceptance Test Campaign'),
-              native_bid_adjustment: nil,
-              status: 'Active',
-              time_zone: 'BrusselsCopenhagenMadridParis',
-              tracking_url_template: nil,
-              url_custom_parameters: nil,
-              campaign_type: 'SearchAndContent',
-              settings: nil,
-              budget_id: nil,
-              languages: nil,
-            },
-          ],
+          campaign: [a_campaign_hash],
         },
+      }
+    end
+
+    let(:a_campaign_hash) do
+      {
+        bidding_scheme: { type: 'ManualCpc' },
+        budget_type: 'DailyBudgetStandard',
+        daily_budget: '10',
+        description: 'This campaign was automatically generated in a test',
+        forward_compatibility_map: '',
+        id: a_kind_of(String),
+        name: a_string_starting_with('Acceptance Test Campaign'),
+        native_bid_adjustment: nil,
+        status: 'Active',
+        time_zone: 'BrusselsCopenhagenMadridParis',
+        tracking_url_template: nil,
+        url_custom_parameters: nil,
+        campaign_type: 'SearchAndContent',
+        settings: nil,
+        budget_id: nil,
+        languages: nil,
       }
     end
 
@@ -72,7 +74,11 @@ RSpec.describe 'CampaignManagement service' do
       end
 
       it 'returns a list of campaigns' do
-        is_expected.to include(a_campaign_list_hash)
+        is_expected.to include({
+          campaigns: {
+            campaign: a_collection_including(a_campaign_hash),
+          }
+        })
       end
     end
 
