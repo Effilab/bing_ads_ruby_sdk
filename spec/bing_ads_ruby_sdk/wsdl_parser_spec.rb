@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'fixtures'
 require 'bing_ads_ruby_sdk/wsdl_parser'
 

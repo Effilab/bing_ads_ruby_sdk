@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'bing_ads_ruby_sdk/cache'
 
 module BingAdsRubySdk

@@ -130,16 +130,10 @@ RSpec.describe 'CustomerManagement service' do
             },
             sales_house_customer_id: nil,
             tax_information: {
-              key_value_pair_ofstringstring: [
-                {
-                  key: "TaxId",
-                  value: nil,
-                },
-                {
-                  key: "TaxType",
-                  value: nil,
-                },
-              ],
+              key_value_pair_ofstringstring: {
+                key: "TaxId",
+                value: nil
+              }
             },
             back_up_payment_instrument_id: nil,
             billing_threshold_amount: nil,
@@ -338,7 +332,7 @@ RSpec.describe 'CustomerManagement service' do
              middle_initial: nil,
             },
             password: nil,
-            secret_answer: "",
+            secret_answer: nil,
             secret_question: "None",
             user_life_cycle_status: "Active",
             time_stamp: a_kind_of(String),

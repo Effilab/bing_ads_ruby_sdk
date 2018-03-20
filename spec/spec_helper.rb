@@ -7,6 +7,7 @@ end
 require 'shared_helper'
 require 'httplog'
 require 'fileutils'
+require 'mock_redis'
 
 warn_level = $VERBOSE
 $VERBOSE = nil

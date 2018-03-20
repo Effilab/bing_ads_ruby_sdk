@@ -1,5 +1,6 @@
 require 'signet/oauth_2/client'
-require 'bing_ads_ruby_sdk/oauth2/fs_store'
+require 'bing_ads_ruby_sdk/oauth2/store/fs_store'
+require 'bing_ads_ruby_sdk/oauth2/store/redis_store'
 # @todo see if we need to add and verify state with SecureRandom.hex(10)
 # We need the state param where we use a web UI.
 # require 'securerandom'

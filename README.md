@@ -18,29 +18,18 @@ And then execute:
 Or install it yourself as:
 
     $ gem install bing_ads_ruby_sdk
-### Generate the cache
-Add the gem tasks in your project Rakefile
-
-```ruby
-import 'tasks/bing_ads_ruby_sdk.rake'
-```
-
-```shell
-bundle exec rake -T
-rake bars:cache:build  # Build cache
-rake bars:cache:check  # Check cache
-rake bars:cache:clear  # Clear cache
-rake bars:cache:reset  # Reset cache : clear, build and check
-```
-The safest thing to do is to reset the cache.
 
 ## Usage
 ### Configure the app
 ```ruby
 BingAdsRubySdk.logger.level = :debug
 
+# This is optionnal, if you already have a token,
+# You can set a file directly to the store:
+BingAdsRubySdk::OAuth2::FsStore.config = "credentials.json"
+
 @api ||= BingAdsRubySdk::Api.new(
-  oauth_store: MyRedisStore,
+  oauth_store: BingAdsRubySdk::OAuth2::FsStore,
   credentials: {
     developer_token: '123abc',
     client_id:       '1a-2b-3c'
@@ -52,7 +41,44 @@ BingAdsRubySdk.logger.level = :debug
   )
 end
 ```
-You can / should provide an other oauth token store on Api init than the default BingAdsRubySdk::OAuth2::FsStore, all you need to know should be in the gem documentation.
+
+In `credentials.json` you should have:
+```json
+{
+  "access_token": "ABCD",
+  "refresh_token": "JT4HhmS",
+  "issued_at": "2018-03-08 14:52:04 +0100",
+  "expires_in": 3600
+}
+```
+
+You should provide a replacement for the `BingAdsRubySdk::OAuth2::FsStore` OAuth token store (oauth_store) when initialising the BingAdsRubySdk::Api class. All you need to know should be in the gem documentation.
+
+You can use the RedisStore this way:
+
+
+```ruby
+BingAdsRubySdk.logger.level = :debug
+
+# Set the Redis connection
+$redis = Redis.new
+BingAdsRubySdk::OAuth2::Store::RedisStore.redis = $redis
+
+@api ||= BingAdsRubySdk::Api.new(
+  oauth_store: BingAdsRubySdk::OAuth2::Store::RedisStore,
+  credentials: {
+    developer_token: '123abc',
+    client_id:       '1a-2b-3c'
+  }
+).tap do |api|
+  api.customer(
+    id:         123,
+    account_id: 456
+  )
+end
+```
+
+
 
 Please see `spec/examples/` for a number of examples on how to use the SDK
 
@@ -73,6 +99,23 @@ $ cat .token* # Should output something like this: {"access_token":"....
 
 ## Development
 
+### Generate the cache
+Add the gem tasks in your project Rakefile
+
+```ruby
+import 'tasks/bing_ads_ruby_sdk.rake'
+```
+
+```shell
+bundle exec rake -T
+rake bars:cache:build  # Build cache
+rake bars:cache:check  # Check cache
+rake bars:cache:clear  # Clear cache
+rake bars:cache:reset  # Reset cache : clear, build and check
+```
+The safest thing to do is to reset the cache.
+
+### Specs
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`.
