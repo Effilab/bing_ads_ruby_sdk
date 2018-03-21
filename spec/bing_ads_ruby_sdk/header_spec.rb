@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 module BingAdsRubySdk
   RSpec.describe Header do
     let(:token) do

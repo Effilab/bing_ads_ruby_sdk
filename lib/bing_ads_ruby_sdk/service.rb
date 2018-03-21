@@ -26,7 +26,9 @@ module BingAdsRubySdk
           idempotent: true,
           retry_interval: HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT,
           connect_timeout: HTTP_OPEN_TIMEOUT,
-          read_timeout: HTTP_READ_TIMEOUT
+          read_timeout: HTTP_READ_TIMEOUT,
+          ssl_version: :TLSv1_2,
+          ciphers: "TLSv1.2:!aNULL:!eNULL",
         )
       end
 

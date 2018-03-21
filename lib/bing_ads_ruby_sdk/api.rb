@@ -32,7 +32,7 @@ module BingAdsRubySdk
     # @option credentials [String] :client_id The client ID used to acces the API
     def initialize(version: :v11,
                    environment: :production,
-                   oauth_store: OAuth2::FsStore,
+                   oauth_store: OAuth2::Store::FsStore,
                    credentials: {})
       @config = Configuration.new(version: version, environment: environment)
       @token  = token(credentials, oauth_store)
