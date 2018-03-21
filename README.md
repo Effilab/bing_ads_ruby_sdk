@@ -5,7 +5,7 @@
 Add the following to your application's Gemfile:
 
 ```ruby
-# Once the merge request is approved we will remove github dependence
+# You currently need to use this version of lolsoap:
 gem 'lolsoap', github: 'effilab/lolsoap', branch: 'edge'
 
 gem 'bing_ads_ruby_sdk'
