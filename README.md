@@ -100,6 +100,13 @@ $ cat .token* # Should output something like this: {"access_token":"....
 ## Development
 
 ### Generate the cache
+The gem parses the WSDL provided by Bing to generate stubs. These are stored as serialized objects
+in the .cache folder. `Marshal.dump` is used so this means that you can use the generated cache
+stored in the repository if you are using the same Major version of Ruby as was used to build the cache.
+
+If you need to use another major version of Ruby or you want to prepare the gem for use with another
+version of the Bing Ads API, you will need to regenerate that cache. Here's how to do that.
+
 Add the gem tasks in your project Rakefile
 
 ```ruby
