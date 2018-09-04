@@ -43,7 +43,6 @@ RSpec.describe 'CampaignManagement service' do
         campaign_id: campaign_id,
         ad_groups: { ad_group: {
           name: 'AcceptanceTestAdGroup',
-          ad_distribution: 'Search Content',
           language: 'French',
         } }
       )

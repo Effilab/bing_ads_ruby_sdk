@@ -15,6 +15,7 @@ RSpec.describe 'CustomerManagement service' do
   end
 
   subject(:signup_customer) do
+    BingAdsRubySdk.logger.level = Logger::DEBUG
     api.customer_management.signup_customer(
       customer: {
         customer_address: {
@@ -28,7 +29,7 @@ RSpec.describe 'CustomerManagement service' do
       },
       advertiser_account: {
         name: "Test Account #{SecureRandom.hex}",
-        currency_type: 'USDollar',
+        currency_code: 'USD',
       },
       parent_customer_id: CUSTOMER_ID
     )
@@ -38,7 +39,6 @@ RSpec.describe 'CustomerManagement service' do
     describe '#find_accounts' do
       subject do
         api.customer_management.find_accounts(
-          application_scope: 'Advertiser',
           account_filter: '',
           customer_id: CUSTOMER_ID,
           top_n: 1
@@ -65,7 +65,6 @@ RSpec.describe 'CustomerManagement service' do
     describe '#find_accounts_or_customers_info' do
       subject do
         api.customer_management.find_accounts_or_customers_info(
-          application_scope: 'Advertiser',
           filter: '',
           top_n: 1
         )
@@ -95,21 +94,11 @@ RSpec.describe 'CustomerManagement service' do
       it 'returns information about the current account' do
         expect(get_account).to include(
           account: {
-            account_type: "Advertiser",
             bill_to_customer_id: a_kind_of(String),
-            country_code: a_kind_of(String),
-            currency_type: "USDollar",
+            currency_code: "USD",
             account_financial_status: "ClearFinancialStatus",
             id: a_kind_of(String),
             language: "English",
-            forward_compatibility_map: {
-              key_value_pair_ofstringstring: [
-                {
-                  key: "AutoTag",
-                  value: "0",
-                },
-              ],
-            },
             last_modified_by_user_id: a_kind_of(String),
             last_modified_time: a_kind_of(String),
             name: a_string_starting_with("Test Account"),
@@ -122,21 +111,22 @@ RSpec.describe 'CustomerManagement service' do
             time_stamp: a_kind_of(String),
             time_zone: "PacificTimeUSCanadaTijuana",
             pause_reason: nil,
+            forward_compatibility_map: nil,
             linked_agencies: {
-              customer_info: {
-                id: a_kind_of(String),
-                name: a_kind_of(String),
-              },
+              customer_info: [
+                {
+                  id: a_kind_of(String),
+                  name: a_kind_of(String),
+                }
+              ],
             },
             sales_house_customer_id: nil,
-            tax_information: {
-              key_value_pair_ofstringstring: {
-                key: "TaxId",
-                value: nil
-              }
-            },
+            tax_information: "",
             back_up_payment_instrument_id: nil,
             billing_threshold_amount: nil,
+            business_address: nil,
+            auto_tag_type: "Inactive",
+            sold_to_payment_instrument_id: nil
           }
         )
       end
@@ -192,18 +182,6 @@ RSpec.describe 'CustomerManagement service' do
       it 'returns customer data' do
         expect(get_customer).to include(
           customer: {
-            customer_address: {
-              city: "Paris",
-              country_code: "FR",
-              id: a_kind_of(String),
-              line1: "1 rue de Rivoli",
-              line2: nil,
-              line3: nil,
-              line4: nil,
-              postal_code: "75001",
-              state_or_province: "",
-              time_stamp: a_kind_of(String),
-            },
             customer_financial_status: "ClearFinancialStatus",
             id: a_kind_of(String),
             industry: "Entertainment",
@@ -232,7 +210,6 @@ RSpec.describe 'CustomerManagement service' do
     describe '#get_customers_info' do
       subject do
         api.customer_management.get_customers_info(
-          application_scope: 'Advertiser',
           customer_name_filter: '',
           top_n: 1
         )
@@ -241,12 +218,13 @@ RSpec.describe 'CustomerManagement service' do
       it 'returns a list of simple customer information' do
         is_expected.to include(
           customers_info: {
-            customer_info: [
-              {
-                id: a_kind_of(String),
-                name: a_kind_of(String),
-              },
-            ],
+            customer_info:
+              a_collection_including(
+                {
+                  id: a_kind_of(String),
+                  name: a_kind_of(String),
+                }
+              ),
           }
         )
       end
@@ -307,6 +285,7 @@ RSpec.describe 'CustomerManagement service' do
                postal_code: "92100",
                state_or_province: "01",
                time_stamp: a_kind_of(String),
+               business_name: nil,
              },
              contact_by_phone: "false",
              contact_by_postal_mail: "false",
@@ -319,7 +298,6 @@ RSpec.describe 'CustomerManagement service' do
              phone1: "0000000",
              phone2: nil,
             },
-            customer_app_scope: nil,
             customer_id: a_kind_of(String),
             id: a_kind_of(String),
             job_title: nil,
@@ -337,11 +315,18 @@ RSpec.describe 'CustomerManagement service' do
             user_life_cycle_status: "Active",
             time_stamp: a_kind_of(String),
             user_name: a_kind_of(String),
-            is_migrated_to_microsoft_account: "true",
+            forward_compatibility_map: nil,
             },
-            roles: { int: a_kind_of(Array) }, # { int: ['53', '54'] },
-            accounts: "",
-            customers: ""
+            customer_roles: {
+              customer_role:
+                include(
+                  {
+                    role_id: a_kind_of(String),
+                    customer_id: a_kind_of(String),
+                    account_ids: nil
+                  }
+                )
+            },
           )
       end
     end

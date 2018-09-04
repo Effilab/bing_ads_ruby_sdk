@@ -11,7 +11,6 @@ RSpec.describe 'CampaignManagement service' do
         ad_groups: {
           ad_group: {
             name: 'AcceptanceTestAdGroup',
-            ad_distribution: 'Search Content',
             language: 'French',
             start_date: {
               day: '1',
@@ -39,19 +38,15 @@ RSpec.describe 'CampaignManagement service' do
           ad_group:
             [
               {
-                ad_distribution: "Search",
                 ad_rotation: nil,
+                audience_ads_bid_adjustment: nil,
                 bidding_scheme: a_collection_including(type: "InheritFromParent"),
-                content_match_bid: { amount: "0.05" },
+                cpc_bid: { amount: "0.05" },
                 forward_compatibility_map: "",
                 id: a_kind_of(String),
                 language: "French",
                 name: "AcceptanceTestAdGroup",
-                native_bid_adjustment: nil,
                 network: "OwnedAndOperatedAndSyndicatedSearch",
-                pricing_model: "Cpc",
-                remarketing_targeting_setting: "BidOnly",
-                search_bid: { amount: "0.05" },
                 settings: nil,
                 start_date: {
                   day: '1',
@@ -123,14 +118,13 @@ RSpec.describe 'CampaignManagement service' do
           ad_groups: {
             ad_group: [
               id: ad_group_id,
-              ad_distribution: 'Search',
             ],
           }
         )
       end
 
       it 'updates the ad' do
-        is_expected.to eq(partial_errors: '')
+        is_expected.to eq(partial_errors: '', inherited_bid_strategy_types: nil)
       end
     end
 
