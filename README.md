@@ -99,7 +99,24 @@ $ cat .token* # Should output something like this: {"access_token":"....
 
 ## Development
 
-### Generate the cache
+### Updating to a new Bing API version
+Bing regularly releases new versions of the API and removes support for old versions.
+When you want to support a new version of the API, here are some of the things that
+need to be changed:
+* Go to https://docs.microsoft.com/en-us/bingads/guides/migration-guide to see what has changed
+* Add a new v*.yml config file to lib/bing_ads_ruby_sdk/config/
+  * The migration guide will tell you what endpoints to use in the new configuration file
+* Generate the cache files for the new version as detailed below
+* Set the default SDK version in lib/bing_ads_ruby_sdk/version.rb
+* Update the list of supported versions in lib/bing_ads_ruby_sdk/configuration.rb
+* Run the integration tests using `bundle exec rspec spec/examples/`, and fix the tests
+
+If you want to remove support for a version of the API:
+* Remove the version from the versions list in lib/bing_ads_ruby_sdk/configuration.rb
+* Remove the config file for the version in lib/bing_ads_ruby_sdk/config/
+* Remove the cache folder for the version in lib/bing_ads_ruby_sdk/.cache/
+
+### Generating the cache
 The gem parses the WSDL provided by Bing to generate stubs. These are stored as serialized objects
 in the .cache folder. `Marshal.dump` is used so this means that you can use the generated cache
 stored in the repository if you are using the same Major version of Ruby as was used to build the cache.
