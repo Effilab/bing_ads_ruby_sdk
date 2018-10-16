@@ -30,9 +30,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = %w[lib]
 
-  spec.add_dependency 'signet'
-  spec.add_dependency 'lolsoap'
-  spec.add_dependency 'excon'
+  spec.add_runtime_dependency 'signet', '~> 0.8.1'
+  spec.add_runtime_dependency 'lolsoap'
+  spec.add_runtime_dependency 'excon'
 
   spec.add_development_dependency 'mock_redis'
   spec.add_development_dependency 'bundler'

@@ -2,7 +2,7 @@ require "bing_ads_ruby_sdk/wsdl_parser"
 
 class Fixtures
   class << self
-    def api_config(version: :v11)
+    def api_config(version: BingAdsRubySdk::DEFAULT_SDK_VERSION)
       YAML.load_file(
         File.join(__dir__, 'fixtures', "#{version}.yml")
       )

@@ -6,10 +6,10 @@ module BingAdsRubySdk
     # Sets Bing Ads available environments, this will increase cache size.
     ENVIRONMENTS = %i[production sandbox test].freeze
     # Sets Gem supported versions, this will increase cache size.
-    VERSIONS     = %i[v11].freeze
+    VERSIONS     = %i[v12].freeze
     # Sets cache location, will contain ".cache/version[s]/environment[s]/service".
     CACHE_BASE   = __dir__
-    # Sets version.yml location, see v11.yml for future versions.
+    # Sets version.yml location, see v12.yml for future versions.
     CONF_PATH    = File.join(__dir__, 'config')
 
     attr_reader :data, :version, :environment, :cache_path, :abstract
@@ -18,7 +18,7 @@ module BingAdsRubySdk
     # @param environment [Symbol]
     # @option environment [Symbol] :production Use the production WSDL configuration.
     # @option environment [Symbol] :sandbox Use the sandbox WSDL configuration.
-    def initialize(version: :v11, environment: :production)
+    def initialize(version: DEFAULT_SDK_VERSION, environment: :production)
       @version     = version
       @environment = environment
       @cache_path  = File.join(CACHE_BASE, '.cache', version.to_s, environment.to_s)

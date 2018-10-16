@@ -11,7 +11,6 @@ RSpec.describe 'CampaignManagement service' do
         campaign_id: campaign_id,
         ad_groups: { ad_group: {
           name: 'AcceptanceTestAdGroup',
-          ad_distribution: 'Search Content',
           language: 'French',
         } }
       )
@@ -24,7 +23,7 @@ RSpec.describe 'CampaignManagement service' do
           {
             expanded_text_ad: {
               ad_format_preference: 'All',
-              display_url: 'https://www.example.com/',
+              domain: 'https://www.example.com/',
               final_urls: [string: 'http://www.contoso.com/'],
               path_1: 'subdirectory1',
               path_2: 'subdirectory2',
@@ -86,7 +85,7 @@ RSpec.describe 'CampaignManagement service' do
                 tracking_url_template: "{lpurl}",
                 type: "ExpandedText",
                 url_custom_parameters: nil,
-                display_url: "www.contoso.com",
+                domain: "www.contoso.com",
                 path1: "subdirectory1",
                 path2: "subdirectory2",
                 text: "Ad text goes here",

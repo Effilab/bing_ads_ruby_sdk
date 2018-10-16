@@ -27,7 +27,7 @@ RSpec.describe "CampaignManagement service" do
               scheduling: {},
               text: "CalloutText",
             },
-            sitelink2_ad_extension: {
+            sitelink_ad_extension: {
               device_preference: nil,
               id: nil,
               description_1: "Description 1",
@@ -59,7 +59,7 @@ RSpec.describe "CampaignManagement service" do
 
     let(:types) do
       %w(
-        Sitelink2AdExtension
+        SitelinkAdExtension
         LocationAdExtension
         CallAdExtension
         ImageAdExtension
@@ -103,7 +103,7 @@ RSpec.describe "CampaignManagement service" do
     subject(:get_ad_extensions_associations) do
       api.campaign_management.get_ad_extensions_associations(
         account_id: ACCOUNT_ID,
-        ad_extension_type: "CallAdExtension Sitelink2AdExtension CalloutAdExtension",
+        ad_extension_type: "CallAdExtension SitelinkAdExtension CalloutAdExtension",
         association_type: "Campaign",
         entity_ids: { long: campaign_id }
       )
@@ -180,7 +180,7 @@ RSpec.describe "CampaignManagement service" do
             forward_compatibility_map: "",
             id: match(/[0-9]*/),
             status: "Active",
-            type: "Sitelink2AdExtension",
+            type: "SitelinkAdExtension",
             version: match(/[0-9]*/),
             description1: "Description 1",
             description2: "Description 2",
@@ -247,7 +247,7 @@ RSpec.describe "CampaignManagement service" do
         expect(get_association(associations, "CalloutAdExtension"))
           .to include(callout_ad_extension)
 
-        expect(get_association(associations, "Sitelink2AdExtension"))
+        expect(get_association(associations, "SitelinkAdExtension"))
           .to include(site_links_ad_extension)
       end
     end

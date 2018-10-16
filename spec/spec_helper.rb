@@ -13,7 +13,6 @@ warn_level = $VERBOSE
 $VERBOSE = nil
 
 BingAdsRubySdk::Configuration::ENVIRONMENTS = %i[test].freeze
-BingAdsRubySdk::Configuration::VERSIONS     = %i[v11].freeze
 $VERBOSE = warn_level
 
 log_path = "log"
