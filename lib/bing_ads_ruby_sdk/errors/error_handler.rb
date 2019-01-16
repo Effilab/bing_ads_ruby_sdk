@@ -24,21 +24,24 @@ module BingAdsRubySdk
           partial_error_keys(response).any?
         end
 
-        # Gets populated partial error keys from the response
-        # @return [Array] array of symbols for keys in the response
-        #   that are populated with errors
-        def partial_error_keys(response)
-          existing_keys = (PARTIAL_ERROR_KEYS & response.keys)
-
-          existing_keys.reject do |key|
-            response[key].nil? || response[key].is_a?(String)
-          end
-        end
-
         def contains_fault?(response)
           error_keys = %i[faultcode error_code]
 
           (error_keys & response.keys).any?
+        end
+
+        def fault_class(response)
+          hash_with_error = response[:detail] || partial_errors(response)
+
+          return BASE_FAULT unless hash_with_error
+
+          error = hash_with_error.keys.first
+
+          begin
+            Object.const_get("BingAdsRubySdk::Errors::#{klass_name(error)}")
+          rescue NameError
+            BASE_FAULT
+          end
         end
 
         def partial_errors(response)
@@ -56,17 +59,14 @@ module BingAdsRubySdk
           BingAdsRubySdk::Utils.camelize(key_string)
         end
 
-        def fault_class(response)
-          hash_with_error = response[:detail] || partial_errors(response)
+        # Gets populated partial error keys from the response
+        # @return [Array] array of symbols for keys in the response
+        #   that are populated with errors
+        def partial_error_keys(response)
+          existing_keys = (PARTIAL_ERROR_KEYS & response.keys)
 
-          return BASE_FAULT unless hash_with_error
-
-          error = hash_with_error.keys.first
-
-          begin
-            Object.const_get("BingAdsRubySdk::Errors::#{klass_name(error)}")
-          rescue NameError
-            BASE_FAULT
+          existing_keys.reject do |key|
+            response[key].nil? || response[key].is_a?(String)
           end
         end
       end

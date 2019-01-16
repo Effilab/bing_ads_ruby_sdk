@@ -25,7 +25,7 @@ module BingAdsRubySdk
       end
 
       it 'sets customer' do
-        subject.customer = { id: 777, account_id: 666 }
+        subject.set_customer({ id: 777, account_id: 666 })
 
         expect(subject.content).to eq(
           authentication_token: 'yes/we/can',

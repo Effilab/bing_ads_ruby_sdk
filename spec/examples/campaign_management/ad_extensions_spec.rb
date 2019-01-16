@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../example_helper'
 require "securerandom"
 
 RSpec.describe "CampaignManagement service" do

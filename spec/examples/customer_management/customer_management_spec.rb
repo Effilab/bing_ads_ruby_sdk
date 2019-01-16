@@ -1,4 +1,3 @@
-require_relative '../example_helper'
 require 'securerandom'
 
 RSpec.describe 'CustomerManagement service' do

@@ -5,9 +5,6 @@
 Add the following to your application's Gemfile:
 
 ```ruby
-# You currently need to use this version of lolsoap:
-gem 'lolsoap', github: 'effilab/lolsoap', branch: 'edge'
-
 gem 'bing_ads_ruby_sdk'
 ```
 
@@ -35,7 +32,7 @@ BingAdsRubySdk::OAuth2::FsStore.config = "credentials.json"
     client_id:       '1a-2b-3c'
   }
 ).tap do |api|
-  api.customer(
+  api.set_customer(
     id:         123,
     account_id: 456
   )

@@ -5,7 +5,7 @@ RSpec.describe BingAdsRubySdk::Errors::ApplicationFault do
     context 'when creating an instance' do
       subject(:create_instance) { described_class.new({ details: nil }) }
 
-      it 'should instantiate without raising an exception' do
+      it 'instantiates without raising an exception' do
         expect { create_instance }.not_to raise_error
       end
     end

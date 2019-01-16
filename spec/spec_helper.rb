@@ -1,60 +1,27 @@
 require 'simplecov'
 require "benchmark"
+require 'bing_ads_ruby_sdk'
+require 'dotenv/load'
+
+root_path = File.join(BingAdsRubySdk::LIB_DIR, "../")
+
+Dir[File.join(root_path, "spec", "support", "**", "*.rb")].each { |f| require f }
+Dir[File.join(root_path, "log", "*.log")].each do |log_file|
+  File.open(log_file, 'w') { |f| f.truncate(0) }
+end
 
 SimpleCov.start do
   add_filter '/spec/'
 end
-require 'shared_helper'
-require 'httplog'
-require 'fileutils'
-require 'mock_redis'
 
-warn_level = $VERBOSE
-$VERBOSE = nil
+RSpec.configure do |config|
+  # Enable flags like --only-failures and --next-failure
+  config.example_status_persistence_file_path = '.rspec_status'
 
-BingAdsRubySdk::Configuration::ENVIRONMENTS = %i[test].freeze
-$VERBOSE = warn_level
+  # Disable RSpec exposing methods globally on `Module` and `main`
+  config.disable_monkey_patching!
 
-log_path = "log"
-log_file = "#{log_path}/test.log"
-FileUtils.mkdir_p(log_path)
-File.open(log_file, 'w') { |f| f.write('') }
-
-BingAdsRubySdk.logger = Logger.new(File.open(log_file, 'w'))
-BingAdsRubySdk.logger.level = :debug
-
-# https://github.com/trusche/httplog
-# We need to initialize it early so we use 00_httplog.rb name
-
-HttpLog.configure do |config|
-  # Enable or disable all logging
-  # Disable for production
-  config.enabled = true
-
-  # You can assign a different logger
-  config.logger = Logger.new("log/http.log")
-
-  # I really wouldn't change this...
-  config.severity = Logger::Severity::DEBUG
-
-  # Tweak which parts of the HTTP cycle to log...
-  config.log_connect   = true
-  config.log_request   = true
-  config.log_headers   = true
-  config.log_data      = false
-
-  config.log_status    = true
-  config.log_response  = false
-  # Display timing for every request:
-  config.log_benchmark = true
-
-  # ...or log all request as a single line by setting this to `true`
-  # config.compact_log = true
-
-  # Prettify the output - see below
-  config.color = true
-
-  # Limit logging based on URL patterns
-  config.url_whitelist_pattern = /.*/
-  config.url_blacklist_pattern = nil
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
 end

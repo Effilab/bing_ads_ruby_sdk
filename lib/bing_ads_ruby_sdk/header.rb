@@ -1,26 +1,43 @@
 module BingAdsRubySdk
   # Contains the SOAP Request header informations
   class Header
-    attr_reader :credentials, :token
-    attr_accessor :customer
-
     # @param credentials [Hash] to be used for API authorization
     # @option credentials :developer_token [String]
     # @param token [OAuth2::AuthorizationCode] instance of an AuthorizationCode
-    def initialize(credentials, token)
+    def initialize(credentials, oauth_store)
       @credentials = credentials
-      @token       = token
+      @token       = build_token(oauth_store)
       @customer    = {}
     end
 
     # @return [Hash] Authorization and identification data that will be added to the SOAP header
     def content
       {
-        authentication_token: token.fetch_or_refresh,
-        developer_token:      credentials[:developer_token],
-        customer_id:          customer[:id],
-        customer_account_id:  customer[:account_id]
+        "AuthenticationToken" => token.fetch_or_refresh,
+        "DeveloperToken" =>      credentials[:developer_token],
+        "CustomerId" =>          customer[:id],
+        "CustomerAccountId" =>   customer[:account_id]
       }
+    end
+
+    def set_customer(hash)
+      customer[:account_id] = hash.fetch(:account_id)
+      customer[:id] = hash.fetch(:id)
+      self
+    end
+
+    private
+
+    attr_reader :token, :credentials, :customer
+
+    def build_token(store)
+      OAuth2::AuthorizationCode.new(
+        {
+          developer_token: credentials[:developer_token],
+          client_id:       credentials[:client_id],
+        },
+        { store: store }
+      )
     end
   end
 end

@@ -1,29 +1,23 @@
-require 'bing_ads_ruby_sdk/cache'
+require 'dotenv/load'
 
-BingAdsRubySdk.logger.formatter = proc do |severity, datetime, progname, msg|
-  "#{severity} #{datetime} #{progname} #{msg}".tap do |line|
-    puts nil, line
-  end
-end
+namespace :token do
+  desc "Update test config file and store with Bing OAuth2 token"
+  task :update do
+    store = ::BingAdsRubySdk::OAuth2::Store::FsStore.new(ENV.fetch('BING_TOKEN_NAME'))
+    auth = BingAdsRubySdk::OAuth2::AuthorizationCode.new(
+      {
+        developer_token: ENV.fetch('BING_DEVELOPER_TOKEN'),
+        client_id: ENV.fetch('BING_CLIENT_ID')
+      },
+      store: store
+    )
 
-namespace :bars do
-  namespace :cache do
-    desc 'Build cache'
-    task :build do
-      BingAdsRubySdk::Cache.build
-    end
+    puts "Go to #{auth.code_url}",
+         "You will be redirected to a URL at the end. Paste it here in the console and press enter"
 
-    desc 'Check cache'
-    task :check do
-      BingAdsRubySdk::Cache.check
-    end
+    full_url = STDIN.gets.chomp
+    auth.fetch_from_url(full_url)
 
-    desc 'Clear cache'
-    task :clear do
-      BingAdsRubySdk::Cache.clear
-    end
-
-    desc 'Reset cache : clear, build and check'
-    task reset: %i[clear build check]
+    puts "Written to store"
   end
 end

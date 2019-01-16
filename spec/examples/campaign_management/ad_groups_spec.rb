@@ -1,5 +1,3 @@
-require_relative '../example_helper'
-
 RSpec.describe 'CampaignManagement service' do
   include_context 'use api'
   include_context 'manages campaigns'
