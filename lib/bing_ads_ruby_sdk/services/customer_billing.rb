@@ -5,8 +5,6 @@ module BingAdsRubySdk
       def self.service
         :customer_billing
       end
-
-      private
     end
   end
 end

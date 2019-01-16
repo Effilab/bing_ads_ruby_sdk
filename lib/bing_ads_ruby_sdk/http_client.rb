@@ -1,12 +1,9 @@
 # frozen_string_literal: true
 
-# require "lolsoap"
-# require "bing_ads_ruby_sdk/utils"
 require "net/http"
 require "excon"
 
 module BingAdsRubySdk
-  # Manages communication with the a defined SOAP service on the API
   class HttpClient
     @http_connections = {}
     HTTP_OPEN_TIMEOUT = 10
@@ -15,8 +12,6 @@ module BingAdsRubySdk
     HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT = 1
 
     class << self
-      attr_accessor :http_connections
-
       def post(request)
         uri = URI(request.url)
         conn = connection(request.url)
@@ -26,6 +21,16 @@ module BingAdsRubySdk
           headers: request.headers,
         )
       end
+
+      def close_http_connections
+        self.http_connections.each do |url, connection|
+          connection.reset
+        end
+      end
+
+      private
+
+      attr_accessor :http_connections
 
       def connection(host)
         self.http_connections[host] ||= Excon.new(
@@ -40,12 +45,6 @@ module BingAdsRubySdk
           ssl_version: :TLSv1_2,
           ciphers: "TLSv1.2:!aNULL:!eNULL",
         )
-      end
-
-      def close_http_connections
-        self.http_connections.each do |url, connection|
-          connection.reset
-        end
       end
     end
   end

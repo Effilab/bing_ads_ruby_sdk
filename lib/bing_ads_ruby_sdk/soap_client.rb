@@ -1,11 +1,13 @@
 # frozen_string_literal: true
+require 'bing_ads_ruby_sdk/wsdl_operation_wrapper'
+require "bing_ads_ruby_sdk/http_client"
 
 module BingAdsRubySdk
   class SoapClient
 
     def initialize(service_name:, version:, environment:, header:)
       @header = header
-      @wsdl_file_path = File.join(BingAdsRubySdk::LIB_DIR, 'bing_ads_ruby_sdk', 'wsdl', version.to_s, environment.to_s, "#{service_name}.xml")
+      @wsdl_file_path = File.join(BingAdsRubySdk.root_path, 'lib', 'bing_ads_ruby_sdk', 'wsdl', version.to_s, environment.to_s, "#{service_name}.xml")
     end
 
     def call(operation_name, message = {})

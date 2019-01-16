@@ -3,10 +3,8 @@ require "benchmark"
 require 'bing_ads_ruby_sdk'
 require 'dotenv/load'
 
-root_path = File.join(BingAdsRubySdk::LIB_DIR, "../")
-
-Dir[File.join(root_path, "spec", "support", "**", "*.rb")].each { |f| require f }
-Dir[File.join(root_path, "log", "*.log")].each do |log_file|
+Dir[File.join(BingAdsRubySdk.root_path, "spec", "support", "**", "*.rb")].each { |f| require f }
+Dir[File.join(BingAdsRubySdk.root_path, "log", "*.log")].each do |log_file|
   File.open(log_file, 'w') { |f| f.truncate(0) }
 end
 

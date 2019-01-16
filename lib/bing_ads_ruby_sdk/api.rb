@@ -2,7 +2,6 @@
 
 require "bing_ads_ruby_sdk/header"
 require "bing_ads_ruby_sdk/soap_client"
-require "bing_ads_ruby_sdk/http_client"
 require "bing_ads_ruby_sdk/services/base"
 require "bing_ads_ruby_sdk/services/ad_insight"
 require "bing_ads_ruby_sdk/services/bulk"
@@ -10,7 +9,7 @@ require "bing_ads_ruby_sdk/services/campaign_management"
 require "bing_ads_ruby_sdk/services/customer_billing"
 require "bing_ads_ruby_sdk/services/customer_management"
 require "bing_ads_ruby_sdk/services/reporting"
-require "bing_ads_ruby_sdk/oauth2/authorization_code"
+require "bing_ads_ruby_sdk/oauth2/authorization_handler"
 require "bing_ads_ruby_sdk/errors/application_fault"
 require "bing_ads_ruby_sdk/errors/server_error"
 require "bing_ads_ruby_sdk/errors/error_handler"
@@ -28,7 +27,7 @@ module BingAdsRubySdk
     # @option credentials [String] :client_id The client ID used to acces the API
     def initialize(version: DEFAULT_SDK_VERSION,
                    environment: :production,
-                   oauth_store: OAuth2::Store::FsStore,
+                   oauth_store: ,
                    credentials: {})
       @version = version
       @environment = environment

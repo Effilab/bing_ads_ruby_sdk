@@ -5,9 +5,6 @@ module BingAdsRubySdk
       def self.service
         :reporting
       end
-
-      private
-
     end
   end
 end

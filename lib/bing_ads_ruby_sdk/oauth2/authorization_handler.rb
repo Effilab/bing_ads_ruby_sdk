@@ -1,5 +1,5 @@
 require 'signet/oauth_2/client'
-require 'bing_ads_ruby_sdk/oauth2/store/fs_store'
+require 'bing_ads_ruby_sdk/oauth2/fs_store'
 # @todo see if we need to add and verify state with SecureRandom.hex(10)
 # We need the state param where we use a web UI.
 # require 'securerandom'
@@ -7,7 +7,7 @@ require 'bing_ads_ruby_sdk/oauth2/store/fs_store'
 module BingAdsRubySdk
   module OAuth2
     # Adds some useful methods to Signet::OAuth2::Client
-    class AuthorizationCode
+    class AuthorizationHandler
 
       # @param config [Hash] mandatory parameters to initialize the client.
       # @option config [Symbol] :developer_token

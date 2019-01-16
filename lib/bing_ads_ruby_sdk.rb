@@ -4,7 +4,6 @@ require 'lolsoap'
 
 require 'bing_ads_ruby_sdk/version'
 require 'bing_ads_ruby_sdk/api'
-require 'bing_ads_ruby_sdk/wsdl_operation_wrapper'
 
 module BingAdsRubySdk
   def self.logger
@@ -18,6 +17,7 @@ module BingAdsRubySdk
   ATTRIBUTE_PREFIX = "@"
   TYPE_KEY = "@type"
   XSI_NAMESPACE_KEY = "xsi"
+  ROOT_PATH = File.join(__dir__,'..')
 
   def self.xsi_namespace_key
     XSI_NAMESPACE_KEY
@@ -31,19 +31,20 @@ module BingAdsRubySdk
     ATTRIBUTE_PREFIX
   end
 
-  self.logger = Logger.new("log/soap.log").tap { |l| l.level = Logger::DEBUG }
+  def self.root_path
+    ROOT_PATH
+  end
 
-  class ElementMismatch < StandardError; end
-
-  LIB_DIR = __dir__
-  CONF_PATH = File.join(__dir__, 'bing_ads_ruby_sdk', 'config')
+  self.logger = Logger.new(File.join(ROOT_PATH, "log", "soap.log")).tap do |l|
+    l.level = Logger::INFO
+  end
 end
 
 def setup
   require 'dotenv/load'
   require 'byebug'
 
-  store = ::BingAdsRubySdk::OAuth2::Store::FsStore.new(ENV.fetch('BING_TOKEN_NAME'))
+  store = ::BingAdsRubySdk::OAuth2::FsStore.new(ENV.fetch('BING_TOKEN_NAME'))
   @auth = BingAdsRubySdk::Api.new(
     oauth_store: store,
     credentials: {
@@ -55,6 +56,7 @@ def setup
     id: ENV.fetch('BING_CUSTOMER_ID'),
     account_id: ENV.fetch('BING_ACCOUNT_ID')
   })
+  BingAdsRubySdk.logger.level = Logger::DEBUG
   @cm = @auth.customer_management
   @cp = @auth.campaign_management
   @b = @auth.bulk
