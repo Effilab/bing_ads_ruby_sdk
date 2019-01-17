@@ -12,19 +12,7 @@ module BingAdsRubySdk
         process(@params)
       end
 
-      def self.call(string)
-        string.gsub(MULTIPLE_CAPSREGEX, MATCHING_PATTERN)
-              .gsub(SPLIT_REGEX, MATCHING_PATTERN)
-              .tr('-', '_')
-              .downcase
-              .to_sym
-      end
-
       private
-
-      MULTIPLE_CAPSREGEX = /([A-Z]+)([A-Z][a-z])/
-      SPLIT_REGEX = /([a-z\d])([A-Z])/
-      MATCHING_PATTERN = '\1_\2'
 
       def process(obj)
         return obj unless obj.is_a?(Hash)
@@ -39,7 +27,7 @@ module BingAdsRubySdk
       end
 
       def snakize(string)
-        self.class.call(string)
+        BingAdsRubySdk::StringUtils.snakize(string)
       end
     end
   end

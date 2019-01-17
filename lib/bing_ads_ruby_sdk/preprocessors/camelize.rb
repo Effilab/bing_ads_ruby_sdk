@@ -12,10 +12,6 @@ module BingAdsRubySdk
         process(@params)
       end
 
-      def self.call(string)
-        string.split(UNDERSCORE).collect!{ |w| w.capitalize }.join
-      end
-
       private
 
       def process(obj)
@@ -39,10 +35,9 @@ module BingAdsRubySdk
       end
 
       def camelize(string)
-        self.class.call(string)
+        BingAdsRubySdk::StringUtils.camelize(string)
       end
 
-      UNDERSCORE = '_'
       BLACKLIST = %w(long)
     end
   end

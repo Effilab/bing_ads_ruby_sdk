@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BingAdsRubySdk
   # Contains the SOAP Request header informations
   class Header

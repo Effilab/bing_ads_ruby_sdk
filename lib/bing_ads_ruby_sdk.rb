@@ -4,6 +4,7 @@ require 'lolsoap'
 
 require 'bing_ads_ruby_sdk/version'
 require 'bing_ads_ruby_sdk/api'
+require 'bing_ads_ruby_sdk/string_utils'
 
 module BingAdsRubySdk
   def self.logger

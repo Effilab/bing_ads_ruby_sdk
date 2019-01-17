@@ -1,5 +1,6 @@
 require 'simplecov'
 require "benchmark"
+require 'byebug'
 require 'bing_ads_ruby_sdk'
 require 'dotenv/load'
 

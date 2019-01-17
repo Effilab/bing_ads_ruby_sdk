@@ -68,14 +68,14 @@ module BingAdsRubySdk
       # @return [Hash] containing the fault information if provided
       # @return [Hash] empty hash if no fault information
       def fault_hash
-        @raw_response[:detail][fault_key] || {}
+        raw_response[:detail][fault_key] || {}
       end
 
       # The fault key that corresponds to the inherited class
       # @return [Symbol] the fault key
       def fault_key
         class_name = self.class.name.split('::').last
-        BingAdsRubySdk::Utils.snakize(class_name).to_sym
+        BingAdsRubySdk::StringUtils.snakize(class_name).to_sym
       end
 
       def first_error_message(error_list)
@@ -113,7 +113,7 @@ module BingAdsRubySdk
     class PartialErrorBase < ApplicationFault
       # The parent hash for this type of error is the root of the response
       def fault_hash
-        @raw_response[fault_key] || {}
+        raw_response[fault_key] || {}
       end
 
       # Gets the first error message in the list. This is

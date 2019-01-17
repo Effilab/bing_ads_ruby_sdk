@@ -14,7 +14,7 @@ module BingAdsRubySdk
       end
 
       def call(operation_name, message = {})
-        camelized_name = BingAdsRubySdk::Preprocessors::Camelize.call(operation_name.to_s)
+        camelized_name = BingAdsRubySdk::StringUtils.camelize(operation_name.to_s)
         response = soap_client.call(
           camelized_name,
           preprocess(message, camelized_name),

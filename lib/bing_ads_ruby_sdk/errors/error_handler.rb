@@ -4,72 +4,62 @@ module BingAdsRubySdk
   module Errors
     # Parses the response from the API to raise errors if they are returned
     class ErrorHandler
-      BASE_FAULT = BingAdsRubySdk::Errors::GeneralError
-      PARTIAL_ERROR_KEYS = %i[partial_errors nested_partial_errors].freeze
+      def initialize(response)
+        @response = response
+      end
 
-      class << self
-        def parse_errors!(response)
-          # Some operations don't return a response, for example:
-          # https://msdn.microsoft.com/en-us/library/bing-ads-customer-management-deleteaccount.aspx
-          return unless response.is_a? Hash
-          raise fault_class(response).new(response) if contains_error?(response)
-        end
+      def call
+        # Some operations don't return a response, for example:
+        # https://msdn.microsoft.com/en-us/library/bing-ads-customer-management-deleteaccount.aspx
+        return unless response.is_a? Hash
+        raise fault_class.new(response) if contains_error?
+      end
 
-        def contains_error?(response)
-          contains_partial_errors?(response) ||
-            contains_fault?(response)
-        end
+      private
 
-        def contains_partial_errors?(response)
-          partial_error_keys(response).any?
-        end
+      attr_reader :response
 
-        def contains_fault?(response)
-          error_keys = %i[faultcode error_code]
+      def contains_error?
+        partial_error_keys.any? || contains_fault?
+      end
 
-          (error_keys & response.keys).any?
-        end
+      def contains_fault?
+        (ERROR_KEYS & response.keys).any?
+      end
 
-        def fault_class(response)
-          hash_with_error = response[:detail] || partial_errors(response)
+      def fault_class
+        ERRORS_MAPPING.fetch(hash_with_error.keys.first, BASE_FAULT)
+      end
 
-          return BASE_FAULT unless hash_with_error
+      def hash_with_error
+        response[:detail] || partial_errors || {}
+      end
 
-          error = hash_with_error.keys.first
+      def partial_errors
+        response.select {|key| partial_error_keys.include?(key)}
+      end
 
-          begin
-            Object.const_get("BingAdsRubySdk::Errors::#{klass_name(error)}")
-          rescue NameError
-            BASE_FAULT
-          end
-        end
-
-        def partial_errors(response)
-          keys = partial_error_keys(response)
-          response.select {|key| keys.include?(key)}
-        end
-
-        def klass_name(key)
-          key_string = key.to_s
-
-          # Partial errors are stored in a key with a plural name,
-          # but exception classes are named in the singular by convention
-          key_string = key_string.gsub(/s$/, '') if PARTIAL_ERROR_KEYS.include?(key)
-
-          BingAdsRubySdk::Utils.camelize(key_string)
-        end
-
-        # Gets populated partial error keys from the response
-        # @return [Array] array of symbols for keys in the response
-        #   that are populated with errors
-        def partial_error_keys(response)
-          existing_keys = (PARTIAL_ERROR_KEYS & response.keys)
-
-          existing_keys.reject do |key|
-            response[key].nil? || response[key].is_a?(String)
-          end
+      # Gets populated partial error keys from the response
+      # @return [Array] array of symbols for keys in the response
+      #   that are populated with errors
+      def partial_error_keys
+        @partial_error_keys ||= (PARTIAL_ERROR_KEYS & response.keys).reject do |key|
+          response[key].nil? || response[key].is_a?(String)
         end
       end
+
+      BASE_FAULT = BingAdsRubySdk::Errors::GeneralError
+      PARTIAL_ERROR_KEYS = %i[partial_errors nested_partial_errors].freeze
+      ERROR_KEYS = %i[faultcode error_code]
+      ERRORS_MAPPING = {
+        api_fault_detail: BingAdsRubySdk::Errors::ApiFaultDetail,
+        ad_api_fault_detail: BingAdsRubySdk::Errors::AdApiFaultDetail,
+        editorial_api_fault_detail: BingAdsRubySdk::Errors::EditorialApiFaultDetail,
+        api_batch_fault: BingAdsRubySdk::Errors::ApiBatchFault,
+        api_fault: BingAdsRubySdk::Errors::ApiFault,
+        nested_partial_errors: BingAdsRubySdk::Errors::NestedPartialError,
+        partial_errors: BingAdsRubySdk::Errors::PartialError
+      }
     end
   end
 end
