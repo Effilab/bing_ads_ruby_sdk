@@ -3,23 +3,24 @@ require 'time'
 require 'lolsoap'
 
 require 'bing_ads_ruby_sdk/version'
+require 'bing_ads_ruby_sdk/configuration'
 require 'bing_ads_ruby_sdk/api'
 require 'bing_ads_ruby_sdk/string_utils'
 
 module BingAdsRubySdk
-  def self.logger
-    @logger
+  def self.config
+    @configuration
   end
 
-  def self.logger=(value)
-    @logger = value
+  def self.configure
+    @configuration ||= BingAdsRubySdk::Configuration.new
+    yield(config)
   end
 
-  ATTRIBUTE_PREFIX = "@"
-  TYPE_KEY = "@type"
-  XSI_NAMESPACE_KEY = "xsi"
-  ROOT_PATH = File.join(__dir__,'..')
-
+  def self.log(level, *args, &block)
+    return unless config.log
+    config.logger.send(level, *args, &block)
+  end
   def self.xsi_namespace_key
     XSI_NAMESPACE_KEY
   end
@@ -28,17 +29,13 @@ module BingAdsRubySdk
     TYPE_KEY
   end
 
-  def self.attribute_prefix
-    ATTRIBUTE_PREFIX
-  end
-
   def self.root_path
     ROOT_PATH
   end
 
-  self.logger = Logger.new(File.join(ROOT_PATH, "log", "soap.log")).tap do |l|
-    l.level = Logger::INFO
-  end
+  TYPE_KEY = "@type"
+  XSI_NAMESPACE_KEY = "xsi"
+  ROOT_PATH = File.join(__dir__,'..')
 end
 
 def setup
@@ -57,7 +54,11 @@ def setup
     id: ENV.fetch('BING_CUSTOMER_ID'),
     account_id: ENV.fetch('BING_ACCOUNT_ID')
   })
-  BingAdsRubySdk.logger.level = Logger::DEBUG
+  BingAdsRubySdk.configure do |conf|
+    conf.log = true
+    conf.logger.level = Logger::DEBUG
+    conf.filters = ["AuthenticationToken", "DeveloperToken"]
+  end
   @cm = @auth.customer_management
   @cp = @auth.campaign_management
   @b = @auth.bulk

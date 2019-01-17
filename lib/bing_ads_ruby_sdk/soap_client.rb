@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 require 'bing_ads_ruby_sdk/wsdl_operation_wrapper'
 require "bing_ads_ruby_sdk/http_client"
+require "bing_ads_ruby_sdk/log_message"
 
 module BingAdsRubySdk
   class SoapClient
@@ -22,15 +23,15 @@ module BingAdsRubySdk
         insert_args(message, node)
       end
 
-      BingAdsRubySdk.logger.debug { format_xml(req.content) }
+      BingAdsRubySdk.log(:debug) { format_xml(req.content) }
 
-      raw_response = BingAdsRubySdk::HttpClient.post(req)
+      response_body = BingAdsRubySdk::HttpClient.post(req)
 
-      parse_response(req, raw_response)
+      parse_response(req, response_body)
     end
 
     def wsdl_wrapper(operation_name)
-      BingAdsRubySdk::WsdlOperationWrapper.new(lolsoap_parser, operation_name)
+      WsdlOperationWrapper.new(lolsoap_parser, operation_name)
     end
 
     private
@@ -57,7 +58,7 @@ module BingAdsRubySdk
           if arg_name == BingAdsRubySdk.type_key
             node.__attribute__(
               "#{BingAdsRubySdk.xsi_namespace_key}:#{arg_name[1..-1]}",
-              lolsoap_wsdl.types[arg_value].prefix_and_name
+              WsdlOperationWrapper.prefix_and_name(lolsoap_wsdl, arg_value)
             )
           else
             node.__send__(arg_name, arg_value)
@@ -66,25 +67,14 @@ module BingAdsRubySdk
       end
     end
 
-    def parse_response(req, raw_response)
-      if contains_error?(raw_response)
-        BingAdsRubySdk.logger.warn { format_xml(raw_response.body) }
-        raise BingAdsRubySdk::Errors::ServerError, raw_response
-      else
-        BingAdsRubySdk.logger.debug { format_xml(raw_response.body) }
-      end
-
-      lolsoap_client.response(req, raw_response.body).body_hash.tap do |b_h|
-        BingAdsRubySdk.logger.debug { b_h }
+    def parse_response(req, response_body)
+      lolsoap_client.response(req, response_body).body_hash.tap do |b_h|
+        BingAdsRubySdk.log(:debug) { b_h }
         BingAdsRubySdk::Errors::ErrorHandler.new(b_h).call
       end
-    end
-
-    def contains_error?(response)
-      [
-        Net::HTTPServerError,
-        Net::HTTPClientError,
-      ].any? { |http_error_class| response.class <= http_error_class }
+    rescue BingAdsRubySdk::Errors::GeneralError => e
+      BingAdsRubySdk.log(:warn) { format_xml(response_body) }
+      raise e
     end
 
     def lolsoap_client
@@ -102,7 +92,7 @@ module BingAdsRubySdk
     end
 
     def format_xml(string)
-      Nokogiri::XML(string).to_xhtml(indent: 2)
+      BingAdsRubySdk::LogMessage.new(string).to_s
     end
   end
 end
