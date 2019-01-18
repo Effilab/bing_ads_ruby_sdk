@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">f73bfe6d-3e85-42ae-8912-93c684de36be</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <UpdateUetTagsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+      <PartialErrors xmlns:i="http://www.w3.org/2001/XMLSchema-instance"/>
+    </UpdateUetTagsResponse>
+  </s:Body>
+</s:Envelope>

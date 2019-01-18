@@ -10,8 +10,16 @@ module BingAdsRubySdk
         call_wrapper(__method__, message, :budgets, :budget)
       end
 
+      def add_ad_extensions(message)
+        call_wrapper(__method__, message)
+      end
+
       def get_ad_extension_ids_by_account_id(message)
-        call_wrapper(__method__, message, :ad_extension_ids, :long)
+        call_wrapper(__method__, message, :ad_extension_ids)
+      end
+
+      def add_shared_entity(message)
+        call_wrapper(__method__, message)
       end
 
       def get_shared_entities_by_account_id(message)
@@ -39,6 +47,10 @@ module BingAdsRubySdk
       end
 
       def update_conversion_goals(message)
+        call_wrapper(__method__, message)
+      end
+
+      def set_ad_extensions_associations(message)
         call_wrapper(__method__, message)
       end
 

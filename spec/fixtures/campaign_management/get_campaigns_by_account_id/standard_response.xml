@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">a5709565-28f6-4322-9d9b-08ae6bad962c</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <GetCampaignsByAccountIdResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+      <Campaigns xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <Campaign>
+          <AudienceAdsBidAdjustment i:nil="true"/>
+          <BiddingScheme i:type="MaxClicksBiddingScheme">
+            <Type>MaxClicks</Type>
+            <MaxCpc>
+              <Amount i:nil="true"/>
+            </MaxCpc>
+          </BiddingScheme>
+          <BudgetType>DailyBudgetAccelerated</BudgetType>
+          <DailyBudget>0.05</DailyBudget>
+          <Description>20200015 - 20200015 - SN - B - Activit&#xC3;&#xA9; - Stations_Service - Geoloc - ETA</Description>
+          <ForwardCompatibilityMap xmlns:a="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+          <Id>349704435</Id>
+          <Name>20200015 - 20200015 - SN - B - Activit&#xE9; - Stations_Service - Geoloc - ETA</Name>
+          <Status>Paused</Status>
+          <SubType i:nil="true"/>
+          <TimeZone>BrusselsCopenhagenMadridParis</TimeZone>
+          <TrackingUrlTemplate i:nil="true"/>
+          <UrlCustomParameters i:nil="true"/>
+          <CampaignType>Search</CampaignType>
+          <Settings i:nil="true"/>
+          <BudgetId>8177617799488</BudgetId>
+          <Languages xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true"/>
+        </Campaign>
+        <Campaign>
+          <AudienceAdsBidAdjustment i:nil="true"/>
+          <BiddingScheme i:type="MaxClicksBiddingScheme">
+            <Type>MaxClicks</Type>
+            <MaxCpc>
+              <Amount i:nil="true"/>
+            </MaxCpc>
+          </BiddingScheme>
+          <BudgetType>DailyBudgetAccelerated</BudgetType>
+          <DailyBudget>0.05</DailyBudget>
+          <Description>20200015 - 20200015 - SN - E - Produits - Stations_Service - Geoloc - ETA</Description>
+          <ForwardCompatibilityMap xmlns:a="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+          <Id>349704436</Id>
+          <Name>20200015 - 20200015 - SN - E - Produits - Stations_Service - Geoloc - ETA</Name>
+          <Status>Paused</Status>
+          <SubType i:nil="true"/>
+          <TimeZone>BrusselsCopenhagenMadridParis</TimeZone>
+          <TrackingUrlTemplate i:nil="true"/>
+          <UrlCustomParameters i:nil="true"/>
+          <CampaignType>Search</CampaignType>
+          <Settings i:nil="true"/>
+          <BudgetId>8177617799488</BudgetId>
+          <Languages xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true"/>
+        </Campaign>
+        <Campaign>
+          <AudienceAdsBidAdjustment i:nil="true"/>
+          <BiddingScheme i:type="MaxClicksBiddingScheme">
+            <Type>MaxClicks</Type>
+            <MaxCpc>
+              <Amount i:nil="true"/>
+            </MaxCpc>
+          </BiddingScheme>
+          <BudgetType>DailyBudgetAccelerated</BudgetType>
+          <DailyBudget>0.05</DailyBudget>
+          <Description>20200015 - SN - X - Station Service #1 - Geozone_custom - 5KW - V3 - ETA</Description>
+          <ForwardCompatibilityMap xmlns:a="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+          <Id>349704437</Id>
+          <Name>20200015 - SN - X - Station Service #1 - Geozone_custom - 5KW - V3 - ETA</Name>
+          <Status>Paused</Status>
+          <SubType i:nil="true"/>
+          <TimeZone>BrusselsCopenhagenMadridParis</TimeZone>
+          <TrackingUrlTemplate i:nil="true"/>
+          <UrlCustomParameters i:nil="true"/>
+          <CampaignType>Search</CampaignType>
+          <Settings i:nil="true"/>
+          <BudgetId>8177617799488</BudgetId>
+          <Languages xmlns:a="http://schemas.microsoft.com/2003/10/Serialization/Arrays" i:nil="true"/>
+        </Campaign>
+      </Campaigns>
+    </GetCampaignsByAccountIdResponse>
+  </s:Body>
+</s:Envelope>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:ns0="https://bingads.microsoft.com/CampaignManagement/v12" xmlns:ns1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ns2="https://adapi.microsoft.com" xmlns:ns3="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:ns4="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ns0:AuthenticationToken>***FILTERED***</ns0:AuthenticationToken>
+    <ns0:DeveloperToken>***FILTERED***</ns0:DeveloperToken>
+    <ns0:CustomerId>***FILTERED***</ns0:CustomerId>
+    <ns0:CustomerAccountId>***FILTERED***</ns0:CustomerAccountId>
+  </soap:Header>
+  <soap:Body>
+    <ns0:GetBulkDownloadStatusRequest>
+      <ns0:RequestId>618504973441</ns0:RequestId>
+    </ns0:GetBulkDownloadStatusRequest>
+  </soap:Body>
+</soap:Envelope>

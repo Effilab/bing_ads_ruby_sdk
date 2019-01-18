@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">791f173b-cb9b-4b9e-9a1d-c08c60ccf3b5</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <GetConversionGoalsByIdsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+      <ConversionGoals xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <ConversionGoal i:type="EventGoal">
+          <ConversionWindowInMinutes>43200</ConversionWindowInMinutes>
+          <CountType>Unique</CountType>
+          <Id>46068449</Id>
+          <Name>updated sdk test</Name>
+          <Revenue>
+            <CurrencyCode i:nil="true"/>
+            <Type>NoValue</Type>
+            <Value i:nil="true"/>
+          </Revenue>
+          <Scope>Customer</Scope>
+          <Status>Active</Status>
+          <TagId>96031109</TagId>
+          <TrackingStatus>TagUnverified</TrackingStatus>
+          <Type>Event</Type>
+          <ActionExpression>contact_form</ActionExpression>
+          <ActionOperator>Equals</ActionOperator>
+          <CategoryExpression i:nil="true"/>
+          <CategoryOperator i:nil="true"/>
+          <LabelExpression i:nil="true"/>
+          <LabelOperator i:nil="true"/>
+          <Value i:nil="true"/>
+          <ValueOperator i:nil="true"/>
+        </ConversionGoal>
+        <ConversionGoal i:type="EventGoal">
+          <ConversionWindowInMinutes>43200</ConversionWindowInMinutes>
+          <CountType>Unique</CountType>
+          <Id>46068448</Id>
+          <Name>random</Name>
+          <Revenue>
+            <CurrencyCode i:nil="true"/>
+            <Type>NoValue</Type>
+            <Value i:nil="true"/>
+          </Revenue>
+          <Scope>Customer</Scope>
+          <Status>Active</Status>
+          <TagId>96031109</TagId>
+          <TrackingStatus>TagUnverified</TrackingStatus>
+          <Type>Event</Type>
+          <ActionExpression>contact_form</ActionExpression>
+          <ActionOperator>Equals</ActionOperator>
+          <CategoryExpression i:nil="true"/>
+          <CategoryOperator i:nil="true"/>
+          <LabelExpression i:nil="true"/>
+          <LabelOperator i:nil="true"/>
+          <Value i:nil="true"/>
+          <ValueOperator i:nil="true"/>
+        </ConversionGoal>
+      </ConversionGoals>
+      <PartialErrors xmlns:i="http://www.w3.org/2001/XMLSchema-instance"/>
+    </GetConversionGoalsByIdsResponse>
+  </s:Body>
+</s:Envelope>

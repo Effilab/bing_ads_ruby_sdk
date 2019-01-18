@@ -11,10 +11,12 @@ module BingAdsRubySdk
       return message unless message_is_xml
       return message unless filters.any? || pretty_print
 
-      document = Nokogiri.XML(message)
+      document = Nokogiri::XML(message)
       document = apply_filter(document) if filters.any?
       document.to_xml(nokogiri_options)
     end
+
+    FILTERED = "***FILTERED***"
 
     private
 
@@ -36,7 +38,7 @@ module BingAdsRubySdk
 
     def apply_filter!(document, filter)
       document.xpath("//*[local-name()='#{filter}']").each do |node|
-        node.content = "***FILTERED***"
+        node.content = FILTERED
       end
     end
 

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">37faa802-0f8b-4478-9c5b-ca045a64677c</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <GetSharedEntitiesByAccountIdResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+      <SharedEntities xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <SharedEntity i:type="NegativeKeywordList">
+          <AssociationCount>0</AssociationCount>
+          <ForwardCompatibilityMap xmlns:a="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+          <Id>229798145242911</Id>
+          <Name>sdk list</Name>
+          <Type>NegativeKeywordList</Type>
+          <ItemCount>0</ItemCount>
+        </SharedEntity>
+      </SharedEntities>
+    </GetSharedEntitiesByAccountIdResponse>
+  </s:Body>
+</s:Envelope>

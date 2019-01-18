@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:ns0="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:ns1="https://adapi.microsoft.com" xmlns:ns2="https://bingads.microsoft.com/Customer/v12/Exception" xmlns:ns3="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:ns4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ns5="https://bingads.microsoft.com/Customer/v12" xmlns:ns6="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ns5:AuthenticationToken>***FILTERED***</ns5:AuthenticationToken>
+    <ns5:DeveloperToken>***FILTERED***</ns5:DeveloperToken>
+    <soap:CustomerId>***FILTERED***</soap:CustomerId>
+    <soap:CustomerAccountId>***FILTERED***</soap:CustomerAccountId>
+  </soap:Header>
+  <soap:Body>
+    <ns5:SignupCustomerRequest>
+      <ns5:Customer>
+        <ns0:Industry>NA</ns0:Industry>
+        <ns0:MarketCountry>FR</ns0:MarketCountry>
+        <ns0:MarketLanguage>French</ns0:MarketLanguage>
+        <ns0:Name>sdk customer</ns0:Name>
+        <ns0:CustomerAddress>
+          <ns0:City>Nice</ns0:City>
+          <ns0:CountryCode>FR</ns0:CountryCode>
+          <ns0:Line1>127 bd risso</ns0:Line1>
+          <ns0:PostalCode>06000</ns0:PostalCode>
+        </ns0:CustomerAddress>
+      </ns5:Customer>
+      <ns5:Account xsi:type="ns0:AdvertiserAccount">
+        <ns0:CurrencyCode>EUR</ns0:CurrencyCode>
+        <ns0:Name>SDK account</ns0:Name>
+      </ns5:Account>
+      <ns5:ParentCustomerId>9876</ns5:ParentCustomerId>
+    </ns5:SignupCustomerRequest>
+  </soap:Body>
+</soap:Envelope>

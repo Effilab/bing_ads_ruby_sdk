@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">c9ef74ca-b44b-47ef-8328-9a6d0d76e1dd</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <GetBudgetsByIdsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+      <Budgets xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <Budget>
+          <Amount>0.05</Amount>
+          <AssociationCount>3</AssociationCount>
+          <BudgetType>DailyBudgetAccelerated</BudgetType>
+          <Id>8177617799488</Id>
+          <Name>budget_DEFAULT</Name>
+        </Budget>
+      </Budgets>
+      <PartialErrors xmlns:i="http://www.w3.org/2001/XMLSchema-instance"/>
+    </GetBudgetsByIdsResponse>
+  </s:Body>
+</s:Envelope>

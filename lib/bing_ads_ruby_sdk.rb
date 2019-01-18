@@ -9,11 +9,10 @@ require 'bing_ads_ruby_sdk/string_utils'
 
 module BingAdsRubySdk
   def self.config
-    @configuration
+    @configuration ||= BingAdsRubySdk::Configuration.new
   end
 
   def self.configure
-    @configuration ||= BingAdsRubySdk::Configuration.new
     yield(config)
   end
 
@@ -57,7 +56,8 @@ def setup
   BingAdsRubySdk.configure do |conf|
     conf.log = true
     conf.logger.level = Logger::DEBUG
-    conf.filters = ["AuthenticationToken", "DeveloperToken"]
+    conf.pretty_print_xml = true
+    conf.filters = ["AuthenticationToken", "DeveloperToken", "CustomerId", "CustomerAccountId"]
   end
   @cm = @auth.customer_management
   @cp = @auth.campaign_management

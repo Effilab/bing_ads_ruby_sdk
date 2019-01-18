@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v12">a19fe953-1cb6-4012-93c3-7c4d442bb020</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <UpdateAccountResponse xmlns="https://bingads.microsoft.com/Customer/v12">
+      <LastModifiedTime>2019-01-18T13:16:38.827</LastModifiedTime>
+    </UpdateAccountResponse>
+  </s:Body>
+</s:Envelope>

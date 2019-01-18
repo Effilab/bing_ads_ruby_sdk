@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:ns0="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:ns1="https://adapi.microsoft.com" xmlns:ns2="https://bingads.microsoft.com/Customer/v12/Exception" xmlns:ns3="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:ns4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ns5="https://bingads.microsoft.com/Customer/v12" xmlns:ns6="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ns5:AuthenticationToken>***FILTERED***</ns5:AuthenticationToken>
+    <ns5:DeveloperToken>***FILTERED***</ns5:DeveloperToken>
+    <soap:CustomerId>***FILTERED***</soap:CustomerId>
+    <soap:CustomerAccountId>***FILTERED***</soap:CustomerAccountId>
+  </soap:Header>
+  <soap:Body>
+    <ns5:UpdateAccountRequest>
+      <ns5:Account xsi:type="ns0:AdvertiserAccount">
+        <ns0:CurrencyCode>EUR</ns0:CurrencyCode>
+        <ns0:Id>5678</ns0:Id>
+        <ns0:Name>SDKTEST updated</ns0:Name>
+        <ns0:TimeStamp>AAAAAE496a4=</ns0:TimeStamp>
+      </ns5:Account>
+    </ns5:UpdateAccountRequest>
+  </soap:Body>
+</soap:Envelope>

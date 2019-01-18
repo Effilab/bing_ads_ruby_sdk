@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">ac8ec6a3-9844-430c-9038-956cffb9ba68</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <AddAdExtensionsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+      <AdExtensionIdentities xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <AdExtensionIdentity>
+          <Id>8177660966625</Id>
+          <Version>1</Version>
+        </AdExtensionIdentity>
+      </AdExtensionIdentities>
+      <NestedPartialErrors xmlns:i="http://www.w3.org/2001/XMLSchema-instance"/>
+    </AddAdExtensionsResponse>
+  </s:Body>
+</s:Envelope>
