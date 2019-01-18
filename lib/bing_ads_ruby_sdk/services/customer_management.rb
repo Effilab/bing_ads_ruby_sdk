@@ -3,11 +3,11 @@ module BingAdsRubySdk
     class CustomerManagement < Base
 
       def get_account(message)
-        call_wrapper(__method__, message)
+        call(__method__, message)
       end
 
       def update_account(message)
-        call_wrapper(__method__, message)
+        call(__method__, message)
       end
 
       def find_accounts_or_customers_info(message)
@@ -15,7 +15,7 @@ module BingAdsRubySdk
       end
 
       def signup_customer(message)
-        call_wrapper(__method__, message)
+        call(__method__, message)
       end
 
       def self.service
