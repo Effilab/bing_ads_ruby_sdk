@@ -55,8 +55,8 @@ module BingAdsRubySdk
         else
           if arg_name == BingAdsRubySdk.type_key
             node.__attribute__(
-              "#{BingAdsRubySdk.xsi_namespace_key}:#{arg_name[1..-1]}",
-              WsdlOperationWrapper.prefix_and_name(lolsoap_wsdl, arg_value)
+              type_attribute_name,
+              prefixed_type_name(arg_value)
             )
           else
             node.__send__(arg_name, arg_value)
@@ -91,6 +91,14 @@ module BingAdsRubySdk
 
     def format_xml(string)
       BingAdsRubySdk::LogMessage.new(string).to_s
+    end
+
+    def type_attribute_name
+      "#{BingAdsRubySdk.xsi_namespace_key}:type"
+    end
+
+    def prefixed_type_name(typename)
+      WsdlOperationWrapper.prefix_and_name(lolsoap_wsdl, typename)
     end
 
     def path_to_wsdl(version, environment, service_name)
