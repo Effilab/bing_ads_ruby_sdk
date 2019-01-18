@@ -10,7 +10,6 @@ module BingAdsRubySdk
       @request_namespace_type = parser.operations.fetch(operation_name).fetch(:input).fetch(:body).first
     end
 
-    # element_type:
     def ordered_fields_hash(namespace_type)
       # we check types first as its the main source of data, except for the Request type which lives in elements
       if parser.types.fetch(namespace_type, nil)
