@@ -8,7 +8,7 @@ module BingAdsRubySdk
 
     def initialize(service_name:, version:, environment:, header:)
       @header = header
-      @wsdl_file_path = File.join(BingAdsRubySdk.root_path, 'lib', 'bing_ads_ruby_sdk', 'wsdl', version.to_s, environment.to_s, "#{service_name}.xml")
+      @wsdl_file_path = path_to_wsdl(version, environment, service_name)
     end
 
     def call(operation_name, message = {})
@@ -91,6 +91,18 @@ module BingAdsRubySdk
 
     def format_xml(string)
       BingAdsRubySdk::LogMessage.new(string).to_s
+    end
+
+    def path_to_wsdl(version, environment, service_name)
+      File.join(
+        BingAdsRubySdk.root_path,
+        'lib',
+        'bing_ads_ruby_sdk',
+        'wsdl',
+        version.to_s,
+        environment.to_s,
+        "#{service_name}.xml"
+      )
     end
   end
 end
