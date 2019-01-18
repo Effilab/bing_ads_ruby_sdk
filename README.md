@@ -39,10 +39,15 @@ api = BingAdsRubySdk::Api.new(
     client_id: 'your_bing_client_id'
   }
 )
-api.customer_management.find_accounts_or_customers_info(
+api.customer_management.signup_customer(params)
   filter: 'name',
   top_n: 1
 )
+
+# once you have your bing customer and account ids:
+api.set_customer({ id: customer_id, account_id: account_id })
+
+api.campaign_management.get_campaigns_by_account_id(account_id: account_id)
 ```
 
 You'll see services like `customer_management` implement some methods, but not all the one available in the API.
