@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module BingAdsRubySdk
-  # TODO: split these error classes to their own file
   module Errors
     # Base exception class for reporting API errors
     class GeneralError < ::StandardError
