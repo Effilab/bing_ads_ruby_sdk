@@ -32,12 +32,12 @@ module BingAdsRubySdk
       def ordered_value(allowed_attributes, type_name, value)
         case value
         when Hash
-          namespace_type = wrapper.namespace_and_type_from_name(allowed_attributes, type_name, value[BingAdsRubySdk.type_key])
+          namespace_type = wrapper.namespace_and_type_from_name(allowed_attributes, type_name, value[BingAdsRubySdk::SoapClient.type_key])
           process(value, namespace_type)
         when Array
           value.map do |elt|
             # I cannot think of any array of something else than Hashes yet
-            namespace_type = wrapper.namespace_and_type_from_name(allowed_attributes, type_name, elt[BingAdsRubySdk.type_key])
+            namespace_type = wrapper.namespace_and_type_from_name(allowed_attributes, type_name, elt[BingAdsRubySdk::SoapClient.type_key])
             process(elt, namespace_type)
           end
         else value

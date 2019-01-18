@@ -34,6 +34,10 @@ module BingAdsRubySdk
       WsdlOperationWrapper.new(lolsoap_parser, operation_name)
     end
 
+    def self.type_key
+      TYPE_KEY
+    end
+
     private
 
     attr_reader :client, :header
@@ -53,7 +57,7 @@ module BingAdsRubySdk
             end
           end
         else
-          if arg_name == BingAdsRubySdk.type_key
+          if arg_name == TYPE_KEY
             node.__attribute__(
               type_attribute_name,
               prefixed_type_name(arg_value)
@@ -77,7 +81,7 @@ module BingAdsRubySdk
 
     def lolsoap_client
       @lolsoap ||= LolSoap::Client.new(lolsoap_wsdl).tap do |c|
-        c.wsdl.namespaces[BingAdsRubySdk.xsi_namespace_key] = BingAdsRubySdk.xsi_namespace
+        c.wsdl.namespaces[XSI_NAMESPACE_KEY] = XSI_NAMESPACE
       end
     end
 
@@ -94,7 +98,7 @@ module BingAdsRubySdk
     end
 
     def type_attribute_name
-      "#{BingAdsRubySdk.xsi_namespace_key}:type"
+      "#{XSI_NAMESPACE_KEY}:type"
     end
 
     def prefixed_type_name(typename)
@@ -112,5 +116,9 @@ module BingAdsRubySdk
         "#{service_name}.xml"
       )
     end
+
+    TYPE_KEY = "@type"
+    XSI_NAMESPACE_KEY = "xsi"
+    XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
   end
 end
