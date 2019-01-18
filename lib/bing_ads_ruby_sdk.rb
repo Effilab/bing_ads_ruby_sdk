@@ -25,6 +25,10 @@ module BingAdsRubySdk
     XSI_NAMESPACE_KEY
   end
 
+  def self.xsi_namespace
+    XSI_NAMESPACE
+  end
+
   def self.type_key
     TYPE_KEY
   end
@@ -35,5 +39,6 @@ module BingAdsRubySdk
 
   TYPE_KEY = "@type"
   XSI_NAMESPACE_KEY = "xsi"
+  XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
   ROOT_PATH = File.join(__dir__,'..')
 end

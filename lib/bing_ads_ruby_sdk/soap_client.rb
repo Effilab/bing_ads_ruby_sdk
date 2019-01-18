@@ -38,8 +38,6 @@ module BingAdsRubySdk
 
     attr_reader :client, :header
 
-    XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
-
     def insert_args(args, node)
       args.each do |arg_name, arg_value|
         case arg_value
@@ -79,7 +77,7 @@ module BingAdsRubySdk
 
     def lolsoap_client
       @lolsoap ||= LolSoap::Client.new(lolsoap_wsdl).tap do |c|
-        c.wsdl.namespaces[BingAdsRubySdk.xsi_namespace_key] = XSI_NAMESPACE
+        c.wsdl.namespaces[BingAdsRubySdk.xsi_namespace_key] = BingAdsRubySdk.xsi_namespace
       end
     end
 
