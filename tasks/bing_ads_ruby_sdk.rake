@@ -1,13 +1,19 @@
 require 'dotenv/load'
+require 'byebug'
 
-namespace :token do
-  desc "Update test config file and store with Bing OAuth2 token"
-  task :update do
-    store = ::BingAdsRubySdk::OAuth2::FsStore.new(ENV.fetch('BING_TOKEN_NAME'))
+namespace :bing_token do
+  desc "Gets and stores Bing OAuth token in file"
+  task :get, [:filename, :bing_developer_token, :bing_client_id] do |task, args|
+
+    filename = args[:filename] || ENV.fetch('BING_STORE_FILENAME')
+    developer_token = args[:bing_developer_token] || ENV.fetch('BING_DEVELOPER_TOKEN')
+    bing_client_id = args[:bing_client_id] || ENV.fetch('BING_CLIENT_ID')
+
+    store = ::BingAdsRubySdk::OAuth2::FsStore.new(filename)
     auth = BingAdsRubySdk::OAuth2::AuthorizationHandler.new(
       {
-        developer_token: ENV.fetch('BING_DEVELOPER_TOKEN'),
-        client_id: ENV.fetch('BING_CLIENT_ID')
+        developer_token: developer_token,
+        client_id: bing_client_id
       },
       store: store
     )

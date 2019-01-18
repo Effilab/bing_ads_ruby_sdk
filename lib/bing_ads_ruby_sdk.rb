@@ -20,6 +20,7 @@ module BingAdsRubySdk
     return unless config.log
     config.logger.send(level, *args, &block)
   end
+
   def self.xsi_namespace_key
     XSI_NAMESPACE_KEY
   end
@@ -35,31 +36,4 @@ module BingAdsRubySdk
   TYPE_KEY = "@type"
   XSI_NAMESPACE_KEY = "xsi"
   ROOT_PATH = File.join(__dir__,'..')
-end
-
-def setup
-  require 'dotenv/load'
-  require 'byebug'
-
-  store = ::BingAdsRubySdk::OAuth2::FsStore.new(ENV.fetch('BING_TOKEN_NAME'))
-  @auth = BingAdsRubySdk::Api.new(
-    oauth_store: store,
-    credentials: {
-      developer_token: ENV.fetch('BING_DEVELOPER_TOKEN'),
-      client_id: ENV.fetch('BING_CLIENT_ID')
-    }
-  )
-  @auth.set_customer({
-    id: ENV.fetch('BING_CUSTOMER_ID'),
-    account_id: ENV.fetch('BING_ACCOUNT_ID')
-  })
-  BingAdsRubySdk.configure do |conf|
-    conf.log = true
-    conf.logger.level = Logger::DEBUG
-    conf.pretty_print_xml = true
-    conf.filters = ["AuthenticationToken", "DeveloperToken", "CustomerId", "CustomerAccountId"]
-  end
-  @cm = @auth.customer_management
-  @cp = @auth.campaign_management
-  @b = @auth.bulk
 end

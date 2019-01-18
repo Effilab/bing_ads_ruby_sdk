@@ -1,14 +1,4 @@
 module SpecHelpers
-
-  def self.configure_gem
-    BingAdsRubySdk.configure do |conf|
-      conf.log = true
-      conf.logger.level = Logger::DEBUG
-      conf.pretty_print_xml = true
-      conf.filters = ["AuthenticationToken", "DeveloperToken", "CustomerId", "CustomerAccountId"]
-    end
-  end
-
   def self.request_xml_for(service, action, filename)
     Nokogiri::XML(File.read(xml_path_for(service, action, filename)))
   end
@@ -49,7 +39,7 @@ module SpecHelpers
   end
 
   def self.default_store
-    ::BingAdsRubySdk::OAuth2::FsStore.new(ENV['BING_TOKEN_NAME'])
+    ::BingAdsRubySdk::OAuth2::FsStore.new(ENV['BING_STORE_FILENAME'])
   end
 
   def self.xml_path_for(service, action, filename, request = true)

@@ -13,7 +13,12 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 
-SpecHelpers.configure_gem
+BingAdsRubySdk.configure do |conf|
+  conf.log = true
+  conf.logger.level = Logger::DEBUG
+  conf.pretty_print_xml = true
+  conf.filters = ["AuthenticationToken", "DeveloperToken", "CustomerId", "CustomerAccountId"]
+end
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
