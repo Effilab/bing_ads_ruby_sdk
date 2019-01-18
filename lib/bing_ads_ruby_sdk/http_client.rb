@@ -24,7 +24,7 @@ module BingAdsRubySdk
 
         if contains_error?(raw_response)
           BingAdsRubySdk.log(:warn) { BingAdsRubySdk::LogMessage.new(raw_response.body).to_s }
-          raise BingAdsRubySdk::Errors::ServerError, raw_response
+          raise BingAdsRubySdk::Errors::ServerError, raw_response.body
         else
           BingAdsRubySdk.log(:debug) { BingAdsRubySdk::LogMessage.new(raw_response.body).to_s }
         end

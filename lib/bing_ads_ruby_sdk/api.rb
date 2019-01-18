@@ -10,8 +10,7 @@ require "bing_ads_ruby_sdk/services/customer_billing"
 require "bing_ads_ruby_sdk/services/customer_management"
 require "bing_ads_ruby_sdk/services/reporting"
 require "bing_ads_ruby_sdk/oauth2/authorization_handler"
-require "bing_ads_ruby_sdk/errors/application_fault"
-require "bing_ads_ruby_sdk/errors/server_error"
+require "bing_ads_ruby_sdk/errors/errors"
 require "bing_ads_ruby_sdk/errors/error_handler"
 
 module BingAdsRubySdk

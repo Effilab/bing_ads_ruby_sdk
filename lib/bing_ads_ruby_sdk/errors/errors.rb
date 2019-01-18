@@ -26,6 +26,12 @@ module BingAdsRubySdk
       end
     end
 
+    class ServerError < GeneralError
+      def initialize(server_error)
+        super "Server raised error #{server_error}"
+      end
+    end
+
     # Base exception class for handling errors where the detail is supplied
     class ApplicationFault < GeneralError
       def initialize(response)
