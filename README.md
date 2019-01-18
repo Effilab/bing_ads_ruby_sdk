@@ -45,6 +45,22 @@ api.customer_management.find_accounts_or_customers_info(
 )
 ```
 
+You'll see services like `customer_management` implement some methods, but not all the one available in the API.
+
+The methods implemented contain additional code to ease data manipulation but any endpoint can be reach using `call` on a service.
+
+```ruby
+@cm.call(:find_accounts_or_customers_info, filter: 'name', top_n: 1)
+# => { account_info_with_customer_data: { account_info_with_customer_data: [{ customer_id: "250364751", :
+
+# VS method dedicated to extract data
+
+@cm.find_accounts_or_customers_info(filter: 'name', top_n: 1)
+# => [{ customer_id: "250364731" ...
+
+```
+
+
 ## Configure the gem
 ```ruby
 BingAdsRubySdk.configure do |conf|
@@ -55,18 +71,6 @@ BingAdsRubySdk.configure do |conf|
   conf.filters = ["AuthenticationToken", "DeveloperToken"]
 end
 ```
-
-In `credentials.json` you should have:
-```json
-{
-  "access_token": "ABCD",
-  "refresh_token": "JT4HhmS",
-  "issued_at": "2018-03-08 14:52:04 +0100",
-  "expires_in": 3600
-}
-```
-
-Please see `spec/bing_ads_ruby_sdk/services` for a number of examples on how to use the SDK
 
 ## Development
 
