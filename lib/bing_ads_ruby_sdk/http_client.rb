@@ -33,14 +33,14 @@ module BingAdsRubySdk
       end
 
       def close_http_connections
-        self.http_connections.each do |url, connection|
+        self.http_connections.values.each do |connection|
           connection.reset
         end
       end
 
       protected
 
-      attr_accessor :http_connections
+      attr_reader :http_connections
 
       def contains_error?(response)
         HTTP_ERRORS.any? { |http_error_class| response.class <= http_error_class }
