@@ -1,16 +1,16 @@
 require 'simplecov'
-require "benchmark"
-require 'byebug'
-require 'bing_ads_ruby_sdk'
 require 'dotenv/load'
+require 'byebug'
+
+SimpleCov.start do
+  add_filter '/spec/'
+end
+
+require 'bing_ads_ruby_sdk'
 
 Dir[File.join(BingAdsRubySdk.root_path, "spec", "support", "**", "*.rb")].each { |f| require f }
 Dir[File.join(BingAdsRubySdk.root_path, "log", "*.log")].each do |log_file|
   File.open(log_file, 'w') { |f| f.truncate(0) }
-end
-
-SimpleCov.start do
-  add_filter '/spec/'
 end
 
 BingAdsRubySdk.configure do |conf|
