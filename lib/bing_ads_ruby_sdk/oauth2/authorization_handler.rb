@@ -1,8 +1,5 @@
 require 'signet/oauth_2/client'
 require 'bing_ads_ruby_sdk/oauth2/fs_store'
-# @todo see if we need to add and verify state with SecureRandom.hex(10)
-# We need the state param where we use a web UI.
-# require 'securerandom'
 
 module BingAdsRubySdk
   module OAuth2
@@ -19,18 +16,16 @@ module BingAdsRubySdk
         refresh_from_store
       end
 
-      # Get or fetch an access token.
-      # @return [String] The access token.
-      def fetch_or_refresh
-        if client.expired?
-          client.refresh!
-          store.write(token_data)
-        end
-        client.access_token
+      # @return [String] unless client.client_id url is nil interpolated url.
+      # @return [nil] if client.client_id is nil.
+      def code_url
+        return nil if client.client_id.nil?
+        "https://login.live.com/oauth20_authorize.srf?client_id=#{client.client_id}&scope=bingads.manage&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf"
       end
 
-      def fetch_from_url(url = nil)
-        return false if url.blank?
+      # Once you have completed the oauth process in your browser using the code_url
+      # copy the url your browser has been redirected to and use it as argument here
+      def fetch_from_url(url)
         codes = extract_codes(url)
 
         return false if codes.none?
@@ -39,11 +34,14 @@ module BingAdsRubySdk
         false
       end
 
-      # @return [String] unless client.client_id url is nil interpolated url.
-      # @return [nil] if client.client_id is nil.
-      def code_url
-        return nil if client.client_id.nil?
-        "https://login.live.com/oauth20_authorize.srf?client_id=#{client.client_id}&scope=bingads.manage&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf"
+      # Get or fetch an access token.
+      # @return [String] The access token.
+      def fetch_or_refresh
+        if client.expired?
+          client.refresh!
+          store.write(token_data)
+        end
+        client.access_token
       end
 
       private
