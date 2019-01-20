@@ -274,4 +274,20 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
       )
     end
   end
+
+  describe "get_shared_entity_associations_by_entity_ids" do
+    let(:action) { 'get_shared_entity_associations_by_entity_ids' }
+    let(:filename) { 'standard' }
+
+    it "returns expected result" do
+      expect(
+        service.get_shared_entity_associations_by_entity_ids({
+          entity_ids: [{ long: 349704435 }],
+          entity_type: "Campaign",
+          shared_entity_type: "NegativeKeywordList"
+      })).to eq([
+        { entity_id: "349704435", entity_type: "Campaign", shared_entity_id: "223200992903993", shared_entity_type: "NegativeKeywordList" }
+      ])
+    end
+  end
 end

@@ -32,11 +32,7 @@ module BingAdsRubySdk
 
       def call_wrapper(action, message, *response_nesting)
         response = call(action, message)
-        if response_nesting.any?
-          wrap_array(dig_response(response, response_nesting))
-        else
-          response
-        end
+        wrap_array(dig_response(response, response_nesting))
       end
 
       def preprocess(message, operation_name)
