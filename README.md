@@ -18,9 +18,9 @@ Or install it yourself as:
 
 ## Getting Started
 
-In order to use Bing's api you need to get your api credentials from bing. From there them gem handles the oauth token generation.
+In order to use Bing's api you need to get your api credentials from bing. From there gem handles the oauth token generation.
 
-By default, there is only one store in the gem to store the oauth token. It's a filesystem based store. You can create yourself to store credentials in database or wherever you desire. The store class must implement `read` and `write(data)` instance methods.
+By default, there is only one store in the gem to store the oauth token. It's a file system based store. You can create one yourself to store credentials in a database or wherever you desire. The store class must implement `read` and `write(data)` instance methods.
 
 To get your token, run:
 ```ruby
@@ -50,9 +50,9 @@ api.set_customer({ id: customer_id, account_id: account_id })
 api.campaign_management.get_campaigns_by_account_id(account_id: account_id)
 ```
 
-You'll see services like `customer_management` implement some methods, but not all the one available in the API.
+You'll see services like `customer_management` implement some methods, but not all the ones available in the API.
 
-The methods implemented contain additional code to ease data manipulation but any endpoint can be reach using `call` on a service.
+The methods implemented contain additional code to ease data manipulation but any endpoint can be reached using `call` on a service.
 
 ```ruby
 @cm.call(:find_accounts_or_customers_info, filter: 'name', top_n: 1)
