@@ -6,12 +6,11 @@ module BingAdsRubySdk
     # Adds some useful methods to Signet::OAuth2::Client
     class AuthorizationHandler
 
-      # @param config [Hash] mandatory parameters to initialize the client.
-      # @option config [Symbol] :developer_token
-      # @option config [Symbol] :client_id
+      # @param developer_token
+      # @param client_id
       # @param store [Store]
-      def initialize(config, store:)
-        @client = build_client(config)
+      def initialize(developer_token:, client_id:, store:)
+        @client = build_client(developer_token, client_id)
         @store  = store
         refresh_from_store
       end
@@ -72,12 +71,14 @@ module BingAdsRubySdk
         query_params.find { |arg| arg.first.casecmp("CODE").zero? }
       end
 
-      def build_client(config)
+      def build_client(developer_token, client_id)
         Signet::OAuth2::Client.new({
           authorization_uri:    'https://login.live.com/oauth20_authorize.srf',
           token_credential_uri: 'https://login.live.com/oauth20_token.srf',
-          redirect_uri:         'https://login.live.com/oauth20_desktop.srf'
-        }.merge(config))
+          redirect_uri:         'https://login.live.com/oauth20_desktop.srf',
+          developer_token: developer_token,
+          client_id: client_id
+        })
       end
 
       def token_data

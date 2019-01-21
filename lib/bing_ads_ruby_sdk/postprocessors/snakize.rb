@@ -14,6 +14,7 @@ module BingAdsRubySdk
 
       private
 
+      # NOTE: there is a potential for high memory usage here as we're using recursive method calling
       def process(obj)
         return obj unless obj.is_a?(Hash)
 

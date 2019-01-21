@@ -1,6 +1,11 @@
 RSpec.describe BingAdsRubySdk::Api do
   subject do
-    described_class.new(environment: :test, oauth_store: SpecHelpers.default_store)
+    described_class.new(
+      environment: :test,
+      oauth_store: SpecHelpers.default_store,
+      client_id: 'client_id',
+      developer_token: 'developer_token'
+    )
   end
 
   it { expect(subject.ad_insight).to be_a(BingAdsRubySdk::Services::AdInsight) }

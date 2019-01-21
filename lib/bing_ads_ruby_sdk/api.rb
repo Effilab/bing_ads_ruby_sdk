@@ -21,18 +21,19 @@ module BingAdsRubySdk
     # @param environment [Symbol]
     # @option environment [Symbol] :production Use the production WSDL configuration
     # @option environment [Symbol] :sandbox Use the sandbox WSDL configuration
-    # @param credentials [Hash]
-    # @option credentials [String] :developer_token The developer token used to access the API
-    # @option credentials [String] :client_id The client ID used to acces the API
+    # @param developer_token
+    # @param client_id
     def initialize(version: DEFAULT_SDK_VERSION,
                    environment: :production,
-                   oauth_store: ,
-                   credentials: {})
+                   developer_token:,
+                   client_id:,
+                   oauth_store:)
       @version = version
       @environment = environment
       @header = Header.new(
-        credentials,
-        oauth_store
+        developer_token: developer_token,
+        client_id: client_id,
+        store: oauth_store
       )
     end
 
@@ -60,11 +61,10 @@ module BingAdsRubySdk
       build_service(BingAdsRubySdk::Services::Reporting)
     end
 
-    # @param config [Hash] shared soap header customer parameters
-    # @option config [Symbol] :id customer id
-    # @option config [Symbol] :account_id customer account_id
-    def set_customer(config)
-      header.set_customer(account_id: config.fetch(:account_id), id: config.fetch(:id))
+    # @param account_id
+    # @param customer_id
+    def set_customer(account_id:, customer_id:)
+      header.set_customer(account_id: account_id, customer_id: customer_id)
     end
 
     private

@@ -34,10 +34,8 @@ Then to use the api:
 store = ::BingAdsRubySdk::OAuth2::FsStore.new('my_token.json')
 api = BingAdsRubySdk::Api.new(
   oauth_store: store,
-  credentials: {
-    developer_token: 'your_dev_token',
-    client_id: 'your_bing_client_id'
-  }
+  developer_token: 'your_dev_token',
+  client_id: 'your_bing_client_id'
 )
 api.customer_management.signup_customer(params)
   filter: 'name',
@@ -45,7 +43,7 @@ api.customer_management.signup_customer(params)
 )
 
 # once you have your bing customer and account ids:
-api.set_customer({ id: customer_id, account_id: account_id })
+api.set_customer(customer_id: customer_id, account_id: account_id )
 
 api.campaign_management.get_campaigns_by_account_id(account_id: account_id)
 ```

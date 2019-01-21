@@ -18,6 +18,8 @@ module BingAdsRubySdk
         @message = format_message(code, message)
       end
 
+      private
+
       # Format the message separated by hyphen if
       # there is a code and a message
       def format_message(code, message)
@@ -116,6 +118,9 @@ module BingAdsRubySdk
 
     # Base class for handling partial errors
     class PartialErrorBase < ApplicationFault
+
+      private
+
       # The parent hash for this type of error is the root of the response
       def fault_hash
         raw_response[fault_key] || {}
@@ -134,6 +139,7 @@ module BingAdsRubySdk
     class PartialError < PartialErrorBase
       define_error_lists :batch_error
 
+      private
       def fault_key
         :partial_errors
       end
@@ -142,6 +148,7 @@ module BingAdsRubySdk
     class NestedPartialError < PartialErrorBase
       define_error_lists :batch_error_collection
 
+      private
       def fault_key
         :nested_partial_errors
       end

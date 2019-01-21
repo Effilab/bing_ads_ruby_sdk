@@ -17,6 +17,7 @@ module BingAdsRubySdk
 
       attr_reader :wrapper, :params
 
+      # NOTE: there is a potential for high memory usage here as we're using recursive method calling
       def process(obj, namespace_type)
         return obj unless obj.is_a?(Hash)
 
