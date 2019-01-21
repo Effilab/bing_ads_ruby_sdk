@@ -1,0 +1,25 @@
+For the records and future maintenance, here are the urls where we got the wsdl files:
+
+PRODUCTION:
+  ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v12/AdInsightService.svc?singleWsdl
+  bulk:                https://bulk.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v12/BulkService.svc?singleWsdl
+  campaign_management: https://campaign.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v12/CampaignManagementService.svc?singleWsdl
+  customer_billing:    https://clientcenter.api.bingads.microsoft.com/Api/Billing/v12/CustomerBillingService.svc?singleWsdl
+  customer_management: https://clientcenter.api.bingads.microsoft.com/Api/CustomerManagement/v12/CustomerManagementService.svc?singleWsdl
+  reporting:           https://reporting.api.bingads.microsoft.com/Api/Advertiser/Reporting/v12/ReportingService.svc?singleWsdl
+
+SANDBOX:
+  ad_insight:          https://adinsight.api.sandbox.bingads.microsoft.com/Api/Advertiser/AdInsight/v12/AdInsightService.svc?singleWsdl
+  bulk:                https://bulk.api.sandbox.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v12/BulkService.svc?singleWsdl
+  campaign_management: https://campaign.api.sandbox.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v12/CampaignManagementService.svc?singleWsdl
+  customer_billing:    https://clientcenter.api.sandbox.bingads.microsoft.com/Api/Billing/v12/CustomerBillingService.svc?singleWsdl
+  customer_management: https://clientcenter.api.sandbox.bingads.microsoft.com/Api/CustomerManagement/v12/CustomerManagementService.svc?singleWsdl
+  reporting:           https://reporting.api.sandbox.bingads.microsoft.com/Api/Advertiser/Reporting/v12/ReportingService.svc?singleWsdl
+
+TEST:
+  ad_insight:          https://adinsight.api.bingads.microsoft.com/Api/Advertiser/AdInsight/v12/AdInsightService.svc?singleWsdl
+  bulk:                https://bulk.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v12/BulkService.svc?singleWsdl
+  campaign_management: https://campaign.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/v12/CampaignManagementService.svc?singleWsdl
+  customer_billing:    https://clientcenter.api.bingads.microsoft.com/Api/Billing/v12/CustomerBillingService.svc?singleWsdl
+  customer_management: https://clientcenter.api.bingads.microsoft.com/Api/CustomerManagement/v12/CustomerManagementService.svc?singleWsdl
+  reporting:           https://reporting.api.bingads.microsoft.com/Api/Advertiser/Reporting/v12/ReportingService.svc?singleWsdl
