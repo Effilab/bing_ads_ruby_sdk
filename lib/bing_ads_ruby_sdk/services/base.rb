@@ -3,6 +3,8 @@
 require 'bing_ads_ruby_sdk/preprocessors/camelize'
 require 'bing_ads_ruby_sdk/preprocessors/order'
 require 'bing_ads_ruby_sdk/postprocessors/snakize'
+require 'bing_ads_ruby_sdk/postprocessors/cast_long_arrays'
+
 
 module BingAdsRubySdk
   module Services
@@ -42,7 +44,9 @@ module BingAdsRubySdk
       end
 
       def postprocess(message)
-        snakize(message)
+        cast_long_arrays(
+          snakize(message)
+        )
       end
 
       def order(wrapper, hash)
@@ -55,6 +59,10 @@ module BingAdsRubySdk
 
       def snakize(hash)
         ::BingAdsRubySdk::Postprocessors::Snakize.new(hash).call
+      end
+
+      def cast_long_arrays(hash)
+        ::BingAdsRubySdk::Postprocessors::CastLongArrays.new(hash).call
       end
 
       def dig_response(response, keys)

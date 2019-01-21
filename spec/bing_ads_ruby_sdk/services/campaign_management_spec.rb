@@ -105,7 +105,7 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
             tag_id: 96031109
           }
       }])).to eq({
-        conversion_goal_ids:{ long: [ '46068449' ] },
+        conversion_goal_ids: [46068449],
         partial_errors: ""
       })
     end
@@ -193,7 +193,7 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
           ad_extension_type: "CallAdExtension SitelinkAdExtension CalloutAdExtension"
         )
       ).to eq([
-        { long: [ '8177660966625'] }
+        8177660966625
       ])
     end
   end
