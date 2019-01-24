@@ -83,8 +83,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
     let(:unordered_params) {{
       "ConversionGoals" => [
         {
-          "ConversionGoal" => {
-            "@type" => "EventGoal",
+          "EventGoal" => {
             "ActionExpression" => 'contact_form',
             "ActionOperator" => 'Equals',
             "ConversionWindowInMinutes" => 43200,
@@ -101,7 +100,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
     let(:ordered_params) {{
       "ConversionGoals" => [
         {
-          "ConversionGoal" => {
+          "EventGoal" => {
             "ConversionWindowInMinutes" => 43200,
             "CountType" => "Unique",
             "Name" => "contact_form",
@@ -110,7 +109,6 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
             "Type" => "Event",
             "ActionExpression" => 'contact_form',
             "ActionOperator" => 'Equals',
-            "@type" => "EventGoal"
           }
         }
       ]

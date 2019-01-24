@@ -18,7 +18,6 @@
             <ns0:Type>NoValue</ns0:Type>
           </ns0:Revenue>
           <ns0:TagId>96031109</ns0:TagId>
-          <ns0:Type>Event</ns0:Type>
           <ns0:ActionExpression>contact_form</ns0:ActionExpression>
           <ns0:ActionOperator>Equals</ns0:ActionOperator>
         </ns0:ConversionGoal>

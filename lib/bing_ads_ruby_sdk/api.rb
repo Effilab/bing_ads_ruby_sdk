@@ -61,8 +61,6 @@ module BingAdsRubySdk
       build_service(BingAdsRubySdk::Services::Reporting)
     end
 
-    # @param account_id
-    # @param customer_id
     def set_customer(account_id:, customer_id:)
       header.set_customer(account_id: account_id, customer_id: customer_id)
     end

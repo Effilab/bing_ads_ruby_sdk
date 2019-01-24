@@ -39,7 +39,7 @@ module BingAdsRubySdk
         BingAdsRubySdk::StringUtils.camelize(string)
       end
 
-      BLACKLIST = %w(long)
+      BLACKLIST = %w(long string)
     end
   end
 end

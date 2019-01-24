@@ -23,7 +23,7 @@ module BingAdsRubySdk
 
         allowed_attributes = wrapper.ordered_fields_hash(namespace_type)
 
-        order(obj, allowed_attributes.keys).tap do |ordered_hash|
+        order(obj, allowed_attributes).tap do |ordered_hash|
           ordered_hash.each do |type_name, value|
             ordered_hash[type_name] = ordered_value(allowed_attributes, type_name, value)
           end
@@ -33,12 +33,11 @@ module BingAdsRubySdk
       def ordered_value(allowed_attributes, type_name, value)
         case value
         when Hash
-          namespace_type = wrapper.namespace_and_type_from_name(allowed_attributes, type_name, value[BingAdsRubySdk::SoapClient.type_key])
+          namespace_type = wrapper.namespace_and_type_from_name(allowed_attributes, type_name)
           process(value, namespace_type)
         when Array
           value.map do |elt|
-            # I cannot think of any array of something else than Hashes yet
-            namespace_type = wrapper.namespace_and_type_from_name(allowed_attributes, type_name, elt[BingAdsRubySdk::SoapClient.type_key])
+            namespace_type = wrapper.namespace_and_type_from_name(allowed_attributes, type_name)
             process(elt, namespace_type)
           end
         else value
@@ -49,9 +48,10 @@ module BingAdsRubySdk
         wrapper.ordered_fields_hash(namespace_type)
       end
 
-      def order(hash, array)
+      def order(hash, allowed_attributes)
+        array = allowed_attributes.keys
         # basically order by index in reference array
-        Hash[ hash.sort_by { |k, _| array.index(k) || k.ord } ]
+        Hash[ hash.sort_by { |k, _| array.index(wrapper.base_type_name(allowed_attributes, k)) || k.ord } ]
       end
     end
   end

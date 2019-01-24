@@ -93,8 +93,7 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
     it "returns expected result" do
       expect(
         service.add_conversion_goals(conversion_goals: [{
-          conversion_goal: {
-            '@type' => 'EventGoal',
+          event_goal: {
             action_expression: 'contact_form',
             action_operator: 'Equals',
             conversion_window_in_minutes: 43200,
@@ -118,8 +117,7 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
     it "returns expected result" do
       expect(
         service.update_conversion_goals(conversion_goals: [{
-          conversion_goal: {
-            '@type' => 'EventGoal',
+          event_goal: {
             id: 46068449,
             action_expression: 'contact_form',
             action_operator: 'Equals',
@@ -127,7 +125,6 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
             count_type: "Unique",
             name: "updated sdk test",
             revenue: { "type": "NoValue" },
-            type: "Event",
             tag_id: 96031109
           }
       }])).to eq({
@@ -163,8 +160,7 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
           account_id: 150168726,
           ad_extensions: [
             {
-              ad_extension: {
-                '@type' => 'CallAdExtension',
+              call_ad_extension: {
                 scheduling: {},
                 country_code: "NZ",
                 phone_number: "0123456699",
@@ -249,8 +245,7 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
     it "returns expected result" do
       expect(
         service.add_shared_entity(
-          shared_entity: {
-            '@type' => 'NegativeKeywordList',
+          negative_keyword_list: {
             name: 'sdk list'
           }
       )).to eq({

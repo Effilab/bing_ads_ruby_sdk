@@ -25,5 +25,10 @@ module BingAdsRubySdk
     ROOT_PATH
   end
 
+  def self.type_key
+    TYPE_KEY
+  end
+
+  TYPE_KEY = '@type'
   ROOT_PATH = File.join(__dir__,'..')
 end

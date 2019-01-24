@@ -26,16 +26,8 @@ module SpecHelpers
     )
   end
 
-  def self.wrapper(wsdl_name, action_name)
-    BingAdsRubySdk::WsdlOperationWrapper.new(parser(wsdl_name), action_name)
-  end
-
-  def self.parser(name)
-    LolSoap::WSDLParser.parse(File.read(wsdl_path(name)))
-  end
-
-  def self.wsdl_path(name)
-    File.join(BingAdsRubySdk.root_path, 'lib', 'bing_ads_ruby_sdk', 'wsdl', BingAdsRubySdk::DEFAULT_SDK_VERSION.to_s, 'test', "#{name}.xml")
+  def self.wrapper(service, action_name)
+    soap_client(service).wsdl_wrapper(action_name)
   end
 
   def self.default_store

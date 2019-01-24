@@ -35,7 +35,7 @@ RSpec.describe BingAdsRubySdk::Services::CustomerManagement do
             }
           },
           account: {
-            '@type' => "AdvertiserAccount",
+            '@type' => 'AdvertiserAccount',
             currency_code: "EUR",
             name: 'SDK account'
           }

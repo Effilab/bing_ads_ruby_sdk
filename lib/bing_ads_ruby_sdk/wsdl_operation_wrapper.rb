@@ -19,14 +19,13 @@ module BingAdsRubySdk
       end
     end
 
-    def namespace_and_type_from_name(all_attributes, type_name, real_type_name)
-      namespace_type = all_attributes.fetch(type_name).fetch(:type)
-      if real_type_name
-        # we need to get the namespace, then use the real_type_name
-        [namespace_type.first, real_type_name]
-      else
-        namespace_type
-      end
+    def namespace_and_type_from_name(all_attributes, type_name)
+      all_attributes.fetch(type_name).fetch(:type)
+    end
+
+    def base_type_name(elements, type_name)
+      return nil if type_name == BingAdsRubySdk.type_key
+      elements.fetch(type_name).fetch(:base_type_name, type_name)
     end
 
     def self.prefix_and_name(wsdl, type_name)

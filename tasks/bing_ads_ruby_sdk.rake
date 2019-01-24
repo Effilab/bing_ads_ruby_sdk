@@ -1,5 +1,4 @@
 require 'dotenv/load'
-require 'byebug'
 
 namespace :bing_token do
   desc "Gets and stores Bing OAuth token in file"
