@@ -22,7 +22,6 @@ RSpec.describe 'CustomerManagement service' do
       },
       parent_customer_id: Examples.parent_customer_id
     )
-    byebug
     expect(created_customer).to include(
       customer_id: a_kind_of(String),
       customer_number: a_kind_of(String),
