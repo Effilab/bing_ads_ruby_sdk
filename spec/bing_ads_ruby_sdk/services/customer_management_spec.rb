@@ -34,6 +34,7 @@ RSpec.describe BingAdsRubySdk::Services::CustomerManagement do
               postal_code: "06000"
             }
           },
+          # Note that the structure of this type is slightly different to other types, in accord with the Bing WSDL
           account: {
             '@type' => 'AdvertiserAccount',
             currency_code: "EUR",
