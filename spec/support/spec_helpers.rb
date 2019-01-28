@@ -34,6 +34,7 @@ module SpecHelpers
     ::BingAdsRubySdk::OAuth2::FsStore.new(ENV['BING_STORE_FILENAME'])
   end
 
+  # default ficture for now is stabndard.xml but door is open to get more usecases
   def self.xml_path_for(service, action, filename, request = true)
     if request
       File.join(BingAdsRubySdk.root_path, 'spec', 'fixtures', service.to_s, action, "#{filename}.xml")
