@@ -1,26 +1,17 @@
-require 'fixtures'
-
-module BingAdsRubySdk
-  RSpec.describe Api do
-    subject do
-      described_class.new(environment: :test)
-    end
-
-    it { expect(subject.campaign_management).to be_instance_of(BingAdsRubySdk::Service) }
-    it { expect(subject.campaign_management).to respond_to(:add_ads) }
-
-    describe '.header' do
-      it { expect(subject.header).to be_instance_of(BingAdsRubySdk::Header) }
-
-      describe '.content' do
-        it 'inits properly so the content is available' do
-          expect(subject.header.content).to be_a(Hash)
-        end
-      end
-    end
-
-    describe '.customer' do
-      it { expect(subject).to respond_to(:customer) }
-    end
+RSpec.describe BingAdsRubySdk::Api do
+  subject do
+    described_class.new(
+      environment: :test,
+      oauth_store: SpecHelpers.default_store,
+      client_id: 'client_id',
+      developer_token: 'developer_token'
+    )
   end
+
+  it { expect(subject.ad_insight).to be_a(BingAdsRubySdk::Services::AdInsight) }
+  it { expect(subject.bulk).to be_a(BingAdsRubySdk::Services::Bulk) }
+  it { expect(subject.campaign_management).to be_a(BingAdsRubySdk::Services::CampaignManagement) }
+  it { expect(subject.customer_billing).to be_a(BingAdsRubySdk::Services::CustomerBilling) }
+  it { expect(subject.customer_management).to be_a(BingAdsRubySdk::Services::CustomerManagement) }
+  it { expect(subject.reporting).to be_a(BingAdsRubySdk::Services::Reporting) }
 end

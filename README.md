@@ -5,9 +5,6 @@
 Add the following to your application's Gemfile:
 
 ```ruby
-# You currently need to use this version of lolsoap:
-gem 'lolsoap', github: 'effilab/lolsoap', branch: 'edge'
-
 gem 'bing_ads_ruby_sdk'
 ```
 
@@ -19,127 +16,76 @@ Or install it yourself as:
 
     $ gem install bing_ads_ruby_sdk
 
-## Usage
-### Configure the app
+## Getting Started
+
+In order to use Bing's api you need to get your api credentials from bing. From there gem handles the oauth token generation.
+
+By default, there is only one store in the gem to store the oauth token. It's a file system based store. You can create one yourself to store credentials in a database or wherever you desire. The store class must implement `read` and `write(data)` instance methods.
+
+To get your token, run:
 ```ruby
-BingAdsRubySdk.logger.level = :debug
+rake bing_token:get[my_token.json,your_dev_token,your_bing_client_id]
 
-# This is optionnal, if you already have a token,
-# You can set a file directly to the store:
-BingAdsRubySdk::OAuth2::FsStore.config = "credentials.json"
-
-@api ||= BingAdsRubySdk::Api.new(
-  oauth_store: BingAdsRubySdk::OAuth2::FsStore,
-  credentials: {
-    developer_token: '123abc',
-    client_id:       '1a-2b-3c'
-  }
-).tap do |api|
-  api.customer(
-    id:         123,
-    account_id: 456
-  )
-end
 ```
 
-In `credentials.json` you should have:
-```json
-{
-  "access_token": "ABCD",
-  "refresh_token": "JT4HhmS",
-  "issued_at": "2018-03-08 14:52:04 +0100",
-  "expires_in": 3600
-}
+
+Then to use the api:
+```ruby
+store = ::BingAdsRubySdk::OAuth2::FsStore.new('my_token.json')
+api = BingAdsRubySdk::Api.new(
+  oauth_store: store,
+  developer_token: 'your_dev_token',
+  client_id: 'your_bing_client_id'
+)
+api.customer_management.signup_customer(params)
+  filter: 'name',
+  top_n: 1
+)
+
+# once you have your bing customer and account ids:
+api.set_customer(customer_id: customer_id, account_id: account_id )
+
+api.campaign_management.get_campaigns_by_account_id(account_id: account_id)
 ```
 
-You should provide a replacement for the `BingAdsRubySdk::OAuth2::FsStore` OAuth token store (oauth_store) when initialising the BingAdsRubySdk::Api class. All you need to know should be in the gem documentation.
+You'll see services like `customer_management` implement some methods, but not all the ones available in the API.
 
-You can use the RedisStore this way:
-
+The methods implemented contain additional code to ease data manipulation but any endpoint can be reached using `call` on a service.
 
 ```ruby
-BingAdsRubySdk.logger.level = :debug
+@cm.call(:find_accounts_or_customers_info, filter: 'name', top_n: 1)
+# => { account_info_with_customer_data: { account_info_with_customer_data: [{ customer_id: "250364751", :
 
-# Set the Redis connection
-$redis = Redis.new
-BingAdsRubySdk::OAuth2::Store::RedisStore.redis = $redis
+# VS method dedicated to extract data
 
-@api ||= BingAdsRubySdk::Api.new(
-  oauth_store: BingAdsRubySdk::OAuth2::Store::RedisStore,
-  credentials: {
-    developer_token: '123abc',
-    client_id:       '1a-2b-3c'
-  }
-).tap do |api|
-  api.customer(
-    id:         123,
-    account_id: 456
-  )
+@cm.find_accounts_or_customers_info(filter: 'name', top_n: 1)
+# => [{ customer_id: "250364731" ...
+
+```
+
+
+## Configure the gem
+```ruby
+BingAdsRubySdk.configure do |conf|
+  conf.log = true
+  conf.logger.level = Logger::DEBUG
+  conf.pretty_print_xml = true
+  # to filter sensitive data before logging
+  conf.filters = ["AuthenticationToken", "DeveloperToken"]
 end
-```
-
-
-
-Please see `spec/examples/` for a number of examples on how to use the SDK
-
-### Bootsrap Authorization code flow
-Before you can connect to the Bing Ads API you need to make an authentication
-token available to the SDK. Here's how to do it:
-
-* Follow Bing Ads documentation to setup a native app
-  * https://msdn.microsoft.com/en-us/library/bing-ads-user-authentication-oauth-guide(v=msads.100).aspx
-
-* Run the token generator and follow the instructions
-
-```
-$ bing_ads_token_from_code
-
-$ cat .token* # Should output something like this: {"access_token":"....
 ```
 
 ## Development
 
-### Generate the cache
-Add the gem tasks in your project Rakefile
-
-```ruby
-import 'tasks/bing_ads_ruby_sdk.rake'
-```
-
-```shell
-bundle exec rake -T
-rake bars:cache:build  # Build cache
-rake bars:cache:check  # Check cache
-rake bars:cache:clear  # Clear cache
-rake bars:cache:reset  # Reset cache : clear, build and check
-```
-The safest thing to do is to reset the cache.
+### Updating to a new Bing API version
+Bing regularly releases new versions of the API and removes support for old versions.
+When you want to support a new version of the API, here are some of the things that
+need to be changed:
+* Go to https://docs.microsoft.com/en-us/bingads/guides/migration-guide to see what has changed
+* Set the default SDK version in lib/bing_ads_ruby_sdk/version.rb
 
 ### Specs
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`.
-
-You can run tests using the following : `bundle exec rake`
-
-If you wish to run full example tests please understand that this will pollute
-any account that you use, so perhaps it would be best not to use an account with
-payment information attached.
-
-Currently the credentials are accessed by the example tests using environment
-variables so you will need to set these first. This could be achieved using
-[Direnv](https://direnv.net/), or `source my_exports.sh`, or just exporting values at the command line.
-
-Here is an example:
-```
-export ACCEPTANCE_CUSTOMER_ID=<YOUR CUSTOMER ID>
-export ACCEPTANCE_ACCOUNT_ID=<YOUR ACCOUNT ID>
-export ACCEPTANCE_USER_ID=<YOUR USER ID>
-export ACCEPTANCE_DEVELOPER_TOKEN=<YOUR DEVELOPER TOKEN>
-export ACCEPTANCE_CLIENT_ID=<YOUR CLIENT ID>
-
-bundle exec rspec spec/examples
-```
 
 To release a new version, update the version number in `version.rb`, and then run
 `bundle exec rake release`, which will create a git tag for the version, push git

@@ -1,39 +1,37 @@
-module BingAdsRubySdk
-  RSpec.describe Header do
-    let(:token) do
-      double.tap do |token|
-        allow(token).to receive(:fetch_or_refresh) { 'yes/we/can' }
-      end
-    end
+RSpec.describe BingAdsRubySdk::Header do
+  let(:oauth_store) { double(:oauth_store) }
+  let(:subject) { described_class.new(developer_token: '123abc', client_id: '1a-2b-3c', store: oauth_store) }
+  let(:auth_handler) do
+    double(:auth_handler, fetch_or_refresh: 'yes/we/can')
+  end
 
-    let(:subject) do
-      described_class.new(
-        { developer_token: '123abc',
-          client_id:       '1a-2b-3c' },
-        token
+  before do
+    expect(::BingAdsRubySdk::OAuth2::AuthorizationHandler).to receive(:new).with(
+      developer_token: '123abc',
+      client_id: '1a-2b-3c',
+      store: oauth_store
+    ).and_return auth_handler
+  end
+
+  describe '.content' do
+    it do
+      expect(subject.content).to eq(
+        "AuthenticationToken" => 'yes/we/can',
+        "DeveloperToken" =>      '123abc',
+        "CustomerId" =>          nil,
+        "CustomerAccountId" =>   nil
       )
     end
 
-    describe '.content' do
-      it do
-        expect(subject.content).to eq(
-          authentication_token: 'yes/we/can',
-          developer_token:      '123abc',
-          customer_id:          nil,
-          customer_account_id:  nil
-        )
-      end
+    it 'sets customer' do
+      subject.set_customer(customer_id: 777, account_id: 666 )
 
-      it 'sets customer' do
-        subject.customer = { id: 777, account_id: 666 }
-
-        expect(subject.content).to eq(
-          authentication_token: 'yes/we/can',
-          developer_token:      '123abc',
-          customer_id:          777,
-          customer_account_id:  666
-        )
-      end
+      expect(subject.content).to eq(
+        "AuthenticationToken" => 'yes/we/can',
+        "DeveloperToken" =>      '123abc',
+        "CustomerId" =>          777,
+        "CustomerAccountId" =>   666
+      )
     end
   end
 end

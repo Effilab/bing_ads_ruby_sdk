@@ -1,68 +1,80 @@
 # frozen_string_literal: true
 
-require "lolsoap"
-require "bing_ads_ruby_sdk/soap_callback_manager"
-require "bing_ads_ruby_sdk/service"
 require "bing_ads_ruby_sdk/header"
-require "bing_ads_ruby_sdk/configuration"
-require "bing_ads_ruby_sdk/oauth2/authorization_code"
-require "bing_ads_ruby_sdk/errors/application_fault"
-require "bing_ads_ruby_sdk/errors/server_error"
+require "bing_ads_ruby_sdk/soap_client"
+require "bing_ads_ruby_sdk/services/base"
+require "bing_ads_ruby_sdk/services/ad_insight"
+require "bing_ads_ruby_sdk/services/bulk"
+require "bing_ads_ruby_sdk/services/campaign_management"
+require "bing_ads_ruby_sdk/services/customer_billing"
+require "bing_ads_ruby_sdk/services/customer_management"
+require "bing_ads_ruby_sdk/services/reporting"
+require "bing_ads_ruby_sdk/oauth2/authorization_handler"
+require "bing_ads_ruby_sdk/errors/errors"
 require "bing_ads_ruby_sdk/errors/error_handler"
 
 module BingAdsRubySdk
-  SoapCallbackManager.register_callbacks
-
   class Api
-    attr_reader :header, :config
-
-    # @param config [Hash] shared soap header customer parameters
-    # @option config [Symbol] :id customer id
-    # @option config [Symbol] :account_id customer account_id
-    def customer(config)
-      header.customer = config
-    end
+    attr_reader :header
 
     # @param version [Symbol] API version, used to choose WSDL configuration version
     # @param environment [Symbol]
     # @option environment [Symbol] :production Use the production WSDL configuration
     # @option environment [Symbol] :sandbox Use the sandbox WSDL configuration
-    # @param credentials [Hash]
-    # @option credentials [String] :developer_token The developer token used to access the API
-    # @option credentials [String] :client_id The client ID used to acces the API
-    def initialize(version: :v11,
+    # @param developer_token
+    # @param client_id
+    def initialize(version: DEFAULT_SDK_VERSION,
                    environment: :production,
-                   oauth_store: OAuth2::Store::FsStore,
-                   credentials: {})
-      @config = Configuration.new(version: version, environment: environment)
-      @token  = token(credentials, oauth_store)
-      @header = Header.new(credentials, @token)
-      # Get the URLs for the WSDL that defines the services on the API
-      # Create services accessors and objects from each named wsdl
-      build_services
+                   developer_token:,
+                   client_id:,
+                   oauth_store:)
+      @version = version
+      @environment = environment
+      @header = Header.new(
+        developer_token: developer_token,
+        client_id: client_id,
+        store: oauth_store
+      )
+    end
+
+    def ad_insight
+      build_service(BingAdsRubySdk::Services::AdInsight)
+    end
+
+    def bulk
+      build_service(BingAdsRubySdk::Services::Bulk)
+    end
+
+    def campaign_management
+      build_service(BingAdsRubySdk::Services::CampaignManagement)
+    end
+
+    def customer_billing
+      build_service(BingAdsRubySdk::Services::CustomerBilling)
+    end
+
+    def customer_management
+      build_service(BingAdsRubySdk::Services::CustomerManagement)
+    end
+
+    def reporting
+      build_service(BingAdsRubySdk::Services::Reporting)
+    end
+
+    def set_customer(account_id:, customer_id:)
+      header.set_customer(account_id: account_id, customer_id: customer_id)
     end
 
     private
 
-    def build_services
-      config.services.each_key do |serv|
-        BingAdsRubySdk.logger.debug("Defining service #{serv} accessors")
-        self.class.send(:attr_reader, serv)
-        client = config.cached(serv)
-        instance_variable_set(
-          "@#{serv}",
-          Service.new(client, header)
+    def build_service(klass)
+      klass.new(
+        BingAdsRubySdk::SoapClient.new(
+          version: @version,
+          environment: @environment,
+          header: header,
+          service_name: klass.service
         )
-      end
-    end
-
-    def token(credentials, store)
-      OAuth2::AuthorizationCode.new(
-        {
-          developer_token: credentials[:developer_token],
-          client_id:       credentials[:client_id],
-        },
-        { store: store }
       )
     end
   end

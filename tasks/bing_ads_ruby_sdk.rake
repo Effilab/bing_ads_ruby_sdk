@@ -1,29 +1,28 @@
-require 'bing_ads_ruby_sdk/cache'
+require 'dotenv/load'
 
-BingAdsRubySdk.logger.formatter = proc do |severity, datetime, progname, msg|
-  "#{severity} #{datetime} #{progname} #{msg}".tap do |line|
-    puts nil, line
-  end
-end
+namespace :bing_token do
+  desc "Gets and stores Bing OAuth token in file"
+  task :get, [:filename, :bing_developer_token, :bing_client_id] do |task, args|
 
-namespace :bars do
-  namespace :cache do
-    desc 'Build cache'
-    task :build do
-      BingAdsRubySdk::Cache.build
-    end
+    filename = args[:filename] || ENV.fetch('BING_STORE_FILENAME')
+    developer_token = args[:bing_developer_token] || ENV.fetch('BING_DEVELOPER_TOKEN')
+    bing_client_id = args[:bing_client_id] || ENV.fetch('BING_CLIENT_ID')
 
-    desc 'Check cache'
-    task :check do
-      BingAdsRubySdk::Cache.check
-    end
+    store = ::BingAdsRubySdk::OAuth2::FsStore.new(filename)
+    auth = BingAdsRubySdk::OAuth2::AuthorizationHandler.new(
+      {
+        developer_token: developer_token,
+        client_id: bing_client_id
+      },
+      store: store
+    )
 
-    desc 'Clear cache'
-    task :clear do
-      BingAdsRubySdk::Cache.clear
-    end
+    puts "Go to #{auth.code_url}",
+         "You will be redirected to a URL at the end. Paste it here in the console and press enter"
 
-    desc 'Reset cache : clear, build and check'
-    task reset: %i[clear build check]
+    full_url = STDIN.gets.chomp
+    auth.fetch_from_url(full_url)
+
+    puts "Written to store"
   end
 end

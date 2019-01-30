@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">2566fd81-b382-4b58-b62b-bd2d5184e15e</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <GetUetTagsByIdsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+      <UetTags xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <UetTag>
+          <Description/>
+          <Id>96031109</Id>
+          <Name>updated SDK-test</Name>
+          <TrackingNoScript>&lt;img src="//bat.bing.com/action/0?ti=96031109&amp;Ver=2" height="0" width="0" style="display:none; visibility: hidden;" /&gt;</TrackingNoScript>
+          <TrackingScript>&lt;script&gt;(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"96031109"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&amp;&amp;s!=="loaded"&amp;&amp;s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");&lt;/script&gt;&lt;noscript&gt;&lt;img src="//bat.bing.com/action/0?ti=96031109&amp;Ver=2" height="0" width="0" style="display:none; visibility: hidden;" /&gt;&lt;/noscript&gt;</TrackingScript>
+          <TrackingStatus>Unverified</TrackingStatus>
+        </UetTag>
+      </UetTags>
+      <PartialErrors xmlns:i="http://www.w3.org/2001/XMLSchema-instance"/>
+    </GetUetTagsByIdsResponse>
+  </s:Body>
+</s:Envelope>

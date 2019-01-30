@@ -7,9 +7,11 @@
 /pkg/
 /spec/reports/
 /tmp/
-
+/log/*
 # rspec failure tracking
 .rspec_status
 .token_*
 
 .byebug_history
+.env
+custom_setup.rb

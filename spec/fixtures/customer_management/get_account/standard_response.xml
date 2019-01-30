@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v12">17caa13f-9073-43f9-83fd-347bc3f44a26</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <GetAccountResponse xmlns="https://bingads.microsoft.com/Customer/v12">
+      <Account xmlns:a="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <a:BillToCustomerId>168403565</a:BillToCustomerId>
+        <a:CurrencyCode>EUR</a:CurrencyCode>
+        <a:AccountFinancialStatus>ClearFinancialStatus</a:AccountFinancialStatus>
+        <a:Id>5678</a:Id>
+        <a:Language>English</a:Language>
+        <a:LastModifiedByUserId>131003009</a:LastModifiedByUserId>
+        <a:LastModifiedTime>2019-01-16T14:39:45.443</a:LastModifiedTime>
+        <a:Name>SDKTEST</a:Name>
+        <a:Number>F1194A36</a:Number>
+        <a:ParentCustomerId>9876</a:ParentCustomerId>
+        <a:PaymentMethodId>131001762</a:PaymentMethodId>
+        <a:PaymentMethodType i:nil="true"/>
+        <a:PrimaryUserId>131003009</a:PrimaryUserId>
+        <a:AccountLifeCycleStatus>Active</a:AccountLifeCycleStatus>
+        <a:TimeStamp>AAAAAE496a4=</a:TimeStamp>
+        <a:TimeZone>PacificTimeUSCanadaTijuana</a:TimeZone>
+        <a:PauseReason i:nil="true"/>
+        <a:ForwardCompatibilityMap xmlns:b="http://schemas.datacontract.org/2004/07/System.Collections.Generic" i:nil="true"/>
+        <a:LinkedAgencies>
+          <a:CustomerInfo>
+            <a:Id>1234</a:Id>
+            <a:Name>updated name</a:Name>
+          </a:CustomerInfo>
+        </a:LinkedAgencies>
+        <a:SalesHouseCustomerId i:nil="true"/>
+        <a:TaxInformation xmlns:b="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+        <a:BackUpPaymentInstrumentId i:nil="true"/>
+        <a:BillingThresholdAmount i:nil="true"/>
+        <a:BusinessAddress i:nil="true"/>
+        <a:AutoTagType>Inactive</a:AutoTagType>
+        <a:SoldToPaymentInstrumentId i:nil="true"/>
+      </Account>
+    </GetAccountResponse>
+  </s:Body>
+</s:Envelope>

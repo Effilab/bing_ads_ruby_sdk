@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">d82a1bef-f6ca-408d-92a3-24b310561cb1</h:TrackingId>
+  </s:Header>
+  <s:Body>
+    <GetAdExtensionsAssociationsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+      <AdExtensionAssociationCollection xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+        <AdExtensionAssociationCollection>
+          <AdExtensionAssociations>
+            <AdExtensionAssociation>
+              <AdExtension i:type="CalloutAdExtension">
+                <DevicePreference i:nil="true"/>
+                <ForwardCompatibilityMap xmlns:a="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+                <Id>8177650858590</Id>
+                <Scheduling i:nil="true"/>
+                <Status>Active</Status>
+                <Type>CalloutAdExtension</Type>
+                <Version>1</Version>
+                <Text>Informations Et Contact</Text>
+              </AdExtension>
+              <AssociationType>Campaign</AssociationType>
+              <EditorialStatus>Active</EditorialStatus>
+              <EntityId>349704437</EntityId>
+            </AdExtensionAssociation>
+            <AdExtensionAssociation>
+              <AdExtension i:type="CalloutAdExtension">
+                <DevicePreference i:nil="true"/>
+                <ForwardCompatibilityMap xmlns:a="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+                <Id>8177660966942</Id>
+                <Scheduling i:nil="true"/>
+                <Status>Active</Status>
+                <Type>CalloutAdExtension</Type>
+                <Version>1</Version>
+                <Text>CalloutText</Text>
+              </AdExtension>
+              <AssociationType>Campaign</AssociationType>
+              <EditorialStatus>Active</EditorialStatus>
+              <EntityId>349704437</EntityId>
+            </AdExtensionAssociation>
+          </AdExtensionAssociations>
+        </AdExtensionAssociationCollection>
+      </AdExtensionAssociationCollection>
+      <PartialErrors xmlns:i="http://www.w3.org/2001/XMLSchema-instance"/>
+    </GetAdExtensionsAssociationsResponse>
+  </s:Body>
+</s:Envelope>
