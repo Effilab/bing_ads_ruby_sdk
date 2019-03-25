@@ -1,0 +1,6 @@
+# https://github.com/SvanBoxel/delete-merged-branch
+exclude: 
+  - development
+  - production
+  - master
+#  - BranchNameToExclude*WildcardsSupported
