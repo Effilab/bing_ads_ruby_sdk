@@ -8,6 +8,8 @@
 /spec/reports/
 /tmp/
 /log/*
+vendor/bundle/
+
 # rspec failure tracking
 .rspec_status
 .token_*
