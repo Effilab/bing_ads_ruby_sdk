@@ -42,4 +42,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'awesome_print'
+  spec.add_development_dependency 'rspec_junit_formatter', '~> 0.4.1'
 end
