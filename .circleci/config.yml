@@ -13,12 +13,8 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            # fallback to using the latest cache if no exact match is found
-            - v1-dependencies-
+      # We can't use restore_cache because we don't include a Gemfile.lock
+      # in the Gem repo
 
       - run:
           name: install dependencies
@@ -34,6 +30,7 @@ jobs:
       - run:
           name: run tests
           command: |
+            mkdir log/
             mkdir /tmp/test-results
             TEST_FILES="$(circleci tests glob "spec/bing_ads_ruby_sdk/**/*_spec.rb" | \
               circleci tests split --split-by=timings)"
