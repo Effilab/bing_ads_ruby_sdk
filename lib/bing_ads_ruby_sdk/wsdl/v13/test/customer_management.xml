@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions name="CustomerManagementService" targetNamespace="https://bingads.microsoft.com/Customer/v12" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="https://bingads.microsoft.com/Customer/v12" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions name="CustomerManagementService" targetNamespace="https://bingads.microsoft.com/Customer/v13" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="https://bingads.microsoft.com/Customer/v13" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsp:Policy wsu:Id="BasicHttpBinding_ICustomerManagementService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -26,9 +26,9 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsdl:types>
-    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v12" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-      <xs:import namespace="https://bingads.microsoft.com/Customer/v12/Entities"/>
-      <xs:import namespace="https://bingads.microsoft.com/Customer/v12/Exception"/>
+    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v13" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="https://bingads.microsoft.com/Customer/v13/Entities"/>
+      <xs:import namespace="https://bingads.microsoft.com/Customer/v13/Exception"/>
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
       <xs:element name="GetAccountsInfoRequest">
         <xs:complexType>
@@ -46,12 +46,12 @@
       <xs:element name="GetAccountsInfoResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="AccountsInfo" nillable="true" type="q1:ArrayOfAccountInfo" xmlns:q1="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="AccountsInfo" nillable="true" type="q1:ArrayOfAccountInfo" xmlns:q1="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="TrackingId" nillable="true" type="xs:string"/>
-      <xs:element name="ApiFault" nillable="true" type="q2:ApiFault" xmlns:q2="https://bingads.microsoft.com/Customer/v12/Exception"/>
+      <xs:element name="ApiFault" nillable="true" type="q2:ApiFault" xmlns:q2="https://bingads.microsoft.com/Customer/v13/Exception"/>
       <xs:element name="FindAccountsRequest">
         <xs:complexType>
           <xs:sequence>
@@ -64,14 +64,14 @@
       <xs:element name="FindAccountsResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="AccountsInfo" nillable="true" type="q3:ArrayOfAccountInfo" xmlns:q3="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="AccountsInfo" nillable="true" type="q3:ArrayOfAccountInfo" xmlns:q3="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AddAccountRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Account" nillable="true" type="q4:AdvertiserAccount" xmlns:q4="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Account" nillable="true" type="q4:AdvertiserAccount" xmlns:q4="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -87,7 +87,7 @@
       <xs:element name="UpdateAccountRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Account" nillable="true" type="q5:AdvertiserAccount" xmlns:q5="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Account" nillable="true" type="q5:AdvertiserAccount" xmlns:q5="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -102,21 +102,20 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="CustomerId" type="xs:long"/>
-            <xs:element minOccurs="0" name="IncludeCustomerAddress" type="xs:boolean"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetCustomerResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Customer" nillable="true" type="q6:Customer" xmlns:q6="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Customer" nillable="true" type="q6:Customer" xmlns:q6="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="UpdateCustomerRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Customer" nillable="true" type="q7:Customer" xmlns:q7="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Customer" nillable="true" type="q7:Customer" xmlns:q7="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -130,8 +129,8 @@
       <xs:element name="SignupCustomerRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Customer" nillable="true" type="q8:Customer" xmlns:q8="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="Account" nillable="true" type="q9:AdvertiserAccount" xmlns:q9="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Customer" nillable="true" type="q8:Customer" xmlns:q8="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="Account" nillable="true" type="q9:AdvertiserAccount" xmlns:q9="https://bingads.microsoft.com/Customer/v13/Entities"/>
             <xs:element minOccurs="0" name="ParentCustomerId" nillable="true" type="xs:long"/>
           </xs:sequence>
         </xs:complexType>
@@ -157,7 +156,7 @@
       <xs:element name="GetAccountResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Account" nillable="true" type="q10:AdvertiserAccount" xmlns:q10="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Account" nillable="true" type="q10:AdvertiserAccount" xmlns:q10="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -172,7 +171,7 @@
       <xs:element name="GetCustomersInfoResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="CustomersInfo" nillable="true" type="q11:ArrayOfCustomerInfo" xmlns:q11="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="CustomersInfo" nillable="true" type="q11:ArrayOfCustomerInfo" xmlns:q11="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -205,7 +204,7 @@
       <xs:element name="UpdateUserRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="User" nillable="true" type="q12:User" xmlns:q12="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="User" nillable="true" type="q12:User" xmlns:q12="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -241,15 +240,14 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:long"/>
-            <xs:element minOccurs="0" name="IncludeLinkedAccountIds" nillable="true" type="xs:boolean"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetUserResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="User" nillable="true" type="q17:User" xmlns:q17="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="CustomerRoles" nillable="true" type="q18:ArrayOfCustomerRole" xmlns:q18="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="User" nillable="true" type="q17:User" xmlns:q17="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="CustomerRoles" nillable="true" type="q18:ArrayOfCustomerRole" xmlns:q18="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -261,7 +259,7 @@
       <xs:element name="GetCurrentUserResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="User" nillable="true" type="q19:User" xmlns:q19="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="User" nillable="true" type="q19:User" xmlns:q19="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -282,14 +280,14 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element minOccurs="0" name="CustomerId" type="xs:long"/>
-            <xs:element minOccurs="0" name="StatusFilter" nillable="true" type="q20:UserLifeCycleStatus" xmlns:q20="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="StatusFilter" nillable="true" type="q20:UserLifeCycleStatus" xmlns:q20="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetUsersInfoResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="UsersInfo" nillable="true" type="q21:ArrayOfUserInfo" xmlns:q21="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="UsersInfo" nillable="true" type="q21:ArrayOfUserInfo" xmlns:q21="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -315,7 +313,7 @@
       <xs:element name="GetPilotFeaturesCountriesResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="PilotFeatures" nillable="true" type="q23:ArrayOfPilotFeature" xmlns:q23="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="PilotFeatures" nillable="true" type="q23:ArrayOfPilotFeature" xmlns:q23="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -329,7 +327,7 @@
       <xs:element name="GetAccessibleCustomerResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="AccessibleCustomer" nillable="true" type="q24:Customer" xmlns:q24="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="AccessibleCustomer" nillable="true" type="q24:Customer" xmlns:q24="https://bingads.microsoft.com/Customer/v13/Entities"/>
             <xs:element minOccurs="0" name="ValidFields" type="xs:int"/>
           </xs:sequence>
         </xs:complexType>
@@ -345,7 +343,7 @@
       <xs:element name="FindAccountsOrCustomersInfoResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="AccountInfoWithCustomerData" nillable="true" type="q25:ArrayOfAccountInfoWithCustomerData" xmlns:q25="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="AccountInfoWithCustomerData" nillable="true" type="q25:ArrayOfAccountInfoWithCustomerData" xmlns:q25="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -364,7 +362,7 @@
       <xs:element name="AddPrepayAccountRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Account" nillable="true" type="q26:AdvertiserAccount" xmlns:q26="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Account" nillable="true" type="q26:AdvertiserAccount" xmlns:q26="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -380,7 +378,7 @@
       <xs:element name="UpdatePrepayAccountRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Account" nillable="true" type="q27:AdvertiserAccount" xmlns:q27="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Account" nillable="true" type="q27:AdvertiserAccount" xmlns:q27="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -420,87 +418,86 @@
       <xs:element name="SearchCustomersRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q29:ArrayOfPredicate" xmlns:q29="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="DateRange" nillable="true" type="q30:DateRange" xmlns:q30="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="Ordering" nillable="true" type="q31:ArrayOfOrderBy" xmlns:q31="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="PageInfo" nillable="true" type="q32:Paging" xmlns:q32="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="IncludeCustomerAddress" type="xs:boolean"/>
+            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q29:ArrayOfPredicate" xmlns:q29="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="DateRange" nillable="true" type="q30:DateRange" xmlns:q30="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="Ordering" nillable="true" type="q31:ArrayOfOrderBy" xmlns:q31="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="PageInfo" nillable="true" type="q32:Paging" xmlns:q32="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SearchCustomersResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Customers" nillable="true" type="q33:ArrayOfCustomer" xmlns:q33="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Customers" nillable="true" type="q33:ArrayOfCustomer" xmlns:q33="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AddClientLinksRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="ClientLinks" nillable="true" type="q34:ArrayOfClientLink" xmlns:q34="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="ClientLinks" nillable="true" type="q34:ArrayOfClientLink" xmlns:q34="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AddClientLinksResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="OperationErrors" nillable="true" type="q35:ArrayOfOperationError" xmlns:q35="https://bingads.microsoft.com/Customer/v12/Exception"/>
-            <xs:element minOccurs="0" name="PartialErrors" nillable="true" type="q36:ArrayOfArrayOfOperationError" xmlns:q36="https://bingads.microsoft.com/Customer/v12/Exception"/>
+            <xs:element minOccurs="0" name="OperationErrors" nillable="true" type="q35:ArrayOfOperationError" xmlns:q35="https://bingads.microsoft.com/Customer/v13/Exception"/>
+            <xs:element minOccurs="0" name="PartialErrors" nillable="true" type="q36:ArrayOfArrayOfOperationError" xmlns:q36="https://bingads.microsoft.com/Customer/v13/Exception"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="UpdateClientLinksRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="ClientLinks" nillable="true" type="q37:ArrayOfClientLink" xmlns:q37="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="ClientLinks" nillable="true" type="q37:ArrayOfClientLink" xmlns:q37="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="UpdateClientLinksResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="OperationErrors" nillable="true" type="q38:ArrayOfOperationError" xmlns:q38="https://bingads.microsoft.com/Customer/v12/Exception"/>
-            <xs:element minOccurs="0" name="PartialErrors" nillable="true" type="q39:ArrayOfArrayOfOperationError" xmlns:q39="https://bingads.microsoft.com/Customer/v12/Exception"/>
+            <xs:element minOccurs="0" name="OperationErrors" nillable="true" type="q38:ArrayOfOperationError" xmlns:q38="https://bingads.microsoft.com/Customer/v13/Exception"/>
+            <xs:element minOccurs="0" name="PartialErrors" nillable="true" type="q39:ArrayOfArrayOfOperationError" xmlns:q39="https://bingads.microsoft.com/Customer/v13/Exception"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SearchClientLinksRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q40:ArrayOfPredicate" xmlns:q40="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="Ordering" nillable="true" type="q41:ArrayOfOrderBy" xmlns:q41="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="PageInfo" nillable="true" type="q42:Paging" xmlns:q42="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q40:ArrayOfPredicate" xmlns:q40="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="Ordering" nillable="true" type="q41:ArrayOfOrderBy" xmlns:q41="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="PageInfo" nillable="true" type="q42:Paging" xmlns:q42="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SearchClientLinksResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="ClientLinks" nillable="true" type="q43:ArrayOfClientLink" xmlns:q43="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="ClientLinks" nillable="true" type="q43:ArrayOfClientLink" xmlns:q43="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SearchAccountsRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q44:ArrayOfPredicate" xmlns:q44="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="Ordering" nillable="true" type="q45:ArrayOfOrderBy" xmlns:q45="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="PageInfo" nillable="true" type="q46:Paging" xmlns:q46="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q44:ArrayOfPredicate" xmlns:q44="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="Ordering" nillable="true" type="q45:ArrayOfOrderBy" xmlns:q45="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="PageInfo" nillable="true" type="q46:Paging" xmlns:q46="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SearchAccountsResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Accounts" nillable="true" type="q47:ArrayOfAdvertiserAccount" xmlns:q47="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Accounts" nillable="true" type="q47:ArrayOfAdvertiserAccount" xmlns:q47="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SendUserInvitationRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="UserInvitation" nillable="true" type="q48:UserInvitation" xmlns:q48="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="UserInvitation" nillable="true" type="q48:UserInvitation" xmlns:q48="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -514,30 +511,46 @@
       <xs:element name="SearchUserInvitationsRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q49:ArrayOfPredicate" xmlns:q49="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q49:ArrayOfPredicate" xmlns:q49="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SearchUserInvitationsResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="UserInvitations" nillable="true" type="q50:ArrayOfUserInvitation" xmlns:q50="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="UserInvitations" nillable="true" type="q50:ArrayOfUserInvitation" xmlns:q50="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="ValidateAddressRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Address" nillable="true" type="q51:Address" xmlns:q51="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Address" nillable="true" type="q51:Address" xmlns:q51="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="ValidateAddressResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="OriginalAddress" nillable="true" type="q52:Address" xmlns:q52="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="OriginalAddress" nillable="true" type="q52:Address" xmlns:q52="https://bingads.microsoft.com/Customer/v13/Entities"/>
             <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string"/>
-            <xs:element minOccurs="0" name="SuggestedAddresses" nillable="true" type="q53:ArrayOfAddress" xmlns:q53="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="SuggestedAddresses" nillable="true" type="q53:ArrayOfAddress" xmlns:q53="https://bingads.microsoft.com/Customer/v13/Entities"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetLinkedAccountsAndCustomersInfoRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="CustomerId" type="xs:long"/>
+            <xs:element minOccurs="0" name="OnlyParentAccounts" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetLinkedAccountsAndCustomersInfoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="AccountsInfo" nillable="true" type="q54:ArrayOfAccountInfo" xmlns:q54="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="CustomersInfo" nillable="true" type="q55:ArrayOfCustomerInfo" xmlns:q55="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -583,7 +596,7 @@
       <xs:attribute name="Id" type="xs:ID"/>
       <xs:attribute name="Ref" type="xs:IDREF"/>
     </xs:schema>
-    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:tns="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v13/Entities" xmlns:tns="https://bingads.microsoft.com/Customer/v13/Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
@@ -1423,13 +1436,7 @@
           <xs:element minOccurs="0" name="CustomerLifeCycleStatus" nillable="true" type="tns:CustomerLifeCycleStatus"/>
           <xs:element minOccurs="0" name="TimeStamp" nillable="true" type="xs:base64Binary"/>
           <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string"/>
-          <xs:element minOccurs="0" name="CustomerAddress" nillable="true" type="tns:Address">
-            <xs:annotation>
-              <xs:appinfo>
-                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
-              </xs:appinfo>
-            </xs:annotation>
-          </xs:element>
+          <xs:element minOccurs="0" name="CustomerAddress" nillable="true" type="tns:Address"/>
         </xs:sequence>
       </xs:complexType>
       <xs:element name="Customer" nillable="true" type="tns:Customer"/>
@@ -1954,13 +1961,8 @@
           <xs:element minOccurs="0" name="RoleId" type="xs:int"/>
           <xs:element minOccurs="0" name="CustomerId" type="xs:long"/>
           <xs:element minOccurs="0" name="AccountIds" nillable="true" type="q5:ArrayOflong" xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
-          <xs:element minOccurs="0" name="LinkedAccountIds" nillable="true" type="q6:ArrayOflong" xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
-            <xs:annotation>
-              <xs:appinfo>
-                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/"/>
-              </xs:appinfo>
-            </xs:annotation>
-          </xs:element>
+          <xs:element minOccurs="0" name="LinkedAccountIds" nillable="true" type="q6:ArrayOflong" xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
+          <xs:element minOccurs="0" name="CustomerLinkPermission" nillable="true" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:element name="CustomerRole" nillable="true" type="tns:CustomerRole"/>
@@ -2097,16 +2099,19 @@
       <xs:element name="ArrayOfClientLink" nillable="true" type="tns:ArrayOfClientLink"/>
       <xs:complexType name="ClientLink">
         <xs:sequence>
-          <xs:element minOccurs="0" name="ClientAccountId" nillable="true" type="xs:long"/>
-          <xs:element minOccurs="0" name="ClientAccountNumber" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ClientEntityId" nillable="true" type="xs:long"/>
+          <xs:element minOccurs="0" name="ClientEntityNumber" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ClientEntityName" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="ManagingCustomerId" nillable="true" type="xs:long"/>
           <xs:element minOccurs="0" name="ManagingCustomerNumber" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="ManagingCustomerName" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="Note" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="InviterEmail" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="InviterName" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="InviterPhone" nillable="true" type="xs:string"/>
-          <xs:element minOccurs="0" name="IsBillToClient" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="IsBillToClient" nillable="true" type="xs:boolean"/>
           <xs:element minOccurs="0" name="StartDate" nillable="true" type="xs:dateTime"/>
           <xs:element minOccurs="0" name="Status" nillable="true" type="tns:ClientLinkStatus"/>
           <xs:element minOccurs="0" name="SuppressNotification" type="xs:boolean"/>
@@ -2114,6 +2119,7 @@
           <xs:element minOccurs="0" name="LastModifiedByUserId" type="xs:long"/>
           <xs:element minOccurs="0" name="Timestamp" nillable="true" type="xs:base64Binary"/>
           <xs:element minOccurs="0" name="ForwardCompatibilityMap" nillable="true" type="q8:ArrayOfKeyValuePairOfstringstring" xmlns:q8="http://schemas.datacontract.org/2004/07/System.Collections.Generic"/>
+          <xs:element minOccurs="0" name="CustomerLinkPermission" nillable="true" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:element name="ClientLink" nillable="true" type="tns:ClientLink"/>
@@ -2207,7 +2213,7 @@
       </xs:complexType>
       <xs:element name="AdApiError" nillable="true" type="tns:AdApiError"/>
     </xs:schema>
-    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v12/Exception" xmlns:tns="https://bingads.microsoft.com/Customer/v12/Exception" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v13/Exception" xmlns:tns="https://bingads.microsoft.com/Customer/v13/Exception" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="https://adapi.microsoft.com"/>
       <xs:complexType name="ApiFault">
         <xs:complexContent mixed="false">
@@ -3034,210 +3040,238 @@
   <wsdl:message name="ICustomerManagementService_ValidateAddress_ApiFault_FaultMessage">
     <wsdl:part element="tns:ApiFault" name="detail"/>
   </wsdl:message>
+  <wsdl:message name="GetLinkedAccountsAndCustomersInfoRequest">
+    <wsdl:part element="tns:GetLinkedAccountsAndCustomersInfoRequest" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="GetLinkedAccountsAndCustomersInfoRequest_Headers">
+    <wsdl:part element="tns:ApplicationToken" name="ApplicationToken"/>
+    <wsdl:part element="tns:AuthenticationToken" name="AuthenticationToken"/>
+    <wsdl:part element="tns:DeveloperToken" name="DeveloperToken"/>
+    <wsdl:part element="tns:Password" name="Password"/>
+    <wsdl:part element="tns:UserName" name="UserName"/>
+  </wsdl:message>
+  <wsdl:message name="GetLinkedAccountsAndCustomersInfoResponse">
+    <wsdl:part element="tns:GetLinkedAccountsAndCustomersInfoResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="GetLinkedAccountsAndCustomersInfoResponse_Headers">
+    <wsdl:part element="tns:TrackingId" name="TrackingId"/>
+  </wsdl:message>
+  <wsdl:message name="ICustomerManagementService_GetLinkedAccountsAndCustomersInfo_AdApiFaultDetailFault_FaultMessage">
+    <wsdl:part element="q35:AdApiFaultDetail" name="detail" xmlns:q35="https://adapi.microsoft.com"/>
+  </wsdl:message>
+  <wsdl:message name="ICustomerManagementService_GetLinkedAccountsAndCustomersInfo_ApiFault_FaultMessage">
+    <wsdl:part element="tns:ApiFault" name="detail"/>
+  </wsdl:message>
   <wsdl:portType msc:usingSession="false" name="ICustomerManagementService">
     <wsdl:operation name="GetAccountsInfo">
       <wsdl:input message="tns:GetAccountsInfoRequest" name="GetAccountsInfoRequest" wsaw:Action="GetAccountsInfo"/>
-      <wsdl:output message="tns:GetAccountsInfoResponse" name="GetAccountsInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccountsInfoResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetAccountsInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccountsInfoAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetAccountsInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccountsInfoApiFault"/>
+      <wsdl:output message="tns:GetAccountsInfoResponse" name="GetAccountsInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccountsInfoResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetAccountsInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccountsInfoAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetAccountsInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccountsInfoApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="FindAccounts">
       <wsdl:input message="tns:FindAccountsRequest" name="FindAccountsRequest" wsaw:Action="FindAccounts"/>
-      <wsdl:output message="tns:FindAccountsResponse" name="FindAccountsResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/FindAccountsResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_FindAccounts_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/FindAccountsAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_FindAccounts_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/FindAccountsApiFault"/>
+      <wsdl:output message="tns:FindAccountsResponse" name="FindAccountsResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/FindAccountsResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_FindAccounts_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/FindAccountsAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_FindAccounts_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/FindAccountsApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="AddAccount">
       <wsdl:input message="tns:AddAccountRequest" name="AddAccountRequest" wsaw:Action="AddAccount"/>
-      <wsdl:output message="tns:AddAccountResponse" name="AddAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddAccountResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_AddAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddAccountAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_AddAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddAccountApiFault"/>
+      <wsdl:output message="tns:AddAccountResponse" name="AddAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddAccountResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_AddAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddAccountAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_AddAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddAccountApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="UpdateAccount">
       <wsdl:input message="tns:UpdateAccountRequest" name="UpdateAccountRequest" wsaw:Action="UpdateAccount"/>
-      <wsdl:output message="tns:UpdateAccountResponse" name="UpdateAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateAccountResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateAccountAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateAccountApiFault"/>
+      <wsdl:output message="tns:UpdateAccountResponse" name="UpdateAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateAccountResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateAccountAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateAccountApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetCustomer">
       <wsdl:input message="tns:GetCustomerRequest" name="GetCustomerRequest" wsaw:Action="GetCustomer"/>
-      <wsdl:output message="tns:GetCustomerResponse" name="GetCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomerResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomerAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomerApiFault"/>
+      <wsdl:output message="tns:GetCustomerResponse" name="GetCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomerResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomerAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomerApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="UpdateCustomer">
       <wsdl:input message="tns:UpdateCustomerRequest" name="UpdateCustomerRequest" wsaw:Action="UpdateCustomer"/>
-      <wsdl:output message="tns:UpdateCustomerResponse" name="UpdateCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateCustomerResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateCustomerAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateCustomerApiFault"/>
+      <wsdl:output message="tns:UpdateCustomerResponse" name="UpdateCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateCustomerResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateCustomerAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateCustomerApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="SignupCustomer">
       <wsdl:input message="tns:SignupCustomerRequest" name="SignupCustomerRequest" wsaw:Action="SignupCustomer"/>
-      <wsdl:output message="tns:SignupCustomerResponse" name="SignupCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SignupCustomerResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SignupCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SignupCustomerAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SignupCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SignupCustomerApiFault"/>
+      <wsdl:output message="tns:SignupCustomerResponse" name="SignupCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SignupCustomerResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SignupCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SignupCustomerAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SignupCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SignupCustomerApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetAccount">
       <wsdl:input message="tns:GetAccountRequest" name="GetAccountRequest" wsaw:Action="GetAccount"/>
-      <wsdl:output message="tns:GetAccountResponse" name="GetAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccountResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccountAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccountApiFault"/>
+      <wsdl:output message="tns:GetAccountResponse" name="GetAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccountResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccountAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccountApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetCustomersInfo">
       <wsdl:input message="tns:GetCustomersInfoRequest" name="GetCustomersInfoRequest" wsaw:Action="GetCustomersInfo"/>
-      <wsdl:output message="tns:GetCustomersInfoResponse" name="GetCustomersInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomersInfoResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetCustomersInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomersInfoAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetCustomersInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomersInfoApiFault"/>
+      <wsdl:output message="tns:GetCustomersInfoResponse" name="GetCustomersInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomersInfoResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetCustomersInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomersInfoAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetCustomersInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomersInfoApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="DeleteAccount">
       <wsdl:input message="tns:DeleteAccountRequest" name="DeleteAccountRequest" wsaw:Action="DeleteAccount"/>
-      <wsdl:output message="tns:DeleteAccountResponse" name="DeleteAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteAccountResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_DeleteAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteAccountAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_DeleteAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteAccountApiFault"/>
+      <wsdl:output message="tns:DeleteAccountResponse" name="DeleteAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteAccountResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_DeleteAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteAccountAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_DeleteAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteAccountApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="DeleteCustomer">
       <wsdl:input message="tns:DeleteCustomerRequest" name="DeleteCustomerRequest" wsaw:Action="DeleteCustomer"/>
-      <wsdl:output message="tns:DeleteCustomerResponse" name="DeleteCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteCustomerResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_DeleteCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteCustomerAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_DeleteCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteCustomerApiFault"/>
+      <wsdl:output message="tns:DeleteCustomerResponse" name="DeleteCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteCustomerResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_DeleteCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteCustomerAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_DeleteCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteCustomerApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="UpdateUser">
       <wsdl:input message="tns:UpdateUserRequest" name="UpdateUserRequest" wsaw:Action="UpdateUser"/>
-      <wsdl:output message="tns:UpdateUserResponse" name="UpdateUserResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateUserResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateUser_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateUserAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateUser_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateUserApiFault"/>
+      <wsdl:output message="tns:UpdateUserResponse" name="UpdateUserResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateUserResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateUser_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateUserAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateUser_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateUserApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="UpdateUserRoles">
       <wsdl:input message="tns:UpdateUserRolesRequest" name="UpdateUserRolesRequest" wsaw:Action="UpdateUserRoles"/>
-      <wsdl:output message="tns:UpdateUserRolesResponse" name="UpdateUserRolesResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateUserRolesResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateUserRoles_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateUserRolesAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateUserRoles_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateUserRolesApiFault"/>
+      <wsdl:output message="tns:UpdateUserRolesResponse" name="UpdateUserRolesResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateUserRolesResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateUserRoles_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateUserRolesAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateUserRoles_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateUserRolesApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetUser">
       <wsdl:input message="tns:GetUserRequest" name="GetUserRequest" wsaw:Action="GetUser"/>
-      <wsdl:output message="tns:GetUserResponse" name="GetUserResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetUserResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetUser_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetUserAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetUser_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetUserApiFault"/>
+      <wsdl:output message="tns:GetUserResponse" name="GetUserResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetUserResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetUser_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetUserAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetUser_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetUserApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetCurrentUser">
       <wsdl:input message="tns:GetCurrentUserRequest" name="GetCurrentUserRequest" wsaw:Action="GetCurrentUser"/>
-      <wsdl:output message="tns:GetCurrentUserResponse" name="GetCurrentUserResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCurrentUserResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetCurrentUser_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCurrentUserAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetCurrentUser_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCurrentUserApiFault"/>
+      <wsdl:output message="tns:GetCurrentUserResponse" name="GetCurrentUserResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCurrentUserResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetCurrentUser_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCurrentUserAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetCurrentUser_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCurrentUserApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="DeleteUser">
       <wsdl:input message="tns:DeleteUserRequest" name="DeleteUserRequest" wsaw:Action="DeleteUser"/>
-      <wsdl:output message="tns:DeleteUserResponse" name="DeleteUserResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteUserResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_DeleteUser_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteUserAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_DeleteUser_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/DeleteUserApiFault"/>
+      <wsdl:output message="tns:DeleteUserResponse" name="DeleteUserResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteUserResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_DeleteUser_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteUserAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_DeleteUser_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/DeleteUserApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetUsersInfo">
       <wsdl:input message="tns:GetUsersInfoRequest" name="GetUsersInfoRequest" wsaw:Action="GetUsersInfo"/>
-      <wsdl:output message="tns:GetUsersInfoResponse" name="GetUsersInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetUsersInfoResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetUsersInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetUsersInfoAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetUsersInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetUsersInfoApiFault"/>
+      <wsdl:output message="tns:GetUsersInfoResponse" name="GetUsersInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetUsersInfoResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetUsersInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetUsersInfoAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetUsersInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetUsersInfoApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetCustomerPilotFeatures">
       <wsdl:input message="tns:GetCustomerPilotFeaturesRequest" name="GetCustomerPilotFeaturesRequest" wsaw:Action="GetCustomerPilotFeatures"/>
-      <wsdl:output message="tns:GetCustomerPilotFeaturesResponse" name="GetCustomerPilotFeaturesResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomerPilotFeaturesResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetCustomerPilotFeatures_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomerPilotFeaturesAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetCustomerPilotFeatures_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetCustomerPilotFeaturesApiFault"/>
+      <wsdl:output message="tns:GetCustomerPilotFeaturesResponse" name="GetCustomerPilotFeaturesResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomerPilotFeaturesResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetCustomerPilotFeatures_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomerPilotFeaturesAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetCustomerPilotFeatures_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetCustomerPilotFeaturesApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetPilotFeaturesCountries">
       <wsdl:input message="tns:GetPilotFeaturesCountriesRequest" name="GetPilotFeaturesCountriesRequest" wsaw:Action="GetPilotFeaturesCountries"/>
-      <wsdl:output message="tns:GetPilotFeaturesCountriesResponse" name="GetPilotFeaturesCountriesResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetPilotFeaturesCountriesResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetPilotFeaturesCountries_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetPilotFeaturesCountriesAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetPilotFeaturesCountries_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetPilotFeaturesCountriesApiFault"/>
+      <wsdl:output message="tns:GetPilotFeaturesCountriesResponse" name="GetPilotFeaturesCountriesResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetPilotFeaturesCountriesResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetPilotFeaturesCountries_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetPilotFeaturesCountriesAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetPilotFeaturesCountries_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetPilotFeaturesCountriesApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetAccessibleCustomer">
       <wsdl:input message="tns:GetAccessibleCustomerRequest" name="GetAccessibleCustomerRequest" wsaw:Action="GetAccessibleCustomer"/>
-      <wsdl:output message="tns:GetAccessibleCustomerResponse" name="GetAccessibleCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccessibleCustomerResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetAccessibleCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccessibleCustomerAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_GetAccessibleCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/GetAccessibleCustomerApiFault"/>
+      <wsdl:output message="tns:GetAccessibleCustomerResponse" name="GetAccessibleCustomerResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccessibleCustomerResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetAccessibleCustomer_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccessibleCustomerAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetAccessibleCustomer_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetAccessibleCustomerApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="FindAccountsOrCustomersInfo">
       <wsdl:input message="tns:FindAccountsOrCustomersInfoRequest" name="FindAccountsOrCustomersInfoRequest" wsaw:Action="FindAccountsOrCustomersInfo"/>
-      <wsdl:output message="tns:FindAccountsOrCustomersInfoResponse" name="FindAccountsOrCustomersInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/FindAccountsOrCustomersInfoResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_FindAccountsOrCustomersInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/FindAccountsOrCustomersInfoAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_FindAccountsOrCustomersInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/FindAccountsOrCustomersInfoApiFault"/>
+      <wsdl:output message="tns:FindAccountsOrCustomersInfoResponse" name="FindAccountsOrCustomersInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/FindAccountsOrCustomersInfoResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_FindAccountsOrCustomersInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/FindAccountsOrCustomersInfoAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_FindAccountsOrCustomersInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/FindAccountsOrCustomersInfoApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="UpgradeCustomerToAgency">
       <wsdl:input message="tns:UpgradeCustomerToAgencyRequest" name="UpgradeCustomerToAgencyRequest" wsaw:Action="UpgradeCustomerToAgency"/>
-      <wsdl:output message="tns:UpgradeCustomerToAgencyResponse" name="UpgradeCustomerToAgencyResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpgradeCustomerToAgencyResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpgradeCustomerToAgency_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpgradeCustomerToAgencyAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpgradeCustomerToAgency_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpgradeCustomerToAgencyApiFault"/>
+      <wsdl:output message="tns:UpgradeCustomerToAgencyResponse" name="UpgradeCustomerToAgencyResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpgradeCustomerToAgencyResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpgradeCustomerToAgency_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpgradeCustomerToAgencyAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpgradeCustomerToAgency_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpgradeCustomerToAgencyApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="AddPrepayAccount">
       <wsdl:input message="tns:AddPrepayAccountRequest" name="AddPrepayAccountRequest" wsaw:Action="AddPrepayAccount"/>
-      <wsdl:output message="tns:AddPrepayAccountResponse" name="AddPrepayAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddPrepayAccountResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_AddPrepayAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddPrepayAccountAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_AddPrepayAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddPrepayAccountApiFault"/>
+      <wsdl:output message="tns:AddPrepayAccountResponse" name="AddPrepayAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddPrepayAccountResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_AddPrepayAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddPrepayAccountAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_AddPrepayAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddPrepayAccountApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="UpdatePrepayAccount">
       <wsdl:input message="tns:UpdatePrepayAccountRequest" name="UpdatePrepayAccountRequest" wsaw:Action="UpdatePrepayAccount"/>
-      <wsdl:output message="tns:UpdatePrepayAccountResponse" name="UpdatePrepayAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdatePrepayAccountResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdatePrepayAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdatePrepayAccountAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdatePrepayAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdatePrepayAccountApiFault"/>
+      <wsdl:output message="tns:UpdatePrepayAccountResponse" name="UpdatePrepayAccountResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdatePrepayAccountResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdatePrepayAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdatePrepayAccountAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdatePrepayAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdatePrepayAccountApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="MapCustomerIdToExternalCustomerId">
       <wsdl:input message="tns:MapCustomerIdToExternalCustomerIdRequest" name="MapCustomerIdToExternalCustomerIdRequest" wsaw:Action="MapCustomerIdToExternalCustomerId"/>
-      <wsdl:output message="tns:MapCustomerIdToExternalCustomerIdResponse" name="MapCustomerIdToExternalCustomerIdResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/MapCustomerIdToExternalCustomerIdResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_MapCustomerIdToExternalCustomerId_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/MapCustomerIdToExternalCustomerIdAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_MapCustomerIdToExternalCustomerId_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/MapCustomerIdToExternalCustomerIdApiFault"/>
+      <wsdl:output message="tns:MapCustomerIdToExternalCustomerIdResponse" name="MapCustomerIdToExternalCustomerIdResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/MapCustomerIdToExternalCustomerIdResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_MapCustomerIdToExternalCustomerId_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/MapCustomerIdToExternalCustomerIdAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_MapCustomerIdToExternalCustomerId_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/MapCustomerIdToExternalCustomerIdApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="MapAccountIdToExternalAccountIds">
       <wsdl:input message="tns:MapAccountIdToExternalAccountIdsRequest" name="MapAccountIdToExternalAccountIdsRequest" wsaw:Action="MapAccountIdToExternalAccountIds"/>
-      <wsdl:output message="tns:MapAccountIdToExternalAccountIdsResponse" name="MapAccountIdToExternalAccountIdsResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/MapAccountIdToExternalAccountIdsResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_MapAccountIdToExternalAccountIds_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/MapAccountIdToExternalAccountIdsAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_MapAccountIdToExternalAccountIds_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/MapAccountIdToExternalAccountIdsApiFault"/>
+      <wsdl:output message="tns:MapAccountIdToExternalAccountIdsResponse" name="MapAccountIdToExternalAccountIdsResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/MapAccountIdToExternalAccountIdsResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_MapAccountIdToExternalAccountIds_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/MapAccountIdToExternalAccountIdsAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_MapAccountIdToExternalAccountIds_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/MapAccountIdToExternalAccountIdsApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="SearchCustomers">
       <wsdl:input message="tns:SearchCustomersRequest" name="SearchCustomersRequest" wsaw:Action="SearchCustomers"/>
-      <wsdl:output message="tns:SearchCustomersResponse" name="SearchCustomersResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchCustomersResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SearchCustomers_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchCustomersAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SearchCustomers_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchCustomersApiFault"/>
+      <wsdl:output message="tns:SearchCustomersResponse" name="SearchCustomersResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchCustomersResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SearchCustomers_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchCustomersAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SearchCustomers_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchCustomersApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="AddClientLinks">
       <wsdl:input message="tns:AddClientLinksRequest" name="AddClientLinksRequest" wsaw:Action="AddClientLinks"/>
-      <wsdl:output message="tns:AddClientLinksResponse" name="AddClientLinksResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddClientLinksResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_AddClientLinks_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddClientLinksAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_AddClientLinks_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/AddClientLinksApiFault"/>
+      <wsdl:output message="tns:AddClientLinksResponse" name="AddClientLinksResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddClientLinksResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_AddClientLinks_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddClientLinksAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_AddClientLinks_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/AddClientLinksApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="UpdateClientLinks">
       <wsdl:input message="tns:UpdateClientLinksRequest" name="UpdateClientLinksRequest" wsaw:Action="UpdateClientLinks"/>
-      <wsdl:output message="tns:UpdateClientLinksResponse" name="UpdateClientLinksResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateClientLinksResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateClientLinks_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateClientLinksAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_UpdateClientLinks_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/UpdateClientLinksApiFault"/>
+      <wsdl:output message="tns:UpdateClientLinksResponse" name="UpdateClientLinksResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateClientLinksResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateClientLinks_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateClientLinksAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_UpdateClientLinks_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/UpdateClientLinksApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="SearchClientLinks">
       <wsdl:input message="tns:SearchClientLinksRequest" name="SearchClientLinksRequest" wsaw:Action="SearchClientLinks"/>
-      <wsdl:output message="tns:SearchClientLinksResponse" name="SearchClientLinksResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchClientLinksResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SearchClientLinks_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchClientLinksAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SearchClientLinks_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchClientLinksApiFault"/>
+      <wsdl:output message="tns:SearchClientLinksResponse" name="SearchClientLinksResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchClientLinksResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SearchClientLinks_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchClientLinksAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SearchClientLinks_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchClientLinksApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="SearchAccounts">
       <wsdl:input message="tns:SearchAccountsRequest" name="SearchAccountsRequest" wsaw:Action="SearchAccounts"/>
-      <wsdl:output message="tns:SearchAccountsResponse" name="SearchAccountsResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchAccountsResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SearchAccounts_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchAccountsAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SearchAccounts_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchAccountsApiFault"/>
+      <wsdl:output message="tns:SearchAccountsResponse" name="SearchAccountsResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchAccountsResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SearchAccounts_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchAccountsAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SearchAccounts_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchAccountsApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="SendUserInvitation">
       <wsdl:input message="tns:SendUserInvitationRequest" name="SendUserInvitationRequest" wsaw:Action="SendUserInvitation"/>
-      <wsdl:output message="tns:SendUserInvitationResponse" name="SendUserInvitationResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SendUserInvitationResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SendUserInvitation_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SendUserInvitationAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SendUserInvitation_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SendUserInvitationApiFault"/>
+      <wsdl:output message="tns:SendUserInvitationResponse" name="SendUserInvitationResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SendUserInvitationResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SendUserInvitation_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SendUserInvitationAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SendUserInvitation_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SendUserInvitationApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="SearchUserInvitations">
       <wsdl:input message="tns:SearchUserInvitationsRequest" name="SearchUserInvitationsRequest" wsaw:Action="SearchUserInvitations"/>
-      <wsdl:output message="tns:SearchUserInvitationsResponse" name="SearchUserInvitationsResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchUserInvitationsResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SearchUserInvitations_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchUserInvitationsAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_SearchUserInvitations_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/SearchUserInvitationsApiFault"/>
+      <wsdl:output message="tns:SearchUserInvitationsResponse" name="SearchUserInvitationsResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchUserInvitationsResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SearchUserInvitations_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchUserInvitationsAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_SearchUserInvitations_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/SearchUserInvitationsApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="ValidateAddress">
       <wsdl:input message="tns:ValidateAddressRequest" name="ValidateAddressRequest" wsaw:Action="ValidateAddress"/>
-      <wsdl:output message="tns:ValidateAddressResponse" name="ValidateAddressResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/ValidateAddressResponse"/>
-      <wsdl:fault message="tns:ICustomerManagementService_ValidateAddress_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/ValidateAddressAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerManagementService_ValidateAddress_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v12/ICustomerManagementService/ValidateAddressApiFault"/>
+      <wsdl:output message="tns:ValidateAddressResponse" name="ValidateAddressResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/ValidateAddressResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_ValidateAddress_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/ValidateAddressAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_ValidateAddress_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/ValidateAddressApiFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetLinkedAccountsAndCustomersInfo">
+      <wsdl:input message="tns:GetLinkedAccountsAndCustomersInfoRequest" name="GetLinkedAccountsAndCustomersInfoRequest" wsaw:Action="GetLinkedAccountsAndCustomersInfo"/>
+      <wsdl:output message="tns:GetLinkedAccountsAndCustomersInfoResponse" name="GetLinkedAccountsAndCustomersInfoResponse" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetLinkedAccountsAndCustomersInfoResponse"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetLinkedAccountsAndCustomersInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetLinkedAccountsAndCustomersInfoAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerManagementService_GetLinkedAccountsAndCustomersInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Customer/v13/ICustomerManagementService/GetLinkedAccountsAndCustomersInfoApiFault"/>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICustomerManagementService" type="tns:ICustomerManagementService">
@@ -3957,10 +3991,31 @@
         <soap:fault name="ApiFault" namespace="" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
+    <wsdl:operation name="GetLinkedAccountsAndCustomersInfo">
+      <soap:operation soapAction="GetLinkedAccountsAndCustomersInfo" style="document"/>
+      <wsdl:input name="GetLinkedAccountsAndCustomersInfoRequest">
+        <soap:header message="tns:GetLinkedAccountsAndCustomersInfoRequest_Headers" part="ApplicationToken" use="literal"/>
+        <soap:header message="tns:GetLinkedAccountsAndCustomersInfoRequest_Headers" part="AuthenticationToken" use="literal"/>
+        <soap:header message="tns:GetLinkedAccountsAndCustomersInfoRequest_Headers" part="DeveloperToken" use="literal"/>
+        <soap:header message="tns:GetLinkedAccountsAndCustomersInfoRequest_Headers" part="Password" use="literal"/>
+        <soap:header message="tns:GetLinkedAccountsAndCustomersInfoRequest_Headers" part="UserName" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetLinkedAccountsAndCustomersInfoResponse">
+        <soap:header message="tns:GetLinkedAccountsAndCustomersInfoResponse_Headers" part="TrackingId" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AdApiFaultDetailFault">
+        <soap:fault name="AdApiFaultDetailFault" namespace="" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="ApiFault">
+        <soap:fault name="ApiFault" namespace="" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="CustomerManagementService">
     <wsdl:port binding="tns:BasicHttpBinding_ICustomerManagementService" name="BasicHttpBinding_ICustomerManagementService">
-      <soap:address location="https://clientcenter.api.bingads.microsoft.com/Api/CustomerManagement/v12/CustomerManagementService.svc"/>
+      <soap:address location="https://clientcenter.api.bingads.microsoft.com/Api/CustomerManagement/v13/CustomerManagementService.svc"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

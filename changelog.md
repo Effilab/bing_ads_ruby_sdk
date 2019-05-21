@@ -10,7 +10,7 @@ The main reasons of the refactoring were to:
 
 Alongside these key points, we now have:
 
-- filtred logs
+- filtered logs
 
 - split concerns
 
