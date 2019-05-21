@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Header>
-    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">27c5447b-da43-4f03-b704-8ea00de874f4</h:TrackingId>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v13">27c5447b-da43-4f03-b704-8ea00de874f4</h:TrackingId>
   </s:Header>
   <s:Body>
-    <AddConversionGoalsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+    <AddConversionGoalsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v13">
       <ConversionGoalIds xmlns:a="http://schemas.datacontract.org/2004/07/System" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
         <a:long>46068449</a:long>
       </ConversionGoalIds>

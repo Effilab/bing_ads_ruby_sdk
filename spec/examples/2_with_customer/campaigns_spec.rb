@@ -13,8 +13,7 @@ RSpec.describe 'CampaignManagement service' do
               name: "Acceptance Test Campaign #{random}",
               daily_budget: 10,
               budget_type: 'DailyBudgetStandard',
-              time_zone: 'BrusselsCopenhagenMadridParis',
-              description: 'This campaign was automatically generated in a test'
+              time_zone: 'BrusselsCopenhagenMadridParis'
             }
         }
       )

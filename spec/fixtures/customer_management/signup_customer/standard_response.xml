@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Header>
-    <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v12">e3a162e9-0bc2-48e0-ab1c-3bf294df256d</h:TrackingId>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v13">8b29b0c2-3168-4eb2-acf4-bcfa1d744cad</h:TrackingId>
   </s:Header>
   <s:Body>
-    <SignupCustomerResponse xmlns="https://bingads.microsoft.com/Customer/v12">
+    <SignupCustomerResponse xmlns="https://bingads.microsoft.com/Customer/v13">
       <CustomerId>1234</CustomerId>
       <CustomerNumber>G11800KYC4</CustomerNumber>
       <AccountId>5678</AccountId>

@@ -22,7 +22,8 @@ RSpec.describe 'Conversion goals methods' do
       label_expression: a_kind_of(String),
       label_operator: a_kind_of(String),
       value: a_kind_of(String),
-      value_operator: a_kind_of(String)
+      value_operator: a_kind_of(String),
+      exclude_from_bidding: nil
     }
   end
 

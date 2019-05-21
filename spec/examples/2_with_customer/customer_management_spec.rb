@@ -140,6 +140,7 @@ RSpec.describe 'CustomerManagement service' do
             customer_life_cycle_status: "Active",
             time_stamp: a_kind_of(String),
             number: a_kind_of(String),
+            customer_address: a_kind_of(Hash),
           }
         )
       end

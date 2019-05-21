@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Header>
-    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">37faa802-0f8b-4478-9c5b-ca045a64677c</h:TrackingId>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v13">37faa802-0f8b-4478-9c5b-ca045a64677c</h:TrackingId>
   </s:Header>
   <s:Body>
-    <GetSharedEntitiesByAccountIdResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+    <GetSharedEntitiesByAccountIdResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v13">
       <SharedEntities xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
         <SharedEntity i:type="NegativeKeywordList">
           <AssociationCount>0</AssociationCount>

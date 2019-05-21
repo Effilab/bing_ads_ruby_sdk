@@ -142,6 +142,7 @@ RSpec.describe "AdExtension methods" do
             destination_url: nil,
             display_text: a_kind_of(String),
             final_app_urls: nil,
+            final_url_suffix: nil,
             final_mobile_urls: {
               string: a_kind_of(String)
             },
@@ -211,7 +212,7 @@ RSpec.describe "AdExtension methods" do
       )).to eq(partial_errors: "")
     end
   end
-]
+
   describe "#delete_ad_extensions_associations" do
     before do
       response = create_add_ad_extensions
@@ -234,5 +235,4 @@ RSpec.describe "AdExtension methods" do
       )).to eq(partial_errors: "")
     end
   end
-
 end

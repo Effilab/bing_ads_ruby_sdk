@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Header>
-    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">0f780b92-8feb-42be-aebb-49e2f17b98d5</h:TrackingId>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v13">0f780b92-8feb-42be-aebb-49e2f17b98d5</h:TrackingId>
   </s:Header>
   <s:Body>
-    <GetBulkDownloadStatusResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+    <GetBulkDownloadStatusResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v13">
       <Errors xmlns:i="http://www.w3.org/2001/XMLSchema-instance" i:nil="true"/>
       <ForwardCompatibilityMap xmlns:a="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:i="http://www.w3.org/2001/XMLSchema-instance"/>
       <PercentComplete>100</PercentComplete>

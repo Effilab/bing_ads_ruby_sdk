@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Header>
-    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v12">c9ef74ca-b44b-47ef-8328-9a6d0d76e1dd</h:TrackingId>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/CampaignManagement/v13">63914b99-7c12-4f79-9e45-ca11c01777ce</h:TrackingId>
   </s:Header>
   <s:Body>
-    <GetBudgetsByIdsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v12">
+    <GetBudgetsByIdsResponse xmlns="https://bingads.microsoft.com/CampaignManagement/v13">
       <Budgets xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
         <Budget>
           <Amount>0.05</Amount>
