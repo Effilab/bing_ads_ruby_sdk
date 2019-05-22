@@ -26,47 +26,38 @@ module Examples
 
     def client_id
       # you have to fill this in with data from bing
-      '60fa49ce-cff5-4b54-9862-1bbaefe095e2'
     end
 
     def developer_token
       # you have to fill this in with data from bing
-      '142WBGD646050693'
     end
 
     def parent_customer_id
       # you have to fill this in with data from bing
-      '168403565'
     end
 
     def customer_id
       # you have to fill this in with data you get after running 1_customer folder
-      250547879
     end
 
     def account_id
       # you have to fill this in with data you get after running 1_customer folder
-      149368895
     end
 
     def uet_tag_id
       # you have to fill this in with data you get after running 2_with_customer folder
-      25054803
     end
 
     def campaign_id
       # you have to fill this in with data you get after running 2_with_customer folder
-      371768375
     end
 
     def conversion_goal_id
       # you have to fill this in with data you get after running 3_with_uet_tag folder
-      45083769
     end
 
     def ad_group_id
       # you have to fill this in with data you get after running 5_with_campaign folder
-      1170980203370431
     end
 
     def store
