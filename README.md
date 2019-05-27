@@ -76,6 +76,11 @@ end
 ```
 
 ## Development
+You can run `bin/console` for an interactive prompt that will allow you to experiment.
+
+To release a new version, update the version number in `version.rb`, and then run
+`bundle exec rake release`, which will create a git tag for the version, push git
+commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ### Updating to a new Bing API version
 Bing regularly releases new versions of the API and removes support for old versions.
@@ -85,11 +90,22 @@ need to be changed:
 * Set the default SDK version in lib/bing_ads_ruby_sdk/version.rb
 
 ### Specs
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run 
+`rake spec` to run unit tests. 
 
-To release a new version, update the version number in `version.rb`, and then run
-`bundle exec rake release`, which will create a git tag for the version, push git
-commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+If you want to run the integration tests they are in the `spec/examples/` 
+folders. Remember that these will create real accounts and entities in Microsoft
+Advertising so take care to check your account spending settings.
+
+Here's how to run the tests:
+* Make sure you have the token as described above
+* Put your Client ID, Developer Token, and Parent Customer ID in the methods 
+    with the same names in `spec/examples/examples.rb`
+* Run the specs in order, for example:
+  * `bundle exec spec spec/examples/1_...`, at the end of the spec there will be
+    a message at the end about copying an ID into `spec/examples/examples.rb`
+  * `bundle exec spec spec/examples/2_...` 
+  * keep repeating until you have run all the specs in `spec/examples`
 
 ## Contributing
 
