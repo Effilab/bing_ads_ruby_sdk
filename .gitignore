@@ -17,3 +17,5 @@ vendor/bundle/
 .byebug_history
 .env
 custom_setup.rb
+.circleci/*
+.github/*
