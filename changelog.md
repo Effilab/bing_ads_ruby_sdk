@@ -1,3 +1,7 @@
+## V1.1.1 Release
+
+- fix broken 1.1.0 which didnt bundle lib folder in gem release
+
 ## V1.1.0 Release
 
 - Use bing api v13
