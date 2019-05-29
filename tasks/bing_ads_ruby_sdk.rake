@@ -10,13 +10,10 @@ namespace :bing_token do
 
     store = ::BingAdsRubySdk::OAuth2::FsStore.new(filename)
     auth = BingAdsRubySdk::OAuth2::AuthorizationHandler.new(
-      {
-        developer_token: developer_token,
-        client_id: bing_client_id
-      },
+      developer_token: developer_token,
+      client_id: bing_client_id,
       store: store
     )
-
     puts "Go to #{auth.code_url}",
          "You will be redirected to a URL at the end. Paste it here in the console and press enter"
 

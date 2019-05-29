@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Header>
-    <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v12">17caa13f-9073-43f9-83fd-347bc3f44a26</h:TrackingId>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v13">17caa13f-9073-43f9-83fd-347bc3f44a26</h:TrackingId>
   </s:Header>
   <s:Body>
-    <GetAccountResponse xmlns="https://bingads.microsoft.com/Customer/v12">
-      <Account xmlns:a="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <GetAccountResponse xmlns="https://bingads.microsoft.com/Customer/v13">
+      <Account xmlns:a="https://bingads.microsoft.com/Customer/v13/Entities" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
         <a:BillToCustomerId>168403565</a:BillToCustomerId>
         <a:CurrencyCode>EUR</a:CurrencyCode>
         <a:AccountFinancialStatus>ClearFinancialStatus</a:AccountFinancialStatus>

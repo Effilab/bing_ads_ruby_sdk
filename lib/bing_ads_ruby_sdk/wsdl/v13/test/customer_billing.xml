@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions name="CustomerBillingService" targetNamespace="https://bingads.microsoft.com/Billing/v12" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="https://bingads.microsoft.com/Billing/v12" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<wsdl:definitions name="CustomerBillingService" targetNamespace="https://bingads.microsoft.com/Billing/v13" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="https://bingads.microsoft.com/Billing/v13" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <wsp:Policy wsu:Id="BasicHttpBinding_ICustomerBillingService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -26,10 +26,10 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsdl:types>
-    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Billing/v12" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Billing/v13" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
-      <xs:import namespace="https://bingads.microsoft.com/Customer/v12/Entities"/>
-      <xs:import namespace="https://bingads.microsoft.com/Customer/v12/Exception"/>
+      <xs:import namespace="https://bingads.microsoft.com/Customer/v13/Entities"/>
+      <xs:import namespace="https://bingads.microsoft.com/Customer/v13/Exception"/>
       <xs:element name="GetBillingDocumentsInfoRequest">
         <xs:complexType>
           <xs:sequence>
@@ -47,32 +47,32 @@
       <xs:element name="GetBillingDocumentsInfoResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="BillingDocumentsInfo" nillable="true" type="q2:ArrayOfBillingDocumentInfo" xmlns:q2="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="BillingDocumentsInfo" nillable="true" type="q2:ArrayOfBillingDocumentInfo" xmlns:q2="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="TrackingId" nillable="true" type="xs:string"/>
-      <xs:element name="ApiBatchFault" nillable="true" type="q3:ApiBatchFault" xmlns:q3="https://bingads.microsoft.com/Customer/v12/Exception"/>
-      <xs:element name="ApiFault" nillable="true" type="q4:ApiFault" xmlns:q4="https://bingads.microsoft.com/Customer/v12/Exception"/>
+      <xs:element name="ApiBatchFault" nillable="true" type="q3:ApiBatchFault" xmlns:q3="https://bingads.microsoft.com/Customer/v13/Exception"/>
+      <xs:element name="ApiFault" nillable="true" type="q4:ApiFault" xmlns:q4="https://bingads.microsoft.com/Customer/v13/Exception"/>
       <xs:element name="GetBillingDocumentsRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="BillingDocumentsInfo" nillable="true" type="q5:ArrayOfBillingDocumentInfo" xmlns:q5="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="Type" type="q6:DataType" xmlns:q6="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="BillingDocumentsInfo" nillable="true" type="q5:ArrayOfBillingDocumentInfo" xmlns:q5="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="Type" type="q6:DataType" xmlns:q6="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="GetBillingDocumentsResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="BillingDocuments" nillable="true" type="q7:ArrayOfBillingDocument" xmlns:q7="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="BillingDocuments" nillable="true" type="q7:ArrayOfBillingDocument" xmlns:q7="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="AddInsertionOrderRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="InsertionOrder" nillable="true" type="q8:InsertionOrder" xmlns:q8="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="InsertionOrder" nillable="true" type="q8:InsertionOrder" xmlns:q8="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -87,7 +87,7 @@
       <xs:element name="UpdateInsertionOrderRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="InsertionOrder" nillable="true" type="q9:InsertionOrder" xmlns:q9="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="InsertionOrder" nillable="true" type="q9:InsertionOrder" xmlns:q9="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -98,34 +98,19 @@
           </xs:sequence>
         </xs:complexType>
       </xs:element>
-      <xs:element name="GetInsertionOrdersByAccountRequest">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="AccountId" type="xs:long"/>
-            <xs:element minOccurs="0" name="InsertionOrderIds" nillable="true" type="q10:ArrayOflong" xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
-      <xs:element name="GetInsertionOrdersByAccountResponse">
-        <xs:complexType>
-          <xs:sequence>
-            <xs:element minOccurs="0" name="InsertionOrders" nillable="true" type="q11:ArrayOfInsertionOrder" xmlns:q11="https://bingads.microsoft.com/Customer/v12/Entities"/>
-          </xs:sequence>
-        </xs:complexType>
-      </xs:element>
       <xs:element name="SearchInsertionOrdersRequest">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q12:ArrayOfPredicate" xmlns:q12="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="Ordering" nillable="true" type="q13:ArrayOfOrderBy" xmlns:q13="https://bingads.microsoft.com/Customer/v12/Entities"/>
-            <xs:element minOccurs="0" name="PageInfo" nillable="true" type="q14:Paging" xmlns:q14="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="Predicates" nillable="true" type="q10:ArrayOfPredicate" xmlns:q10="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="Ordering" nillable="true" type="q11:ArrayOfOrderBy" xmlns:q11="https://bingads.microsoft.com/Customer/v13/Entities"/>
+            <xs:element minOccurs="0" name="PageInfo" nillable="true" type="q12:Paging" xmlns:q12="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
       <xs:element name="SearchInsertionOrdersResponse">
         <xs:complexType>
           <xs:sequence>
-            <xs:element minOccurs="0" name="InsertionOrders" nillable="true" type="q15:ArrayOfInsertionOrder" xmlns:q15="https://bingads.microsoft.com/Customer/v12/Entities"/>
+            <xs:element minOccurs="0" name="InsertionOrders" nillable="true" type="q13:ArrayOfInsertionOrder" xmlns:q13="https://bingads.microsoft.com/Customer/v13/Entities"/>
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -194,7 +179,7 @@
       </xs:complexType>
       <xs:element name="ArrayOflong" nillable="true" type="tns:ArrayOflong"/>
     </xs:schema>
-    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:tns="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v13/Entities" xmlns:tns="https://bingads.microsoft.com/Customer/v13/Entities" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/"/>
       <xs:complexType name="ArrayOfBillingDocumentInfo">
         <xs:sequence>
@@ -251,7 +236,6 @@
       <xs:complexType name="InsertionOrder">
         <xs:sequence>
           <xs:element minOccurs="0" name="AccountId" type="xs:long"/>
-          <xs:element minOccurs="0" name="BalanceAmount" nillable="true" type="xs:double"/>
           <xs:element minOccurs="0" name="BookingCountryCode" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="Comment" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="EndDate" nillable="true" type="xs:dateTime"/>
@@ -266,6 +250,14 @@
           <xs:element minOccurs="0" name="Status" nillable="true" type="tns:InsertionOrderStatus"/>
           <xs:element minOccurs="0" name="PurchaseOrder" nillable="true" type="xs:string"/>
           <xs:element minOccurs="0" name="PendingChanges" nillable="true" type="tns:InsertionOrderPendingChanges"/>
+          <xs:element minOccurs="0" name="AccountNumber" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="BudgetRemaining" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="BudgetSpent" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="BudgetRemainingPercent" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="BudgetSpentPercent" nillable="true" type="xs:double"/>
+          <xs:element minOccurs="0" name="SeriesName" nillable="true" type="xs:string"/>
+          <xs:element minOccurs="0" name="IsInSeries" nillable="true" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="SeriesFrequencyType" nillable="true" type="xs:string"/>
         </xs:sequence>
       </xs:complexType>
       <xs:element name="InsertionOrder" nillable="true" type="tns:InsertionOrder"/>
@@ -317,6 +309,13 @@
             <xs:annotation>
               <xs:appinfo>
                 <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="Queued">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">11</EnumerationValue>
               </xs:appinfo>
             </xs:annotation>
           </xs:enumeration>
@@ -372,12 +371,6 @@
         </xs:restriction>
       </xs:simpleType>
       <xs:element name="InsertionOrderPendingChangesStatus" nillable="true" type="tns:InsertionOrderPendingChangesStatus"/>
-      <xs:complexType name="ArrayOfInsertionOrder">
-        <xs:sequence>
-          <xs:element maxOccurs="unbounded" minOccurs="0" name="InsertionOrder" nillable="true" type="tns:InsertionOrder"/>
-        </xs:sequence>
-      </xs:complexType>
-      <xs:element name="ArrayOfInsertionOrder" nillable="true" type="tns:ArrayOfInsertionOrder"/>
       <xs:complexType name="ArrayOfPredicate">
         <xs:sequence>
           <xs:element maxOccurs="unbounded" minOccurs="0" name="Predicate" nillable="true" type="tns:Predicate"/>
@@ -441,6 +434,12 @@
         </xs:sequence>
       </xs:complexType>
       <xs:element name="Paging" nillable="true" type="tns:Paging"/>
+      <xs:complexType name="ArrayOfInsertionOrder">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="InsertionOrder" nillable="true" type="tns:InsertionOrder"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfInsertionOrder" nillable="true" type="tns:ArrayOfInsertionOrder"/>
     </xs:schema>
     <xs:schema elementFormDefault="qualified" targetNamespace="https://adapi.microsoft.com" xmlns:tns="https://adapi.microsoft.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:complexType name="AdApiFaultDetail">
@@ -475,7 +474,7 @@
       </xs:complexType>
       <xs:element name="AdApiError" nillable="true" type="tns:AdApiError"/>
     </xs:schema>
-    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v12/Exception" xmlns:tns="https://bingads.microsoft.com/Customer/v12/Exception" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:schema elementFormDefault="qualified" targetNamespace="https://bingads.microsoft.com/Customer/v13/Exception" xmlns:tns="https://bingads.microsoft.com/Customer/v13/Exception" xmlns:xs="http://www.w3.org/2001/XMLSchema">
       <xs:import namespace="https://adapi.microsoft.com"/>
       <xs:complexType name="ApiBatchFault">
         <xs:complexContent mixed="false">
@@ -622,28 +621,6 @@
   <wsdl:message name="ICustomerBillingService_UpdateInsertionOrder_ApiFault_FaultMessage">
     <wsdl:part element="tns:ApiFault" name="detail"/>
   </wsdl:message>
-  <wsdl:message name="GetInsertionOrdersByAccountRequest">
-    <wsdl:part element="tns:GetInsertionOrdersByAccountRequest" name="parameters"/>
-  </wsdl:message>
-  <wsdl:message name="GetInsertionOrdersByAccountRequest_Headers">
-    <wsdl:part element="tns:ApplicationToken" name="ApplicationToken"/>
-    <wsdl:part element="tns:AuthenticationToken" name="AuthenticationToken"/>
-    <wsdl:part element="tns:DeveloperToken" name="DeveloperToken"/>
-    <wsdl:part element="tns:Password" name="Password"/>
-    <wsdl:part element="tns:UserName" name="UserName"/>
-  </wsdl:message>
-  <wsdl:message name="GetInsertionOrdersByAccountResponse">
-    <wsdl:part element="tns:GetInsertionOrdersByAccountResponse" name="parameters"/>
-  </wsdl:message>
-  <wsdl:message name="GetInsertionOrdersByAccountResponse_Headers">
-    <wsdl:part element="tns:TrackingId" name="TrackingId"/>
-  </wsdl:message>
-  <wsdl:message name="ICustomerBillingService_GetInsertionOrdersByAccount_AdApiFaultDetailFault_FaultMessage">
-    <wsdl:part element="q5:AdApiFaultDetail" name="detail" xmlns:q5="https://adapi.microsoft.com"/>
-  </wsdl:message>
-  <wsdl:message name="ICustomerBillingService_GetInsertionOrdersByAccount_ApiFault_FaultMessage">
-    <wsdl:part element="tns:ApiFault" name="detail"/>
-  </wsdl:message>
   <wsdl:message name="SearchInsertionOrdersRequest">
     <wsdl:part element="tns:SearchInsertionOrdersRequest" name="parameters"/>
   </wsdl:message>
@@ -661,7 +638,7 @@
     <wsdl:part element="tns:TrackingId" name="TrackingId"/>
   </wsdl:message>
   <wsdl:message name="ICustomerBillingService_SearchInsertionOrders_AdApiFaultDetailFault_FaultMessage">
-    <wsdl:part element="q6:AdApiFaultDetail" name="detail" xmlns:q6="https://adapi.microsoft.com"/>
+    <wsdl:part element="q5:AdApiFaultDetail" name="detail" xmlns:q5="https://adapi.microsoft.com"/>
   </wsdl:message>
   <wsdl:message name="ICustomerBillingService_SearchInsertionOrders_ApiFault_FaultMessage">
     <wsdl:part element="tns:ApiFault" name="detail"/>
@@ -683,7 +660,7 @@
     <wsdl:part element="tns:TrackingId" name="TrackingId"/>
   </wsdl:message>
   <wsdl:message name="ICustomerBillingService_GetAccountMonthlySpend_AdApiFaultDetailFault_FaultMessage">
-    <wsdl:part element="q7:AdApiFaultDetail" name="detail" xmlns:q7="https://adapi.microsoft.com"/>
+    <wsdl:part element="q6:AdApiFaultDetail" name="detail" xmlns:q6="https://adapi.microsoft.com"/>
   </wsdl:message>
   <wsdl:message name="ICustomerBillingService_GetAccountMonthlySpend_ApiFault_FaultMessage">
     <wsdl:part element="tns:ApiFault" name="detail"/>
@@ -691,47 +668,41 @@
   <wsdl:portType msc:usingSession="false" name="ICustomerBillingService">
     <wsdl:operation name="GetBillingDocumentsInfo">
       <wsdl:input message="tns:GetBillingDocumentsInfoRequest" name="GetBillingDocumentsInfoRequest" wsaw:Action="GetBillingDocumentsInfo"/>
-      <wsdl:output message="tns:GetBillingDocumentsInfoResponse" name="GetBillingDocumentsInfoResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetBillingDocumentsInfoResponse"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocumentsInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetBillingDocumentsInfoAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocumentsInfo_ApiBatchFault_FaultMessage" name="ApiBatchFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetBillingDocumentsInfoApiBatchFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocumentsInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetBillingDocumentsInfoApiFault"/>
+      <wsdl:output message="tns:GetBillingDocumentsInfoResponse" name="GetBillingDocumentsInfoResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetBillingDocumentsInfoResponse"/>
+      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocumentsInfo_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetBillingDocumentsInfoAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocumentsInfo_ApiBatchFault_FaultMessage" name="ApiBatchFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetBillingDocumentsInfoApiBatchFault"/>
+      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocumentsInfo_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetBillingDocumentsInfoApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetBillingDocuments">
       <wsdl:input message="tns:GetBillingDocumentsRequest" name="GetBillingDocumentsRequest" wsaw:Action="GetBillingDocuments"/>
-      <wsdl:output message="tns:GetBillingDocumentsResponse" name="GetBillingDocumentsResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetBillingDocumentsResponse"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocuments_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetBillingDocumentsAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocuments_ApiBatchFault_FaultMessage" name="ApiBatchFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetBillingDocumentsApiBatchFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocuments_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetBillingDocumentsApiFault"/>
+      <wsdl:output message="tns:GetBillingDocumentsResponse" name="GetBillingDocumentsResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetBillingDocumentsResponse"/>
+      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocuments_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetBillingDocumentsAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocuments_ApiBatchFault_FaultMessage" name="ApiBatchFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetBillingDocumentsApiBatchFault"/>
+      <wsdl:fault message="tns:ICustomerBillingService_GetBillingDocuments_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetBillingDocumentsApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="AddInsertionOrder">
       <wsdl:input message="tns:AddInsertionOrderRequest" name="AddInsertionOrderRequest" wsaw:Action="AddInsertionOrder"/>
-      <wsdl:output message="tns:AddInsertionOrderResponse" name="AddInsertionOrderResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/AddInsertionOrderResponse"/>
-      <wsdl:fault message="tns:ICustomerBillingService_AddInsertionOrder_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/AddInsertionOrderAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_AddInsertionOrder_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/AddInsertionOrderApiFault"/>
+      <wsdl:output message="tns:AddInsertionOrderResponse" name="AddInsertionOrderResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/AddInsertionOrderResponse"/>
+      <wsdl:fault message="tns:ICustomerBillingService_AddInsertionOrder_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/AddInsertionOrderAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerBillingService_AddInsertionOrder_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/AddInsertionOrderApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="UpdateInsertionOrder">
       <wsdl:input message="tns:UpdateInsertionOrderRequest" name="UpdateInsertionOrderRequest" wsaw:Action="UpdateInsertionOrder"/>
-      <wsdl:output message="tns:UpdateInsertionOrderResponse" name="UpdateInsertionOrderResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/UpdateInsertionOrderResponse"/>
-      <wsdl:fault message="tns:ICustomerBillingService_UpdateInsertionOrder_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/UpdateInsertionOrderAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_UpdateInsertionOrder_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/UpdateInsertionOrderApiFault"/>
-    </wsdl:operation>
-    <wsdl:operation name="GetInsertionOrdersByAccount">
-      <wsdl:input message="tns:GetInsertionOrdersByAccountRequest" name="GetInsertionOrdersByAccountRequest" wsaw:Action="GetInsertionOrdersByAccount"/>
-      <wsdl:output message="tns:GetInsertionOrdersByAccountResponse" name="GetInsertionOrdersByAccountResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetInsertionOrdersByAccountResponse"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetInsertionOrdersByAccount_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetInsertionOrdersByAccountAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetInsertionOrdersByAccount_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetInsertionOrdersByAccountApiFault"/>
+      <wsdl:output message="tns:UpdateInsertionOrderResponse" name="UpdateInsertionOrderResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/UpdateInsertionOrderResponse"/>
+      <wsdl:fault message="tns:ICustomerBillingService_UpdateInsertionOrder_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/UpdateInsertionOrderAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerBillingService_UpdateInsertionOrder_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/UpdateInsertionOrderApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="SearchInsertionOrders">
       <wsdl:input message="tns:SearchInsertionOrdersRequest" name="SearchInsertionOrdersRequest" wsaw:Action="SearchInsertionOrders"/>
-      <wsdl:output message="tns:SearchInsertionOrdersResponse" name="SearchInsertionOrdersResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/SearchInsertionOrdersResponse"/>
-      <wsdl:fault message="tns:ICustomerBillingService_SearchInsertionOrders_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/SearchInsertionOrdersAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_SearchInsertionOrders_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/SearchInsertionOrdersApiFault"/>
+      <wsdl:output message="tns:SearchInsertionOrdersResponse" name="SearchInsertionOrdersResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/SearchInsertionOrdersResponse"/>
+      <wsdl:fault message="tns:ICustomerBillingService_SearchInsertionOrders_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/SearchInsertionOrdersAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerBillingService_SearchInsertionOrders_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/SearchInsertionOrdersApiFault"/>
     </wsdl:operation>
     <wsdl:operation name="GetAccountMonthlySpend">
       <wsdl:input message="tns:GetAccountMonthlySpendRequest" name="GetAccountMonthlySpendRequest" wsaw:Action="GetAccountMonthlySpend"/>
-      <wsdl:output message="tns:GetAccountMonthlySpendResponse" name="GetAccountMonthlySpendResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetAccountMonthlySpendResponse"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetAccountMonthlySpend_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetAccountMonthlySpendAdApiFaultDetailFault"/>
-      <wsdl:fault message="tns:ICustomerBillingService_GetAccountMonthlySpend_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v12/ICustomerBillingService/GetAccountMonthlySpendApiFault"/>
+      <wsdl:output message="tns:GetAccountMonthlySpendResponse" name="GetAccountMonthlySpendResponse" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetAccountMonthlySpendResponse"/>
+      <wsdl:fault message="tns:ICustomerBillingService_GetAccountMonthlySpend_AdApiFaultDetailFault_FaultMessage" name="AdApiFaultDetailFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetAccountMonthlySpendAdApiFaultDetailFault"/>
+      <wsdl:fault message="tns:ICustomerBillingService_GetAccountMonthlySpend_ApiFault_FaultMessage" name="ApiFault" wsaw:Action="https://bingads.microsoft.com/Billing/v13/ICustomerBillingService/GetAccountMonthlySpendApiFault"/>
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICustomerBillingService" type="tns:ICustomerBillingService">
@@ -827,27 +798,6 @@
         <soap:fault name="ApiFault" namespace="" use="literal"/>
       </wsdl:fault>
     </wsdl:operation>
-    <wsdl:operation name="GetInsertionOrdersByAccount">
-      <soap:operation soapAction="GetInsertionOrdersByAccount" style="document"/>
-      <wsdl:input name="GetInsertionOrdersByAccountRequest">
-        <soap:header message="tns:GetInsertionOrdersByAccountRequest_Headers" part="ApplicationToken" use="literal"/>
-        <soap:header message="tns:GetInsertionOrdersByAccountRequest_Headers" part="AuthenticationToken" use="literal"/>
-        <soap:header message="tns:GetInsertionOrdersByAccountRequest_Headers" part="DeveloperToken" use="literal"/>
-        <soap:header message="tns:GetInsertionOrdersByAccountRequest_Headers" part="Password" use="literal"/>
-        <soap:header message="tns:GetInsertionOrdersByAccountRequest_Headers" part="UserName" use="literal"/>
-        <soap:body use="literal"/>
-      </wsdl:input>
-      <wsdl:output name="GetInsertionOrdersByAccountResponse">
-        <soap:header message="tns:GetInsertionOrdersByAccountResponse_Headers" part="TrackingId" use="literal"/>
-        <soap:body use="literal"/>
-      </wsdl:output>
-      <wsdl:fault name="AdApiFaultDetailFault">
-        <soap:fault name="AdApiFaultDetailFault" namespace="" use="literal"/>
-      </wsdl:fault>
-      <wsdl:fault name="ApiFault">
-        <soap:fault name="ApiFault" namespace="" use="literal"/>
-      </wsdl:fault>
-    </wsdl:operation>
     <wsdl:operation name="SearchInsertionOrders">
       <soap:operation soapAction="SearchInsertionOrders" style="document"/>
       <wsdl:input name="SearchInsertionOrdersRequest">
@@ -893,7 +843,7 @@
   </wsdl:binding>
   <wsdl:service name="CustomerBillingService">
     <wsdl:port binding="tns:BasicHttpBinding_ICustomerBillingService" name="BasicHttpBinding_ICustomerBillingService">
-      <soap:address location="https://clientcenter.api.bingads.microsoft.com/Api/Billing/v12/CustomerBillingService.svc"/>
+      <soap:address location="https://clientcenter.api.bingads.microsoft.com/Api/Billing/v13/CustomerBillingService.svc"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

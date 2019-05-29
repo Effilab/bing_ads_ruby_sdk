@@ -60,6 +60,7 @@ RSpec.describe 'Ad methods' do
           final_app_urls: nil,
           final_mobile_urls: nil,
           final_urls: a_kind_of(Hash),
+          final_url_suffix: nil,
           forward_compatibility_map: "",
           id: a_kind_of(String),
           status: a_kind_of(String),
@@ -70,8 +71,10 @@ RSpec.describe 'Ad methods' do
           path1: a_kind_of(String),
           path2: a_kind_of(String),
           text: a_kind_of(String),
+          text_part2: '',
           title_part1: a_kind_of(String),
-          title_part2: a_kind_of(String)
+          title_part2: a_kind_of(String),
+          title_part3: ''
         }
       )
     end

@@ -23,7 +23,6 @@ RSpec.describe 'CampaignCriterion methods' do
     it 'returns CampaignCriterion ids' do
       expect(add_campaign_criterions(190)).to include(
         campaign_criterion_ids: [a_kind_of(Integer)],
-        is_migrated: 'false',
         nested_partial_errors: ''
       )
     end
@@ -40,7 +39,6 @@ RSpec.describe 'CampaignCriterion methods' do
         campaign_id: Examples.campaign_id,
         criterion_type: 'Targets'
       )).to eq(
-        is_migrated: 'false',
         partial_errors: ''
       )
     end

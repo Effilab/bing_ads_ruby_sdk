@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
   <s:Header>
-    <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v12">37d18ec7-de78-4000-8a5d-ba4efadf1de0</h:TrackingId>
+    <h:TrackingId xmlns:h="https://bingads.microsoft.com/Customer/v13">37d18ec7-de78-4000-8a5d-ba4efadf1de0</h:TrackingId>
   </s:Header>
   <s:Body>
-    <FindAccountsOrCustomersInfoResponse xmlns="https://bingads.microsoft.com/Customer/v12">
-      <AccountInfoWithCustomerData xmlns:a="https://bingads.microsoft.com/Customer/v12/Entities" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+    <FindAccountsOrCustomersInfoResponse xmlns="https://bingads.microsoft.com/Customer/v13">
+      <AccountInfoWithCustomerData xmlns:a="https://bingads.microsoft.com/Customer/v13/Entities" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
         <a:AccountInfoWithCustomerData>
           <a:CustomerId>1234</a:CustomerId>
           <a:CustomerName>SDKTEST updated</a:CustomerName>

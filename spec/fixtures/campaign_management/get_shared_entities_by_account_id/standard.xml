@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<soap:Envelope xmlns:ns0="https://bingads.microsoft.com/CampaignManagement/v12" xmlns:ns1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ns2="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:ns3="http://schemas.datacontract.org/2004/07/System" xmlns:ns4="https://adapi.microsoft.com" xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+<soap:Envelope xmlns:ns0="https://bingads.microsoft.com/CampaignManagement/v13" xmlns:ns1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ns2="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:ns3="http://schemas.datacontract.org/2004/07/System" xmlns:ns4="https://adapi.microsoft.com" xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Header>
     <ns0:AuthenticationToken>***FILTERED***</ns0:AuthenticationToken>
     <ns0:DeveloperToken>***FILTERED***</ns0:DeveloperToken>

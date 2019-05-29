@@ -6,10 +6,10 @@ RSpec.describe 'CampaignManagement service' do
   describe 'Campaign methods' do
     let(:a_campaign_hash) do
       a_hash_including(
+        audience_ads_bid_adjustment: a_kind_of(String),
         bidding_scheme: a_kind_of(Hash),
         budget_type: a_kind_of(String),
         daily_budget: a_kind_of(String),
-        description: a_kind_of(String),
         forward_compatibility_map: '',
         id: Examples.campaign_id.to_s,
         name: a_string_starting_with('Acceptance Test Campaign'),
@@ -21,6 +21,9 @@ RSpec.describe 'CampaignManagement service' do
         settings: nil,
         budget_id: nil,
         languages: nil,
+        experiment_id: nil,
+        final_url_suffix: nil,
+        sub_type: nil,
       )
     end
 

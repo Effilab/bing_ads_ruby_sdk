@@ -12,6 +12,7 @@ RSpec.describe 'Keyword methods' do
         editorial_status: a_kind_of(String),
         final_app_urls: nil,
         final_mobile_urls: nil,
+        final_url_suffix: nil,
         final_urls: nil,
         forward_compatibility_map: a_kind_of(String),
         id: a_kind_of(String),

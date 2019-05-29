@@ -1,3 +1,10 @@
+## V1.1.0 Release
+
+- Use bing api v13
+
+- Bulk api v6
+
+
 ## V1.0.0 Release
 The main reasons of the refactoring were to:
 
@@ -10,10 +17,14 @@ The main reasons of the refactoring were to:
 
 Alongside these key points, we now have:
 
-- filtred logs
+- filtered logs
 
 - split concerns
 
 - strong specs suite
 
 - a customizable configuration
+
+- Use bing api v12
+
+- Bulk api v6

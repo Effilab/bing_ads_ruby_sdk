@@ -28,6 +28,7 @@ RSpec.describe 'CampaignManagement service' do
                 tracking_no_script: a_string_starting_with("<img src=\"//bat.bing.com/action/"),
                 tracking_script: a_string_starting_with('<script>(function(w,d,t,r,u)'),
                 tracking_status: 'Unverified',
+                customer_share: nil
               }
             ]
           },
