@@ -16,19 +16,10 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/Effilab/bing_ads_ruby_sdk'
   spec.license       = 'MIT'
 
-  spec.files         =  Dir[
-    "Gemfile",
-    "LICENSE.txt",
-    "README.md",
-    "Rakefile",
-    "bin/*",
-    "bing_ads_ruby_sdk.gemspec",
-    "changelog.md",
-    "lib/",
-    "tasks/"
-  ]
-
-  spec.require_paths = %w[lib]
+  spec.files         = `git ls-files`.split($/)
+  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.test_files    = spec.files.grep(%r{^(spec)/})
+  spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency 'signet', '~> 0.8.1'
   spec.add_runtime_dependency 'excon', '>= 0.62.0'
