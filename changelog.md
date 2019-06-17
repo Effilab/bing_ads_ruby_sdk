@@ -1,3 +1,6 @@
+## V1.2.0 Release
+Replaced Live connect auth with MIcrosoft Identity as it is now the default from Bing.
+
 ## V1.1.1 Release
 
 - fix broken 1.1.0 which didnt bundle lib folder in gem release
