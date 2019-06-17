@@ -19,7 +19,9 @@ module BingAdsRubySdk
       # @return [nil] if client.client_id is nil.
       def code_url
         return nil if client.client_id.nil?
-        "https://login.live.com/oauth20_authorize.srf?client_id=#{client.client_id}&scope=bingads.manage&response_type=code&redirect_uri=https://login.live.com/oauth20_desktop.srf"
+        "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=#{client.client_id}&"\
+        "scope=offline_access+https://ads.microsoft.com/ads.manage&response_type=code&"\
+        "redirect_uri=https://login.microsoftonline.com/common/oauth2/nativeclient"
       end
 
       # Once you have completed the oauth process in your browser using the code_url
@@ -73,11 +75,12 @@ module BingAdsRubySdk
 
       def build_client(developer_token, client_id)
         Signet::OAuth2::Client.new({
-          authorization_uri:    'https://login.live.com/oauth20_authorize.srf',
-          token_credential_uri: 'https://login.live.com/oauth20_token.srf',
-          redirect_uri:         'https://login.live.com/oauth20_desktop.srf',
+          authorization_uri:    'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+          token_credential_uri: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
+          redirect_uri:         'https://login.microsoftonline.com/common/oauth2/nativeclient',
           developer_token: developer_token,
-          client_id: client_id
+          client_id: client_id,
+          scope: 'offline_access'
         })
       end
 
