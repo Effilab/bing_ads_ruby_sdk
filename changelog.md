@@ -1,5 +1,5 @@
 ## V1.2.0 Release
-Replaced Live connect auth with MIcrosoft Identity as it is now the default from Bing.
+Replaced Live connect auth with Microsoft Identity as it is now the default from Bing.
 
 ## V1.1.1 Release
 
