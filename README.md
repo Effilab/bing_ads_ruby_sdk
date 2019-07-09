@@ -102,9 +102,9 @@ Here's how to run the tests:
 * Put your Client ID, Developer Token, and Parent Customer ID in the methods 
     with the same names in `spec/examples/examples.rb`
 * Run the specs in order, for example:
-  * `bundle exec spec spec/examples/1_...`, at the end of the spec there will be
+  * `bundle exec rspec spec/examples/1_...`, at the end of the spec there will be
     a message at the end about copying an ID into `spec/examples/examples.rb`
-  * `bundle exec spec spec/examples/2_...` 
+  * `bundle exec rspec spec/examples/2_...` 
   * keep repeating until you have run all the specs in `spec/examples`
 
 ## Contributing
