@@ -11,6 +11,17 @@ module BingAdsRubySdk
     HTTP_RETRY_COUNT_ON_TIMEOUT = 2
     HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT = 1
     HTTP_ERRORS = [ Net::HTTPServerError, Net::HTTPClientError ]
+    CONNECTION_SETTINGS = {
+      persistent: true,
+      tcp_nodelay: true,
+      retry_limit: HTTP_RETRY_COUNT_ON_TIMEOUT,
+      idempotent: true,
+      retry_interval: HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT,
+      connect_timeout: HTTP_OPEN_TIMEOUT,
+      read_timeout: HTTP_READ_TIMEOUT,
+      ssl_version: :TLSv1_2,
+      ciphers: "TLSv1.2:!aNULL:!eNULL",
+    }
 
     class << self
       def post(request)
@@ -46,18 +57,17 @@ module BingAdsRubySdk
         HTTP_ERRORS.any? { |http_error_class| response.class <= http_error_class }
       end
 
+      def connection_settings
+        CONNECTION_SETTINGS.tap do |args|
+          instrumentor = BingAdsRubySdk.config.instrumentor
+          args[:instrumentor] = instrumentor if instrumentor
+        end
+      end
+
       def connection(host)
         self.http_connections[host] ||= Excon.new(
           host,
-          persistent: true,
-          tcp_nodelay: true,
-          retry_limit: HTTP_RETRY_COUNT_ON_TIMEOUT,
-          idempotent: true,
-          retry_interval: HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT,
-          connect_timeout: HTTP_OPEN_TIMEOUT,
-          read_timeout: HTTP_READ_TIMEOUT,
-          ssl_version: :TLSv1_2,
-          ciphers: "TLSv1.2:!aNULL:!eNULL",
+          connection_settings
         )
       end
     end
