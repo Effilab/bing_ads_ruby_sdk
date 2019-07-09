@@ -72,6 +72,10 @@ BingAdsRubySdk.configure do |conf|
   conf.pretty_print_xml = true
   # to filter sensitive data before logging
   conf.filters = ["AuthenticationToken", "DeveloperToken"]
+  
+  # Optionally allow ActiveSupport::Notifications to be emitted by Excon.
+  # These notifications can then be sent on to your profiling system
+  # conf.instrumentor = ActiveSupport::Notifications 
 end
 ```
 
