@@ -1,3 +1,6 @@
+## V1.3.0 Release
+Allow instrumentation of HTTP requests via ActiveSupport::Notifications
+
 ## V1.2.0 Release
 Replaced Live connect auth with Microsoft Identity as it is now the default from Bing.
 
