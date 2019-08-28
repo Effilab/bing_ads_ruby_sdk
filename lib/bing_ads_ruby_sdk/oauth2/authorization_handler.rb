@@ -9,8 +9,8 @@ module BingAdsRubySdk
       # @param developer_token
       # @param client_id
       # @param store [Store]
-      def initialize(developer_token:, client_id:, store:)
-        @client = build_client(developer_token, client_id)
+      def initialize(developer_token:, client_id:, store:, client_secret: nil)
+        @client = build_client(developer_token, client_id, client_secret)
         @store  = store
         refresh_from_store
       end
@@ -73,7 +73,7 @@ module BingAdsRubySdk
         query_params.find { |arg| arg.first.casecmp("CODE").zero? }
       end
 
-      def build_client(developer_token, client_id)
+      def build_client(developer_token, client_id, client_secret=nil)
         Signet::OAuth2::Client.new({
           authorization_uri:    'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
           token_credential_uri: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
@@ -81,7 +81,7 @@ module BingAdsRubySdk
           developer_token: developer_token,
           client_id: client_id,
           scope: 'offline_access'
-        })
+        }.merge(client_secret ? { client_secret: client_secret } : {}))
       end
 
       def token_data

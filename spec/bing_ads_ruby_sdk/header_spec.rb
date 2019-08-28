@@ -6,11 +6,11 @@ RSpec.describe BingAdsRubySdk::Header do
   end
 
   before do
-    expect(::BingAdsRubySdk::OAuth2::AuthorizationHandler).to receive(:new).with(
+    expect(::BingAdsRubySdk::OAuth2::AuthorizationHandler).to receive(:new).with(hash_including(
       developer_token: '123abc',
       client_id: '1a-2b-3c',
       store: oauth_store
-    ).and_return auth_handler
+    )).and_return auth_handler
   end
 
   describe '.content' do

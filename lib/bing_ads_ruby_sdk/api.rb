@@ -27,13 +27,15 @@ module BingAdsRubySdk
                    environment: :production,
                    developer_token:,
                    client_id:,
-                   oauth_store:)
+                   oauth_store:,
+                   client_secret: nil)
       @version = version
       @environment = environment
       @header = Header.new(
         developer_token: developer_token,
         client_id: client_id,
-        store: oauth_store
+        store: oauth_store,
+        client_secret: client_secret
       )
     end
 
