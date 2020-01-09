@@ -23,6 +23,11 @@ module BingAdsRubySdk
         postprocess(response)
       end
 
+      def call_wrapper(action, message, *response_nesting)
+        response = call(action, message)
+        wrap_array(dig_response(response, response_nesting))
+      end
+
       def self.service
         raise 'implement me'
       end
@@ -30,11 +35,6 @@ module BingAdsRubySdk
       private
 
       attr_reader :soap_client
-
-      def call_wrapper(action, message, *response_nesting)
-        response = call(action, message)
-        wrap_array(dig_response(response, response_nesting))
-      end
 
       def preprocess(message, operation_name)
         order(
