@@ -1,3 +1,7 @@
+## V1.3.1 Release
+
+- add client secret in signatures
+
 ## V1.3.0 Release
 Allow instrumentation of HTTP requests via ActiveSupport::Notifications
 
