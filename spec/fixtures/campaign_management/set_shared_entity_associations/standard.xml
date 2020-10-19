@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope xmlns:ns0="https://bingads.microsoft.com/CampaignManagement/v13" xmlns:ns1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:ns2="http://schemas.datacontract.org/2004/07/System.Collections.Generic" xmlns:ns3="http://schemas.datacontract.org/2004/07/System" xmlns:ns4="https://adapi.microsoft.com" xmlns:ns5="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Header>
+    <ns0:AuthenticationToken>***FILTERED***</ns0:AuthenticationToken>
+    <ns0:DeveloperToken>***FILTERED***</ns0:DeveloperToken>
+    <ns0:CustomerId>***FILTERED***</ns0:CustomerId>
+    <ns0:CustomerAccountId>***FILTERED***</ns0:CustomerAccountId>
+  </soap:Header>
+  <soap:Body>
+    <ns0:SetSharedEntityAssociationsRequest>
+      <ns0:Associations>
+        <ns0:SharedEntityAssociation>
+          <ns0:EntityId>349704435</ns0:EntityId>
+          <ns0:EntityType>Account</ns0:EntityType>
+          <ns0:SharedEntityId>223200992903993</ns0:SharedEntityId>
+          <ns0:SharedEntityType>PlacementExclusionList</ns0:SharedEntityType>
+        </ns0:SharedEntityAssociation>
+      </ns0:Associations>
+    </ns0:SetSharedEntityAssociationsRequest>
+  </soap:Body>
+</soap:Envelope>
