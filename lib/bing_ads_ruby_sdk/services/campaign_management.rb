@@ -23,6 +23,9 @@ module BingAdsRubySdk
         call(__method__, message)
       end
 
+      def set_shared_entity_associations(message)
+        call(__method__, message)
+      end
 
       def update_conversion_goals(message)
         call(__method__, message)

@@ -285,4 +285,23 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
       ])
     end
   end
+
+  describe "set_shared_entity_associations" do
+    let(:action) { 'set_shared_entity_associations' }
+    let(:filename) { 'standard' }
+
+    it "returns expected result" do
+      expect(
+        service.set_shared_entity_associations(
+          associations: [{
+                           shared_entity_association: {
+                             entity_id: "349704435",
+                             entity_type: "Account",
+                             shared_entity_id: "223200992903993",
+                             shared_entity_type: "PlacementExclusionList"
+                           },
+                         }]
+      )).to eq({ partial_errors: "" })
+    end
+  end
 end
