@@ -37,9 +37,10 @@ api = BingAdsRubySdk::Api.new(
   developer_token: 'your_dev_token',
   client_id: 'your_bing_client_id'
 )
-api.customer_management.signup_customer(params)
-  filter: 'name',
-  top_n: 1
+api.customer_management.signup_customer(
+  parent_customer_id: parent_customer_id,
+  customer: customer_data, # a hash with your params
+  account: account_data.merge("@type" => "AdvertiserAccount")
 )
 
 # once you have your bing customer and account ids:
