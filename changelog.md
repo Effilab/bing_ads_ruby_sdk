@@ -1,3 +1,7 @@
+## V1.3.4 Release
+
+- lift constraint on signet gem
+
 ## V1.3.1 Release
 
 - add client secret in signatures
