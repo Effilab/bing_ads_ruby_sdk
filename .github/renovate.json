@@ -1,0 +1,95 @@
+{
+  "extends": [
+    "config:base",
+    "schedule:weekly",
+    ":preserveSemverRanges"
+  ],
+  "branchPrefix": "bot-",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["*"],
+      "stabilityDays": 5
+    },
+    {
+      "matchDepTypes": ["devDependencies"],
+      "matchPackagePatterns": ["lint", "prettier"],
+      "groupName": "linter-update",
+      "labels": ["linter-update"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["nodenv", "npm"],
+      "groupName": "js-update",
+      "labels": ["js-update"],
+      "automerge": true
+    },
+    {
+      "matchManagers": ["bundler", "ruby-version"],
+      "groupName": "ruby-update",
+      "labels": ["ruby-update"]
+    },
+    {
+      "matchManagers": ["pip-compile", "pip_requirements", "pip_setup", "pipenv", "pyenv", "setup-cfg"],
+      "groupName": "python-update",
+      "labels": ["python-update"]
+    },
+    {
+      "matchDepTypes": ["peerDependencies", "devDependencies", "dependencies"],
+      "matchUpdateTypes": ["minor","patch","pin","digest","rollback","bump"],
+      "groupName": "dep-update",
+      "labels": ["dependencies-update"],
+      "automerge": true
+    },
+    {
+      "matchCurrentVersion": "/^0\\./",
+      "matchUpdateTypes": ["minor","patch","pin","digest","rollback","bump"],
+      "groupName": "betas can break",
+      "labels": ["betas-update"],
+      "description": "according semver spec, version <1 can introduce breaking changes on each rel",
+      "automerge": false
+    },
+    {
+      "matchManagers": ["gitlabci", "gitlabci-include", "circleci", "helm-requirements", "helm-values", "helmfile", "helmv3","docker-compose", "dockerfile","kubernetes"],
+      "groupName": "ci-update",
+      "labels": ["ci-update"]
+    },
+    {
+      "matchPackageNames": ["redis"],
+      "allowedVersions": "<6",
+      "groupName": "redis-update",
+      "description": "explicit max version to prevent issues like need to coordinate with real infra"
+    },
+    {
+      "matchPackageNames": ["postgres"],
+      "allowedVersions": "<14",
+      "groupName": "postgres-update",
+      "description": "explicit max version to prevent issue like need to coordinate with real infra"
+    },
+    {
+      "matchPackageNames": ["ruby","circleci/ruby"],
+      "allowedVersions": "<3",
+      "groupName": "rubycore-update",
+      "description": "explicit max version to prevent issues"
+    },
+    {
+      "matchPackageNames": ["bonita"],
+      "allowedVersions": "<=7.12",
+      "description": "explicit max version to prevent issue like need to coordinate with bonita app install"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security"],
+    "extends": ["schedule:daily"]
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "extends": ["schedule:weekly"],
+    "commitMessageAction": "Update lockfiles",
+    "groupName": "lockfile-update",
+    "automerge": true
+  },
+  "dependencyDashboard": true,
+  "timezone": "Europe/Paris",
+  "prHourlyLimit": 6
+}
