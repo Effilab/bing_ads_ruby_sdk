@@ -41,7 +41,7 @@
       "automerge": true
     },
     {
-      "matchCurrentVersion": "/^0\\./",
+      "matchCurrentVersion": "/^\\^?v?0\\./",
       "matchUpdateTypes": ["minor","patch","pin","digest","rollback","bump"],
       "groupName": "betas can break",
       "labels": ["betas-update"],
