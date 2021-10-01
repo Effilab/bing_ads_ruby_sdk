@@ -5,7 +5,7 @@ module BingAdsRubySdk
   module OAuth2
     # Adds some useful methods to Signet::OAuth2::Client
     class AuthorizationHandler
-
+      SCOPE = "https://ads.microsoft.com/msads.manage"
       # @param developer_token
       # @param client_id
       # @param store [Store]
@@ -22,7 +22,7 @@ module BingAdsRubySdk
       def code_url
         return nil if client.client_id.nil?
         "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=#{client.client_id}&"\
-        "scope=offline_access+https://ads.microsoft.com/msads.manage&response_type=code&"\
+        "scope=offline_access+#{SCOPE}&response_type=code&"\
         "redirect_uri=https://login.microsoftonline.com/common/oauth2/nativeclient"
       end
 
@@ -41,7 +41,7 @@ module BingAdsRubySdk
       # @return [String] The access token.
       def fetch_or_refresh
         if client.expired?
-          client.refresh!
+          client.fetch_access_token!(scope: SCOPE)
           store.write(token_data)
         end
         client.access_token
@@ -82,7 +82,7 @@ module BingAdsRubySdk
           redirect_uri:         'https://login.microsoftonline.com/common/oauth2/nativeclient',
           developer_token: developer_token,
           client_id: client_id,
-          scope: 'offline_access,https://ads.microsoft.com/msads.manage'
+          scope: "offline_access"
         }.tap do |hash|
           hash[:client_secret] = client_secret if client_secret
         end
