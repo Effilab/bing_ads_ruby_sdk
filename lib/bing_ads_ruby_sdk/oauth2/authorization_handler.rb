@@ -82,7 +82,7 @@ module BingAdsRubySdk
           redirect_uri:         'https://login.microsoftonline.com/common/oauth2/nativeclient',
           developer_token: developer_token,
           client_id: client_id,
-          scope: 'offline_access'
+          scope: 'offline_access,https://ads.microsoft.com/msads.manage'
         }.tap do |hash|
           hash[:client_secret] = client_secret if client_secret
         end
