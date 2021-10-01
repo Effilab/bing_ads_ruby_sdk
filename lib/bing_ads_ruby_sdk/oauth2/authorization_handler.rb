@@ -22,7 +22,7 @@ module BingAdsRubySdk
       def code_url
         return nil if client.client_id.nil?
         "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=#{client.client_id}&"\
-        "scope=offline_access+https://ads.microsoft.com/ads.manage&response_type=code&"\
+        "scope=offline_access+https://ads.microsoft.com/msads.manage&response_type=code&"\
         "redirect_uri=https://login.microsoftonline.com/common/oauth2/nativeclient"
       end
 
