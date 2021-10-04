@@ -40,10 +40,7 @@ module BingAdsRubySdk
       # Get or fetch an access token.
       # @return [String] The access token.
       def fetch_or_refresh
-        if client.expired?
-          client.fetch_access_token!(scope: SCOPE)
-          store.write(token_data)
-        end
+        fetch_and_write if client.expired?
         client.access_token
       end
 
@@ -65,7 +62,11 @@ module BingAdsRubySdk
       # @return [#store.write] store's write output.
       def fetch_from_code(code)
         client.code = code
-        client.fetch_access_token!
+        fetch_and_write
+      end
+
+      def fetch_and_write
+        client.fetch_access_token!(scope: SCOPE)
         store.write(token_data)
       end
 
@@ -81,8 +82,7 @@ module BingAdsRubySdk
           token_credential_uri: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
           redirect_uri:         'https://login.microsoftonline.com/common/oauth2/nativeclient',
           developer_token: developer_token,
-          client_id: client_id,
-          scope: "offline_access"
+          client_id: client_id
         }.tap do |hash|
           hash[:client_secret] = client_secret if client_secret
         end
