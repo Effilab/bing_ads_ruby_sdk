@@ -6,9 +6,9 @@ module BingAdsRubySdk
     # Adds some useful methods to Signet::OAuth2::Client
     class AuthorizationHandler
       SCOPE = "https://ads.microsoft.com/msads.manage"
-      AUTHORIZE_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
-      TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-      REDIRECT_URL = "https://login.microsoftonline.com/common/oauth2/nativeclient"
+      AUTHORIZE_URI = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      TOKEN_URI = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      REDIRECT_URI = "https://login.microsoftonline.com/common/oauth2/nativeclient"
       # @param developer_token
       # @param client_id
       # @param store [Store]
@@ -16,17 +16,16 @@ module BingAdsRubySdk
         @client = Signet::OAuth2::Client.new(
           client_params(developer_token, client_id, client_secret)
         )
-        @store  = store
-        refresh_from_store
+        @store = store
       end
 
       # @return [String] unless client.client_id url is nil interpolated url.
       # @return [nil] if client.client_id is nil.
       def code_url
         return nil if client.client_id.nil?
-        "#{AUTHORIZE_URL}?client_id=#{client.client_id}&" \
+        "#{AUTHORIZE_URI}?client_id=#{client.client_id}&" \
         "scope=offline_access+#{SCOPE}&response_type=code&" \
-        "redirect_uri=#{REDIRECT_URL}"
+        "redirect_uri=#{REDIRECT_URI}"
       end
 
       # Once you have completed the oauth process in your browser using the code_url
@@ -43,6 +42,7 @@ module BingAdsRubySdk
       # Get or fetch an access token.
       # @return [String] The access token.
       def fetch_or_refresh
+        refresh_from_store
         fetch_and_write if client.expired?
         client.access_token
       end
@@ -81,9 +81,9 @@ module BingAdsRubySdk
 
       def client_params(developer_token, client_id, client_secret)
         {
-          authorization_uri: AUTHORIZE_URL,
-          token_credential_uri: TOKEN_URL,
-          redirect_uri: REDIRECT_URL,
+          authorization_uri: AUTHORIZE_URI,
+          token_credential_uri: TOKEN_URI,
+          redirect_uri: REDIRECT_URI,
           developer_token: developer_token,
           client_id: client_id
         }.tap do |hash|
