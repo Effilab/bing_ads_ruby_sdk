@@ -1,6 +1,6 @@
 ## V1.4.0 Release
 
-- Change scope from `https://ads.microsoft.com/ads.manage` to `https://ads.microsoft.com/msads.manage` as requested by Bing (deadline March 22)
+- Breaking: change scope from `https://ads.microsoft.com/ads.manage` to `https://ads.microsoft.com/msads.manage` as requested by Bing (deadline March 22)
 
 - now reading store at the very last moment to get freshest token
 
