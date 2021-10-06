@@ -6,6 +6,9 @@ module BingAdsRubySdk
     # Adds some useful methods to Signet::OAuth2::Client
     class AuthorizationHandler
       SCOPE = "https://ads.microsoft.com/msads.manage"
+      AUTHORIZE_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
+      TOKEN_URL = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+      REDIRECT_URL = "https://login.microsoftonline.com/common/oauth2/nativeclient"
       # @param developer_token
       # @param client_id
       # @param store [Store]
@@ -21,9 +24,9 @@ module BingAdsRubySdk
       # @return [nil] if client.client_id is nil.
       def code_url
         return nil if client.client_id.nil?
-        "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=#{client.client_id}&"\
-        "scope=offline_access+#{SCOPE}&response_type=code&"\
-        "redirect_uri=https://login.microsoftonline.com/common/oauth2/nativeclient"
+        "#{AUTHORIZE_URL}?client_id=#{client.client_id}&" \
+        "scope=offline_access+#{SCOPE}&response_type=code&" \
+        "redirect_uri=#{REDIRECT_URL}"
       end
 
       # Once you have completed the oauth process in your browser using the code_url
@@ -78,9 +81,9 @@ module BingAdsRubySdk
 
       def client_params(developer_token, client_id, client_secret)
         {
-          authorization_uri:    'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
-          token_credential_uri: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
-          redirect_uri:         'https://login.microsoftonline.com/common/oauth2/nativeclient',
+          authorization_uri: AUTHORIZE_URL,
+          token_credential_uri: TOKEN_URL,
+          redirect_uri: REDIRECT_URL,
           developer_token: developer_token,
           client_id: client_id
         }.tap do |hash|
