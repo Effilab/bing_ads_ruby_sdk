@@ -21,6 +21,7 @@
       "matchManagers": ["nodenv", "npm"],
       "groupName": "js-update",
       "labels": ["js-update"],
+      "allowedVersions": "<17",
       "automerge": true
     },
     {
@@ -41,7 +42,7 @@
       "automerge": true
     },
     {
-      "matchCurrentVersion": "/^\\^?v?0\\./",
+      "matchCurrentVersion": "/^\\^?v?~?0\\./",
       "matchUpdateTypes": ["minor","patch","pin","digest","rollback","bump"],
       "groupName": "betas can break",
       "labels": ["betas-update"],
@@ -57,17 +58,17 @@
       "matchPackageNames": ["redis"],
       "allowedVersions": "<6",
       "groupName": "redis-update",
-      "description": "explicit max version to prevent issues like need to coordinate with real infra"
+      "description": "explicit max version to prevent issues like need to coordinate with real infra on GCP"
     },
     {
-      "matchPackageNames": ["postgres"],
+      "matchPackageNames": ["postgres","postgis"],
       "allowedVersions": "<14",
       "groupName": "postgres-update",
-      "description": "explicit max version to prevent issue like need to coordinate with real infra"
+      "description": "explicit max version to prevent issue like need to coordinate with real infra on GCP"
     },
     {
       "matchPackageNames": ["ruby","circleci/ruby"],
-      "allowedVersions": "<3",
+      "allowedVersions": "<4",
       "groupName": "rubycore-update",
       "description": "explicit max version to prevent issues"
     },
