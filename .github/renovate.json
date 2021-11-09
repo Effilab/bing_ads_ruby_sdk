@@ -73,6 +73,12 @@
       "description": "explicit max version to prevent issues"
     },
     {
+      "matchPackageNames": ["node"],
+      "allowedVersions": "<17",
+      "groupName": "node-update",
+      "description": "explicit max version to prevent issues"
+    },
+    {
       "matchPackageNames": ["bonita"],
       "allowedVersions": "<=7.12",
       "description": "explicit max version to prevent issue like need to coordinate with bonita app install"
