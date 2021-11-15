@@ -333,7 +333,6 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
         }
       }
     end
-    # rubocop:enable Metrics/LineLength
 
     let(:error_class) { BingAdsRubySdk::Errors::GeneralError }
     let(:error_attributes) do

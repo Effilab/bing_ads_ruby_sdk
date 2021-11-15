@@ -11,7 +11,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
       SpecHelpers.wrapper(:customer_management, "SignupCustomer")
     end
 
-    let(:unordered_params) {
+    let(:unordered_params) do
       {
         "Account" => {
           "Name" => "test account",
@@ -25,9 +25,9 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
         },
         "ParentCustomerId" => "1234"
       }
-    }
+    end
 
-    let(:ordered_params) {
+    let(:ordered_params) do
       {
         "Customer" => {
           "Industry" => "industry",
@@ -41,7 +41,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
         },
         "ParentCustomerId" => "1234"
       }
-    }
+    end
 
     it("orders") { action }
   end
@@ -51,7 +51,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
       SpecHelpers.wrapper(:campaign_management, "UpdateUetTags")
     end
 
-    let(:unordered_params) {
+    let(:unordered_params) do
       {
         "UetTags" => [
           {
@@ -63,9 +63,9 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
           }
         ]
       }
-    }
+    end
 
-    let(:ordered_params) {
+    let(:ordered_params) do
       {
         "UetTags" => [
           {
@@ -77,7 +77,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
           }
         ]
       }
-    }
+    end
 
     it("orders") { action }
   end
@@ -87,7 +87,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
       SpecHelpers.wrapper(:campaign_management, "AddConversionGoals")
     end
 
-    let(:unordered_params) {
+    let(:unordered_params) do
       {
         "ConversionGoals" => [
           {
@@ -104,9 +104,9 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
           }
         ]
       }
-    }
+    end
 
-    let(:ordered_params) {
+    let(:ordered_params) do
       {
         "ConversionGoals" => [
           {
@@ -123,7 +123,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
           }
         ]
       }
-    }
+    end
 
     it("orders") { action }
   end
