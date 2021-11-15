@@ -97,7 +97,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
               "ConversionWindowInMinutes" => 43200,
               "CountType" => "Unique",
               "Name" => "contact_form",
-              "Revenue" => { "Type" => "NoValue" },
+              "Revenue" => {"Type" => "NoValue"},
               "Type" => "Event",
               "TagId" => 26003317
             }
@@ -114,7 +114,7 @@ RSpec.describe BingAdsRubySdk::Preprocessors::Order do
               "ConversionWindowInMinutes" => 43200,
               "CountType" => "Unique",
               "Name" => "contact_form",
-              "Revenue" => { "Type" => "NoValue" },
+              "Revenue" => {"Type" => "NoValue"},
               "TagId" => 26003317,
               "Type" => "Event",
               "ActionExpression" => "contact_form",
