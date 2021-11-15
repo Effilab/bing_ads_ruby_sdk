@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe BingAdsRubySdk::Preprocessors::Camelize do
-
   def action(params)
     described_class.new(params).call
   end

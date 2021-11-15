@@ -1,8 +1,6 @@
 module BingAdsRubySdk
   module Services
     class CampaignManagement < Base
-
-
       def add_ad_extensions(message)
         call(__method__, message)
       end
@@ -35,7 +33,6 @@ module BingAdsRubySdk
         call(__method__, message)
       end
 
-
       def get_ad_extensions_associations(message)
         wrap_array(
           call(__method__, message)
@@ -67,7 +64,7 @@ module BingAdsRubySdk
         call_wrapper(__method__, message, :ads, :ad)
       end
 
-      def get_budgets_by_ids(message= {})
+      def get_budgets_by_ids(message = {})
         call_wrapper(__method__, message, :budgets, :budget)
       end
 

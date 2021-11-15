@@ -1,12 +1,10 @@
 RSpec.describe BingAdsRubySdk::HttpClient do
-
   describe ".post" do
     let(:request) do
       double(:request,
         url: "http://bing_url.com/foo",
         content: "body",
-        headers: "headers"
-      )
+        headers: "headers")
     end
     let(:excon) { double(:excon) }
 
@@ -33,7 +31,7 @@ RSpec.describe BingAdsRubySdk::HttpClient do
     it "closes existing connections" do
       expect(described_class).to receive(:http_connections).and_return({
         "url1" => connection1,
-        "url2" => connection2,
+        "url2" => connection2
       })
       expect(connection1).to receive :reset
       expect(connection2).to receive :reset

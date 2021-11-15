@@ -3,8 +3,8 @@ RSpec.describe BingAdsRubySdk::Api do
     described_class.new(
       environment: :test,
       oauth_store: SpecHelpers.default_store,
-      client_id: 'client_id',
-      developer_token: 'developer_token'
+      client_id: "client_id",
+      developer_token: "developer_token"
     )
   end
 

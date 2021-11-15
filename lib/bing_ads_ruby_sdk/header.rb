@@ -18,9 +18,9 @@ module BingAdsRubySdk
     def content
       {
         "AuthenticationToken" => auth_handler.fetch_or_refresh,
-        "DeveloperToken" =>      developer_token,
-        "CustomerId" =>          customer[:customer_id],
-        "CustomerAccountId" =>   customer[:account_id]
+        "DeveloperToken" => developer_token,
+        "CustomerId" => customer[:customer_id],
+        "CustomerAccountId" => customer[:account_id]
       }.tap do |hash|
         hash["ClientSecret"] = client_secret if client_secret
       end

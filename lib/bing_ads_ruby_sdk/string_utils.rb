@@ -2,20 +2,19 @@
 
 module BingAdsRubySdk
   module StringUtils
-
     def self.camelize(string)
-      string.split(UNDERSCORE).collect!{ |w| w.capitalize }.join
+      string.split(UNDERSCORE).collect! { |w| w.capitalize }.join
     end
 
     def self.snakize(string)
       string.gsub(MULTIPLE_CAPSREGEX, MATCHING_PATTERN)
-            .gsub(SPLIT_REGEX, MATCHING_PATTERN)
-            .tr('-', '_')
-            .downcase
-            .to_sym
+        .gsub(SPLIT_REGEX, MATCHING_PATTERN)
+        .tr("-", "_")
+        .downcase
+        .to_sym
     end
 
-    UNDERSCORE = '_'
+    UNDERSCORE = "_"
     MULTIPLE_CAPSREGEX = /([A-Z]+)([A-Z][a-z])/
     SPLIT_REGEX = /([a-z\d])([A-Z])/
     MATCHING_PATTERN = '\1_\2'

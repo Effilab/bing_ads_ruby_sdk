@@ -1,9 +1,8 @@
-
 RSpec.describe BingAdsRubySdk::OAuth2::FsStore do
   after do
-    File.unlink('./.abc') if File.file?('./.abc')
+    File.unlink("./.abc") if File.file?("./.abc")
   end
-  let(:store) { described_class.new('.abc') }
+  let(:store) { described_class.new(".abc") }
 
   context "when not empty" do
     before { store.write(a: 1, b: "2") }

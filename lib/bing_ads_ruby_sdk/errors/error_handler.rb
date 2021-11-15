@@ -36,7 +36,7 @@ module BingAdsRubySdk
       end
 
       def partial_errors
-        response.select {|key| partial_error_keys.include?(key)}
+        response.select { |key| partial_error_keys.include?(key) }
       end
 
       # Gets populated partial error keys from the response

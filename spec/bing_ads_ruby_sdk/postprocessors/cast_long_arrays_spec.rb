@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe BingAdsRubySdk::Postprocessors::CastLongArrays do
-
   def action(params)
     described_class.new(params).call
   end
@@ -10,12 +9,12 @@ RSpec.describe BingAdsRubySdk::Postprocessors::CastLongArrays do
     expect(action({
       long: "foo",
       bar_bar: {
-        long: ['1', '2']
+        long: ["1", "2"]
       },
       foos: [
         {
           bar: {
-            long: ['3', '4']
+            long: ["3", "4"]
           }
         }
       ]
@@ -23,7 +22,7 @@ RSpec.describe BingAdsRubySdk::Postprocessors::CastLongArrays do
       long: "foo",
       bar_bar: [1, 2],
       foos: [
-        { bar: [3, 4] }
+        {bar: [3, 4]}
       ]
     })
   end

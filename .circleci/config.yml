@@ -4,9 +4,9 @@
 #
 version: 2
 jobs:
-  build:
+  build_2_x:
     docker:
-      - image: circleci/ruby:2.7.4
+      - image: ruby:2.7.4
 
     working_directory: ~/repo
 
@@ -44,9 +44,49 @@ jobs:
           path: /tmp/test-results
           destination: test-results
 
+  build_3_x:
+    docker:
+      - image: ruby:3.0.2
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # We can't use restore_cache because we don't include a Gemfile.lock
+      # in the Gem repo
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            mkdir log/
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/bing_ads_ruby_sdk/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
 
 workflows:
   version: 2
   build:
     jobs:
-      - build
+      - build_2_x
+      - build_3_x

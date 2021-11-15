@@ -2,7 +2,6 @@
 
 module BingAdsRubySdk
   class AugmentedParser
-
     def initialize(wsdl_file_path)
       @lolsoap_parser = LolSoap::WSDLParser.parse(File.read(wsdl_file_path))
       @concrete_abstract_mapping = {}

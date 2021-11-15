@@ -9,11 +9,11 @@ module BingAdsRubySdk
       def initialize(response)
         @raw_response = response
 
-        code = response[:error_code] || 'Bing Ads API error'
+        code = response[:error_code] || "Bing Ads API error"
 
         message = response[:message] ||
-                    response[:faultstring] ||
-                      'See exception details for more information.'
+          response[:faultstring] ||
+          "See exception details for more information."
 
         @message = format_message(code, message)
       end
@@ -23,7 +23,7 @@ module BingAdsRubySdk
       # Format the message separated by hyphen if
       # there is a code and a message
       def format_message(code, message)
-        [code, message].compact.join(' - ')
+        [code, message].compact.join(" - ")
       end
     end
 
@@ -47,7 +47,7 @@ module BingAdsRubySdk
 
         first_message = first_error_message(error_list)
         if error_list.count > 1
-          "API raised #{ error_list.count } errors, including: #{first_message}"
+          "API raised #{error_list.count} errors, including: #{first_message}"
         else
           first_message
         end
@@ -81,7 +81,7 @@ module BingAdsRubySdk
       # The fault key that corresponds to the inherited class
       # @return [Symbol] the fault key
       def fault_key
-        class_name = self.class.name.split('::').last
+        class_name = self.class.name.split("::").last
         BingAdsRubySdk::StringUtils.snakize(class_name).to_sym
       end
 
@@ -100,9 +100,7 @@ module BingAdsRubySdk
       end
 
       class << self
-        def error_lists=(value)
-          @error_lists = value
-        end
+        attr_writer :error_lists
 
         def error_lists
           @error_lists ||= []
@@ -118,7 +116,6 @@ module BingAdsRubySdk
 
     # Base class for handling partial errors
     class PartialErrorBase < ApplicationFault
-
       private
 
       # The parent hash for this type of error is the root of the response
@@ -140,6 +137,7 @@ module BingAdsRubySdk
       define_error_lists :batch_error
 
       private
+
       def fault_key
         :partial_errors
       end
@@ -149,6 +147,7 @@ module BingAdsRubySdk
       define_error_lists :batch_error_collection
 
       private
+
       def fault_key
         :nested_partial_errors
       end

@@ -1,5 +1,4 @@
 RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
-
   let(:service_name) { described_class.service }
   let(:soap_client) { SpecHelpers.soap_client(service_name) }
   let(:expected_xml) { SpecHelpers.request_xml_for(service_name, action, filename) }
@@ -15,8 +14,8 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "get_campaigns_by_account_id" do
-    let(:action) { 'get_campaigns_by_account_id' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_campaigns_by_account_id" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
@@ -30,25 +29,25 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "get_budgets_by_ids" do
-    let(:action) { 'get_budgets_by_ids' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_budgets_by_ids" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.get_budgets_by_ids
       ).to contain_exactly(
-        a_hash_including(name: "budget_DEFAULT"),
+        a_hash_including(name: "budget_DEFAULT")
       )
     end
   end
 
   describe "add_uet_tags" do
-    let(:action) { 'add_uet_tags' }
-    let(:filename) { 'standard' }
+    let(:action) { "add_uet_tags" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
-        service.add_uet_tags({ uet_tags: [ { uet_tag: { name: 'SDK-test', description: nil }}]})
+        service.add_uet_tags({uet_tags: [{uet_tag: {name: "SDK-test", description: nil}}]})
       ).to include({
         uet_tags: a_hash_including({
           uet_tag: a_collection_containing_exactly(
@@ -61,12 +60,12 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "update_uet_tags" do
-    let(:action) { 'update_uet_tags' }
-    let(:filename) { 'standard' }
+    let(:action) { "update_uet_tags" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
-        service.update_uet_tags({ uet_tags: [ { uet_tag: { name: 'updated SDK-test', id: 96031109, description: nil}}]})
+        service.update_uet_tags({uet_tags: [{uet_tag: {name: "updated SDK-test", id: 96031109, description: nil}}]})
       ).to eq({
         partial_errors: ""
       })
@@ -74,12 +73,12 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "get_uet_tags_by_ids" do
-    let(:action) { 'get_uet_tags_by_ids' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_uet_tags_by_ids" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
-        service.get_uet_tags_by_ids(tag_ids: [{ long: 96031109 }])
+        service.get_uet_tags_by_ids(tag_ids: [{long: 96031109}])
       ).to contain_exactly(
         a_hash_including(name: "updated SDK-test")
       )
@@ -87,23 +86,24 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "add_conversion_goals" do
-    let(:action) { 'add_conversion_goals' }
-    let(:filename) { 'standard' }
+    let(:action) { "add_conversion_goals" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.add_conversion_goals(conversion_goals: [{
           event_goal: {
-            action_expression: 'contact_form',
-            action_operator: 'Equals',
+            action_expression: "contact_form",
+            action_operator: "Equals",
             conversion_window_in_minutes: 43200,
             count_type: "Unique",
             name: "sdk test",
-            revenue: { "type": "NoValue" },
+            revenue: {type: "NoValue"},
             type: "Event",
             tag_id: 96031109
           }
-      }])).to eq({
+        }])
+      ).to eq({
         conversion_goal_ids: [46068449],
         partial_errors: ""
       })
@@ -111,37 +111,38 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "update_conversion_goals" do
-    let(:action) { 'update_conversion_goals' }
-    let(:filename) { 'standard' }
+    let(:action) { "update_conversion_goals" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.update_conversion_goals(conversion_goals: [{
           event_goal: {
             id: 46068449,
-            action_expression: 'contact_form',
-            action_operator: 'Equals',
+            action_expression: "contact_form",
+            action_operator: "Equals",
             conversion_window_in_minutes: 43200,
             count_type: "Unique",
             name: "updated sdk test",
-            revenue: { "type": "NoValue" },
+            revenue: {type: "NoValue"},
             tag_id: 96031109
           }
-      }])).to eq({
+        }])
+      ).to eq({
         partial_errors: ""
       })
     end
   end
 
   describe "get_conversion_goals_by_ids" do
-    let(:action) { 'get_conversion_goals_by_ids' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_conversion_goals_by_ids" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.get_conversion_goals_by_ids(
           conversion_goal_types: "Event",
-          conversion_goal_ids: [{ long: 46068449 }, { long: 46068448 }]
+          conversion_goal_ids: [{long: 46068449}, {long: 46068448}]
         )
       ).to contain_exactly(
         a_hash_including(name: "updated sdk test"),
@@ -151,8 +152,8 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "add_ad_extensions" do
-    let(:action) { 'add_ad_extensions' }
-    let(:filename) { 'standard' }
+    let(:action) { "add_ad_extensions" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
@@ -163,11 +164,12 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
               call_ad_extension: {
                 scheduling: {},
                 country_code: "NZ",
-                phone_number: "0123456699",
+                phone_number: "0123456699"
               }
             }
           ]
-      )).to include({
+        )
+      ).to include({
         ad_extension_identities: a_hash_including({
           ad_extension_identity: a_collection_containing_exactly(
             a_hash_including(id: "8177660966625")
@@ -179,8 +181,8 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "get_ad_extension_ids_by_account_id" do
-    let(:action) { 'get_ad_extension_ids_by_account_id' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_ad_extension_ids_by_account_id" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
@@ -195,8 +197,8 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "set_ad_extensions_associations" do
-    let(:action) { 'set_ad_extensions_associations' }
-    let(:filename) { 'standard' }
+    let(:action) { "set_ad_extensions_associations" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
@@ -209,15 +211,16 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
             }
           }],
           association_type: "Campaign"
-      )).to eq({
+        )
+      ).to eq({
         partial_errors: ""
       })
     end
   end
 
   describe "get_ad_extensions_associations" do
-    let(:action) { 'get_ad_extensions_associations' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_ad_extensions_associations" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
@@ -225,30 +228,31 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
           account_id: 150168726,
           association_type: "Campaign",
           ad_extension_type: "CalloutAdExtension",
-          entity_ids: [ { long: 349704437 }]
+          entity_ids: [{long: 349704437}]
         )
       ).to contain_exactly(
         a_hash_including(
-          ad_extension: a_hash_including(id: '8177650858590', text: "Informations Et Contact")
+          ad_extension: a_hash_including(id: "8177650858590", text: "Informations Et Contact")
         ),
         a_hash_including(
-          ad_extension: a_hash_including(id: '8177660966942', text: "CalloutText")
+          ad_extension: a_hash_including(id: "8177660966942", text: "CalloutText")
         )
       )
     end
   end
 
   describe "add_shared_entity" do
-    let(:action) { 'add_shared_entity' }
-    let(:filename) { 'standard' }
+    let(:action) { "add_shared_entity" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.add_shared_entity(
           negative_keyword_list: {
-            name: 'sdk list'
+            name: "sdk list"
           }
-      )).to eq({
+        )
+      ).to eq({
         list_item_ids: "",
         partial_errors: "",
         shared_entity_id: "229798145242911"
@@ -257,51 +261,54 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   end
 
   describe "get_shared_entities_by_account_id" do
-    let(:action) { 'get_shared_entities_by_account_id' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_shared_entities_by_account_id" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.get_shared_entities_by_account_id(
           shared_entity_type: "NegativeKeywordList"
-      )).to contain_exactly(
-        a_hash_including(id: '229798145242911', name: "sdk list")
+        )
+      ).to contain_exactly(
+        a_hash_including(id: "229798145242911", name: "sdk list")
       )
     end
   end
 
   describe "get_shared_entity_associations_by_entity_ids" do
-    let(:action) { 'get_shared_entity_associations_by_entity_ids' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_shared_entity_associations_by_entity_ids" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.get_shared_entity_associations_by_entity_ids({
-          entity_ids: [{ long: 349704435 }],
+          entity_ids: [{long: 349704435}],
           entity_type: "Campaign",
           shared_entity_type: "NegativeKeywordList"
-      })).to eq([
-        { entity_id: "349704435", entity_type: "Campaign", shared_entity_id: "223200992903993", shared_entity_type: "NegativeKeywordList" }
+        })
+      ).to eq([
+        {entity_id: "349704435", entity_type: "Campaign", shared_entity_id: "223200992903993", shared_entity_type: "NegativeKeywordList"}
       ])
     end
   end
 
   describe "set_shared_entity_associations" do
-    let(:action) { 'set_shared_entity_associations' }
-    let(:filename) { 'standard' }
+    let(:action) { "set_shared_entity_associations" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.set_shared_entity_associations(
           associations: [{
-                           shared_entity_association: {
-                             entity_id: "349704435",
-                             entity_type: "Account",
-                             shared_entity_id: "223200992903993",
-                             shared_entity_type: "PlacementExclusionList"
-                           },
-                         }]
-      )).to eq({ partial_errors: "" })
+            shared_entity_association: {
+              entity_id: "349704435",
+              entity_type: "Account",
+              shared_entity_id: "223200992903993",
+              shared_entity_type: "PlacementExclusionList"
+            }
+          }]
+        )
+      ).to eq({partial_errors: ""})
     end
   end
 end
