@@ -1,88 +1,48 @@
-# Ruby CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
 version: 2
+commands:
+  build:
+    steps:
+      - checkout
+      # We can't use restore_cache because we don't include a Gemfile.lock in the Gem repo
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run:
+          name: run tests
+          command: |
+            mkdir log/
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/bing_ads_ruby_sdk/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --format RspecJunitFormatter \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
 jobs:
   build_2_x:
     docker:
       - image: ruby:2.7.4
-
     working_directory: ~/repo
-
     steps:
-      - checkout
-
-      # We can't use restore_cache because we don't include a Gemfile.lock
-      # in the Gem repo
-
-      - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      # run tests!
-      - run:
-          name: run tests
-          command: |
-            mkdir log/
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/bing_ads_ruby_sdk/**/*_spec.rb" | \
-              circleci tests split --split-by=timings)"
-
-            bundle exec rspec \
-              --format progress \
-              --format RspecJunitFormatter \
-              --out /tmp/test-results/rspec.xml \
-              --format progress \
-              $TEST_FILES
-
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+      - build
 
   build_3_x:
     docker:
       - image: ruby:3.0.2
-
     working_directory: ~/repo
-
     steps:
-      - checkout
-
-      # We can't use restore_cache because we don't include a Gemfile.lock
-      # in the Gem repo
-
-      - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      # run tests!
-      - run:
-          name: run tests
-          command: |
-            mkdir log/
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/bing_ads_ruby_sdk/**/*_spec.rb" | \
-              circleci tests split --split-by=timings)"
-
-            bundle exec rspec \
-              --format progress \
-              --format RspecJunitFormatter \
-              --out /tmp/test-results/rspec.xml \
-              --format progress \
-              $TEST_FILES
-
-      # collect reports
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /tmp/test-results
-          destination: test-results
+      - build
 
 workflows:
   version: 2
