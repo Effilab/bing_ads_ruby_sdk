@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../examples'
+require_relative "../examples"
 
 RSpec.describe "AdExtension methods" do
   include_context "use api"
@@ -26,8 +26,8 @@ RSpec.describe "AdExtension methods" do
             description_1: "Description 1 - #{Examples.random}"[0..34],
             description_2: "Description 2 - #{Examples.random}"[0..34],
             display_text: "Display Text #{Examples.random}"[0..24],
-            final_mobile_urls: [ { string: "http://mobile.example.com" } ],
-            final_urls: [ { string: "http://www.example.com" } ],
+            final_mobile_urls: [{string: "http://mobile.example.com"}],
+            final_urls: [{string: "http://www.example.com"}],
             tracking_url_template: "{lpurl}"
           }
         }
@@ -61,26 +61,25 @@ RSpec.describe "AdExtension methods" do
       account_id: Examples.account_id,
       ad_extension_type: "CallAdExtension SitelinkAdExtension CalloutAdExtension",
       association_type: "Campaign",
-      entity_ids: [{ long: Examples.campaign_id }]
+      entity_ids: [{long: Examples.campaign_id}]
     )
   end
 
   context "with shared ad extensions" do
     before(:all) do
-      # we use a global var to create ad extensions once, its enough
-      $created_ad_extension_response = create_add_ad_extensions
-      set_ad_extensions_associations(ad_extension_ids($created_ad_extension_response))
+      @created_ad_extension_response = create_add_ad_extensions
+      set_ad_extensions_associations(ad_extension_ids(@created_ad_extension_response))
     end
 
     describe "#add_ad_extensions" do
       it "returns AdExtension ids" do
-        expect($created_ad_extension_response).to include(
+        expect(@created_ad_extension_response).to include(
           ad_extension_identities: {
             ad_extension_identity: [
-              { id: a_kind_of(String), version: "1" },
-              { id: a_kind_of(String), version: "1" },
-              { id: a_kind_of(String), version: "1" },
-            ],
+              {id: a_kind_of(String), version: "1"},
+              {id: a_kind_of(String), version: "1"},
+              {id: a_kind_of(String), version: "1"}
+            ]
           },
           nested_partial_errors: ""
         )
@@ -102,7 +101,7 @@ RSpec.describe "AdExtension methods" do
             is_call_only: "false",
             is_call_tracking_enabled: "false",
             phone_number: match(/[0-9]*/),
-            require_toll_free_tracking_number: nil,
+            require_toll_free_tracking_number: nil
           },
           association_type: "Campaign",
           editorial_status: a_kind_of(String),
@@ -160,7 +159,7 @@ RSpec.describe "AdExtension methods" do
       end
 
       def get_association(associations, type)
-        associations.select { |record| record[:ad_extension][:type] == type }.first
+        associations.find { |record| record[:ad_extension][:type] == type }
       end
 
       it "returns a list of Associations" do
@@ -182,9 +181,9 @@ RSpec.describe "AdExtension methods" do
       it "returns a list of IDs" do
         fetched_ad_extension_ids = api.campaign_management.get_ad_extension_ids_by_account_id(
           account_id: Examples.account_id,
-          ad_extension_type: 'SitelinkAdExtension CallAdExtension CalloutAdExtension'
+          ad_extension_type: "SitelinkAdExtension CallAdExtension CalloutAdExtension"
         )
-        ad_extension_ids($created_ad_extension_response).each do |id|
+        ad_extension_ids(@created_ad_extension_response).each do |id|
           expect(fetched_ad_extension_ids).to include id
         end
       end
@@ -194,8 +193,8 @@ RSpec.describe "AdExtension methods" do
       it "returns AdExtensions" do
         extensions = api.campaign_management.get_ad_extensions_by_ids(
           account_id: Examples.account_id,
-          ad_extension_ids: ad_extension_ids($created_ad_extension_response).map { |id| { long: id } },
-          ad_extension_type: 'SitelinkAdExtension CallAdExtension CalloutAdExtension'
+          ad_extension_ids: ad_extension_ids(@created_ad_extension_response).map { |id| {long: id} },
+          ad_extension_type: "SitelinkAdExtension CallAdExtension CalloutAdExtension"
         )
         expect(extensions).to be_an(Array)
       end
@@ -208,8 +207,7 @@ RSpec.describe "AdExtension methods" do
     it "returns no errors" do
       expect(api.campaign_management.call(:delete_ad_extensions,
         account_id: Examples.account_id,
-        ad_extension_ids: [ { long: ad_extension_ids(response).first }]
-      )).to eq(partial_errors: "")
+        ad_extension_ids: [{long: ad_extension_ids(response).first}])).to eq(partial_errors: "")
     end
   end
 
@@ -228,11 +226,10 @@ RSpec.describe "AdExtension methods" do
         ad_extension_id_to_entity_id_associations: [
           ad_extension_id_to_entity_id_association: {
             ad_extension_id: ad_extension_id,
-            entity_id: Examples.campaign_id,
+            entity_id: Examples.campaign_id
           }
         ],
-        association_type: "Campaign"
-      )).to eq(partial_errors: "")
+        association_type: "Campaign")).to eq(partial_errors: "")
     end
   end
 end

@@ -1,7 +1,6 @@
 module BingAdsRubySdk
   module Services
     class Bulk < Base
-
       def download_campaigns_by_account_ids(message)
         call(__method__, message)
       end

@@ -1,5 +1,4 @@
 RSpec.describe BingAdsRubySdk::Services::CustomerManagement do
-
   let(:service_name) { described_class.service }
   let(:soap_client) { SpecHelpers.soap_client(service_name) }
   let(:expected_xml) { SpecHelpers.request_xml_for(service_name, action, filename) }
@@ -15,8 +14,8 @@ RSpec.describe BingAdsRubySdk::Services::CustomerManagement do
   end
 
   describe "signup_customer" do
-    let(:action) { 'signup_customer' }
-    let(:filename) { 'standard' }
+    let(:action) { "signup_customer" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
@@ -24,9 +23,9 @@ RSpec.describe BingAdsRubySdk::Services::CustomerManagement do
           parent_customer_id: 9876,
           customer: {
             industry: "NA",
-            market_country: 'FR',
-            market_language: 'French',
-            name: 'sdk customer',
+            market_country: "FR",
+            market_language: "French",
+            name: "sdk customer",
             customer_address: {
               city: "Nice",
               country_code: "FR",
@@ -36,9 +35,9 @@ RSpec.describe BingAdsRubySdk::Services::CustomerManagement do
           },
           # Note that the structure of this type is slightly different to other types, in accord with the Bing WSDL
           account: {
-            '@type' => 'AdvertiserAccount',
-            currency_code: "EUR",
-            name: 'SDK account'
+            "@type" => "AdvertiserAccount",
+            :currency_code => "EUR",
+            :name => "SDK account"
           }
         )
       ).to include(
@@ -49,31 +48,31 @@ RSpec.describe BingAdsRubySdk::Services::CustomerManagement do
   end
 
   describe "get_account" do
-    let(:action) { 'get_account' }
-    let(:filename) { 'standard' }
+    let(:action) { "get_account" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.get_account(account_id: 5678)
       ).to include(
-        account: a_hash_including( id: "5678", name: "SDKTEST")
+        account: a_hash_including(id: "5678", name: "SDKTEST")
       )
     end
   end
 
   describe "update_account" do
-    let(:action) { 'update_account' }
-    let(:filename) { 'standard' }
+    let(:action) { "update_account" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
         service.update_account(
           account: {
-            '@type' => 'AdvertiserAccount',
-            id: 5678,
-            time_stamp: "AAAAAE496a4=",
-            currency_code: "EUR",
-            name: "SDKTEST updated"
+            "@type" => "AdvertiserAccount",
+            :id => 5678,
+            :time_stamp => "AAAAAE496a4=",
+            :currency_code => "EUR",
+            :name => "SDKTEST updated"
           }
         )
       ).to eq(
@@ -83,12 +82,12 @@ RSpec.describe BingAdsRubySdk::Services::CustomerManagement do
   end
 
   describe "find_accounts_or_customers_info" do
-    let(:action) { 'find_accounts_or_customers_info' }
-    let(:filename) { 'standard' }
+    let(:action) { "find_accounts_or_customers_info" }
+    let(:filename) { "standard" }
 
     it "returns expected result" do
       expect(
-        service.find_accounts_or_customers_info(filter: 'SDKTEST', top_n: 1)
+        service.find_accounts_or_customers_info(filter: "SDKTEST", top_n: 1)
       ).to contain_exactly(
         a_hash_including(customer_name: "SDKTEST updated", account_id: "5678")
       )

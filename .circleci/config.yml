@@ -1,27 +1,15 @@
-# Ruby CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
-version: 2
-jobs:
+version: 2.1
+
+commands:
   build:
-    docker:
-      - image: circleci/ruby:2.7.4
-
-    working_directory: ~/repo
-
     steps:
       - checkout
-
-      # We can't use restore_cache because we don't include a Gemfile.lock
-      # in the Gem repo
-
+      # We can't use restore_cache because we don't include a Gemfile.lock in the Gem repo
       - run:
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      # run tests!
+      - run: bundle exec standardrb
       - run:
           name: run tests
           command: |
@@ -36,7 +24,6 @@ jobs:
               --out /tmp/test-results/rspec.xml \
               --format progress \
               $TEST_FILES
-
       # collect reports
       - store_test_results:
           path: /tmp/test-results
@@ -44,9 +31,24 @@ jobs:
           path: /tmp/test-results
           destination: test-results
 
+jobs:
+  build_2_x:
+    docker:
+      - image: ruby:2.7.4
+    working_directory: ~/repo
+    steps:
+      - build
+
+  build_3_x:
+    docker:
+      - image: ruby:3.0.2
+    working_directory: ~/repo
+    steps:
+      - build
 
 workflows:
   version: 2
   build:
     jobs:
-      - build
+      - build_2_x
+      - build_3_x

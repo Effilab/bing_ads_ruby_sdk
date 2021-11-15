@@ -23,12 +23,9 @@ module BingAdsRubySdk
     # @option environment [Symbol] :sandbox Use the sandbox WSDL configuration
     # @param developer_token
     # @param client_id
-    def initialize(version: DEFAULT_SDK_VERSION,
-                   environment: :production,
-                   developer_token:,
-                   client_id:,
-                   oauth_store:,
-                   client_secret: nil)
+    def initialize(developer_token:, client_id:, oauth_store:, version: DEFAULT_SDK_VERSION,
+      environment: :production,
+      client_secret: nil)
       @version = version
       @environment = environment
       @header = Header.new(

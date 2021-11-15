@@ -3,7 +3,6 @@
 module BingAdsRubySdk
   module Preprocessors
     class Order
-
       def initialize(wsdl_wrapper, params)
         @wrapper = wsdl_wrapper
         @params = params
@@ -51,7 +50,7 @@ module BingAdsRubySdk
       def order(hash, allowed_attributes)
         array = allowed_attributes.keys
         # basically order by index in reference array
-        Hash[ hash.sort_by { |k, _| array.index(wrapper.base_type_name(allowed_attributes, k)) || k.ord } ]
+        hash.sort_by { |k, _| array.index(wrapper.base_type_name(allowed_attributes, k)) || k.ord }.to_h
       end
     end
   end

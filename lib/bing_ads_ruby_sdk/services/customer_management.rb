@@ -1,7 +1,6 @@
 module BingAdsRubySdk
   module Services
     class CustomerManagement < Base
-
       def get_account(message)
         call(__method__, message)
       end

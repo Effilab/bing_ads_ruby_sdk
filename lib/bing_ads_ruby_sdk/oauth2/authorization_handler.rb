@@ -1,5 +1,5 @@
-require 'signet/oauth_2/client'
-require 'bing_ads_ruby_sdk/oauth2/fs_store'
+require "signet/oauth_2/client"
+require "bing_ads_ruby_sdk/oauth2/fs_store"
 
 module BingAdsRubySdk
   module OAuth2
@@ -9,6 +9,7 @@ module BingAdsRubySdk
       AUTHORIZE_URI = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
       TOKEN_URI = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
       REDIRECT_URI = "https://login.microsoftonline.com/common/oauth2/nativeclient"
+
       # @param developer_token
       # @param client_id
       # @param store [Store]

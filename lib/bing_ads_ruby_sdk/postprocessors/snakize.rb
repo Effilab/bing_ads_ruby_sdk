@@ -3,7 +3,6 @@
 module BingAdsRubySdk
   module Postprocessors
     class Snakize
-
       def initialize(params)
         @params = params
       end
@@ -21,7 +20,7 @@ module BingAdsRubySdk
         obj.each_with_object({}) do |(k, v), h|
           case v
           when Hash then v = process(v)
-          when Array then v = v.map {|elt| process(elt) }
+          when Array then v = v.map { |elt| process(elt) }
           end
           h[snakize(k)] = v
         end
