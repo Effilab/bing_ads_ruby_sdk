@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
-require 'bing_ads_ruby_sdk/preprocessors/camelize'
-require 'bing_ads_ruby_sdk/preprocessors/order'
-require 'bing_ads_ruby_sdk/postprocessors/snakize'
-require 'bing_ads_ruby_sdk/postprocessors/cast_long_arrays'
-
+require "bing_ads_ruby_sdk/preprocessors/camelize"
+require "bing_ads_ruby_sdk/preprocessors/order"
+require "bing_ads_ruby_sdk/postprocessors/snakize"
+require "bing_ads_ruby_sdk/postprocessors/cast_long_arrays"
 
 module BingAdsRubySdk
   module Services
     class Base
-
       def initialize(soap_client)
         @soap_client = soap_client
       end
@@ -18,7 +16,7 @@ module BingAdsRubySdk
         camelized_name = BingAdsRubySdk::StringUtils.camelize(operation_name.to_s)
         response = soap_client.call(
           camelized_name,
-          preprocess(message, camelized_name),
+          preprocess(message, camelized_name)
         )
         postprocess(response)
       end
@@ -29,7 +27,7 @@ module BingAdsRubySdk
       end
 
       def self.service
-        raise 'implement me'
+        raise "implement me"
       end
 
       private
@@ -67,7 +65,7 @@ module BingAdsRubySdk
 
       def dig_response(response, keys)
         response.dig(*keys)
-      rescue StandardError => e
+      rescue
         nil
       end
 

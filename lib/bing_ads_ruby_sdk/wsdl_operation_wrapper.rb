@@ -2,7 +2,6 @@
 
 module BingAdsRubySdk
   class WsdlOperationWrapper
-
     attr_reader :request_namespace_type
 
     def initialize(parser, operation_name)

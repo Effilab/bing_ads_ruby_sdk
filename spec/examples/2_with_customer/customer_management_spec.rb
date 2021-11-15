@@ -1,7 +1,7 @@
-require_relative '../examples'
+require_relative "../examples"
 
-RSpec.describe 'CustomerManagement service' do
-  include_context 'use api'
+RSpec.describe "CustomerManagement service" do
+  include_context "use api"
 
   let(:get_customer) do
     api.customer_management.call(:get_customer, customer_id: Examples.customer_id)
@@ -11,17 +11,16 @@ RSpec.describe 'CustomerManagement service' do
     api.customer_management.get_account(account_id: Examples.account_id)
   end
 
-  describe 'Account methods' do
-    describe '#find_accounts' do
+  describe "Account methods" do
+    describe "#find_accounts" do
       subject do
         api.customer_management.call(:find_accounts,
-          account_filter: '',
+          account_filter: "",
           customer_id: Examples.customer_id,
-          top_n: 1
-        )
+          top_n: 1)
       end
 
-      it 'returns a list of basic account information' do
+      it "returns a list of basic account information" do
         is_expected.to include(
           accounts_info: {
             account_info: [
@@ -30,23 +29,23 @@ RSpec.describe 'CustomerManagement service' do
                 name: a_kind_of(String),
                 number: a_kind_of(String),
                 account_life_cycle_status: a_kind_of(String),
-                pause_reason: nil,
-              },
-            ],
+                pause_reason: nil
+              }
+            ]
           }
         )
       end
     end
 
-    describe '#find_accounts_or_customers_info' do
+    describe "#find_accounts_or_customers_info" do
       subject do
         api.customer_management.find_accounts_or_customers_info(
-          filter: '',
+          filter: "",
           top_n: 1
         )
       end
 
-      it 'returns a list of records containing account / customer pairs' do
+      it "returns a list of records containing account / customer pairs" do
         is_expected.to contain_exactly(
           {
             customer_id: a_kind_of(String),
@@ -55,14 +54,14 @@ RSpec.describe 'CustomerManagement service' do
             account_name: a_kind_of(String),
             account_number: a_kind_of(String),
             account_life_cycle_status: a_kind_of(String), # e.g. 'Active'
-            pause_reason: nil,
+            pause_reason: nil
           }
         )
       end
     end
 
-    describe '#get_account' do
-      it 'returns information about the current account' do
+    describe "#get_account" do
+      it "returns information about the current account" do
         expect(get_account).to include(
           account: {
             bill_to_customer_id: a_kind_of(String),
@@ -87,9 +86,9 @@ RSpec.describe 'CustomerManagement service' do
               customer_info: [
                 {
                   id: a_kind_of(String),
-                  name: a_kind_of(String),
+                  name: a_kind_of(String)
                 }
-              ],
+              ]
             },
             sales_house_customer_id: nil,
             tax_information: "",
@@ -103,28 +102,28 @@ RSpec.describe 'CustomerManagement service' do
       end
     end
 
-    describe '#update_account' do
+    describe "#update_account" do
       let(:account) { get_account[:account] }
       subject do
         api.customer_management.update_account(
           account: {
-            '@type' => 'AdvertiserAccount',
-            id: account[:id],
-            time_stamp: account[:time_stamp],
-            name: "Test Account #{Time.now} - updated",
+            "@type" => "AdvertiserAccount",
+            :id => account[:id],
+            :time_stamp => account[:time_stamp],
+            :name => "Test Account #{Time.now} - updated"
           }
         )
       end
 
-      it 'returns the last modified time' do
+      it "returns the last modified time" do
         is_expected.to include(last_modified_time: a_kind_of(String))
       end
     end
   end
 
-  describe 'Customer methods' do
-    describe 'get_customer' do
-      it 'returns customer data' do
+  describe "Customer methods" do
+    describe "get_customer" do
+      it "returns customer data" do
         expect(get_customer).to include(
           customer: {
             customer_financial_status: "ClearFinancialStatus",
@@ -140,27 +139,26 @@ RSpec.describe 'CustomerManagement service' do
             customer_life_cycle_status: "Active",
             time_stamp: a_kind_of(String),
             number: a_kind_of(String),
-            customer_address: a_kind_of(Hash),
+            customer_address: a_kind_of(Hash)
           }
         )
       end
     end
 
-    describe '#get_customers_info' do
+    describe "#get_customers_info" do
       subject do
         api.customer_management.call(:get_customers_info,
-          customer_name_filter: '',
-          top_n: 1
-        )
+          customer_name_filter: "",
+          top_n: 1)
       end
 
-      it 'returns a list of simple customer information' do
+      it "returns a list of simple customer information" do
         is_expected.to include(
           customers_info: {
             customer_info: a_collection_including(
               {
                 id: a_kind_of(String),
-                name: a_kind_of(String),
+                name: a_kind_of(String)
               }
             )
           }
@@ -168,7 +166,7 @@ RSpec.describe 'CustomerManagement service' do
       end
     end
 
-    describe '#update_customer' do
+    describe "#update_customer" do
       let(:original_customer) { get_customer }
 
       subject do
@@ -182,7 +180,7 @@ RSpec.describe 'CustomerManagement service' do
         })
       end
 
-      it 'returns the update timestamp' do
+      it "returns the update timestamp" do
         is_expected.to include(last_modified_time: a_kind_of(String))
       end
     end

@@ -3,7 +3,6 @@
 module BingAdsRubySdk
   module Postprocessors
     class CastLongArrays
-
       def initialize(params)
         @params = params
       end
@@ -26,7 +25,7 @@ module BingAdsRubySdk
               process(v)
             end
           when Array
-            v.each {|elt| process(elt) }
+            v.each { |elt| process(elt) }
           end
         end
       end

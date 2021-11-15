@@ -10,7 +10,7 @@ module BingAdsRubySdk
     HTTP_READ_TIMEOUT = 20
     HTTP_RETRY_COUNT_ON_TIMEOUT = 2
     HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT = 1
-    HTTP_ERRORS = [ Net::HTTPServerError, Net::HTTPClientError ]
+    HTTP_ERRORS = [Net::HTTPServerError, Net::HTTPClientError]
     CONNECTION_SETTINGS = {
       persistent: true,
       tcp_nodelay: true,
@@ -20,17 +20,17 @@ module BingAdsRubySdk
       connect_timeout: HTTP_OPEN_TIMEOUT,
       read_timeout: HTTP_READ_TIMEOUT,
       ssl_version: :TLSv1_2,
-      ciphers: "TLSv1.2:!aNULL:!eNULL",
+      ciphers: "TLSv1.2:!aNULL:!eNULL"
     }
 
     class << self
       def post(request)
         uri = URI(request.url)
-        conn = self.connection(request.url)
+        conn = connection(request.url)
         raw_response = conn.post(
           path: uri.path,
           body: request.content,
-          headers: request.headers,
+          headers: request.headers
         )
 
         if contains_error?(raw_response)
@@ -44,7 +44,7 @@ module BingAdsRubySdk
       end
 
       def close_http_connections
-        self.http_connections.values.each do |connection|
+        http_connections.values.each do |connection|
           connection.reset
         end
       end
@@ -65,7 +65,7 @@ module BingAdsRubySdk
       end
 
       def connection(host)
-        self.http_connections[host] ||= Excon.new(
+        http_connections[host] ||= Excon.new(
           host,
           connection_settings
         )

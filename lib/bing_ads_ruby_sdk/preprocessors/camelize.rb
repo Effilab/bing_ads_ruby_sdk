@@ -3,7 +3,6 @@
 module BingAdsRubySdk
   module Preprocessors
     class Camelize
-
       def initialize(params)
         @params = params
       end
@@ -21,7 +20,7 @@ module BingAdsRubySdk
         obj.each_with_object({}) do |(k, v), h|
           case v
           when Hash then v = process(v)
-          when Array then v = v.map {|elt| process(elt) }
+          when Array then v = v.map { |elt| process(elt) }
           end
           h[transform_key(k.to_s)] = v
         end
@@ -39,7 +38,7 @@ module BingAdsRubySdk
         BingAdsRubySdk::StringUtils.camelize(string)
       end
 
-      BLACKLIST = %w(long string)
+      BLACKLIST = %w[long string]
     end
   end
 end

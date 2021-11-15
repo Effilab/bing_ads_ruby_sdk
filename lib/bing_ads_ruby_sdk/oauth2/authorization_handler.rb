@@ -1,11 +1,10 @@
-require 'signet/oauth_2/client'
-require 'bing_ads_ruby_sdk/oauth2/fs_store'
+require "signet/oauth_2/client"
+require "bing_ads_ruby_sdk/oauth2/fs_store"
 
 module BingAdsRubySdk
   module OAuth2
     # Adds some useful methods to Signet::OAuth2::Client
     class AuthorizationHandler
-
       # @param developer_token
       # @param client_id
       # @param store [Store]
@@ -13,7 +12,7 @@ module BingAdsRubySdk
         @client = Signet::OAuth2::Client.new(
           client_params(developer_token, client_id, client_secret)
         )
-        @store  = store
+        @store = store
         refresh_from_store
       end
 
@@ -77,12 +76,12 @@ module BingAdsRubySdk
 
       def client_params(developer_token, client_id, client_secret)
         {
-          authorization_uri:    'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
-          token_credential_uri: 'https://login.microsoftonline.com/common/oauth2/v2.0/token',
-          redirect_uri:         'https://login.microsoftonline.com/common/oauth2/nativeclient',
+          authorization_uri: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+          token_credential_uri: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+          redirect_uri: "https://login.microsoftonline.com/common/oauth2/nativeclient",
           developer_token: developer_token,
           client_id: client_id,
-          scope: 'offline_access'
+          scope: "offline_access"
         }.tap do |hash|
           hash[:client_secret] = client_secret if client_secret
         end

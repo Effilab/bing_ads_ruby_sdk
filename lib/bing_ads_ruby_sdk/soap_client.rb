@@ -1,12 +1,12 @@
 # frozen_string_literal: true
-require 'bing_ads_ruby_sdk/wsdl_operation_wrapper'
-require 'bing_ads_ruby_sdk/augmented_parser'
+
+require "bing_ads_ruby_sdk/wsdl_operation_wrapper"
+require "bing_ads_ruby_sdk/augmented_parser"
 require "bing_ads_ruby_sdk/http_client"
 require "bing_ads_ruby_sdk/log_message"
 
 module BingAdsRubySdk
   class SoapClient
-
     def initialize(service_name:, version:, environment:, header:)
       @header = header
       @lolsoap_parser, @concrete_abstract_mapping = cache(service_name) do
@@ -45,7 +45,7 @@ module BingAdsRubySdk
 
     def insert_args(args, node)
       # if ever the current node is a subtype
-      if base_type_name = concrete_abstract_mapping[node.__type__.name]
+      if (base_type_name = concrete_abstract_mapping[node.__type__.name])
         # and add an attribute to specify the real type we want
         node.__attribute__(
           type_attribute_name,
@@ -111,9 +111,9 @@ module BingAdsRubySdk
     def path_to_wsdl(version, environment, service_name)
       File.join(
         BingAdsRubySdk.root_path,
-        'lib',
-        'bing_ads_ruby_sdk',
-        'wsdl',
+        "lib",
+        "bing_ads_ruby_sdk",
+        "wsdl",
         version.to_s,
         environment.to_s,
         "#{service_name}.xml"
@@ -133,8 +133,8 @@ module BingAdsRubySdk
     end
 
     @cached_parsers = {}
-    def self.cached_parsers
-      @cached_parsers
+    class << self
+      attr_reader :cached_parsers
     end
 
     XSI_NAMESPACE_KEY = "xsi"

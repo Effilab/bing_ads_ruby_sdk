@@ -1,11 +1,12 @@
 # frozen_string_literal: true
-require 'time'
-require 'lolsoap'
 
-require 'bing_ads_ruby_sdk/version'
-require 'bing_ads_ruby_sdk/configuration'
-require 'bing_ads_ruby_sdk/api'
-require 'bing_ads_ruby_sdk/string_utils'
+require "time"
+require "lolsoap"
+
+require "bing_ads_ruby_sdk/version"
+require "bing_ads_ruby_sdk/configuration"
+require "bing_ads_ruby_sdk/api"
+require "bing_ads_ruby_sdk/string_utils"
 
 module BingAdsRubySdk
   def self.config
@@ -29,6 +30,6 @@ module BingAdsRubySdk
     TYPE_KEY
   end
 
-  TYPE_KEY = '@type'
-  ROOT_PATH = File.join(__dir__,'..')
+  TYPE_KEY = "@type"
+  ROOT_PATH = File.join(__dir__, "..")
 end
