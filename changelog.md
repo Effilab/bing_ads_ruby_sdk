@@ -1,3 +1,9 @@
+## V1.4.0 Release
+
+- Breaking: change scope from `https://ads.microsoft.com/ads.manage` to `https://ads.microsoft.com/msads.manage` as requested by Bing (deadline March 22)
+
+- now reading store at the very last moment to get freshest token
+
 ## V1.3.4 Release
 
 - lift constraint on signet gem
