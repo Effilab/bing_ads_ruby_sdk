@@ -21,7 +21,6 @@
       "matchManagers": ["nodenv", "npm"],
       "groupName": "js-update",
       "labels": ["js-update"],
-      "allowedVersions": "<17",
       "automerge": true
     },
     {
@@ -61,22 +60,34 @@
       "description": "explicit max version to prevent issues like need to coordinate with real infra on GCP"
     },
     {
-      "matchPackageNames": ["postgres","postgis"],
+      "matchPackageNames": ["cimg/postgres","postgres","postgis","postgis/postgis"],
       "allowedVersions": "<14",
       "groupName": "postgres-update",
       "description": "explicit max version to prevent issue like need to coordinate with real infra on GCP"
     },
     {
-      "matchPackageNames": ["ruby","circleci/ruby"],
+      "matchPackageNames": ["ruby","circleci/ruby","cimg/ruby"],
       "allowedVersions": "<4",
       "groupName": "rubycore-update",
       "description": "explicit max version to prevent issues"
     },
     {
-      "matchPackageNames": ["node"],
+      "matchPackageNames": [
+        "node","circleci/node",
+        "cimg/node"
+      ],
       "allowedVersions": "<17",
       "groupName": "node-update",
-      "description": "explicit max version to prevent issues"
+      "description": "explicit max LTS version to prevent issues"
+    },
+    {
+      "matchPackageNames": [
+        "python","circleci/python",
+        "cimg/python"
+      ],
+      "allowedVersions": "<3.10",
+      "groupName": "python-update",
+      "description": "explicit max LTS version to prevent issues"
     },
     {
       "matchPackageNames": ["bonita"],
@@ -98,5 +109,5 @@
   },
   "dependencyDashboard": true,
   "timezone": "Europe/Paris",
-  "prHourlyLimit": 6
+  "prHourlyLimit": 2
 }
