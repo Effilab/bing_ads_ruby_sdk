@@ -60,6 +60,15 @@
       "description": "explicit max version to prevent issues like need to coordinate with real infra on GCP"
     },
     {
+      "matchPackageNames": [
+        "jdk",
+        "openjdk"
+      ],
+      "allowedVersions": "<12",
+      "groupName": "jdk-update",
+      "description": "explicit max version to keep LTS"
+    },
+    {
       "matchPackageNames": ["cimg/postgres","postgres","postgis","postgis/postgis"],
       "allowedVersions": "<14",
       "groupName": "postgres-update",
@@ -78,16 +87,25 @@
       ],
       "allowedVersions": "<17",
       "groupName": "node-update",
+      "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime" 
+    },
+    {
+      "matchPackageNames": [
+        "python",
+        "circleci/python",
+        "cimg/python"
+      ],
+      "allowedVersions": "<3.8",
+      "groupName": "python-update",
       "description": "explicit max LTS version to prevent issues"
     },
     {
       "matchPackageNames": [
-        "python","circleci/python",
-        "cimg/python"
+        "xgboost"
       ],
-      "allowedVersions": "<3.10",
-      "groupName": "python-update",
-      "description": "explicit max LTS version to prevent issues"
+      "allowedVersions": "<1.5",
+      "groupName": "xgboost-update",
+      "description": "limitation from the data model used in pricer"
     },
     {
       "matchPackageNames": ["bonita"],
@@ -95,11 +113,6 @@
       "description": "explicit max version to prevent issue like need to coordinate with bonita app install"
     }
   ],
-  "vulnerabilityAlerts": {
-    "enabled": true,
-    "labels": ["security"],
-    "extends": ["schedule:daily"]
-  },
   "lockFileMaintenance": {
     "enabled": true,
     "extends": ["schedule:weekly"],
@@ -107,7 +120,16 @@
     "groupName": "lockfile-update",
     "automerge": true
   },
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": [
+      "security"
+    ],
+    "extends": [
+      "schedule:daily"
+    ]
+  },
   "dependencyDashboard": true,
   "timezone": "Europe/Paris",
-  "prHourlyLimit": 2
+  "prHourlyLimit": 4
 }
