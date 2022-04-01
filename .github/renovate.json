@@ -108,6 +108,14 @@
       "description": "limitation from the data model used in pricer"
     },
     {
+      "matchPackageNames": [
+        "envkey"
+      ],
+      "allowedVersions": "<2",
+      "groupName": "envkey-update",
+      "description": "no switch fro now"
+    },
+    {
       "matchPackageNames": ["bonita"],
       "allowedVersions": "<=7.12",
       "description": "explicit max version to prevent issue like need to coordinate with bonita app install"
