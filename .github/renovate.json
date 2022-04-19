@@ -11,6 +11,12 @@
       "stabilityDays": 5
     },
     {
+      "matchDatasources": ["terraform-module","terraform-provider"],
+      "labels": ["terraform"],
+      "groupName": "terraform",
+      "automerge": false
+    },
+    {
       "matchDepTypes": ["devDependencies"],
       "matchPackagePatterns": ["lint", "prettier"],
       "groupName": "linter-update",
@@ -26,11 +32,13 @@
     {
       "matchManagers": ["bundler", "ruby-version"],
       "groupName": "ruby-update",
+      "automerge": true,
       "labels": ["ruby-update"]
     },
     {
       "matchManagers": ["pip-compile", "pip_requirements", "pip_setup", "pipenv", "pyenv", "setup-cfg"],
       "groupName": "python-update",
+      "automerge": true,
       "labels": ["python-update"]
     },
     {
@@ -50,59 +58,60 @@
     },
     {
       "matchManagers": ["gitlabci", "gitlabci-include", "circleci", "helm-requirements", "helm-values", "helmfile", "helmv3","docker-compose", "dockerfile","kubernetes"],
+      "automerge": true,
       "groupName": "ci-update",
       "labels": ["ci-update"]
     },
     {
       "matchPackageNames": ["redis"],
       "allowedVersions": "<6",
+      "automerge": true,
       "groupName": "redis-update",
       "description": "explicit max version to prevent issues like need to coordinate with real infra on GCP"
     },
     {
-      "matchPackageNames": [
-        "jdk",
-        "openjdk"
-      ],
+      "matchPackageNames": ["jdk","openjdk"],
       "allowedVersions": "<12",
+      "automerge": true,
       "groupName": "jdk-update",
       "description": "explicit max version to keep LTS"
     },
     {
       "matchPackageNames": ["cimg/postgres","postgres","postgis","postgis/postgis"],
       "allowedVersions": "<14",
+      "automerge": true,
       "groupName": "postgres-update",
+      "labels": ["postgres"],
       "description": "explicit max version to prevent issue like need to coordinate with real infra on GCP"
     },
     {
       "matchPackageNames": ["ruby","circleci/ruby","cimg/ruby"],
       "allowedVersions": "<4",
       "groupName": "rubycore-update",
-      "description": "explicit max version to prevent issues"
+      "description": "explicit max version to prevent issues",
+      "labels": ["rubycore-update"]
     },
     {
-      "matchPackageNames": [
-        "node","circleci/node",
-        "cimg/node"
-      ],
+      "matchPackageNames": ["node","circleci/node","cimg/node"],
+      "automerge": true,
       "allowedVersions": "<17",
       "groupName": "node-update",
+      "labels": ["node-update"],
       "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime" 
     },
     {
-      "matchPackageNames": [
-        "python",
-        "circleci/python",
-        "cimg/python"
-      ],
+      "matchPackageNames": ["python","circleci/python","cimg/python"],
+      "automerge": true,
       "allowedVersions": "<3.8",
       "groupName": "python-update",
+      "labels": ["python-update"],
       "description": "explicit max LTS version to prevent issues"
     },
     {
       "matchPackageNames": [
         "xgboost"
       ],
+      "automerge": true,
       "allowedVersions": "<1.5",
       "groupName": "xgboost-update",
       "description": "limitation from the data model used in pricer"
@@ -111,9 +120,10 @@
       "matchPackageNames": [
         "envkey"
       ],
+      "automerge": true,
       "allowedVersions": "<2",
       "groupName": "envkey-update",
-      "description": "no switch fro now"
+      "description": "no switch for now"
     },
     {
       "matchPackageNames": ["bonita"],
@@ -126,16 +136,15 @@
     "extends": ["schedule:weekly"],
     "commitMessageAction": "Update lockfiles",
     "groupName": "lockfile-update",
+    "labels": ["lockfile-update"],
     "automerge": true
   },
   "vulnerabilityAlerts": {
     "enabled": true,
-    "labels": [
-      "security"
-    ],
-    "extends": [
-      "schedule:daily"
-    ]
+    "automerge": true,
+    "groupName": "security",
+    "labels": ["security"],
+    "extends": ["schedule:daily"]
   },
   "dependencyDashboard": true,
   "timezone": "Europe/Paris",
