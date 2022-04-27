@@ -118,6 +118,15 @@
     },
     {
       "matchPackageNames": [
+        "gql"
+      ],
+      "automerge": true,
+      "allowedVersions": "<3",
+      "groupName": "gql-update",
+      "description": "limitation from dataiku"
+    },
+    {
+      "matchPackageNames": [
         "envkey"
       ],
       "automerge": true,
