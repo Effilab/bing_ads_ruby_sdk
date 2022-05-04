@@ -5,6 +5,15 @@
     ":preserveSemverRanges"
   ],
   "branchPrefix": "bot-",
+  "hostRules": [
+    {
+      "matchHost": "github.com",
+      "hostType": "rubygems",
+      "encrypted": {
+        "token": "wcFMA/xDdHCJBTolARAAjumTJ4PWx0T4aV3fSFZrLqZsnGUW+j+IKh1WPdzAiGdj+9zUQNcdJimlokWffqMzn3pNC8B8GMb+UjStyxQjZH+kzK6fEU4bn9hsg+g8LVHccvRXjzbIwaIyDcBZE0scr9yS7QRk/xI2vviDMAXTiyQEwMIRCfIAaPhcJBbg7L9kRmDmvnlDXPIVkzvenQYFA+3Smib0tL2glJ5NhS/ZgQUAIaz64d/Ibe+PM5atR2+cEf4o0PmBGSa6yGcGJX32kiR0AFMesNtIKWjh5UUjH4M5k0Uuz3bHU2Q85NjXrcmZD1Pqz//LZn+aFYSiDHM7sOHk+LXYnPtjs3+6KrI40tfo64kS4Xp72L/XhE0trhVPki2NmoQXU9ux8YgCCNZb4La3XcGlS0tWAAJU5Ebajx7qCVqweKpoEHHkim+sXl75s3Qu3WOQCgdAWtL3Vds3cu9D4ZEe0Hax6XxurZ/BuE5MS5i3Kd85JFlRgPD+C+/2EABKrCzTpDHNIK72tAY50rgFM1uvGIgaQVHEVsU0l1dm0DzxTwisWERpr90CNaz5dhGT5lYer+p8z5Gye00kn+SWyqWWTTZ0c+ZLh+eEQ6/TdWhFHjBi8524lvotbAT3Wq7lLDWeS3vAW/bj39v7LPbUGIXdvxIvF9EUwr1NRTviOASLXrEH7NNk99RheiLSdgFWqKKuKEGE2gq0t3vXA85GoT7wU0wB4RKCKqGrCK8AbL+PwvKxKZ+P63F+EfMyhIq89Qw9Szu6KbeNoYwsEQgYyXko/HDMWWqfQcTKEMF6rGf7KRmCFEIjrsSO4LJ+RcbmZBESr+L1T790c2nuFjwGI1qcA0Y"
+      }
+    }
+  ],
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],
