@@ -80,10 +80,10 @@
     },
     {
       "matchPackageNames": ["jdk","openjdk"],
-      "allowedVersions": "<12",
+      "allowedVersions": "<18",
       "automerge": true,
       "groupName": "jdk-update",
-      "description": "explicit max version to keep LTS"
+      "description": "explicit max version to keep LTS only"
     },
     {
       "matchPackageNames": ["cimg/postgres","postgres","postgis","postgis/postgis"],
@@ -106,15 +106,15 @@
       "allowedVersions": "<17",
       "groupName": "node-update",
       "labels": ["node-update"],
-      "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime" 
+      "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime " 
     },
     {
       "matchPackageNames": ["python","circleci/python","cimg/python"],
       "automerge": true,
-      "allowedVersions": "<3.8",
+      "allowedVersions": "<4",
       "groupName": "python-update",
       "labels": ["python-update"],
-      "description": "explicit max LTS version to prevent issues"
+      "description": "explicit max major version to prevent issues"
     },
     {
       "matchPackageNames": [
@@ -144,14 +144,39 @@
       "description": "no switch for now"
     },
     {
-      "matchPackageNames": ["bonita"],
-      "allowedVersions": "<=7.12",
-      "description": "explicit max version to prevent issue like need to coordinate with bonita app install"
+      "matchPackageNames": [
+        "facebookbusiness"
+      ],
+      "groupName": "envkey-update",
+      "description": "Facebook API",
+      "labels": [
+        "apifacebook-update"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "facebookbusiness"
+      ],
+      "groupName": "facebook-update",
+      "description": "Facebook API",
+      "labels": [
+        "apifacebook-update"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "google-ads-googleads"
+      ],
+      "groupName": "googleads-update",
+      "description": "Google Ads API",
+      "labels": [
+        "apigoogleads-update"
+      ]
     }
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "extends": ["schedule:weekly"],
+    "schedule": ["after 2am and before 6am every monday"],
     "commitMessageAction": "Update lockfiles",
     "groupName": "lockfile-update",
     "labels": ["lockfile-update"],
@@ -160,9 +185,9 @@
   "vulnerabilityAlerts": {
     "enabled": true,
     "automerge": true,
-    "groupName": "security",
+    "groupName": null,
     "labels": ["security"],
-    "extends": ["schedule:daily"]
+    "schedule": ["after 2am and before 6am every day"]
   },
   "dependencyDashboard": true,
   "timezone": "Europe/Paris",
