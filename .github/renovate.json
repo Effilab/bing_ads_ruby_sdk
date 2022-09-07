@@ -14,6 +14,17 @@
       }
     }
   ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "automerge": true,
+    "groupName": null,
+    "labels": [
+      "security"
+    ],
+    "schedule": [
+      "after 2am and before 6am every day"
+    ]
+  },
   "packageRules": [
     {
       "matchPackagePatterns": ["*"],
@@ -58,7 +69,7 @@
       "automerge": true
     },
     {
-      "matchCurrentVersion": "/^\\^?v?~?0\\./",
+      "matchCurrentVersion": "/^v?[~ -]?0/",
       "matchUpdateTypes": ["minor","patch","pin","digest","rollback","bump"],
       "groupName": "betas can break",
       "labels": ["betas-update"],
@@ -73,10 +84,8 @@
     },
     {
       "matchPackageNames": ["redis"],
-      "allowedVersions": "<6",
-      "automerge": true,
-      "groupName": "redis-update",
-      "description": "explicit max version to prevent issues like need to coordinate with real infra on GCP"
+      "automerge": false,
+      "groupName": "redis-update"
     },
     {
       "matchPackageNames": ["jdk","openjdk"],
@@ -109,21 +118,32 @@
       "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime " 
     },
     {
-      "matchPackageNames": ["python","circleci/python","cimg/python"],
+      "matchPackageNames": ["python"],
+      "automerge": true,
+      "groupName": "python-update",
+      "labels": ["python-update"]
+    },
+    {
+      "matchPackageNames": ["circleci/python","cimg/python"],
       "automerge": true,
       "allowedVersions": "<4",
-      "groupName": "python-update",
-      "labels": ["python-update"],
+      "groupName": "pythoncore-update",
+      "labels": ["pythoncore-update"],
       "description": "explicit max major version to prevent issues"
     },
     {
-      "matchPackageNames": [
-        "xgboost"
-      ],
+      "matchPackageNames": ["xgboost"],
       "automerge": true,
       "allowedVersions": "<1.5",
       "groupName": "xgboost-update",
       "description": "limitation from the data model used in pricer"
+    },
+    {
+      "matchPackageNames": ["pandas"],
+      "allowedVersions": "<1.4",
+      "automerge": true,
+      "groupName": "pandas-update",
+      "description": "limitation from dataiku, don't merge upper than 1.3 for now"
     },
     {
       "matchPackageNames": [
@@ -155,16 +175,6 @@
     },
     {
       "matchPackageNames": [
-        "facebookbusiness"
-      ],
-      "groupName": "facebook-update",
-      "description": "Facebook API",
-      "labels": [
-        "apifacebook-update"
-      ]
-    },
-    {
-      "matchPackageNames": [
         "google-ads-googleads"
       ],
       "groupName": "googleads-update",
@@ -182,14 +192,7 @@
     "labels": ["lockfile-update"],
     "automerge": true
   },
-  "vulnerabilityAlerts": {
-    "enabled": true,
-    "automerge": true,
-    "groupName": null,
-    "labels": ["security"],
-    "schedule": ["after 2am and before 6am every day"]
-  },
   "dependencyDashboard": true,
   "timezone": "Europe/Paris",
-  "prHourlyLimit": 4
+  "prHourlyLimit": 6
 }
