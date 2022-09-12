@@ -4,6 +4,11 @@
     "schedule:weekly",
     ":preserveSemverRanges"
   ],
+  "kubernetes": {
+    "fileMatch": [
+      "\\.yaml$"
+    ]
+  },
   "branchPrefix": "bot-",
   "hostRules": [
     {
@@ -70,7 +75,14 @@
     },
     {
       "matchCurrentVersion": "/^v?[~ -]?0/",
-      "matchUpdateTypes": ["minor","patch","pin","digest","rollback","bump"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest",
+        "rollback",
+        "bump"
+      ],
       "groupName": "betas can break",
       "labels": ["betas-update"],
       "description": "according semver spec, version <1 can introduce breaking changes on each rel",
@@ -83,9 +95,23 @@
       "labels": ["ci-update"]
     },
     {
+      "matchManagers": [
+        "gitlabci",
+        "gitlabci-include",
+        "circleci",
+        "helm-requirements",
+        "helm-values",
+        "helmfile",
+        "helmv3",
+        "docker-compose",
+        "dockerfile",
+        "kubernetes"
+      ],
       "matchPackageNames": ["redis"],
-      "automerge": false,
-      "groupName": "redis-update"
+      "allowedVersions": "<6",
+      "automerge": true,
+      "groupName": "redis-update",
+      "description": "explicit max version to keep coherence with real infra on GCP"
     },
     {
       "matchPackageNames": ["jdk","openjdk"],
