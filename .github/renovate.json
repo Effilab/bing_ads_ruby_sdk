@@ -6,7 +6,8 @@
   ],
   "kubernetes": {
     "fileMatch": [
-      "\\.yaml$"
+      "\\.yaml$",
+       "\\.tpl$"
     ]
   },
   "branchPrefix": "bot-",
