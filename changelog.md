@@ -1,3 +1,7 @@
+## V1.5.0 Release
+- Breaking: Now raises functional errors
+- Breaking: Now raises an error if not able to read the store in order to refresh the token
+
 ## V1.4.0 Release
 
 - Breaking: change scope from `https://ads.microsoft.com/ads.manage` to `https://ads.microsoft.com/msads.manage` as requested by Bing (deadline March 22)
