@@ -85,13 +85,7 @@ module BingAdsRubySdk
     end
 
     def parse_response(req, response_body)
-      lolsoap_client.response(req, response_body).body_hash.tap do |b_h|
-        BingAdsRubySdk.log(:debug) { b_h }
-        BingAdsRubySdk::Errors::ErrorHandler.new(b_h).call
-      end
-    rescue BingAdsRubySdk::Errors::GeneralError => e
-      BingAdsRubySdk.log(:warn) { format_xml(response_body) }
-      raise e
+      lolsoap_client.response(req, response_body).body_hash
     end
 
     def lolsoap_client
