@@ -18,7 +18,12 @@ module BingAdsRubySdk
           camelized_name,
           preprocess(message, camelized_name)
         )
-        postprocess(response)
+        processed_response = postprocess(response)
+        BingAdsRubySdk::Errors::ErrorHandler.new(processed_response).call
+        processed_response
+      rescue BingAdsRubySdk::Errors::GeneralError => e
+        BingAdsRubySdk.log(:warn) { processed_response }
+        raise e
       end
 
       def call_wrapper(action, message, *response_nesting)

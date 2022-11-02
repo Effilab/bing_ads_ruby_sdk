@@ -54,10 +54,11 @@ module BingAdsRubySdk
 
       # Refresh existing authorization token
       # @return [Signet::OAuth2::Client] if everything went well.
-      # @return [nil] if the token can't be read from the store.
+      # raises error if the token can't be read from the store.
       def refresh_from_store
         ext_token = store.read
-        client.update_token!(ext_token) if ext_token
+        raise "Cannot refresh token : Unable to read store data" if !ext_token&.is_a?(Hash) || ext_token.empty?
+        client.update_token!(ext_token)
       end
 
       # Request the Api to exchange the code for the access token.
