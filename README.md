@@ -24,8 +24,7 @@ By default, there is only one store in the gem to store the oauth token. It's a 
 
 To get your token, run:
 ```ruby
-rake bing_token:get[my_token.json,your_dev_token,your_bing_client_id]
-
+rake token:load_from_json[your_bing_client_id,my_token.json]
 ```
 
 
