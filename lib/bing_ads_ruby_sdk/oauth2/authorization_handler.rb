@@ -36,8 +36,6 @@ module BingAdsRubySdk
 
         return false if codes.none?
         fetch_from_code(codes.last)
-      rescue Signet::AuthorizationError, URI::InvalidURIError
-        false
       end
 
       # Get or fetch an access token.
