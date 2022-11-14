@@ -20,6 +20,18 @@
       }
     }
   ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": [
+      "after 2am and before 6am every monday"
+    ],
+    "commitMessageAction": "Update lockfiles",
+    "groupName": "lockfile-update",
+    "labels": [
+      "lockfile-update"
+    ],
+    "automerge": true
+  },
   "vulnerabilityAlerts": {
     "enabled": true,
     "automerge": true,
@@ -209,16 +221,30 @@
       "labels": [
         "apigoogleads-update"
       ]
+    },
+    {
+      "matchPackageNames": [
+        "rails",
+        "actioncable",
+        "actionmailbox",
+        "actionmailer",
+        "actionpack",
+        "actiontext",
+        "actionview",
+        "activejob",
+        "activemodel",
+        "activerecord",
+        "activestorage",
+        "activesupport",
+        "railties"
+      ],
+      "groupName": "rails-update",
+      "description": "Rails framework",
+      "labels": [
+        "rails-update"
+      ]
     }
   ],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": ["after 2am and before 6am every monday"],
-    "commitMessageAction": "Update lockfiles",
-    "groupName": "lockfile-update",
-    "labels": ["lockfile-update"],
-    "automerge": true
-  },
   "dependencyDashboard": true,
   "timezone": "Europe/Paris",
   "prHourlyLimit": 6
