@@ -8,6 +8,8 @@ require "bing_ads_ruby_sdk/configuration"
 require "bing_ads_ruby_sdk/api"
 require "bing_ads_ruby_sdk/string_utils"
 
+require "bing_ads_ruby_sdk/railtie" if defined?(Rails)
+
 module BingAdsRubySdk
   def self.config
     @configuration ||= BingAdsRubySdk::Configuration.new
