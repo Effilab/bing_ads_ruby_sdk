@@ -28,7 +28,7 @@ module BingAdsRubySdk
     private
 
     def default_logger
-      Logger.new(File.join(BingAdsRubySdk::ROOT_PATH, "log", "bing-sdk.log")).tap do |l|
+      Logger.new(File.join(BingAdsRubySdk::ROOT_PATH, 'log', 'bing-sdk.log')).tap do |l|
         l.level = Logger::INFO
       end
     end

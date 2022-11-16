@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BingAdsRubySdk
   module Services
     class CampaignManagement < Base
@@ -44,7 +46,7 @@ module BingAdsRubySdk
             .first
             .dig(:ad_extension_associations, :ad_extension_association)
         )
-      rescue
+      rescue StandardError
         []
       end
 

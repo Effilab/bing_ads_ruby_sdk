@@ -17,12 +17,12 @@ module BingAdsRubySdk
     # @return [Hash] Authorization and identification data that will be added to the SOAP header
     def content
       {
-        "AuthenticationToken" => auth_handler.fetch_or_refresh,
-        "DeveloperToken" => developer_token,
-        "CustomerId" => customer[:customer_id],
-        "CustomerAccountId" => customer[:account_id]
+        'AuthenticationToken' => auth_handler.fetch_or_refresh,
+        'DeveloperToken' => developer_token,
+        'CustomerId' => customer[:customer_id],
+        'CustomerAccountId' => customer[:account_id]
       }.tap do |hash|
-        hash["ClientSecret"] = client_secret if client_secret
+        hash['ClientSecret'] = client_secret if client_secret
       end
     end
 

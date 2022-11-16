@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-require "bing_ads_ruby_sdk/header"
-require "bing_ads_ruby_sdk/soap_client"
-require "bing_ads_ruby_sdk/services/base"
-require "bing_ads_ruby_sdk/services/ad_insight"
-require "bing_ads_ruby_sdk/services/bulk"
-require "bing_ads_ruby_sdk/services/campaign_management"
-require "bing_ads_ruby_sdk/services/customer_billing"
-require "bing_ads_ruby_sdk/services/customer_management"
-require "bing_ads_ruby_sdk/services/reporting"
-require "bing_ads_ruby_sdk/oauth2/authorization_handler"
-require "bing_ads_ruby_sdk/errors/errors"
-require "bing_ads_ruby_sdk/errors/error_handler"
+require 'bing_ads_ruby_sdk/header'
+require 'bing_ads_ruby_sdk/soap_client'
+require 'bing_ads_ruby_sdk/services/base'
+require 'bing_ads_ruby_sdk/services/ad_insight'
+require 'bing_ads_ruby_sdk/services/bulk'
+require 'bing_ads_ruby_sdk/services/campaign_management'
+require 'bing_ads_ruby_sdk/services/customer_billing'
+require 'bing_ads_ruby_sdk/services/customer_management'
+require 'bing_ads_ruby_sdk/services/reporting'
+require 'bing_ads_ruby_sdk/oauth2/authorization_handler'
+require 'bing_ads_ruby_sdk/errors/errors'
+require 'bing_ads_ruby_sdk/errors/error_handler'
 
 module BingAdsRubySdk
   class Api
@@ -24,8 +24,8 @@ module BingAdsRubySdk
     # @param developer_token
     # @param client_id
     def initialize(developer_token:, client_id:, oauth_store:, version: DEFAULT_SDK_VERSION,
-      environment: :production,
-      client_secret: nil)
+                   environment: :production,
+                   client_secret: nil)
       @version = version
       @environment = environment
       @header = Header.new(

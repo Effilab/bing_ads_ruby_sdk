@@ -15,7 +15,7 @@ module BingAdsRubySdk
       document.to_xml(nokogiri_options)
     end
 
-    FILTERED = "***FILTERED***"
+    FILTERED = '***FILTERED***'
 
     private
 
@@ -42,7 +42,7 @@ module BingAdsRubySdk
     end
 
     def nokogiri_options
-      pretty_print ? {indent: 2} : {save_with: Nokogiri::XML::Node::SaveOptions::AS_XML}
+      pretty_print ? { indent: 2 } : { save_with: Nokogiri::XML::Node::SaveOptions::AS_XML }
     end
 
     def pretty_print

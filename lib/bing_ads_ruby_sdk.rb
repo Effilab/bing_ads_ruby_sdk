@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require "time"
-require "lolsoap"
+require 'time'
+require 'lolsoap'
 
-require "bing_ads_ruby_sdk/version"
-require "bing_ads_ruby_sdk/configuration"
-require "bing_ads_ruby_sdk/api"
-require "bing_ads_ruby_sdk/string_utils"
+require 'bing_ads_ruby_sdk/version'
+require 'bing_ads_ruby_sdk/configuration'
+require 'bing_ads_ruby_sdk/api'
+require 'bing_ads_ruby_sdk/string_utils'
 
-require "bing_ads_ruby_sdk/railtie" if defined?(Rails)
+require 'bing_ads_ruby_sdk/railtie' if defined?(Rails)
 
 module BingAdsRubySdk
   def self.config
@@ -21,6 +21,7 @@ module BingAdsRubySdk
 
   def self.log(level, *args, &block)
     return unless config.log
+
     config.logger.send(level, *args, &block)
   end
 
@@ -44,12 +45,12 @@ module BingAdsRubySdk
       store: store
     )
     puts "Go to #{auth.code_url}."
-    puts "You will be redirected to a URL at the end. Paste it here in the console and press enter"
+    puts 'You will be redirected to a URL at the end. Paste it here in the console and press enter'
 
     full_url = $stdin.gets.chomp
     auth.fetch_from_url(full_url)
 
-    puts "Written to store"
+    puts 'Written to store'
   end
 
   def self.client
@@ -70,6 +71,6 @@ module BingAdsRubySdk
     @store ||= ::BingAdsRubySdk::OAuth2::FsStore.new(FILENAME)
   end
 
-  TYPE_KEY = "@type"
-  ROOT_PATH = File.join(__dir__, "..")
+  TYPE_KEY = '@type'
+  ROOT_PATH = File.join(__dir__, '..')
 end

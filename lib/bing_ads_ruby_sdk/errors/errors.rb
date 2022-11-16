@@ -9,11 +9,11 @@ module BingAdsRubySdk
       def initialize(response)
         @raw_response = response
 
-        code = response[:error_code] || "Bing Ads API error"
+        code = response[:error_code] || 'Bing Ads API error'
 
         message = response[:message] ||
-          response[:faultstring] ||
-          "See exception details for more information."
+                  response[:faultstring] ||
+                  'See exception details for more information.'
 
         @message = format_message(code, message)
       end
@@ -23,7 +23,7 @@ module BingAdsRubySdk
       # Format the message separated by hyphen if
       # there is a code and a message
       def format_message(code, message)
-        [code, message].compact.join(" - ")
+        [code, message].compact.join(' - ')
       end
     end
 
@@ -81,7 +81,7 @@ module BingAdsRubySdk
       # The fault key that corresponds to the inherited class
       # @return [Symbol] the fault key
       def fault_key
-        class_name = self.class.name.split("::").last
+        class_name = self.class.name.split('::').last
         BingAdsRubySdk::StringUtils.snakize(class_name).to_sym
       end
 
@@ -93,7 +93,7 @@ module BingAdsRubySdk
       def array_wrap(value)
         case value
         when Array then value
-        when nil, "" then []
+        when nil, '' then []
         else
           [value]
         end

@@ -13,7 +13,7 @@ module BingAdsRubySdk
       desc 'Creates a config file.'
 
       def copy_config
-        template 'bing_ads_ruby_sdk.rb', "#{Rails.root}/config/initializers/bing_ads_ruby_sdk.rb"
+        template 'bing_ads_ruby_sdk_config.rb', "#{Rails.root}/config/initializers/bing_ads_ruby_sdk.rb"
       end
     end
   end

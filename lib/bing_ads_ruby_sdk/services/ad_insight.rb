@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BingAdsRubySdk
   module Services
     class AdInsight < Base

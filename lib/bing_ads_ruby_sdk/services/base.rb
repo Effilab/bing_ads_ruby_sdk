@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require "bing_ads_ruby_sdk/preprocessors/camelize"
-require "bing_ads_ruby_sdk/preprocessors/order"
-require "bing_ads_ruby_sdk/postprocessors/snakize"
-require "bing_ads_ruby_sdk/postprocessors/cast_long_arrays"
+require 'bing_ads_ruby_sdk/preprocessors/camelize'
+require 'bing_ads_ruby_sdk/preprocessors/order'
+require 'bing_ads_ruby_sdk/postprocessors/snakize'
+require 'bing_ads_ruby_sdk/postprocessors/cast_long_arrays'
 
 module BingAdsRubySdk
   module Services
@@ -32,7 +32,7 @@ module BingAdsRubySdk
       end
 
       def self.service
-        raise "implement me"
+        raise 'implement me'
       end
 
       private
@@ -70,14 +70,14 @@ module BingAdsRubySdk
 
       def dig_response(response, keys)
         response.dig(*keys)
-      rescue
+      rescue StandardError
         nil
       end
 
       def wrap_array(arg)
         case arg
         when Array then arg
-        when nil, "" then []
+        when nil, '' then []
         else [arg]
         end
       end

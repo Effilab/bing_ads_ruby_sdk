@@ -13,10 +13,10 @@ BingAdsRubySdk.configure do |config|
   # conf.instrumentor = ActiveSupport::Notifications
 
   ### These are mandatory options that you must set:
-  config.developer_token = ENV["BING_ADS_DEVELOPER_TOKEN"]
-  config.client_id = ENV["BING_ADS_CLIENT_ID"]
-  config.client_secret = ENV["BING_ADS_CLIENT_SECRET"]
-  config.filename = ENV["BING_ADS_FILENAME"]
-  config.customer_id = ENV["BING_ADS_CUSTOMER_ID"]
-  config.account_id = ENV["BING_ADS_ACCOUNT_ID"]
+  config.developer_token = ENV['BING_ADS_DEVELOPER_TOKEN']
+  config.client_id = ENV['BING_ADS_CLIENT_ID']
+  config.client_secret = ENV['BING_ADS_CLIENT_SECRET']
+  config.filename = ENV['BING_ADS_FILENAME']
+  config.customer_id = ENV['BING_ADS_CUSTOMER_ID']
+  config.account_id = ENV['BING_ADS_ACCOUNT_ID']
 end

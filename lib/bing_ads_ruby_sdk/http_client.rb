@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "net/http"
-require "excon"
+require 'net/http'
+require 'excon'
 
 module BingAdsRubySdk
   class HttpClient
@@ -10,7 +10,7 @@ module BingAdsRubySdk
     HTTP_READ_TIMEOUT = 20
     HTTP_RETRY_COUNT_ON_TIMEOUT = 2
     HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT = 1
-    HTTP_ERRORS = [Net::HTTPServerError, Net::HTTPClientError]
+    HTTP_ERRORS = [Net::HTTPServerError, Net::HTTPClientError].freeze
     CONNECTION_SETTINGS = {
       persistent: true,
       tcp_nodelay: true,
@@ -20,8 +20,8 @@ module BingAdsRubySdk
       connect_timeout: HTTP_OPEN_TIMEOUT,
       read_timeout: HTTP_READ_TIMEOUT,
       ssl_version: :TLSv1_2,
-      ciphers: "TLSv1.2:!aNULL:!eNULL"
-    }
+      ciphers: 'TLSv1.2:!aNULL:!eNULL'
+    }.freeze
 
     class << self
       def post(request)
@@ -44,9 +44,7 @@ module BingAdsRubySdk
       end
 
       def close_http_connections
-        http_connections.values.each do |connection|
-          connection.reset
-        end
+        http_connections.each_value(&:reset)
       end
 
       protected

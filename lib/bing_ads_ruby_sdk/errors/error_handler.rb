@@ -12,7 +12,7 @@ module BingAdsRubySdk
         # Some operations don't return a response, for example:
         # https://msdn.microsoft.com/en-us/library/bing-ads-customer-management-deleteaccount.aspx
         return unless response.is_a? Hash
-        raise fault_class.new(response) if contains_error?
+        raise fault_class, response if contains_error?
       end
 
       private
@@ -50,7 +50,7 @@ module BingAdsRubySdk
 
       BASE_FAULT = BingAdsRubySdk::Errors::GeneralError
       PARTIAL_ERROR_KEYS = %i[partial_errors nested_partial_errors].freeze
-      ERROR_KEYS = %i[faultcode error_code]
+      ERROR_KEYS = %i[faultcode error_code].freeze
       ERRORS_MAPPING = {
         api_fault_detail: BingAdsRubySdk::Errors::ApiFaultDetail,
         ad_api_fault_detail: BingAdsRubySdk::Errors::AdApiFaultDetail,
@@ -59,7 +59,7 @@ module BingAdsRubySdk
         api_fault: BingAdsRubySdk::Errors::ApiFault,
         nested_partial_errors: BingAdsRubySdk::Errors::NestedPartialError,
         partial_errors: BingAdsRubySdk::Errors::PartialError
-      }
+      }.freeze
     end
   end
 end
