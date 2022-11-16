@@ -1,14 +1,16 @@
-require "signet/oauth_2/client"
-require "bing_ads_ruby_sdk/oauth2/fs_store"
+# frozen_string_literal: true
+
+require 'signet/oauth_2/client'
+require 'bing_ads_ruby_sdk/oauth2/fs_store'
 
 module BingAdsRubySdk
   module OAuth2
     # Adds some useful methods to Signet::OAuth2::Client
     class AuthorizationHandler
-      SCOPE = "https://ads.microsoft.com/msads.manage"
-      AUTHORIZE_URI = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize"
-      TOKEN_URI = "https://login.microsoftonline.com/common/oauth2/v2.0/token"
-      REDIRECT_URI = "https://login.microsoftonline.com/common/oauth2/nativeclient"
+      SCOPE = 'https://ads.microsoft.com/msads.manage'
+      AUTHORIZE_URI = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize'
+      TOKEN_URI = 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+      REDIRECT_URI = 'https://login.microsoftonline.com/common/oauth2/nativeclient'
 
       # @param developer_token
       # @param client_id
@@ -24,6 +26,7 @@ module BingAdsRubySdk
       # @return [nil] if client.client_id is nil.
       def code_url
         return nil if client.client_id.nil?
+
         "#{AUTHORIZE_URI}?client_id=#{client.client_id}&" \
         "scope=offline_access+#{SCOPE}&response_type=code&" \
         "redirect_uri=#{REDIRECT_URI}"
@@ -35,6 +38,7 @@ module BingAdsRubySdk
         codes = extract_codes(url)
 
         return false if codes.none?
+
         fetch_from_code(codes.last)
       end
 
@@ -55,7 +59,8 @@ module BingAdsRubySdk
       # raises error if the token can't be read from the store.
       def refresh_from_store
         ext_token = store.read
-        raise "Cannot refresh token : Unable to read store data" if !ext_token&.is_a?(Hash) || ext_token.empty?
+        raise 'Cannot refresh token : Unable to read store data' if !ext_token.is_a?(Hash) || ext_token.empty?
+
         client.update_token!(ext_token)
       end
 
@@ -76,7 +81,7 @@ module BingAdsRubySdk
       def extract_codes(url)
         url = URI.parse(url)
         query_params = URI.decode_www_form(url.query)
-        query_params.find { |arg| arg.first.casecmp("CODE").zero? }
+        query_params.find { |arg| arg.first.casecmp('CODE').zero? }
       end
 
       def client_params(developer_token, client_id, client_secret)

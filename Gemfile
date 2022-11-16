@@ -1,6 +1,8 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
 
 # Specify your gem's dependencies in bing_ads_ruby_sdk.gemspec
 gemspec
 
-gem "standard", "1.16.1"
+gem 'standard', '1.16.1'

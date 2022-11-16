@@ -5,25 +5,25 @@ RSpec.describe BingAdsRubySdk::Postprocessors::CastLongArrays do
     described_class.new(params).call
   end
 
-  it "casts and simplifies long arrays" do
+  it 'casts and simplifies long arrays' do
     expect(action({
-      long: "foo",
-      bar_bar: {
-        long: ["1", "2"]
-      },
-      foos: [
-        {
-          bar: {
-            long: ["3", "4"]
-          }
-        }
-      ]
-    })).to eq({
-      long: "foo",
-      bar_bar: [1, 2],
-      foos: [
-        {bar: [3, 4]}
-      ]
-    })
+                    long: 'foo',
+                    bar_bar: {
+                      long: %w[1 2]
+                    },
+                    foos: [
+                      {
+                        bar: {
+                          long: %w[3 4]
+                        }
+                      }
+                    ]
+                  })).to eq({
+                              long: 'foo',
+                              bar_bar: [1, 2],
+                              foos: [
+                                { bar: [3, 4] }
+                              ]
+                            })
   end
 end

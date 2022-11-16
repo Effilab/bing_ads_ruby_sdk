@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
   let(:service_name) { described_class.service }
   let(:soap_client) { SpecHelpers.soap_client(service_name) }
@@ -13,302 +15,304 @@ RSpec.describe BingAdsRubySdk::Services::CampaignManagement do
     end
   end
 
-  describe "get_campaigns_by_account_id" do
-    let(:action) { "get_campaigns_by_account_id" }
-    let(:filename) { "standard" }
+  describe 'get_campaigns_by_account_id' do
+    let(:action) { 'get_campaigns_by_account_id' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
-        service.get_campaigns_by_account_id(account_id: 150168726)
+        service.get_campaigns_by_account_id(account_id: 150_168_726)
       ).to contain_exactly(
-        a_hash_including(name: "20200015 - 20200015 - SN - B - Activité - Stations_Service - Geoloc - ETA"),
-        a_hash_including(name: "20200015 - 20200015 - SN - E - Produits - Stations_Service - Geoloc - ETA"),
-        a_hash_including(name: "20200015 - SN - X - Station Service #1 - Geozone_custom - 5KW - V3 - ETA")
+        a_hash_including(name: '20200015 - 20200015 - SN - B - Activité - Stations_Service - Geoloc - ETA'),
+        a_hash_including(name: '20200015 - 20200015 - SN - E - Produits - Stations_Service - Geoloc - ETA'),
+        a_hash_including(name: '20200015 - SN - X - Station Service #1 - Geozone_custom - 5KW - V3 - ETA')
       )
     end
   end
 
-  describe "get_budgets_by_ids" do
-    let(:action) { "get_budgets_by_ids" }
-    let(:filename) { "standard" }
+  describe 'get_budgets_by_ids' do
+    let(:action) { 'get_budgets_by_ids' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.get_budgets_by_ids
       ).to contain_exactly(
-        a_hash_including(name: "budget_DEFAULT")
+        a_hash_including(name: 'budget_DEFAULT')
       )
     end
   end
 
-  describe "add_uet_tags" do
-    let(:action) { "add_uet_tags" }
-    let(:filename) { "standard" }
+  describe 'add_uet_tags' do
+    let(:action) { 'add_uet_tags' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
-        service.add_uet_tags({uet_tags: [{uet_tag: {name: "SDK-test", description: nil}}]})
+        service.add_uet_tags({ uet_tags: [{ uet_tag: { name: 'SDK-test', description: nil } }] })
       ).to include({
-        uet_tags: a_hash_including({
-          uet_tag: a_collection_containing_exactly(
-            a_hash_including(name: "SDK-test")
-          )
-        }),
-        partial_errors: ""
-      })
+                     uet_tags: a_hash_including({
+                                                  uet_tag: a_collection_containing_exactly(
+                                                    a_hash_including(name: 'SDK-test')
+                                                  )
+                                                }),
+                     partial_errors: ''
+                   })
     end
   end
 
-  describe "update_uet_tags" do
-    let(:action) { "update_uet_tags" }
-    let(:filename) { "standard" }
+  describe 'update_uet_tags' do
+    let(:action) { 'update_uet_tags' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
-        service.update_uet_tags({uet_tags: [{uet_tag: {name: "updated SDK-test", id: 96031109, description: nil}}]})
+        service.update_uet_tags({ uet_tags: [{ uet_tag: { name: 'updated SDK-test', id: 96_031_109,
+                                                          description: nil } }] })
       ).to eq({
-        partial_errors: ""
-      })
+                partial_errors: ''
+              })
     end
   end
 
-  describe "get_uet_tags_by_ids" do
-    let(:action) { "get_uet_tags_by_ids" }
-    let(:filename) { "standard" }
+  describe 'get_uet_tags_by_ids' do
+    let(:action) { 'get_uet_tags_by_ids' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
-        service.get_uet_tags_by_ids(tag_ids: [{long: 96031109}])
+        service.get_uet_tags_by_ids(tag_ids: [{ long: 96_031_109 }])
       ).to contain_exactly(
-        a_hash_including(name: "updated SDK-test")
+        a_hash_including(name: 'updated SDK-test')
       )
     end
   end
 
-  describe "add_conversion_goals" do
-    let(:action) { "add_conversion_goals" }
-    let(:filename) { "standard" }
+  describe 'add_conversion_goals' do
+    let(:action) { 'add_conversion_goals' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.add_conversion_goals(conversion_goals: [{
-          event_goal: {
-            action_expression: "contact_form",
-            action_operator: "Equals",
-            conversion_window_in_minutes: 43200,
-            count_type: "Unique",
-            name: "sdk test",
-            revenue: {type: "NoValue"},
-            type: "Event",
-            tag_id: 96031109
-          }
-        }])
+                                       event_goal: {
+                                         action_expression: 'contact_form',
+                                         action_operator: 'Equals',
+                                         conversion_window_in_minutes: 43_200,
+                                         count_type: 'Unique',
+                                         name: 'sdk test',
+                                         revenue: { type: 'NoValue' },
+                                         type: 'Event',
+                                         tag_id: 96_031_109
+                                       }
+                                     }])
       ).to eq({
-        conversion_goal_ids: [46068449],
-        partial_errors: ""
-      })
+                conversion_goal_ids: [46_068_449],
+                partial_errors: ''
+              })
     end
   end
 
-  describe "update_conversion_goals" do
-    let(:action) { "update_conversion_goals" }
-    let(:filename) { "standard" }
+  describe 'update_conversion_goals' do
+    let(:action) { 'update_conversion_goals' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.update_conversion_goals(conversion_goals: [{
-          event_goal: {
-            id: 46068449,
-            action_expression: "contact_form",
-            action_operator: "Equals",
-            conversion_window_in_minutes: 43200,
-            count_type: "Unique",
-            name: "updated sdk test",
-            revenue: {type: "NoValue"},
-            tag_id: 96031109
-          }
-        }])
+                                          event_goal: {
+                                            id: 46_068_449,
+                                            action_expression: 'contact_form',
+                                            action_operator: 'Equals',
+                                            conversion_window_in_minutes: 43_200,
+                                            count_type: 'Unique',
+                                            name: 'updated sdk test',
+                                            revenue: { type: 'NoValue' },
+                                            tag_id: 96_031_109
+                                          }
+                                        }])
       ).to eq({
-        partial_errors: ""
-      })
+                partial_errors: ''
+              })
     end
   end
 
-  describe "get_conversion_goals_by_ids" do
-    let(:action) { "get_conversion_goals_by_ids" }
-    let(:filename) { "standard" }
+  describe 'get_conversion_goals_by_ids' do
+    let(:action) { 'get_conversion_goals_by_ids' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.get_conversion_goals_by_ids(
-          conversion_goal_types: "Event",
-          conversion_goal_ids: [{long: 46068449}, {long: 46068448}]
+          conversion_goal_types: 'Event',
+          conversion_goal_ids: [{ long: 46_068_449 }, { long: 46_068_448 }]
         )
       ).to contain_exactly(
-        a_hash_including(name: "updated sdk test"),
-        a_hash_including(name: "random")
+        a_hash_including(name: 'updated sdk test'),
+        a_hash_including(name: 'random')
       )
     end
   end
 
-  describe "add_ad_extensions" do
-    let(:action) { "add_ad_extensions" }
-    let(:filename) { "standard" }
+  describe 'add_ad_extensions' do
+    let(:action) { 'add_ad_extensions' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.add_ad_extensions(
-          account_id: 150168726,
+          account_id: 150_168_726,
           ad_extensions: [
             {
               call_ad_extension: {
                 scheduling: {},
-                country_code: "NZ",
-                phone_number: "0123456699"
+                country_code: 'NZ',
+                phone_number: '0123456699'
               }
             }
           ]
         )
       ).to include({
-        ad_extension_identities: a_hash_including({
-          ad_extension_identity: a_collection_containing_exactly(
-            a_hash_including(id: "8177660966625")
-          )
-        }),
-        nested_partial_errors: ""
-      })
+                     ad_extension_identities: a_hash_including({
+                                                                 ad_extension_identity: a_collection_containing_exactly(
+                                                                   a_hash_including(id: '8177660966625')
+                                                                 )
+                                                               }),
+                     nested_partial_errors: ''
+                   })
     end
   end
 
-  describe "get_ad_extension_ids_by_account_id" do
-    let(:action) { "get_ad_extension_ids_by_account_id" }
-    let(:filename) { "standard" }
+  describe 'get_ad_extension_ids_by_account_id' do
+    let(:action) { 'get_ad_extension_ids_by_account_id' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.get_ad_extension_ids_by_account_id(
-          account_id: 150168726,
-          ad_extension_type: "CallAdExtension SitelinkAdExtension CalloutAdExtension"
+          account_id: 150_168_726,
+          ad_extension_type: 'CallAdExtension SitelinkAdExtension CalloutAdExtension'
         )
       ).to eq([
-        8177660966625
-      ])
+                8_177_660_966_625
+              ])
     end
   end
 
-  describe "set_ad_extensions_associations" do
-    let(:action) { "set_ad_extensions_associations" }
-    let(:filename) { "standard" }
+  describe 'set_ad_extensions_associations' do
+    let(:action) { 'set_ad_extensions_associations' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.set_ad_extensions_associations(
-          account_id: 150168726,
+          account_id: 150_168_726,
           ad_extension_id_to_entity_id_associations: [{
             ad_extension_id_to_entity_id_association: {
-              ad_extension_id: 8177660966942,
-              entity_id: 349704437
+              ad_extension_id: 8_177_660_966_942,
+              entity_id: 349_704_437
             }
           }],
-          association_type: "Campaign"
+          association_type: 'Campaign'
         )
       ).to eq({
-        partial_errors: ""
-      })
+                partial_errors: ''
+              })
     end
   end
 
-  describe "get_ad_extensions_associations" do
-    let(:action) { "get_ad_extensions_associations" }
-    let(:filename) { "standard" }
+  describe 'get_ad_extensions_associations' do
+    let(:action) { 'get_ad_extensions_associations' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.get_ad_extensions_associations(
-          account_id: 150168726,
-          association_type: "Campaign",
-          ad_extension_type: "CalloutAdExtension",
-          entity_ids: [{long: 349704437}]
+          account_id: 150_168_726,
+          association_type: 'Campaign',
+          ad_extension_type: 'CalloutAdExtension',
+          entity_ids: [{ long: 349_704_437 }]
         )
       ).to contain_exactly(
         a_hash_including(
-          ad_extension: a_hash_including(id: "8177650858590", text: "Informations Et Contact")
+          ad_extension: a_hash_including(id: '8177650858590', text: 'Informations Et Contact')
         ),
         a_hash_including(
-          ad_extension: a_hash_including(id: "8177660966942", text: "CalloutText")
+          ad_extension: a_hash_including(id: '8177660966942', text: 'CalloutText')
         )
       )
     end
   end
 
-  describe "add_shared_entity" do
-    let(:action) { "add_shared_entity" }
-    let(:filename) { "standard" }
+  describe 'add_shared_entity' do
+    let(:action) { 'add_shared_entity' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.add_shared_entity(
           negative_keyword_list: {
-            name: "sdk list"
+            name: 'sdk list'
           }
         )
       ).to eq({
-        list_item_ids: "",
-        partial_errors: "",
-        shared_entity_id: "229798145242911"
-      })
+                list_item_ids: '',
+                partial_errors: '',
+                shared_entity_id: '229798145242911'
+              })
     end
   end
 
-  describe "get_shared_entities_by_account_id" do
-    let(:action) { "get_shared_entities_by_account_id" }
-    let(:filename) { "standard" }
+  describe 'get_shared_entities_by_account_id' do
+    let(:action) { 'get_shared_entities_by_account_id' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.get_shared_entities_by_account_id(
-          shared_entity_type: "NegativeKeywordList"
+          shared_entity_type: 'NegativeKeywordList'
         )
       ).to contain_exactly(
-        a_hash_including(id: "229798145242911", name: "sdk list")
+        a_hash_including(id: '229798145242911', name: 'sdk list')
       )
     end
   end
 
-  describe "get_shared_entity_associations_by_entity_ids" do
-    let(:action) { "get_shared_entity_associations_by_entity_ids" }
-    let(:filename) { "standard" }
+  describe 'get_shared_entity_associations_by_entity_ids' do
+    let(:action) { 'get_shared_entity_associations_by_entity_ids' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.get_shared_entity_associations_by_entity_ids({
-          entity_ids: [{long: 349704435}],
-          entity_type: "Campaign",
-          shared_entity_type: "NegativeKeywordList"
-        })
+                                                               entity_ids: [{ long: 349_704_435 }],
+                                                               entity_type: 'Campaign',
+                                                               shared_entity_type: 'NegativeKeywordList'
+                                                             })
       ).to eq([
-        {entity_id: "349704435", entity_type: "Campaign", shared_entity_id: "223200992903993", shared_entity_type: "NegativeKeywordList"}
-      ])
+                { entity_id: '349704435', entity_type: 'Campaign', shared_entity_id: '223200992903993',
+                  shared_entity_type: 'NegativeKeywordList' }
+              ])
     end
   end
 
-  describe "set_shared_entity_associations" do
-    let(:action) { "set_shared_entity_associations" }
-    let(:filename) { "standard" }
+  describe 'set_shared_entity_associations' do
+    let(:action) { 'set_shared_entity_associations' }
+    let(:filename) { 'standard' }
 
-    it "returns expected result" do
+    it 'returns expected result' do
       expect(
         service.set_shared_entity_associations(
           associations: [{
             shared_entity_association: {
-              entity_id: "349704435",
-              entity_type: "Account",
-              shared_entity_id: "223200992903993",
-              shared_entity_type: "PlacementExclusionList"
+              entity_id: '349704435',
+              entity_type: 'Account',
+              shared_entity_id: '223200992903993',
+              shared_entity_type: 'PlacementExclusionList'
             }
           }]
         )
-      ).to eq({partial_errors: ""})
+      ).to eq({ partial_errors: '' })
     end
   end
 end

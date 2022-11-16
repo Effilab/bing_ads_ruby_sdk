@@ -1,24 +1,26 @@
-require_relative "../examples"
+# frozen_string_literal: true
 
-RSpec.describe "CustomerManagement service" do
-  include_context "use api"
+require_relative '../examples'
 
-  it "creates customer" do
+RSpec.describe 'CustomerManagement service' do
+  include_context 'use api'
+
+  it 'creates customer' do
     created_customer = api.customer_management.signup_customer(
       customer: {
         customer_address: {
-          city: "Paris",
+          city: 'Paris',
           postal_code: 75_001,
-          line1: "1 rue de Rivoli",
-          country_code: "FR"
+          line1: '1 rue de Rivoli',
+          country_code: 'FR'
         },
-        industry: "Entertainment",
+        industry: 'Entertainment',
         name: "Test Customer #{random}"
       },
       account: {
-        "@type" => "AdvertiserAccount",
+        '@type' => 'AdvertiserAccount',
         :name => "Test Account #{random}",
-        :currency_code => "USD"
+        :currency_code => 'USD'
       },
       parent_customer_id: Examples.parent_customer_id
     )

@@ -24,6 +24,7 @@ module BingAdsRubySdk
 
     def base_type_name(elements, type_name)
       return nil if type_name == BingAdsRubySdk.type_key
+
       elements.fetch(type_name).fetch(:base_type_name, type_name)
     end
 

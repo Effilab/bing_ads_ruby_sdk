@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SpecHelpers
   def self.request_xml_for(service, action, filename)
     Nokogiri::XML(File.read(xml_path_for(service, action, filename)))
@@ -10,10 +12,10 @@ module SpecHelpers
   def self.fake_header
     OpenStruct.new(
       content: {
-        "AuthenticationToken" => BingAdsRubySdk::LogMessage::FILTERED,
-        "DeveloperToken" => BingAdsRubySdk::LogMessage::FILTERED,
-        "CustomerId" => BingAdsRubySdk::LogMessage::FILTERED,
-        "CustomerAccountId" => BingAdsRubySdk::LogMessage::FILTERED
+        'AuthenticationToken' => BingAdsRubySdk::LogMessage::FILTERED,
+        'DeveloperToken' => BingAdsRubySdk::LogMessage::FILTERED,
+        'CustomerId' => BingAdsRubySdk::LogMessage::FILTERED,
+        'CustomerAccountId' => BingAdsRubySdk::LogMessage::FILTERED
       }
     )
   end
@@ -22,7 +24,7 @@ module SpecHelpers
     BingAdsRubySdk::SoapClient.new(
       service_name: service,
       version: BingAdsRubySdk::DEFAULT_SDK_VERSION,
-      environment: "test",
+      environment: 'test',
       header: header
     )
   end
@@ -32,15 +34,15 @@ module SpecHelpers
   end
 
   def self.default_store
-    ::BingAdsRubySdk::OAuth2::FsStore.new(ENV["BING_STORE_FILENAME"])
+    ::BingAdsRubySdk::OAuth2::FsStore.new(ENV['BING_STORE_FILENAME'])
   end
 
   # default fixture for now is standard.xml but door is open to get more use cases
   def self.xml_path_for(service, action, filename, request = true)
     if request
-      File.join(BingAdsRubySdk.root_path, "spec", "fixtures", service.to_s, action, "#{filename}.xml")
+      File.join(BingAdsRubySdk.root_path, 'spec', 'fixtures', service.to_s, action, "#{filename}.xml")
     else
-      File.join(BingAdsRubySdk.root_path, "spec", "fixtures", service.to_s, action, "#{filename}_response.xml")
+      File.join(BingAdsRubySdk.root_path, 'spec', 'fixtures', service.to_s, action, "#{filename}_response.xml")
     end
   end
 end

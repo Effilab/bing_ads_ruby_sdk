@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BingAdsRubySdk
   module Services
     class CampaignManagement < Base
@@ -14,6 +16,10 @@ module BingAdsRubySdk
       end
 
       def add_uet_tags(message)
+        call(__method__, message)
+      end
+
+      def apply_offline_conversions(message)
         call(__method__, message)
       end
 
@@ -40,7 +46,7 @@ module BingAdsRubySdk
             .first
             .dig(:ad_extension_associations, :ad_extension_association)
         )
-      rescue
+      rescue StandardError
         []
       end
 

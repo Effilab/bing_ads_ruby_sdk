@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "securerandom"
+require 'securerandom'
 
 module Examples
   class << self
@@ -64,12 +64,12 @@ module Examples
     end
 
     def store_filename
-      ENV.fetch("BING_STORE_FILENAME")
+      ENV.fetch('BING_STORE_FILENAME')
     end
   end
 end
 
-RSpec.shared_context "use api" do
+RSpec.shared_context 'use api' do
   let(:random) { Examples.random }
   let(:api) { Examples.build_api }
 end

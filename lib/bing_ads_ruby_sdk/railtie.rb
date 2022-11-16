@@ -1,5 +1,7 @@
-require "bing_ads_ruby_sdk"
-require "rails"
+# frozen_string_literal: true
+
+require 'bing_ads_ruby_sdk'
+require 'rails'
 
 module BingAdsRubySdk
   class Railtie < Rails::Railtie

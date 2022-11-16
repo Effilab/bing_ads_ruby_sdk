@@ -55,12 +55,12 @@ module BingAdsRubySdk
         # types are defined there: https://github.com/loco2/lolsoap/blob/master/lib/lolsoap/wsdl_parser.rb#L305
         lolsoap_parser.each_node('xs:complexType[not(@abstract="true")]') do |node, schema|
           type = ::LolSoap::WSDLParser::Type.new(lolsoap_parser, schema, node)
-          if type.base_type # it has a base_type, its a subtype
-            base_type = extract_base_type(type.base_type)
-            concrete_abstract_mapping[type.name] = base_type.name
-            grouped_types[base_type.name] ||= []
-            grouped_types[base_type.name].push(type)
-          end
+          next unless type.base_type # it has a base_type, its a subtype
+
+          base_type = extract_base_type(type.base_type)
+          concrete_abstract_mapping[type.name] = base_type.name
+          grouped_types[base_type.name] ||= []
+          grouped_types[base_type.name].push(type)
         end
         grouped_types
       end
