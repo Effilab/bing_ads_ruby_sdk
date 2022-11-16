@@ -27,19 +27,23 @@ By default, there is only one store in the gem to store the oauth token. It's a 
 To get your token, run:
 ```ruby
 rake bing_token:get[my_token.json,your_dev_token,your_bing_client_id]
-
 ```
 
+or open console and run: 
 
-Then to use the api:
 ```ruby
-store = ::BingAdsRubySdk::OAuth2::FsStore.new('my_token.json')
-api = BingAdsRubySdk::Api.new(
-  oauth_store: store,
-  developer_token: 'your_dev_token',
-  client_id: 'your_bing_client_id'
-)
+BingAdsRubySdk.create_token
+````
 
+To get an API client:
+Please note that this will require a valid token.
+```ruby
+BingAdsRubySdk.client
+```
+
+To create a new customer:
+```ruby
+api = BingAdsRubySdk.client
 api.customer_management.signup_customer(
   parent_customer_id: parent_customer_id,
   customer: customer_data, # a hash with your params
@@ -49,6 +53,7 @@ api.customer_management.signup_customer(
 # once you have your bing customer and account ids:
 api.set_customer(customer_id: customer_id, account_id: account_id )
 
+# you can then access the api methods
 api.campaign_management.get_campaigns_by_account_id(account_id: account_id)
 ```
 
@@ -70,18 +75,9 @@ The methods implemented contain additional code to ease data manipulation but an
 
 
 ## Configure the gem
+Run the installer
 ```ruby
-BingAdsRubySdk.configure do |conf|
-  conf.log = true
-  conf.logger.level = Logger::DEBUG
-  conf.pretty_print_xml = true
-  # to filter sensitive data before logging
-  conf.filters = ["AuthenticationToken", "DeveloperToken"]
-  
-  # Optionally allow ActiveSupport::Notifications to be emitted by Excon.
-  # These notifications can then be sent on to your profiling system
-  # conf.instrumentor = ActiveSupport::Notifications 
-end
+rails g bing_ads_ruby_sdk:install
 ```
 
 ## Development
