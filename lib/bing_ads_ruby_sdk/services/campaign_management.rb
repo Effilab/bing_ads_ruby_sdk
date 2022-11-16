@@ -17,6 +17,10 @@ module BingAdsRubySdk
         call(__method__, message)
       end
 
+      def apply_offline_conversions(message)
+        call(__method__, message)
+      end
+
       def set_ad_extensions_associations(message)
         call(__method__, message)
       end

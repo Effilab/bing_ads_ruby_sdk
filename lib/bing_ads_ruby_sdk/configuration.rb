@@ -2,7 +2,9 @@
 
 module BingAdsRubySdk
   class Configuration
-    attr_accessor :pretty_print_xml, :filters, :log, :instrumentor
+    attr_accessor :pretty_print_xml, :filters, :log, :instrumentor,
+                  :developer_token, :client_id, :client_secret, :filename,
+                  :customer_id, :account_id
     attr_writer :logger
 
     def initialize
@@ -10,6 +12,13 @@ module BingAdsRubySdk
       @pretty_print_xml = false
       @filters = []
       @instrumentor = nil
+
+      @developer_token = nil
+      @client_id = nil
+      @client_secret = nil
+      @filename = nil
+      @customer_id = nil
+      @account_id = nil
     end
 
     def logger
