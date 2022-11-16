@@ -68,7 +68,7 @@ module BingAdsRubySdk
   end
 
   def self.store
-    @store ||= ::BingAdsRubySdk::OAuth2::FsStore.new(FILENAME)
+    @store ||= ::BingAdsRubySdk::OAuth2::FsStore.new(BingAdsRubySdk.config.filename)
   end
 
   TYPE_KEY = '@type'
