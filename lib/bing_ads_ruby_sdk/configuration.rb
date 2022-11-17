@@ -3,7 +3,8 @@
 module BingAdsRubySdk
   class Configuration
     attr_accessor :pretty_print_xml, :filters, :log, :instrumentor,
-                  :developer_token, :client_id, :client_secret, :filename,
+                  :developer_token, :client_id, :client_secret,
+                  :store_filename, :store_token,
                   :customer_id, :account_id
     attr_writer :logger
 
@@ -16,7 +17,8 @@ module BingAdsRubySdk
       @developer_token = nil
       @client_id = nil
       @client_secret = nil
-      @filename = nil
+      @store_filename = nil
+      @store_token = nil
       @customer_id = nil
       @account_id = nil
     end

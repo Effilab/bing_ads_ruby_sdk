@@ -16,7 +16,8 @@ BingAdsRubySdk.configure do |config|
   config.developer_token = ENV['BING_ADS_DEVELOPER_TOKEN']
   config.client_id = ENV['BING_ADS_CLIENT_ID']
   config.client_secret = ENV['BING_ADS_CLIENT_SECRET']
-  config.filename = ENV['BING_ADS_FILENAME']
+  config.store_filename = ENV['BING_ADS_STORE_FILENAME']
+  config.store_token = ENV['BING_ADS_STORE_TOKEN']
   config.customer_id = ENV['BING_ADS_CUSTOMER_ID']
   config.account_id = ENV['BING_ADS_ACCOUNT_ID']
 end

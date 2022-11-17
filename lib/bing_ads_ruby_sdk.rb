@@ -53,6 +53,11 @@ module BingAdsRubySdk
     puts 'Written to store'
   end
 
+  def self.create_token_from_env
+    token = BingAdsRubySdk.config.store_token
+    store.write(token)
+  end
+
   def self.client
     client = BingAdsRubySdk::Api.new(
       oauth_store: store,
@@ -68,7 +73,7 @@ module BingAdsRubySdk
   end
 
   def self.store
-    @store ||= ::BingAdsRubySdk::OAuth2::FsStore.new(BingAdsRubySdk.config.filename)
+    @store ||= ::BingAdsRubySdk::OAuth2::FsStore.new(BingAdsRubySdk.config.store_filename)
   end
 
   TYPE_KEY = '@type'
