@@ -34,14 +34,14 @@ commands:
 jobs:
   build_2_x:
     docker:
-      - image: ruby:2.7.6
+      - image: ruby:2.7.7
     working_directory: ~/repo
     steps:
       - build
 
   build_3_x:
     docker:
-      - image: ruby:3.1.2
+      - image: ruby:3.1.3
     working_directory: ~/repo
     steps:
       - build
