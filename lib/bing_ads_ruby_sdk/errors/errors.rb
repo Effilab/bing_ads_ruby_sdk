@@ -67,7 +67,7 @@ module BingAdsRubySdk
 
           # Call sometimes returns an empty string instead of
           # nil for empty lists
-          list.nil? || list.empty? ? nil : list
+          (list.nil? || list.empty?) ? nil : list
         end.compact
       end
 
