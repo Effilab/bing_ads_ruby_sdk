@@ -23,7 +23,7 @@
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": [
-      "after 2am and before 6am every monday"
+      "after 3am and before 7am every monday"
     ],
     "commitMessageAction": "Update lockfiles",
     "groupName": "lockfile-update",
@@ -68,7 +68,7 @@
       "automerge": true
     },
     {
-      "matchManagers": ["bundler", "ruby-version"],
+      "matchManagers": ["bundler"],
       "groupName": "ruby-update",
       "automerge": true,
       "labels": ["ruby-update"]
@@ -121,8 +121,8 @@
         "kubernetes"
       ],
       "matchPackageNames": ["redis"],
-      "allowedVersions": "<6",
-      "automerge": true,
+      "allowedVersions": "<7",
+      "automerge": false,
       "groupName": "redis-update",
       "description": "explicit max version to keep coherence with real infra on GCP"
     },
@@ -143,6 +143,13 @@
     },
     {
       "matchPackageNames": ["ruby","circleci/ruby","cimg/ruby"],
+      "allowedVersions": "<4",
+      "groupName": "rubycore-update",
+      "description": "explicit max version to prevent issues",
+      "labels": ["rubycore-update"]
+    },
+    {
+      "matchManagers": ["ruby-version"],
       "allowedVersions": "<4",
       "groupName": "rubycore-update",
       "description": "explicit max version to prevent issues",
@@ -185,6 +192,14 @@
       "description": "limitation from dataiku, don't merge upper than 1.3 for now"
     },
     {
+      "matchManagers": [
+        "pip-compile",
+        "pip_requirements",
+        "pip_setup",
+        "pipenv",
+        "pyenv",
+        "setup-cfg"
+      ],
       "matchPackageNames": [
         "gql"
       ],
@@ -206,10 +221,10 @@
       "matchPackageNames": [
         "facebookbusiness"
       ],
-      "groupName": "envkey-update",
+      "groupName": "facebook-update",
       "description": "Facebook API",
       "labels": [
-        "apifacebook-update"
+        "facebook-update"
       ]
     },
     {
@@ -220,6 +235,17 @@
       "description": "Google Ads API",
       "labels": [
         "apigoogleads-update"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "sidekiq"
+      ],
+      "groupName": "sidekiq-update",
+      "description": "Sidekiq",
+      "labels": [
+        "sidekiq-update",
+        "ruby-update"
       ]
     },
     {
@@ -236,7 +262,8 @@
         "activerecord",
         "activestorage",
         "activesupport",
-        "railties"
+        "railties",
+        "composite_primary_keys"
       ],
       "groupName": "rails-update",
       "description": "Rails framework",
@@ -247,5 +274,5 @@
   ],
   "dependencyDashboard": true,
   "timezone": "Europe/Paris",
-  "prHourlyLimit": 6
+  "prHourlyLimit": 3
 }
