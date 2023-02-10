@@ -41,7 +41,8 @@
     ],
     "schedule": [
       "after 2am and before 6am every day"
-    ]
+    ],
+    "branchTopic": "{{{datasource}}}-{{{depName}}}-sec"
   },
   "packageRules": [
     {
