@@ -75,12 +75,6 @@
       "labels": ["ruby-update"]
     },
     {
-      "matchManagers": ["pip-compile", "pip_requirements", "pip_setup", "pipenv", "pyenv", "setup-cfg"],
-      "groupName": "python-update",
-      "automerge": true,
-      "labels": ["python-update"]
-    },
-    {
       "matchDepTypes": ["peerDependencies", "devDependencies", "dependencies"],
       "matchUpdateTypes": ["minor","patch","pin","digest","rollback","bump"],
       "groupName": "dep-update",
@@ -143,14 +137,7 @@
       "description": "explicit max version to prevent issue like need to coordinate with real infra on GCP"
     },
     {
-      "matchPackageNames": ["ruby","circleci/ruby","cimg/ruby"],
-      "allowedVersions": "<4",
-      "groupName": "rubycore-update",
-      "description": "explicit max version to prevent issues",
-      "labels": ["rubycore-update"]
-    },
-    {
-      "matchManagers": ["ruby-version"],
+      "matchPackageNames": ["ruby-version","ruby","circleci/ruby","cimg/ruby"],
       "allowedVersions": "<4",
       "groupName": "rubycore-update",
       "description": "explicit max version to prevent issues",
@@ -165,10 +152,19 @@
       "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime " 
     },
     {
-      "matchPackageNames": ["python"],
-      "automerge": true,
+      "matchManagers": [
+        "pip-compile",
+        "pip_requirements",
+        "pip_setup",
+        "pipenv",
+        "pyenv",
+        "setup-cfg"
+      ],
       "groupName": "python-update",
-      "labels": ["python-update"]
+      "automerge": true,
+      "labels": [
+        "python-update"
+      ]
     },
     {
       "matchPackageNames": ["circleci/python","cimg/python"],
@@ -240,7 +236,9 @@
     },
     {
       "matchPackageNames": [
-        "sidekiq"
+        "sidekiq",
+        "sidekiq-ent",
+        "sidekiq-pro"
       ],
       "groupName": "sidekiq-update",
       "description": "Sidekiq",
