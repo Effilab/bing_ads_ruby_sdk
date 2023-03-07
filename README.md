@@ -24,7 +24,15 @@ In order to use Microsoft's advertising API you need to
 From there gem handles OAuth token generation.
 By default, there is only one store in the gem to store the oauth token. It's a file system based store. You can create one yourself to store credentials in a database or wherever you desire. The store class must implement `read` and `write(data)` instance methods.
 
-To get your token, run the `bing_token:get` rake task
+To get your token, run the `bing_token:get` rake task, then follow the prompts. Here's an example:
+
+```shell
+bin/rake bing_token:get['credentials.json',YOUR_DEVELOPER_TOKEN,YOUR_CLIENT_ID,YOUR_CLIENT_SECRET]
+
+# For example:
+bin/rake bing_token:get['credentials.json',ABC1234,3431b6d0-a2ac-48e1-a1c5-1d0b82f3187f,sECRETvaluehere]
+```
+
 
 Then to use the api:
 ```ruby
