@@ -30,7 +30,7 @@ To get your token, run the `bing_token:get` rake task, then follow the prompts. 
 bin/rake bing_token:get['credentials.json',YOUR_DEVELOPER_TOKEN,YOUR_CLIENT_ID,YOUR_CLIENT_SECRET]
 
 # For example:
-bin/rake bing_token:get['credentials.json',ABC1234,3431b6d0-a2ac-48e1-a1c5-1d0b82f3187f,sECRETvaluehere]
+bin/rake bing_token:get['credentials.json',ABC1234,3431b6d0-a2ac-48e1-a1c5-1d0b82f3187f,SECRETVALUEHERE]
 ```
 
 
