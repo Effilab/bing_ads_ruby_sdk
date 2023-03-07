@@ -1,3 +1,6 @@
+## V1.5.1 Release
+- Bug fix: Rake task missing
+
 ## V1.5.0 Release
 - Breaking: Now raises functional errors
 - Breaking: Now raises an error if not able to read the store in order to refresh the token
