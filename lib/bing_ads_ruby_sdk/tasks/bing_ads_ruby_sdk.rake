@@ -1,7 +1,7 @@
 require "dotenv/load"
 
 namespace :bing_token do
-  desc "Gets and stores Bing OAuth token in file"
+  desc "Gets OAuth token from MS and stores it in a JSON file defined by filename parameter"
   task :get, [:filename, :bing_developer_token, :bing_client_id, :bing_client_secret] do |task, args|
     filename = args[:filename] || ENV.fetch("BING_STORE_FILENAME")
     developer_token = args[:bing_developer_token] || ENV.fetch("BING_DEVELOPER_TOKEN")

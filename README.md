@@ -18,14 +18,19 @@ Or install it yourself as:
 
 ## Getting Started
 
-In order to use Bing's api you need to get your api credentials from bing. From there gem handles the oauth token generation.
+In order to use Microsoft's advertising API you need to 
+[get your API credentials from MS](https://learn.microsoft.com/en-us/advertising/guides/get-started?view=bingads-13).
 
+From there gem handles OAuth token generation.
 By default, there is only one store in the gem to store the oauth token. It's a file system based store. You can create one yourself to store credentials in a database or wherever you desire. The store class must implement `read` and `write(data)` instance methods.
 
-To get your token, run:
-```ruby
-rake bing_token:get[my_token.json,your_dev_token,your_bing_client_id]
+To get your token, run the `bing_token:get` rake task, then follow the prompts. Here's an example:
 
+```shell
+bin/rake bing_token:get['credentials.json',YOUR_DEVELOPER_TOKEN,YOUR_CLIENT_ID,YOUR_CLIENT_SECRET]
+
+# For example:
+bin/rake bing_token:get['credentials.json',ABC1234,3431b6d0-a2ac-48e1-a1c5-1d0b82f3187f,SECRETVALUEHERE]
 ```
 
 
@@ -37,13 +42,22 @@ api = BingAdsRubySdk::Api.new(
   developer_token: 'your_dev_token',
   client_id: 'your_bing_client_id'
 )
+```
+
+If you want to create an account using the API:
+```ruby
 api.customer_management.signup_customer(
   parent_customer_id: parent_customer_id,
   customer: customer_data, # a hash with your params
   account: account_data.merge("@type" => "AdvertiserAccount")
 )
+```
 
-# once you have your bing customer and account ids:
+Otherwise you can [use existing account IDs as explained here](https://learn.microsoft.com/en-us/advertising/guides/get-started?view=bingads-13#get-ids),
+or use the `customer_management` endpoint as explained below.
+
+Once you have your MS Advertising customer and account ids:
+```ruby
 api.set_customer(customer_id: customer_id, account_id: account_id )
 
 api.campaign_management.get_campaigns_by_account_id(account_id: account_id)
@@ -54,6 +68,8 @@ You'll see services like `customer_management` implement some methods, but not a
 The methods implemented contain additional code to ease data manipulation but any endpoint can be reached using `call` on a service.
 
 ```ruby
+@cm = api.customer_management
+
 @cm.call(:find_accounts_or_customers_info, filter: 'name', top_n: 1)
 # => { account_info_with_customer_data: { account_info_with_customer_data: [{ customer_id: "250364751", :
 
