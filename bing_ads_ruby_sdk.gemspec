@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://github.com/Effilab/bing_ads_ruby_sdk"
   spec.license = "MIT"
 
-  spec.files = `git ls-files`.split($/)
+  spec.files = Dir["README.md", "VERSION", "Gemfile", "Rakefile", "{bin,lib}/**/*"]
   spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
