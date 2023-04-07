@@ -4,7 +4,6 @@ rescue LoadError
   puts "Unable to load .env file, resuming..."
 end
 
-
 namespace :bing_token do
   desc "Gets OAuth token from MS and stores it in a JSON file defined by filename parameter"
   task :get, [:filename, :bing_developer_token, :bing_client_id, :bing_client_secret] do |task, args|
