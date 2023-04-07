@@ -1,6 +1,7 @@
 begin
   require "dotenv/load"
 rescue LoadError
+  puts "Unable to load .env file, resuming..."
 end
 
 

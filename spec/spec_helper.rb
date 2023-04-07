@@ -1,6 +1,11 @@
 require "simplecov"
-require "dotenv/load"
 require "byebug"
+
+begin
+  require "dotenv/load"
+rescue LoadError
+  puts "Unable to load .env file, resuming..."
+end
 
 SimpleCov.start do
   add_filter "/spec/"
