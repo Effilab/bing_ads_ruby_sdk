@@ -1,3 +1,4 @@
+raise "tdh - env is : #{Rails.env}"
 require "dotenv/load" if Rails.env.development?
 
 namespace :bing_token do
