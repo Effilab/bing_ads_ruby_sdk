@@ -210,7 +210,7 @@
         "envkey"
       ],
       "automerge": true,
-      "allowedVersions": "<2",
+      "allowedVersions": "<3",
       "groupName": "envkey-update",
       "description": "no switch for now"
     },
