@@ -4,4 +4,3 @@ source "https://rubygems.org"
 gemspec
 
 gem "standard", "1.25.3"
-gem "dotenv", "2.8.1"

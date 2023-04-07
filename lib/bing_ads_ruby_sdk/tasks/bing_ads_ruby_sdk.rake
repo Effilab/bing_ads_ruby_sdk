@@ -1,4 +1,4 @@
-require "dotenv/load"
+require "dotenv/load" if Rails.env.development?
 
 namespace :bing_token do
   desc "Gets OAuth token from MS and stores it in a JSON file defined by filename parameter"
