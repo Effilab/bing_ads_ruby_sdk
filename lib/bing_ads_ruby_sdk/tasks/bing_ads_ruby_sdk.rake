@@ -1,4 +1,8 @@
-require "dotenv/load"
+begin
+  require "dotenv/load"
+rescue LoadError
+  puts "Unable to load .env file, resuming..."
+end
 
 namespace :bing_token do
   desc "Gets OAuth token from MS and stores it in a JSON file defined by filename parameter"
