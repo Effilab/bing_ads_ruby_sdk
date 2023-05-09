@@ -103,23 +103,47 @@ You can generate the report following the
 That would mean coding something like this:
 
 ```ruby
-submission_response = api.reporting.submit_generate_report(
-  account_report_request: {
-    aggregation: 'Daily',
-    columns: %w[...],
-    scope: { account_ids: [account_id] },
-    time: { 
-      custom_date_range_start: {
-        day: 1,
-        month: 1, 
-        year: 2019
-      },
-      custom_date_range_end: {
-        # ...
-      }
-    }
-  }
-)
+submission_response = api.reporting
+  .call(:submit_generate_report,
+     account_performance_report_request: {
+       exclude_report_header: true,
+       exclude_report_footer: true,
+       exclude_column_headers: true,
+       format: "Csv",
+       aggregation: "Daily",
+       filter: nil,
+       columns: [
+         {
+           account_performance_report_column: "TimePeriod"
+         },
+         {
+           account_performance_report_column: "AccountId"
+         },
+         {
+           account_performance_report_column: "DeviceType"
+         },
+         {
+           account_performance_report_column: "Clicks"
+         }
+       ],
+       scope: {
+         # Your account ID here
+         account_ids: [{long: 1000000}]
+       },
+       time: {
+         custom_date_range_start: {
+           day: 7,
+           month: 5,
+           year: 2023
+         },
+         custom_date_range_end: {
+           day: 8,
+           month: 5,
+           year: 2023
+         }
+       }
+     }
+  )
 
 report_request_id = submission_response.fetch(:report_request_id)
 
