@@ -148,7 +148,7 @@ submission_response = api.reporting
 report_request_id = submission_response.fetch(:report_request_id)
 
 # Then you can poll the API to check the status of the report generation
-poll_response = api.reporting.poll_generate_report(report_request_id: report_request_id)
+poll_response = api.reporting.call(:poll_generate_report, report_request_id: report_request_id)
 
 # When it is ready you can download it
 report_request_status = poll_response.fetch(:report_request_status)
