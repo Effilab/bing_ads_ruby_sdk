@@ -16,7 +16,8 @@ Or install it yourself as:
 
     $ gem install bing_ads_ruby_sdk
 
-## Getting Started
+## Usage
+### Getting Started
 
 In order to use Microsoft's advertising API you need to 
 [get your API credentials from MS](https://learn.microsoft.com/en-us/advertising/guides/get-started?view=bingads-13).
@@ -33,7 +34,6 @@ bin/rake bing_token:get['credentials.json',YOUR_DEVELOPER_TOKEN,YOUR_CLIENT_ID,Y
 bin/rake bing_token:get['credentials.json',ABC1234,3431b6d0-a2ac-48e1-a1c5-1d0b82f3187f,SECRETVALUEHERE]
 ```
 
-
 Then to use the api:
 ```ruby
 store = ::BingAdsRubySdk::OAuth2::FsStore.new('my_token.json')
@@ -44,6 +44,22 @@ api = BingAdsRubySdk::Api.new(
 )
 ```
 
+### Configuration
+```ruby
+BingAdsRubySdk.configure do |conf|
+  conf.log = true
+  conf.logger.level = Logger::DEBUG
+  conf.pretty_print_xml = true
+  # to filter sensitive data before logging
+  conf.filters = ["AuthenticationToken", "DeveloperToken"]
+  
+  # Optionally allow ActiveSupport::Notifications to be emitted by Excon.
+  # These notifications can then be sent on to your profiling system
+  # conf.instrumentor = ActiveSupport::Notifications 
+end
+```
+
+### Account creation and management
 If you want to create an account using the API:
 ```ruby
 api.customer_management.signup_customer(
@@ -54,7 +70,7 @@ api.customer_management.signup_customer(
 ```
 
 Otherwise you can [use existing account IDs as explained here](https://learn.microsoft.com/en-us/advertising/guides/get-started?view=bingads-13#get-ids),
-or use the `customer_management` endpoint as explained below.
+or use the `customer_management` endpoint as explained above.
 
 Once you have your MS Advertising customer and account ids:
 ```ruby
@@ -80,21 +96,75 @@ The methods implemented contain additional code to ease data manipulation but an
 
 ```
 
+### Reporting
+You can generate the report following the 
+[process recommended by Microsoft](https://learn.microsoft.com/en-us/advertising/guides/request-download-report?view=bingads-13):
 
-## Configure the gem
+That would mean coding something like this:
+
 ```ruby
-BingAdsRubySdk.configure do |conf|
-  conf.log = true
-  conf.logger.level = Logger::DEBUG
-  conf.pretty_print_xml = true
-  # to filter sensitive data before logging
-  conf.filters = ["AuthenticationToken", "DeveloperToken"]
-  
-  # Optionally allow ActiveSupport::Notifications to be emitted by Excon.
-  # These notifications can then be sent on to your profiling system
-  # conf.instrumentor = ActiveSupport::Notifications 
+submission_response = api.reporting
+  .call(:submit_generate_report,
+     account_performance_report_request: {
+       exclude_report_header: true,
+       exclude_report_footer: true,
+       exclude_column_headers: true,
+       format: "Csv",
+       aggregation: "Daily",
+       filter: nil,
+       columns: [
+         {
+           account_performance_report_column: "TimePeriod"
+         },
+         {
+           account_performance_report_column: "AccountId"
+         },
+         {
+           account_performance_report_column: "DeviceType"
+         },
+         {
+           account_performance_report_column: "Clicks"
+         }
+       ],
+       scope: {
+         # Your account ID here
+         account_ids: [{long: 1000000}]
+       },
+       time: {
+         custom_date_range_start: {
+           day: 7,
+           month: 5,
+           year: 2023
+         },
+         custom_date_range_end: {
+           day: 8,
+           month: 5,
+           year: 2023
+         }
+       }
+     }
+  )
+
+report_request_id = submission_response.fetch(:report_request_id)
+
+# Then you can poll the API to check the status of the report generation
+poll_response = api.reporting.call(:poll_generate_report, report_request_id: report_request_id)
+
+# When it is ready you can download it
+report_request_status = poll_response.fetch(:report_request_status)
+
+report_generation_status = report_request_status[:status].downcase.to_sym 
+# => One of these: :pending, :error, :success
+
+if report_generation_status == :success
+  url = report_request_status[:report_download_url]
+  # => The URL to download the report (with the library of your choice)
 end
 ```
+
+🛈 Report request example [here in the API docs](https://learn.microsoft.com/en-us/advertising/reporting-service/accountperformancereportrequest?view=bingads-13)
+
+🛈 Hint: convert parameter names from PascalCase to snake_case when consulting the API docs
 
 ## Development
 You can run `bin/console` for an interactive prompt that will allow you to experiment.
