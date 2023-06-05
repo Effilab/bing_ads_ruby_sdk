@@ -63,9 +63,36 @@
       "automerge": true
     },
     {
-      "matchManagers": ["nodenv", "npm"],
-      "groupName": "js-update",
-      "labels": ["js-update"],
+      "matchManagers": [
+        "nodenv",
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest",
+        "rollback",
+        "bump"
+      ],
+      "groupName": "jsminor-upd",
+      "labels": [
+        "js-update"
+      ],
+      "automerge": true
+    },
+    {
+      "matchManagers": [
+        "nodenv",
+        "npm"
+      ],
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "groupName": "jsmajor-upd",
+      "labels": [
+        "js-update"
+      ],
       "automerge": true
     },
     {
@@ -75,8 +102,9 @@
       "labels": ["ruby-update"]
     },
     {
+      "matchManagers": ["bundler"],
       "matchDepTypes": ["peerDependencies", "devDependencies", "dependencies"],
-      "matchUpdateTypes": ["minor","patch","pin","digest","rollback","bump"],
+      "matchUpdateTypes": ["minor","patch","pin","digest","rollback"],
       "groupName": "dep-update",
       "labels": ["dependencies-update"],
       "automerge": true
@@ -204,15 +232,6 @@
       "allowedVersions": "<3",
       "groupName": "gql-update",
       "description": "limitation from dataiku"
-    },
-    {
-      "matchPackageNames": [
-        "envkey"
-      ],
-      "automerge": true,
-      "allowedVersions": "<3",
-      "groupName": "envkey-update",
-      "description": "no switch for now"
     },
     {
       "matchPackageNames": [
