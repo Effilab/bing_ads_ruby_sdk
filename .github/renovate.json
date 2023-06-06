@@ -195,11 +195,29 @@
       ]
     },
     {
-      "matchPackageNames": ["circleci/python","cimg/python"],
+      "matchPackageNames": [
+        "circleci/python",
+        "cimg/python"
+      ],
       "automerge": true,
+      "allowedVersions": "<3.8",
+      "groupName": "pythoncore-update",
+      "labels": [
+        "pythoncore37-update"
+      ],
+      "description": "explicit max major version to prevent issues"
+    },
+    {
+      "matchPackageNames": [
+        "circleci/python",
+        "cimg/python"
+      ],
+      "automerge": false,
       "allowedVersions": "<4",
       "groupName": "pythoncore-update",
-      "labels": ["pythoncore-update"],
+      "labels": [
+        "pythoncore-update"
+      ],
       "description": "explicit max major version to prevent issues"
     },
     {
