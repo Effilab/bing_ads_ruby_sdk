@@ -7,7 +7,7 @@
   "kubernetes": {
     "fileMatch": [
       "\\.yaml$",
-       "\\.tpl$"
+      "\\.tpl$"
     ]
   },
   "branchPrefix": "bot-",
@@ -46,20 +46,34 @@
   },
   "packageRules": [
     {
-      "matchPackagePatterns": ["*"],
+      "matchPackagePatterns": [
+        "*"
+      ],
       "stabilityDays": 5
     },
     {
-      "matchDatasources": ["terraform-module","terraform-provider"],
-      "labels": ["terraform"],
+      "matchDatasources": [
+        "terraform-module",
+        "terraform-provider"
+      ],
+      "labels": [
+        "terraform"
+      ],
       "groupName": "terraform",
       "automerge": false
     },
     {
-      "matchDepTypes": ["devDependencies"],
-      "matchPackagePatterns": ["lint", "prettier"],
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "matchPackagePatterns": [
+        "lint",
+        "prettier"
+      ],
       "groupName": "linter-update",
-      "labels": ["linter-update"],
+      "labels": [
+        "linter-update"
+      ],
       "automerge": true
     },
     {
@@ -96,17 +110,35 @@
       "automerge": true
     },
     {
-      "matchManagers": ["bundler"],
+      "matchManagers": [
+        "bundler"
+      ],
       "groupName": "ruby-update",
       "automerge": true,
-      "labels": ["ruby-update"]
+      "labels": [
+        "ruby-update"
+      ]
     },
     {
-      "matchManagers": ["bundler"],
-      "matchDepTypes": ["peerDependencies", "devDependencies", "dependencies"],
-      "matchUpdateTypes": ["minor","patch","pin","digest","rollback"],
+      "matchManagers": [
+        "bundler"
+      ],
+      "matchDepTypes": [
+        "peerDependencies",
+        "devDependencies",
+        "dependencies"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest",
+        "rollback"
+      ],
       "groupName": "dep-update",
-      "labels": ["dependencies-update"],
+      "labels": [
+        "dependencies-update"
+      ],
       "automerge": true
     },
     {
@@ -120,16 +152,11 @@
         "bump"
       ],
       "groupName": "betas can break",
-      "labels": ["betas-update"],
+      "labels": [
+        "betas-update"
+      ],
       "description": "according semver spec, version <1 can introduce breaking changes on each rel",
       "automerge": false
-    },
-    {
-      "matchManagers": ["gitlabci", "gitlabci-include", "circleci", "helm-requirements", "helm-values", "helmfile", "helmv3","docker-compose", "dockerfile","kubernetes"],
-      "excludePackagePatterns": ["python"],
-      "automerge": true,
-      "groupName": "ci-update",
-      "labels": ["ci-update"]
     },
     {
       "matchManagers": [
@@ -144,41 +171,85 @@
         "dockerfile",
         "kubernetes"
       ],
-      "matchPackageNames": ["redis"],
+      "automerge": true,
+      "groupName": "ci-update",
+      "labels": [
+        "ci-update"
+      ]
+    },
+    {
+      "matchManagers": [
+        "gitlabci",
+        "gitlabci-include",
+        "circleci",
+        "helm-requirements",
+        "helm-values",
+        "helmfile",
+        "helmv3",
+        "docker-compose",
+        "dockerfile",
+        "kubernetes"
+      ],
+      "matchPackageNames": [
+        "redis"
+      ],
       "allowedVersions": "<7",
       "automerge": false,
       "groupName": "redis-update",
       "description": "explicit max version to keep coherence with real infra on GCP"
     },
     {
-      "matchPackageNames": ["jdk","openjdk"],
+      "matchPackageNames": [
+        "jdk",
+        "openjdk"
+      ],
       "allowedVersions": "<18",
       "automerge": true,
       "groupName": "jdk-update",
       "description": "explicit max version to keep LTS only"
     },
     {
-      "matchPackageNames": ["cimg/postgres","postgres","postgis","postgis/postgis"],
+      "matchPackageNames": [
+        "cimg/postgres",
+        "postgres",
+        "postgis",
+        "postgis/postgis"
+      ],
       "allowedVersions": "<14",
       "automerge": true,
       "groupName": "postgres-update",
-      "labels": ["postgres"],
+      "labels": [
+        "postgres"
+      ],
       "description": "explicit max version to prevent issue like need to coordinate with real infra on GCP"
     },
     {
-      "matchPackageNames": ["ruby-version","ruby","circleci/ruby","cimg/ruby"],
+      "matchPackageNames": [
+        "ruby-version",
+        "ruby",
+        "circleci/ruby",
+        "cimg/ruby"
+      ],
       "allowedVersions": "<4",
       "groupName": "rubycore-update",
       "description": "explicit max version to prevent issues",
-      "labels": ["rubycore-update"]
+      "labels": [
+        "rubycore-update"
+      ]
     },
     {
-      "matchPackageNames": ["node","circleci/node","cimg/node"],
+      "matchPackageNames": [
+        "node",
+        "circleci/node",
+        "cimg/node"
+      ],
       "automerge": true,
       "allowedVersions": "<17",
       "groupName": "node-update",
-      "labels": ["node-update"],
-      "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime " 
+      "labels": [
+        "node-update"
+      ],
+      "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime "
     },
     {
       "matchManagers": [
@@ -201,36 +272,27 @@
         "cimg/python",
         "python"
       ],
-      "automerge": true,
-      "allowedVersions": "<3.8",
-      "groupName": "pythoncore37-update",
-      "labels": [
-        "pythoncore37-update"
-      ],
-      "description": "explicit 3.7 version to prevent issues"
-    },
-    {
-      "matchPackageNames": [
-        "circleci/python",
-        "cimg/python",
-        "python"
-      ],
       "automerge": false,
+      "separateMinorPatch": true,
+      "allowedVersions": "<4",
       "groupName": "pythoncore-update",
       "labels": [
         "pythoncore-update"
-      ],
-      "description": "to show what exists but need code changes"
+      ]
     },
     {
-      "matchPackageNames": ["xgboost"],
+      "matchPackageNames": [
+        "xgboost"
+      ],
       "automerge": true,
       "allowedVersions": "<1.5",
       "groupName": "xgboost-update",
       "description": "limitation from the data model used in pricer"
     },
     {
-      "matchPackageNames": ["pandas"],
+      "matchPackageNames": [
+        "pandas"
+      ],
       "allowedVersions": "<1.4",
       "automerge": true,
       "groupName": "pandas-update",
