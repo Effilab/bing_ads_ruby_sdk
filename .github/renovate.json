@@ -126,6 +126,7 @@
     },
     {
       "matchManagers": ["gitlabci", "gitlabci-include", "circleci", "helm-requirements", "helm-values", "helmfile", "helmv3","docker-compose", "dockerfile","kubernetes"],
+      "excludePackagePatterns": ["python"],
       "automerge": true,
       "groupName": "ci-update",
       "labels": ["ci-update"]
@@ -197,28 +198,29 @@
     {
       "matchPackageNames": [
         "circleci/python",
-        "cimg/python"
+        "cimg/python",
+        "python"
       ],
       "automerge": true,
       "allowedVersions": "<3.8",
-      "groupName": "pythoncore-update",
+      "groupName": "pythoncore37-update",
       "labels": [
         "pythoncore37-update"
       ],
-      "description": "explicit max major version to prevent issues"
+      "description": "explicit 3.7 version to prevent issues"
     },
     {
       "matchPackageNames": [
         "circleci/python",
-        "cimg/python"
+        "cimg/python",
+        "python"
       ],
       "automerge": false,
-      "allowedVersions": "<4",
       "groupName": "pythoncore-update",
       "labels": [
         "pythoncore-update"
       ],
-      "description": "explicit max major version to prevent issues"
+      "description": "to show what exists but need code changes"
     },
     {
       "matchPackageNames": ["xgboost"],
