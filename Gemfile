@@ -3,4 +3,4 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in bing_ads_ruby_sdk.gemspec
 gemspec
 
-gem "standard", "1.29.0"
+gem "standard", "1.30.1"
