@@ -9,6 +9,8 @@
 /tmp/
 /log/*
 vendor/bundle/
+# RubyMine project files
+.idea
 
 # rspec failure tracking
 .rspec_status
