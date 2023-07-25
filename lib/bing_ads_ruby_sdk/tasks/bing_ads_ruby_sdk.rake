@@ -1,16 +1,10 @@
-begin
-  require "dotenv/load"
-rescue LoadError
-  puts "Unable to load .env file, resuming..."
-end
-
 namespace :bing_token do
   desc "Gets OAuth token from MS and stores it in a JSON file defined by filename parameter"
   task :get, [:filename, :bing_developer_token, :bing_client_id, :bing_client_secret] do |task, args|
-    filename = args[:filename] || ENV.fetch("BING_STORE_FILENAME")
-    developer_token = args[:bing_developer_token] || ENV.fetch("BING_DEVELOPER_TOKEN")
-    bing_client_id = args[:bing_client_id] || ENV.fetch("BING_CLIENT_ID")
-    bing_client_secret = args[:bing_client_secret] || ENV.fetch("BING_CLIENT_SECRET", nil)
+    filename = args[:filename] || ENV["BING_STORE_FILENAME"]
+    developer_token = args[:bing_developer_token] || ENV["BING_DEVELOPER_TOKEN"]
+    bing_client_id = args[:bing_client_id] || ENV["BING_CLIENT_ID"]
+    bing_client_secret = args[:bing_client_secret] || ENV["BING_CLIENT_SECRET"]
 
     store = ::BingAdsRubySdk::OAuth2::FsStore.new(filename)
     auth = BingAdsRubySdk::OAuth2::AuthorizationHandler.new(
