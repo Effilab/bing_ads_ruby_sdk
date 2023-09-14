@@ -7,6 +7,8 @@ module BingAdsRubySdk
     end
 
     def self.snakize(string)
+      raise "Unexpected string length : #{string.length} for string '#{string[0..200]}...'" if string.length > 1000
+
       string.gsub(MULTIPLE_CAPSREGEX, MATCHING_PATTERN)
         .gsub(SPLIT_REGEX, MATCHING_PATTERN)
         .tr("-", "_")

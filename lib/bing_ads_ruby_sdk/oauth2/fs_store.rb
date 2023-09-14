@@ -23,7 +23,7 @@ module BingAdsRubySdk
       # @return [nil] if the file doesn't exist.
       def read
         return nil unless File.file?("./#{filename}")
-        JSON.parse(IO.read(filename))
+        JSON.parse(File.read(filename))
       end
 
       private
