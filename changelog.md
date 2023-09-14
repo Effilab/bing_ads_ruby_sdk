@@ -1,3 +1,8 @@
+## V1.6 Release
+- Updated documentation
+- Fixed an envkey/dotenv related bug preventing the gem from starting
+- Dropped support for Ruby 2
+
 ## V1.5.1 Release
 - Bug fix: Rake task missing
 
