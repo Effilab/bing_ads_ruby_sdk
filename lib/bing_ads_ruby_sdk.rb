@@ -10,6 +10,9 @@ require "bing_ads_ruby_sdk/string_utils"
 require "bing_ads_ruby_sdk/railtie" if defined?(Rails)
 
 module BingAdsRubySdk
+  TYPE_KEY = "@type"
+  ROOT_PATH = File.join(__dir__, "..")
+
   def self.config
     @configuration ||= BingAdsRubySdk::Configuration.new
   end
@@ -18,9 +21,9 @@ module BingAdsRubySdk
     yield(config)
   end
 
-  def self.log(level, *args, &block)
+  def self.log(level, *, &block)
     return unless config.log
-    config.logger.send(level, *args, &block)
+    config.logger.send(level, *, &block)
   end
 
   def self.root_path
@@ -30,7 +33,4 @@ module BingAdsRubySdk
   def self.type_key
     TYPE_KEY
   end
-
-  TYPE_KEY = "@type"
-  ROOT_PATH = File.join(__dir__, "..")
 end
