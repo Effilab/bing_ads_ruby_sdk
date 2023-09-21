@@ -244,7 +244,7 @@
         "cimg/node"
       ],
       "automerge": true,
-      "allowedVersions": "<17",
+      "allowedVersions": "<21",
       "groupName": "node-update",
       "labels": [
         "node-update"
