@@ -37,7 +37,7 @@ module BingAdsRubySdk
         wrap_array(
           call(__method__, message)
             .dig(:ad_extension_association_collection, :ad_extension_association_collection)
-            .map{|entity_group| entity_group.dig(:ad_extension_associations, :ad_extension_association)}
+            .map { |entity_group| entity_group.dig(:ad_extension_associations, :ad_extension_association) }
         ).flatten
       rescue
         []

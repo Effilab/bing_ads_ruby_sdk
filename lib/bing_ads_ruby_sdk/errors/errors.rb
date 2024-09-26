@@ -57,7 +57,7 @@ module BingAdsRubySdk
 
       def populate_error_lists
         self.class.error_lists.each do |key|
-          instance_variable_set("@#{key}", array_wrap(fault_hash[key]))
+          instance_variable_set(:"@#{key}", array_wrap(fault_hash[key]))
         end
       end
 
