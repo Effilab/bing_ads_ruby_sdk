@@ -1,5 +1,5 @@
-require 'ostruct'
-require 'nokogiri'
+require "ostruct"
+require "nokogiri"
 
 module SpecHelpers
   def self.request_xml_for(service, action, filename)
