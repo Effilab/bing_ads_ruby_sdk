@@ -1,3 +1,6 @@
+require "ostruct"
+require "nokogiri"
+
 module SpecHelpers
   def self.request_xml_for(service, action, filename)
     Nokogiri::XML(File.read(xml_path_for(service, action, filename)))
