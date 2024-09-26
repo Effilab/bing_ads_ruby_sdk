@@ -1,4 +1,4 @@
-module ::BingAdsRubySdk
+module BingAdsRubySdk
   module Services
     class CampaignManagement < Base
       def add_ad_extensions(message)
