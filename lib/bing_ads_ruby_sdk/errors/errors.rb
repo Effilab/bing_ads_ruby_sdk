@@ -57,7 +57,7 @@ module BingAdsRubySdk
 
       def populate_error_lists
         self.class.error_lists.each do |key|
-          instance_variable_set("@#{key}", array_wrap(fault_hash[key]))
+          instance_variable_set(:"@#{key}", array_wrap(fault_hash[key]))
         end
       end
 
@@ -87,6 +87,9 @@ module BingAdsRubySdk
 
       def first_error_message(error_list)
         error = error_list.first.values.first
+        if error.is_a? Array
+          error=error.first
+        end
         format_message(error[:error_code], error[:message])
       end
 
