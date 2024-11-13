@@ -303,9 +303,10 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
             api_fault: {
               tracking_id: "14f89175-e806-4822-8aa7-32b0c7734e11",
               batch_errors: "",
-              operation_errors: [{:operation_error=>
-                                    [{:code=>"1139", :details=>"", :message=>"The business address of this account is required."},
-                                     {:code=>"1140", :details=>"", :message=>"The business address of this account is not valid."}]}]
+              operation_errors: [
+                {operation_error: [{code: "1139", details: "", message: "The business address of this account is required."},
+                  {code: "1140", details: "", message: "The business address of this account is not valid."}]}
+              ]
             }
           }
         end
