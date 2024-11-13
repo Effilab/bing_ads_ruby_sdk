@@ -88,7 +88,7 @@ module BingAdsRubySdk
       def first_error_message(error_list)
         error = error_list.first.values.first
         if error.is_a? Array
-          error=error.first
+          error = error.first
         end
         format_message(error[:error_code], error[:message])
       end
