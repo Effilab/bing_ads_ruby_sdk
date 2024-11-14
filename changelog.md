@@ -1,5 +1,5 @@
 ## V1.7 Release
-- Fixed an error not returning ad extension associations
+- Fixed a bug preventing all but the first ad extension associations to be fetched
 - All error messages are now returned instead of just the first one
 - Updated dependencies
 
