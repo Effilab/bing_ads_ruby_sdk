@@ -1,4 +1,9 @@
 ## V1.6 Release
+- Fixed an error not returning ad extension associations
+- All error messages are now returned instead of just the first one
+- Updated dependencies
+
+## V1.6 Release
 - Updated documentation
 - Fixed an envkey/dotenv related bug preventing the gem from starting
 - Dropped support for Ruby 2
