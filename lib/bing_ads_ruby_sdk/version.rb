@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 module BingAdsRubySdk
-  VERSION = "1.6"
+  VERSION = "1.7"
   DEFAULT_SDK_VERSION = :v13
 end
