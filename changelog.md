@@ -1,3 +1,8 @@
+## V1.7 Release
+- Fixed a bug preventing all but the first ad extension associations to be fetched
+- All error messages are now returned instead of just the first one
+- Updated dependencies
+
 ## V1.6 Release
 - Updated documentation
 - Fixed an envkey/dotenv related bug preventing the gem from starting
