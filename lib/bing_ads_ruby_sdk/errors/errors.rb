@@ -45,19 +45,14 @@ module BingAdsRubySdk
         error_list = all_errors
         return @message if error_list.empty?
 
-        first_message = first_error_message(error_list)
-        if error_list.count > 1
-          "API raised #{error_list.count} errors, including: #{first_message}"
-        else
-          first_message
-        end
+        concatenated_error_messages(error_list)
       end
 
       private
 
       def populate_error_lists
         self.class.error_lists.each do |key|
-          instance_variable_set("@#{key}", array_wrap(fault_hash[key]))
+          instance_variable_set(:"@#{key}", array_wrap(fault_hash[key]))
         end
       end
 
@@ -85,9 +80,18 @@ module BingAdsRubySdk
         BingAdsRubySdk::StringUtils.snakize(class_name).to_sym
       end
 
-      def first_error_message(error_list)
-        error = error_list.first.values.first
-        format_message(error[:error_code], error[:message])
+      def concatenated_error_messages(error_list)
+        errors = error_list.map do |error|
+          if error.is_a?(Hash) && error[:error_code]
+            error
+          else
+            error.values
+          end
+        end.flatten.compact
+
+        errors.map do |error|
+          format_message(error[:error_code], error[:message])
+        end.uniq.join(", ")
       end
 
       def array_wrap(value)
@@ -123,13 +127,13 @@ module BingAdsRubySdk
         raw_response[fault_key] || {}
       end
 
-      # Gets the first error message in the list. This is
-      # overridden because partial errors are structured differently
+      # This is overridden because partial errors are structured differently
       # to application faults
       # @return [Hash] containing the details of the error
-      def first_error_message(error_list)
-        error = error_list.first
-        format_message(error[:error_code], error[:message])
+      def concatenated_error_messages(error_list)
+        error_list.map do |error|
+          format_message(error[:error_code], error[:message])
+        end.uniq.join(", ")
       end
     end
 
