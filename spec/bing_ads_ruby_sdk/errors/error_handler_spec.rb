@@ -156,7 +156,7 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
 
       context "when all the lists have errors" do
         let(:error_message) do
-          "API raised 3 errors, including: ErrorCode - Batch error message"
+          "ErrorCode - Batch error message, TypeInvalid - The campaign criterion ..."
         end
         it("raises an error") { shared_expectations }
       end
@@ -314,7 +314,7 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
         let(:error_attributes) do
           {
             raw_response: api_response,
-            message: "The business address of this account is required."
+            message: "The business address of this account is required., The business address of this account is not valid."
           }
         end
 
@@ -409,7 +409,7 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
     end
   end
 
-  context "when there are partial errors - multiple batch_errors" do
+  context "when there are partial errors - multiple identical batch_errors" do
     let(:api_response) do
       {
         campaign_ids: [],
@@ -446,7 +446,7 @@ RSpec.describe BingAdsRubySdk::Errors::ErrorHandler do
       let(:error_attributes) do
         {
           raw_response: api_response,
-          message: "API raised 2 errors, including: UnsupportedBiddingScheme - The bidding..."
+          message: "UnsupportedBiddingScheme - The bidding..."
         }
       end
 
