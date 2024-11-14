@@ -29,7 +29,7 @@ module BingAdsRubySdk
 
     class ServerError < GeneralError
       def initialize(server_error)
-        super "Server raised error #{server_error}"
+        super("Server raised error #{server_error}")
       end
     end
 
