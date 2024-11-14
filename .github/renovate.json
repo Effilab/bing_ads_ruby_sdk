@@ -1,6 +1,6 @@
 {
   "extends": [
-    "config:base",
+    "config:recommended",
     "schedule:weekly",
     ":preserveSemverRanges"
   ],
@@ -23,7 +23,7 @@
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": [
-      "after 3am and before 7am every monday"
+      "after 3am and before 7am on monday"
     ],
     "commitMessageAction": "Update lockfiles",
     "groupName": "lockfile-update",
@@ -40,16 +40,16 @@
       "security"
     ],
     "schedule": [
-      "after 2am and before 6am every day"
+      "after 2am and before 6am"
     ],
     "branchTopic": "{{{datasource}}}-{{{depName}}}-sec"
   },
   "packageRules": [
     {
-      "matchPackagePatterns": [
+      "minimumReleaseAge": "5 days",
+      "matchPackageNames": [
         "*"
-      ],
-      "stabilityDays": 5
+      ]
     },
     {
       "matchDatasources": [
@@ -66,15 +66,15 @@
       "matchDepTypes": [
         "devDependencies"
       ],
-      "matchPackagePatterns": [
-        "lint",
-        "prettier"
-      ],
       "groupName": "linter-update",
       "labels": [
         "linter-update"
       ],
-      "automerge": true
+      "automerge": true,
+      "matchPackageNames": [
+        "/lint/",
+        "/prettier/"
+      ]
     },
     {
       "matchManagers": [
