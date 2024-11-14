@@ -4,22 +4,7 @@
     "schedule:weekly",
     ":preserveSemverRanges"
   ],
-  "kubernetes": {
-    "fileMatch": [
-      "\\.yaml$",
-      "\\.tpl$"
-    ]
-  },
   "branchPrefix": "bot-",
-  "hostRules": [
-    {
-      "matchHost": "github.com",
-      "hostType": "rubygems",
-      "encrypted": {
-        "token": "wcFMA/xDdHCJBTolARAAjumTJ4PWx0T4aV3fSFZrLqZsnGUW+j+IKh1WPdzAiGdj+9zUQNcdJimlokWffqMzn3pNC8B8GMb+UjStyxQjZH+kzK6fEU4bn9hsg+g8LVHccvRXjzbIwaIyDcBZE0scr9yS7QRk/xI2vviDMAXTiyQEwMIRCfIAaPhcJBbg7L9kRmDmvnlDXPIVkzvenQYFA+3Smib0tL2glJ5NhS/ZgQUAIaz64d/Ibe+PM5atR2+cEf4o0PmBGSa6yGcGJX32kiR0AFMesNtIKWjh5UUjH4M5k0Uuz3bHU2Q85NjXrcmZD1Pqz//LZn+aFYSiDHM7sOHk+LXYnPtjs3+6KrI40tfo64kS4Xp72L/XhE0trhVPki2NmoQXU9ux8YgCCNZb4La3XcGlS0tWAAJU5Ebajx7qCVqweKpoEHHkim+sXl75s3Qu3WOQCgdAWtL3Vds3cu9D4ZEe0Hax6XxurZ/BuE5MS5i3Kd85JFlRgPD+C+/2EABKrCzTpDHNIK72tAY50rgFM1uvGIgaQVHEVsU0l1dm0DzxTwisWERpr90CNaz5dhGT5lYer+p8z5Gye00kn+SWyqWWTTZ0c+ZLh+eEQ6/TdWhFHjBi8524lvotbAT3Wq7lLDWeS3vAW/bj39v7LPbUGIXdvxIvF9EUwr1NRTviOASLXrEH7NNk99RheiLSdgFWqKKuKEGE2gq0t3vXA85GoT7wU0wB4RKCKqGrCK8AbL+PwvKxKZ+P63F+EfMyhIq89Qw9Szu6KbeNoYwsEQgYyXko/HDMWWqfQcTKEMF6rGf7KRmCFEIjrsSO4LJ+RcbmZBESr+L1T790c2nuFjwGI1qcA0Y"
-      }
-    }
-  ],
   "lockFileMaintenance": {
     "enabled": true,
     "schedule": [
@@ -52,17 +37,6 @@
       ]
     },
     {
-      "matchDatasources": [
-        "terraform-module",
-        "terraform-provider"
-      ],
-      "labels": [
-        "terraform"
-      ],
-      "groupName": "terraform",
-      "automerge": false
-    },
-    {
       "matchDepTypes": [
         "devDependencies"
       ],
@@ -75,39 +49,6 @@
         "/lint/",
         "/prettier/"
       ]
-    },
-    {
-      "matchManagers": [
-        "nodenv",
-        "npm"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest",
-        "rollback",
-        "bump"
-      ],
-      "groupName": "jsminor-upd",
-      "labels": [
-        "js-update"
-      ],
-      "automerge": true
-    },
-    {
-      "matchManagers": [
-        "nodenv",
-        "npm"
-      ],
-      "matchUpdateTypes": [
-        "major"
-      ],
-      "groupName": "jsmajor-upd",
-      "labels": [
-        "js-update"
-      ],
-      "automerge": true
     },
     {
       "matchManagers": [
@@ -178,52 +119,6 @@
       ]
     },
     {
-      "matchManagers": [
-        "gitlabci",
-        "gitlabci-include",
-        "circleci",
-        "helm-requirements",
-        "helm-values",
-        "helmfile",
-        "helmv3",
-        "docker-compose",
-        "dockerfile",
-        "kubernetes"
-      ],
-      "matchPackageNames": [
-        "redis"
-      ],
-      "allowedVersions": "<7",
-      "automerge": false,
-      "groupName": "redis-update",
-      "description": "explicit max version to keep coherence with real infra on GCP"
-    },
-    {
-      "matchPackageNames": [
-        "jdk",
-        "openjdk"
-      ],
-      "allowedVersions": "<18",
-      "automerge": true,
-      "groupName": "jdk-update",
-      "description": "explicit max version to keep LTS only"
-    },
-    {
-      "matchPackageNames": [
-        "cimg/postgres",
-        "postgres",
-        "postgis",
-        "postgis/postgis"
-      ],
-      "allowedVersions": "<14",
-      "automerge": true,
-      "groupName": "postgres-update",
-      "labels": [
-        "postgres"
-      ],
-      "description": "explicit max version to prevent issue like need to coordinate with real infra on GCP"
-    },
-    {
       "matchPackageNames": [
         "ruby-version",
         "ruby",
@@ -235,104 +130,6 @@
       "description": "explicit max version to prevent issues",
       "labels": [
         "rubycore-update"
-      ]
-    },
-    {
-      "matchPackageNames": [
-        "node",
-        "circleci/node",
-        "cimg/node"
-      ],
-      "automerge": true,
-      "allowedVersions": "<21",
-      "groupName": "node-update",
-      "labels": [
-        "node-update"
-      ],
-      "description": "explicit max LTS version to prevent issues : https://cloud.google.com/functions/docs/concepts/nodejs-runtime "
-    },
-    {
-      "matchManagers": [
-        "pip-compile",
-        "pip_requirements",
-        "pip_setup",
-        "pipenv",
-        "pyenv",
-        "setup-cfg"
-      ],
-      "groupName": "python-update",
-      "automerge": true,
-      "labels": [
-        "python-update"
-      ]
-    },
-    {
-      "matchPackageNames": [
-        "circleci/python",
-        "cimg/python",
-        "python"
-      ],
-      "automerge": false,
-      "separateMinorPatch": true,
-      "allowedVersions": "<4",
-      "groupName": "pythoncore-update",
-      "labels": [
-        "pythoncore-update"
-      ]
-    },
-    {
-      "matchPackageNames": [
-        "xgboost"
-      ],
-      "automerge": true,
-      "allowedVersions": "<1.5",
-      "groupName": "xgboost-update",
-      "description": "limitation from the data model used in pricer"
-    },
-    {
-      "matchPackageNames": [
-        "pandas"
-      ],
-      "allowedVersions": "<1.4",
-      "automerge": true,
-      "groupName": "pandas-update",
-      "description": "limitation from dataiku, don't merge upper than 1.3 for now"
-    },
-    {
-      "matchManagers": [
-        "pip-compile",
-        "pip_requirements",
-        "pip_setup",
-        "pipenv",
-        "pyenv",
-        "setup-cfg"
-      ],
-      "matchPackageNames": [
-        "gql"
-      ],
-      "automerge": true,
-      "allowedVersions": "<3",
-      "groupName": "gql-update",
-      "description": "limitation from dataiku"
-    },
-    {
-      "matchPackageNames": [
-        "facebookbusiness"
-      ],
-      "groupName": "facebook-update",
-      "description": "Facebook API",
-      "labels": [
-        "facebook-update"
-      ]
-    },
-    {
-      "matchPackageNames": [
-        "google-ads-googleads"
-      ],
-      "groupName": "googleads-update",
-      "description": "Google Ads API",
-      "labels": [
-        "apigoogleads-update"
       ]
     },
     {
