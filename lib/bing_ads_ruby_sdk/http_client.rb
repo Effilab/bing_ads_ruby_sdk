@@ -47,6 +47,8 @@ module BingAdsRubySdk
         http_connections.values.each do |connection|
           connection.reset
         end
+
+        http_connections.clear
       end
 
       protected
