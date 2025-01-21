@@ -7,10 +7,11 @@ RSpec.describe BingAdsRubySdk::HttpClient do
         headers: "headers")
     end
     let(:excon) { double(:excon) }
+    let(:response) { double(:response, body: "soap xml") }
 
     before do
-      expect(::Excon).to receive(:new).and_return(excon)
-      expect(excon).to receive(:post).with(
+      expect(::Excon).to receive(:new).once.and_return(excon)
+      expect(excon).to receive(:post).at_least(1).times.with(
         path: "/foo",
         body: "body",
         headers: "headers"
@@ -18,8 +19,16 @@ RSpec.describe BingAdsRubySdk::HttpClient do
     end
 
     context "successful request" do
-      let(:response) { double(:response, body: "soap xml") }
       it "returns response's body" do
+        expect(described_class.post(request)).to eq("soap xml")
+      end
+    end
+
+    context "on subsequent requests" do
+      it "pools the existing connection" do
+        expect(described_class.post(request)).to eq("soap xml")
+
+        expect(::Excon).not_to receive(:new)
         expect(described_class.post(request)).to eq("soap xml")
       end
     end

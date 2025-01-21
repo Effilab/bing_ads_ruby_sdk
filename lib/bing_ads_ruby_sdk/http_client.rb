@@ -26,7 +26,7 @@ module BingAdsRubySdk
     class << self
       def post(request)
         uri = URI(request.url)
-        conn = connection(request.url)
+        conn = connection("#{uri.scheme}://#{uri.host}")
         raw_response = conn.post(
           path: uri.path,
           body: request.content,
