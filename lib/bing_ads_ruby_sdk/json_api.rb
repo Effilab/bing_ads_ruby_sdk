@@ -27,8 +27,8 @@ module BingAdsRubySdk
         "DeveloperToken" => developer_token,
         "ClientId" => client_id,
         "ClientSecret" => client_secret,
-        content_type: "application/json",
-        accept: :json
+        "Content-Type" => "application/json",
+        "Accept" => "application/json"
       }
       @auth_handler = ::BingAdsRubySdk::OAuth2::AuthorizationHandler.new(
         developer_token: developer_token,
@@ -54,12 +54,11 @@ module BingAdsRubySdk
     attr_reader :auth_handler
 
     def build_service(service_name)
-      client = RestClient::Resource.new(
-        URL_MAP[service_name],
-        headers: headers
+      Services::Json.new(
+        base_url: URL_MAP.fetch(service_name),
+        headers: headers,
+        auth_handler: auth_handler
       )
-
-      Services::Json.new(client: client, auth_handler: auth_handler)
     end
   end
 end
