@@ -1,21 +1,16 @@
 # frozen_string_literal: true
 
 require "bing_ads_ruby_sdk/header"
-require "bing_ads_ruby_sdk/soap_client"
-require "bing_ads_ruby_sdk/services/base"
-require "bing_ads_ruby_sdk/services/ad_insight"
-require "bing_ads_ruby_sdk/services/bulk"
-require "bing_ads_ruby_sdk/services/campaign_management"
-require "bing_ads_ruby_sdk/services/customer_billing"
-require "bing_ads_ruby_sdk/services/customer_management"
-require "bing_ads_ruby_sdk/services/reporting"
 require "bing_ads_ruby_sdk/oauth2/authorization_handler"
-require "bing_ads_ruby_sdk/errors/errors"
-require "bing_ads_ruby_sdk/errors/error_handler"
+require "bing_ads_ruby_sdk/services/json"
 
 module BingAdsRubySdk
   class JsonApi
-    attr_reader :header
+    attr_reader :headers
+
+    URL_MAP = {
+      campaign_management: "https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/"
+    }
 
     # @param version [Symbol] API version, used to choose version
     # @param environment [Symbol]
@@ -28,13 +23,19 @@ module BingAdsRubySdk
       client_secret: nil)
       @version = version
       @environment = environment
-      @header = Header.new(
+      @headers = {
+        "DeveloperToken" => developer_token,
+        "ClientId" => client_id,
+        "ClientSecret" => client_secret,
+        content_type: "application/json",
+        accept: :json
+      }
+      @auth_handler = ::BingAdsRubySdk::OAuth2::AuthorizationHandler.new(
         developer_token: developer_token,
         client_id: client_id,
-        client_secret: client_secret,
-        store: oauth_store
+        store: oauth_store,
+        client_secret: client_secret
       )
-
     end
 
     def campaign_management
@@ -42,41 +43,23 @@ module BingAdsRubySdk
     end
 
     def set_customer(account_id:, customer_id:)
-      header.set_customer(account_id: account_id, customer_id: customer_id)
+      headers.merge!(
+        "CustomerAccountId" => account_id,
+        "CustomerId" => customer_id
+      )
     end
 
     private
 
-    attr_reader :lolsoap_parser
+    attr_reader :auth_handler
 
     def build_service(service_name)
-      @lolsoap_parser = LolSoap::WSDLParser.parse()
-    end
-
-    def lolsoap_client(service_name)
-      @lolsoap ||= LolSoap::Client.new(lolsoap_wsdl(service_name)).tap do |c|
-        c.wsdl.namespaces[XSI_NAMESPACE_KEY] = XSI_NAMESPACE
-      end
-    end
-
-    def lolsoap_wsdl()
-      @lolsoap_wsdl ||= LolSoap::WSDL.new(lolsoap_parser)
-    end
-
-    def request_url(operation_name)
-      lolsoap_client.request(operation_name)
-    end
-
-    def path_to_wsdl(version, environment, service_name)
-      File.join(
-        BingAdsRubySdk.root_path,
-        "lib",
-        "bing_ads_ruby_sdk",
-        "wsdl",
-        version.to_s,
-        environment.to_s,
-        "#{service_name}.xml"
+      client = RestClient::Resource.new(
+        URL_MAP[service_name],
+        headers: headers
       )
+
+      Services::Json.new(client: client, auth_handler: auth_handler)
     end
   end
 end
