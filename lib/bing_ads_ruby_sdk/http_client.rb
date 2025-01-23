@@ -10,7 +10,6 @@ module BingAdsRubySdk
     HTTP_READ_TIMEOUT = 20
     HTTP_RETRY_COUNT_ON_TIMEOUT = 2
     HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT = 1
-    HTTP_ERRORS = [Net::HTTPServerError, Net::HTTPClientError]
     CONNECTION_SETTINGS = {
       persistent: true,
       tcp_nodelay: true,
@@ -26,19 +25,24 @@ module BingAdsRubySdk
     class << self
       def post(request)
         uri = URI(request.url)
-        conn = connection(request.url)
+        conn = connection("#{uri.scheme}://#{uri.host}")
         raw_response = conn.post(
           path: uri.path,
           body: request.content,
           headers: request.headers
         )
 
-        if contains_error?(raw_response)
-          BingAdsRubySdk.log(:warn) { BingAdsRubySdk::LogMessage.new(raw_response.body).to_s }
-          raise BingAdsRubySdk::Errors::ServerError, raw_response.body
-        else
-          BingAdsRubySdk.log(:debug) { BingAdsRubySdk::LogMessage.new(raw_response.body).to_s }
-        end
+        raw_response.body
+      end
+
+      def delete(request)
+        uri = URI(request.url)
+        conn = connection("#{uri.scheme}://#{uri.host}")
+        raw_response = conn.delete(
+          path: uri.path,
+          body: request.content,
+          headers: request.headers
+        )
 
         raw_response.body
       end
@@ -47,15 +51,13 @@ module BingAdsRubySdk
         http_connections.values.each do |connection|
           connection.reset
         end
+
+        http_connections.clear
       end
 
       protected
 
       attr_reader :http_connections
-
-      def contains_error?(response)
-        HTTP_ERRORS.any? { |http_error_class| response.class <= http_error_class }
-      end
 
       def connection_settings
         CONNECTION_SETTINGS.tap do |args|
