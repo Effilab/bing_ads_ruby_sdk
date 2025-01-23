@@ -1,6 +1,9 @@
 module BingAdsRubySdk
   module Services
     class Json
+      ERROR_LIMIT = 5
+      class ApiError < StandardError; end
+
       # Request struct
       Request = Struct.new(:url, :headers, :content, keyword_init: true)
       def initialize(base_url:, headers:, auth_handler:)
@@ -10,10 +13,24 @@ module BingAdsRubySdk
         @auth_handler = auth_handler
       end
 
-      def call(operation, message)
-        response = client.post(request(operation, message))
-        
-        JSON.parse(response, symbolize_names: true)
+      def post(operation, message)
+        json = client.post(request(operation, message))
+
+        response = JSON.parse(json, symbolize_names: true)
+
+        catch_errors(response)
+
+        response
+      end
+
+      def delete(operation, message)
+        json = client.delete(request(operation, message))
+
+        response = JSON.parse(json, symbolize_names: true)
+
+        catch_errors(response)
+
+        response
       end
 
       private
@@ -32,6 +49,21 @@ module BingAdsRubySdk
 
       def format_message(message)
         BingAdsRubySdk::Preprocessors::Camelize.new(message).call
+      end
+
+      def catch_errors(response)
+        catch_error(response, :BatchErrors)
+        catch_error(response, :OperationErrors)
+        catch_error(response, :PartialErrors)
+      end
+
+      def catch_error(response, error_key)
+        return unless response[error_key]&.any?
+
+        errors = response[error_key]
+        message = errors.take(ERROR_LIMIT).map { |error| error[:Message] }.join(", ")
+
+        raise ApiError, "#{message} ..."
       end
     end
   end
