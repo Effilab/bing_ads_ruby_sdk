@@ -10,7 +10,6 @@ module BingAdsRubySdk
     HTTP_READ_TIMEOUT = 20
     HTTP_RETRY_COUNT_ON_TIMEOUT = 2
     HTTP_INTERVAL_RETRY_COUNT_ON_TIMEOUT = 1
-    HTTP_ERRORS = [Net::HTTPServerError, Net::HTTPClientError]
     CONNECTION_SETTINGS = {
       persistent: true,
       tcp_nodelay: true,
@@ -33,8 +32,6 @@ module BingAdsRubySdk
           headers: request.headers
         )
 
-        check_errors(raw_response)
-
         raw_response.body
       end
 
@@ -47,16 +44,7 @@ module BingAdsRubySdk
           headers: request.headers
         )
 
-        check_errors(raw_response)
-
         raw_response.body
-      end
-
-      def check_errors(raw_response)
-        if contains_error?(raw_response)
-          BingAdsRubySdk.log(:warn) { BingAdsRubySdk::LogMessage.new(raw_response.body).to_s }
-          raise BingAdsRubySdk::Errors::ServerError, raw_response.body
-        end
       end
 
       def close_http_connections
@@ -70,11 +58,6 @@ module BingAdsRubySdk
       protected
 
       attr_reader :http_connections
-
-      # TODO: remove this Net::Http era method
-      def contains_error?(response)
-        HTTP_ERRORS.any? { |http_error_class| response.class <= http_error_class }
-      end
 
       def connection_settings
         CONNECTION_SETTINGS.tap do |args|
