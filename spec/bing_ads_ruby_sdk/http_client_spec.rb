@@ -1,6 +1,6 @@
 RSpec.describe BingAdsRubySdk::HttpClient do
   let(:connections) { {} }
-  let(:response_body) { "response body"}
+  let(:response_body) { "response body" }
   def stub_connections
     allow(described_class).to receive(:http_connections).and_return(connections)
   end

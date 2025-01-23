@@ -13,7 +13,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
   end
   let(:error_list) { Array.new(6, error) }
   # Only the first 5 errors are shown in the error message
-  let(:error_message) { "Error, Error, Error, Error, Error ..."}
+  let(:error_message) { "Error, Error, Error, Error, Error ..." }
   let(:client) { BingAdsRubySdk::HttpClient }
   let(:auth_handler) { double(:auth_handler, fetch_or_refresh: "token") }
 
@@ -31,7 +31,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
     end
 
     context "when the response has a Batch error" do
-      let(:response) { { BatchErrors: error_list } }
+      let(:response) { {BatchErrors: error_list} }
 
       it "raises an error" do
         expect { subject }.to raise_error(BingAdsRubySdk::Services::Json::ApiError, error_message)
@@ -39,7 +39,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
     end
 
     context "when the response has an Operation error" do
-      let(:response) { { OperationErrors: error_list } }
+      let(:response) { {OperationErrors: error_list} }
 
       it "raises an error" do
         expect { subject }.to raise_error(BingAdsRubySdk::Services::Json::ApiError, error_message)
@@ -47,7 +47,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
     end
 
     context "when the response has a Partial error" do
-      let(:response) { { PartialErrors: error_list } }
+      let(:response) { {PartialErrors: error_list} }
 
       it "raises an error" do
         expect { subject }.to raise_error(BingAdsRubySdk::Services::Json::ApiError, error_message)
@@ -60,7 +60,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
       allow(client).to receive(:post).and_return(response.to_json)
     end
 
-    subject { json_instance.post("operation", { message: "message" }) }
+    subject { json_instance.post("operation", {message: "message"}) }
 
     include_examples "handling responses"
   end
@@ -70,7 +70,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
       allow(client).to receive(:delete).and_return(response.to_json)
     end
 
-    subject { json_instance.delete("operation", { message: "message" }) }
+    subject { json_instance.delete("operation", {message: "message"}) }
 
     include_examples "handling responses"
   end
