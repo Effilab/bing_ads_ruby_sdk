@@ -1,4 +1,10 @@
 RSpec.describe BingAdsRubySdk::HttpClient do
+  let(:connections) { {} }
+  let(:response_body) { "response body"}
+  def stub_connections
+    allow(described_class).to receive(:http_connections).and_return(connections)
+  end
+
   describe ".post" do
     let(:request) do
       double(:request,
@@ -7,11 +13,9 @@ RSpec.describe BingAdsRubySdk::HttpClient do
         headers: "headers")
     end
     let(:excon) { double(:excon) }
-    let(:response) { double(:response, body: "soap xml") }
-    let(:http_connections) { {} }
 
     before do
-      allow(described_class).to receive(:http_connections).and_return(http_connections)
+      stub_connections
       expect(::Excon).to receive(:new).once.and_return(excon)
       expect(excon).to receive(:post).at_least(1).times.with(
         path: "/foo",
@@ -20,18 +24,47 @@ RSpec.describe BingAdsRubySdk::HttpClient do
       ).and_return(response)
     end
 
-    context "successful request" do
-      it "returns response's body" do
-        expect(described_class.post(request)).to eq("soap xml")
-      end
+    let(:response) { double(:response, body: response_body) }
+
+    it "returns response's body" do
+      expect(described_class.post(request)).to eq(response_body)
     end
 
-    context "on subsequent requests" do
-      it "pools the existing connection using the scheme and host" do
-        expect(described_class.post(request)).to eq("soap xml")
-        expect(described_class.post(request)).to eq("soap xml")
-        expect(http_connections).to include("http://bing_url.com" => excon)
-      end
+    it "pools the existing connection using the scheme and host" do
+      expect(described_class.post(request)).to eq(response_body)
+      expect(described_class.post(request)).to eq(response_body)
+      expect(connections).to eq("http://bing_url.com" => excon)
+    end
+  end
+
+  describe ".delete" do
+    let(:request) do
+      double(:request,
+        url: "http://bing_url.com/foo",
+        content: "body",
+        headers: "headers")
+    end
+    let(:excon) { double(:excon) }
+    let(:response) { double(:response, body: response_body) }
+
+    before do
+      stub_connections
+      expect(::Excon).to receive(:new).once.and_return(excon)
+      expect(excon).to receive(:delete).at_least(1).times.with(
+        path: "/foo",
+        body: "body",
+        headers: "headers"
+      ).and_return(response)
+    end
+
+    it "returns response's body" do
+      expect(described_class.delete(request)).to eq(response_body)
+    end
+
+    it "pools the existing connection using the scheme and host" do
+      expect(described_class.delete(request)).to eq(response_body)
+      expect(described_class.delete(request)).to eq(response_body)
+      expect(connections).to eq("http://bing_url.com" => excon)
     end
   end
 

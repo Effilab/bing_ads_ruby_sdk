@@ -33,14 +33,30 @@ module BingAdsRubySdk
           headers: request.headers
         )
 
+        check_errors(raw_response)
+
+        raw_response.body
+      end
+
+      def delete(request)
+        uri = URI(request.url)
+        conn = connection("#{uri.scheme}://#{uri.host}")
+        raw_response = conn.delete(
+          path: uri.path,
+          body: request.content,
+          headers: request.headers
+        )
+
+        check_errors(raw_response)
+
+        raw_response.body
+      end
+
+      def check_errors(raw_response)
         if contains_error?(raw_response)
           BingAdsRubySdk.log(:warn) { BingAdsRubySdk::LogMessage.new(raw_response.body).to_s }
           raise BingAdsRubySdk::Errors::ServerError, raw_response.body
-        else
-          BingAdsRubySdk.log(:debug) { BingAdsRubySdk::LogMessage.new(raw_response.body).to_s }
         end
-
-        raw_response.body
       end
 
       def close_http_connections
@@ -55,6 +71,7 @@ module BingAdsRubySdk
 
       attr_reader :http_connections
 
+      # TODO: remove this Net::Http era method
       def contains_error?(response)
         HTTP_ERRORS.any? { |http_error_class| response.class <= http_error_class }
       end
