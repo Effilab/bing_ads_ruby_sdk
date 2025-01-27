@@ -22,6 +22,8 @@ RSpec.describe BingAdsRubySdk::Services::Json do
   end
 
   shared_examples "handling responses" do
+    let(:error_class) { BingAdsRubySdk::Services::Json::ApiError }
+
     context "when the response has no errors" do
       let(:response) { {foo: "bar"} }
 
@@ -34,7 +36,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
       let(:response) { {BatchErrors: error_list} }
 
       it "raises an error" do
-        expect { subject }.to raise_error(BingAdsRubySdk::Services::Json::ApiError, error_message)
+        expect { subject }.to raise_error(error_class, error_message)
       end
     end
 
@@ -42,7 +44,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
       let(:response) { {OperationErrors: error_list} }
 
       it "raises an error" do
-        expect { subject }.to raise_error(BingAdsRubySdk::Services::Json::ApiError, error_message)
+        expect { subject }.to raise_error(error_class, error_message)
       end
     end
 
@@ -50,7 +52,7 @@ RSpec.describe BingAdsRubySdk::Services::Json do
       let(:response) { {PartialErrors: error_list} }
 
       it "raises an error" do
-        expect { subject }.to raise_error(BingAdsRubySdk::Services::Json::ApiError, error_message)
+        expect { subject }.to raise_error(error_class, error_message)
       end
     end
   end
