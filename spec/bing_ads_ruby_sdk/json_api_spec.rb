@@ -1,3 +1,5 @@
+require "bing_ads_ruby_sdk/json_api"
+
 RSpec.describe BingAdsRubySdk::JsonApi do
   let(:headers) do
     {
