@@ -12,13 +12,20 @@ module BingAdsRubySdk
       campaign_management: "https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/"
     }
 
+    # @param developer_token
+    # @param client_id
+    # @param oauth_store instance of a store
     # @param version [Symbol] API version, used to choose version
     # @param environment [Symbol]
     # @option environment [Symbol] :production Use the production environment
     # @option environment [Symbol] :sandbox Use the sandbox environment
     # @param developer_token
     # @param client_id
-    def initialize(developer_token:, client_id:, oauth_store:, version: DEFAULT_SDK_VERSION,
+    def initialize(
+      developer_token:,
+      client_id:,
+      oauth_store:,
+      version: DEFAULT_SDK_VERSION,
       environment: :production,
       client_secret: nil)
       @version = version
