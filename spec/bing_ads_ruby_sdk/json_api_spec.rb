@@ -55,7 +55,7 @@ RSpec.describe BingAdsRubySdk::JsonApi do
 
     before do
       expect_auth_handler
-      expect(BingAdsRubySdk::Services::Json)
+      expect(BingAdsRubySdk::Services::Json::CampaignManagement)
         .to receive(:new)
         .with(base_url: url, headers: headers, auth_handler: auth_handler)
         .and_return(service)

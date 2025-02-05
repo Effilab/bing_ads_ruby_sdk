@@ -1,4 +1,6 @@
-RSpec.describe BingAdsRubySdk::Services::Json do
+require "bing_ads_ruby_sdk/services/json/campaign_management"
+
+RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
   let(:error) do
     {
       FieldPath: nil,

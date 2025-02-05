@@ -2,15 +2,18 @@
 
 require "bing_ads_ruby_sdk/header"
 require "bing_ads_ruby_sdk/oauth2/authorization_handler"
-require "bing_ads_ruby_sdk/services/json"
+require "bing_ads_ruby_sdk/services/json/campaign_management"
 
 module BingAdsRubySdk
   class JsonApi
     attr_reader :headers
-
     URL_MAP = {
       campaign_management: "https://campaign.api.%{sandbox}bingads.microsoft.com/CampaignManagement/%{version}/"
-    }
+    }.freeze
+
+    SERVICE_CLASSES = {
+      campaign_management: Services::Json::CampaignManagement
+    }.freeze
 
     # @param developer_token
     # @param client_id
@@ -48,7 +51,7 @@ module BingAdsRubySdk
     end
 
     def campaign_management
-      build_service(:campaign_management)
+      @campaign_management ||= build_service(:campaign_management)
     end
 
     def set_customer(account_id:, customer_id:)
@@ -63,11 +66,15 @@ module BingAdsRubySdk
     attr_reader :auth_handler
 
     def build_service(service_name)
-      Services::Json.new(
-        base_url: URL_MAP.fetch(service_name) % {version: @version, sandbox: @sandbox},
+      SERVICE_CLASSES.fetch(service_name).new(
+        base_url: base_url(service_name),
         headers: headers,
         auth_handler: auth_handler
       )
+    end
+
+    def base_url(service_name)
+      URL_MAP.fetch(service_name) % {version: @version, sandbox: @sandbox}
     end
   end
 end
