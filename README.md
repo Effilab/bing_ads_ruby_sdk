@@ -37,11 +37,24 @@ bin/rake bing_token:get['credentials.json',ABC1234,3431b6d0-a2ac-48e1-a1c5-1d0b8
 Then to use the api:
 ```ruby
 store = ::BingAdsRubySdk::OAuth2::FsStore.new('my_token.json')
-api = BingAdsRubySdk::Api.new(
+soap_api = BingAdsRubySdk::Api.new(
   oauth_store: store,
-  developer_token: 'your_dev_token',
-  client_id: 'your_bing_client_id'
+  developer_token: "your_dev_token",
+  client_id: "your_bing_client_id",
+  client_secret: "your_client_secret"
 )
+
+# Or if you wish to use the REST JSON API:
+rest_api = BingAdsRubySdk::JsonApi.new(
+  oauth_store: store,
+  developer_token: "your_dev_token",
+  client_id: "your_bing_client_id",
+  client_secret: "your_client_secret"
+)
+
+# For the available REST API methods, see these classes:
+# * BingAdsRubySdk::Services::Json::CampaignManagement
+# * BingAdsRubySdk::Services::Json::Base
 ```
 
 ### Configuration
@@ -62,7 +75,7 @@ end
 ### Account creation and management
 If you want to create an account using the API:
 ```ruby
-api.customer_management.signup_customer(
+soap_api.customer_management.signup_customer(
   parent_customer_id: parent_customer_id,
   customer: customer_data, # a hash with your params
   account: account_data.merge("@type" => "AdvertiserAccount")
@@ -74,9 +87,9 @@ or use the `customer_management` endpoint as explained above.
 
 Once you have your MS Advertising customer and account ids:
 ```ruby
-api.set_customer(customer_id: customer_id, account_id: account_id )
+soap_api.set_customer(customer_id: customer_id, account_id: account_id )
 
-api.campaign_management.get_campaigns_by_account_id(account_id: account_id)
+soap_api.campaign_management.get_campaigns_by_account_id(account_id: account_id)
 ```
 
 You'll see services like `customer_management` implement some methods, but not all the ones available in the API.
@@ -84,7 +97,7 @@ You'll see services like `customer_management` implement some methods, but not a
 The methods implemented contain additional code to ease data manipulation but any endpoint can be reached using `call` on a service.
 
 ```ruby
-@cm = api.customer_management
+@cm = soap_api.customer_management
 
 @cm.call(:find_accounts_or_customers_info, filter: 'name', top_n: 1)
 # => { account_info_with_customer_data: { account_info_with_customer_data: [{ customer_id: "250364751", :
@@ -103,7 +116,7 @@ You can generate the report following the
 That would mean coding something like this:
 
 ```ruby
-submission_response = api.reporting
+submission_response = soap_api.reporting
   .call(:submit_generate_report,
      account_performance_report_request: {
        exclude_report_header: true,
@@ -148,7 +161,7 @@ submission_response = api.reporting
 report_request_id = submission_response.fetch(:report_request_id)
 
 # Then you can poll the API to check the status of the report generation
-poll_response = api.reporting.call(:poll_generate_report, report_request_id: report_request_id)
+poll_response = soap_api.reporting.call(:poll_generate_report, report_request_id: report_request_id)
 
 # When it is ready you can download it
 report_request_status = poll_response.fetch(:report_request_status)
