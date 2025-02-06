@@ -19,7 +19,7 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
   let(:client) { BingAdsRubySdk::HttpClient }
   let(:auth_handler) { double(:auth_handler, fetch_or_refresh: "token") }
 
-  def json_instance
+  def service
     described_class.new(base_url: "http://example.com", headers: {}, auth_handler: auth_handler)
   end
 
@@ -64,7 +64,7 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
       allow(client).to receive(:post).and_return(response.to_json)
     end
 
-    subject { json_instance.post("operation", {message: "message"}) }
+    subject { service.post("operation", {message: "message"}) }
 
     include_examples "handling responses"
   end
@@ -74,8 +74,48 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
       allow(client).to receive(:delete).and_return(response.to_json)
     end
 
-    subject { json_instance.delete("operation", {message: "message"}) }
+    subject { service.delete("operation", {message: "message"}) }
 
     include_examples "handling responses"
+  end
+
+  describe "Helper methods" do
+    subject { service }
+    let(:message) { {fake_element: :fake_value} }
+
+    describe "#get_shared_entities" do
+      it "calls post with the correct operation and message" do
+        expect(subject).to receive(:post).with("SharedEntities/Query", message)
+        subject.get_shared_entities(message)
+      end
+    end
+
+    describe "#add_shared_entity" do
+      it "calls post with the correct operation and message" do
+        expect(subject).to receive(:post).with("SharedEntity", message)
+        subject.add_shared_entity(message)
+      end
+    end
+
+    describe "#get_list_items_by_shared_list" do
+      it "calls post with the correct operation and message" do
+        expect(subject).to receive(:post).with("ListItems/QueryBySharedList", message)
+        subject.get_list_items_by_shared_list(message)
+      end
+    end
+
+    describe "#add_list_items_to_shared_list" do
+      it "calls post with the correct operation and message" do
+        expect(subject).to receive(:post).with("ListItems", message)
+        subject.add_list_items_to_shared_list(message)
+      end
+    end
+
+    describe "#delete_list_items_from_shared_list" do
+      it "calls delete with the correct operation and message" do
+        expect(subject).to receive(:delete).with("ListItems", message)
+        subject.delete_list_items_from_shared_list(message)
+      end
+    end
   end
 end

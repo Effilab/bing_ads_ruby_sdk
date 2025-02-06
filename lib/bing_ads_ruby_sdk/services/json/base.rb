@@ -2,6 +2,7 @@ module BingAdsRubySdk
   module Services
     module Json
       class ApiError < StandardError; end
+
       class Base
         ERROR_LIMIT = 5
 
