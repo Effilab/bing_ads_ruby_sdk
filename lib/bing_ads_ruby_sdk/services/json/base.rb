@@ -4,7 +4,7 @@ module BingAdsRubySdk
       class ApiError < StandardError; end
 
       class Base
-        ERROR_LIMIT = 5
+        ERROR_LIMIT = 2
 
         # Request struct
         Request = Struct.new(:url, :headers, :content, keyword_init: true)
@@ -65,7 +65,9 @@ module BingAdsRubySdk
           errors = response[error_key]
           message = errors.take(ERROR_LIMIT).map { |error| error[:Message] }.join(", ")
 
-          raise ApiError, "#{message} ..."
+          message = "#{message} (+#{errors.size - ERROR_LIMIT} not shown)" if errors.size > ERROR_LIMIT
+
+          raise ApiError, message
         end
       end
     end
