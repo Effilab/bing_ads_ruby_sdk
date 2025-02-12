@@ -14,8 +14,8 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
     }
   end
   let(:error_list) { Array.new(6, error) }
-  # Only the first 5 errors are shown in the error message
-  let(:error_message) { "Error, Error (+4 not shown)" }
+  # The error message contains a sample of the error messages
+  let(:error_message) { "0: 4317 - Error, 0: 4317 - Error (+4 not shown)" }
   let(:client) { BingAdsRubySdk::HttpClient }
   let(:auth_handler) { double(:auth_handler, fetch_or_refresh: "token") }
 

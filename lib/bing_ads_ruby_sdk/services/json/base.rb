@@ -1,11 +1,32 @@
 module BingAdsRubySdk
   module Services
     module Json
-      class ApiError < StandardError; end
-
-      class Base
+      class ApiError < StandardError
         ERROR_LIMIT = 2
 
+        attr_reader :samples
+        def initialize(errors)
+          @samples = errors
+
+          super(format_message(errors))
+        end
+
+        def format_message(errors)
+          message = errors.take(ERROR_LIMIT).map { |error| format_error(error) }.join(", ")
+
+          message = "#{message} (+#{errors.size - ERROR_LIMIT} not shown)" if errors.size > ERROR_LIMIT
+
+          message
+        end
+
+        def format_error(error)
+          index = error[:Index] ? "#{error[:Index]}: " : ""
+
+          "#{index}#{error[:Code]} - #{error[:Message]}"
+        end
+      end
+
+      class Base
         # Request struct
         Request = Struct.new(:url, :headers, :content, keyword_init: true)
         def initialize(base_url:, headers:, auth_handler:)
@@ -62,12 +83,7 @@ module BingAdsRubySdk
         def catch_error(response, error_key)
           return unless response[error_key]&.any?
 
-          errors = response[error_key]
-          message = errors.take(ERROR_LIMIT).map { |error| error[:Message] }.join(", ")
-
-          message = "#{message} (+#{errors.size - ERROR_LIMIT} not shown)" if errors.size > ERROR_LIMIT
-
-          raise ApiError, message
+          raise ApiError.new(response[error_key])
         end
       end
     end
