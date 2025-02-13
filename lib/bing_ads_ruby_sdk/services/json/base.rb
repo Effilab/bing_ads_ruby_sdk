@@ -3,8 +3,8 @@
 module BingAdsRubySdk
   module Services
     module Json
+      # Base class for the customer management and campaign management APIs
       class Base
-        # Request struct
         Request = Struct.new(:url, :headers, :content, keyword_init: true)
         def initialize(base_url:, headers:, auth_handler:)
           @client = BingAdsRubySdk::HttpClient
@@ -13,6 +13,9 @@ module BingAdsRubySdk
           @auth_handler = auth_handler
         end
 
+        # @param operation [String] API operation
+        #   Translates to the URL path appended to the base URL
+        # @param message [Hash] the message to send to the API
         def post(operation, message)
           json = client.post(request(operation, message))
 
@@ -23,6 +26,9 @@ module BingAdsRubySdk
           response
         end
 
+        # @param operation [String] API operation
+        #   Translates to the URL path appended to the base URL
+        # @param message [Hash] the message to send to the API
         def delete(operation, message)
           json = client.delete(request(operation, message))
 
@@ -64,6 +70,5 @@ module BingAdsRubySdk
         end
       end
     end
-    # Base class for the customer management and campaign management APIs
   end
 end

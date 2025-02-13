@@ -1,11 +1,17 @@
 module BingAdsRubySdk
   module Services
     module Json
+      # Used to handle the response from the Bing Ads API
       class ApiError < StandardError
         ERROR_LIMIT = 2
 
         attr_reader :details
         attr_reader :category
+
+        # @param category [Symbol] the category of the error
+        # @example :PartialErrors
+        # @param errors [Array<Hash>] the list of errors
+        # @example [{ Index: 0, Code: "CampaignServiceSharedListIdInvalid", Message: "Error" }]
         def initialize(category, errors)
           @category = category
           @details = errors
