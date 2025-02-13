@@ -20,6 +20,7 @@ module BingAdsRubySdk
         end
 
         private
+
         def format_message(errors)
           message = errors.take(ERROR_LIMIT).map { |error| format_error(error) }.join(", ")
 
