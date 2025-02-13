@@ -4,9 +4,9 @@ module BingAdsRubySdk
       class ApiError < StandardError
         ERROR_LIMIT = 2
 
-        attr_reader :samples
+        attr_reader :details
         def initialize(errors)
-          @samples = errors
+          @details = errors
 
           super(format_message(errors))
         end
