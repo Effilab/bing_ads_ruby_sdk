@@ -1,4 +1,4 @@
-
+require "bing_ads_ruby_sdk/services/json/api_error"
 
 module BingAdsRubySdk
   module Services
