@@ -5,10 +5,12 @@ module BingAdsRubySdk
         ERROR_LIMIT = 2
 
         attr_reader :details
-        def initialize(errors)
+        attr_reader :category
+        def initialize(category, errors)
+          @category = category
           @details = errors
 
-          super(format_message(errors))
+          super("#{category}: #{format_message(errors)}")
         end
 
         def format_message(errors)
@@ -80,10 +82,10 @@ module BingAdsRubySdk
           catch_error(response, :PartialErrors)
         end
 
-        def catch_error(response, error_key)
-          return unless response[error_key]&.any?
+        def catch_error(response, category)
+          return unless response[category]&.any?
 
-          raise ApiError.new(response[error_key])
+          raise ApiError.new(category, response[category])
         end
       end
     end

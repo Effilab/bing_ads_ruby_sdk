@@ -38,7 +38,7 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
       let(:response) { {BatchErrors: error_list} }
 
       it "raises an error" do
-        expect { subject }.to raise_error(error_class, error_message)
+        expect { subject }.to raise_error(error_class, "BatchErrors: #{error_message}")
       end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
       let(:response) { {OperationErrors: error_list} }
 
       it "raises an error" do
-        expect { subject }.to raise_error(error_class, error_message)
+        expect { subject }.to raise_error(error_class, "OperationErrors: #{error_message}")
       end
     end
 
@@ -54,7 +54,7 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
       let(:response) { {PartialErrors: error_list} }
 
       it "raises an error" do
-        expect { subject }.to raise_error(error_class, error_message)
+        expect { subject }.to raise_error(error_class, "PartialErrors: #{error_message}")
       end
     end
   end
