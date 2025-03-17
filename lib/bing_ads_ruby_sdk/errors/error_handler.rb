@@ -4,6 +4,19 @@ module BingAdsRubySdk
   module Errors
     # Parses the response from the API to raise errors if they are returned
     class ErrorHandler
+      BASE_FAULT = BingAdsRubySdk::Errors::GeneralError
+      PARTIAL_ERROR_KEYS = %i[partial_errors nested_partial_errors].freeze
+      ERROR_KEYS = %i[faultcode error_code]
+      ERRORS_MAPPING = {
+        api_fault_detail: BingAdsRubySdk::Errors::ApiFaultDetail,
+        ad_api_fault_detail: BingAdsRubySdk::Errors::AdApiFaultDetail,
+        editorial_api_fault_detail: BingAdsRubySdk::Errors::EditorialApiFaultDetail,
+        api_batch_fault: BingAdsRubySdk::Errors::ApiBatchFault,
+        api_fault: BingAdsRubySdk::Errors::ApiFault,
+        nested_partial_errors: BingAdsRubySdk::Errors::NestedPartialError,
+        partial_errors: BingAdsRubySdk::Errors::PartialError
+      }
+
       def initialize(response)
         @response = response
       end
@@ -47,19 +60,6 @@ module BingAdsRubySdk
           response[key].nil? || response[key].is_a?(String)
         end
       end
-
-      BASE_FAULT = BingAdsRubySdk::Errors::GeneralError
-      PARTIAL_ERROR_KEYS = %i[partial_errors nested_partial_errors].freeze
-      ERROR_KEYS = %i[faultcode error_code]
-      ERRORS_MAPPING = {
-        api_fault_detail: BingAdsRubySdk::Errors::ApiFaultDetail,
-        ad_api_fault_detail: BingAdsRubySdk::Errors::AdApiFaultDetail,
-        editorial_api_fault_detail: BingAdsRubySdk::Errors::EditorialApiFaultDetail,
-        api_batch_fault: BingAdsRubySdk::Errors::ApiBatchFault,
-        api_fault: BingAdsRubySdk::Errors::ApiFault,
-        nested_partial_errors: BingAdsRubySdk::Errors::NestedPartialError,
-        partial_errors: BingAdsRubySdk::Errors::PartialError
-      }
     end
   end
 end
