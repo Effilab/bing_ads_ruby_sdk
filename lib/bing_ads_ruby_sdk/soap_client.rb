@@ -7,6 +7,9 @@ require "bing_ads_ruby_sdk/log_message"
 
 module BingAdsRubySdk
   class SoapClient
+    XSI_NAMESPACE_KEY = "xsi"
+    XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
+
     def initialize(service_name:, version:, environment:, header:)
       @header = header
       @lolsoap_parser, @concrete_abstract_mapping = cache(service_name) do
@@ -130,8 +133,5 @@ module BingAdsRubySdk
     class << self
       attr_reader :cached_parsers
     end
-
-    XSI_NAMESPACE_KEY = "xsi"
-    XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance"
   end
 end
