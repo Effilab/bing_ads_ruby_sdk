@@ -3,6 +3,8 @@
 module BingAdsRubySdk
   module Preprocessors
     class Camelize
+      BLACKLIST = %w[long string]
+
       def initialize(params)
         @params = params
       end
@@ -37,8 +39,6 @@ module BingAdsRubySdk
       def camelize(string)
         BingAdsRubySdk::StringUtils.camelize(string)
       end
-
-      BLACKLIST = %w[long string]
     end
   end
 end
