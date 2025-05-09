@@ -34,13 +34,12 @@ commands:
 jobs:
   build_3_x:
     docker:
-      - image: ruby:3.3.6
+      - image: ruby:3.3.6-slim
     working_directory: ~/repo
     steps:
       - build
 
 workflows:
-  version: 3
-  build:
+  build_workflow:
     jobs:
       - build_3_x
