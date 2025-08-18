@@ -28,8 +28,8 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_runtime_dependency "signet"
-  spec.add_runtime_dependency "excon", ">= 0.62.0"
-  spec.add_runtime_dependency "lolsoap", ">=0.9.0"
+  spec.add_runtime_dependency "excon"
+  spec.add_runtime_dependency "lolsoap"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "dotenv"
@@ -39,5 +39,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "simplecov"
   spec.add_development_dependency "byebug"
   spec.add_development_dependency "awesome_print"
-  spec.add_development_dependency "rspec_junit_formatter", "~> 0.4.1"
+  spec.add_development_dependency "rspec_junit_formatter"
 end

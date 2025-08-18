@@ -8,7 +8,8 @@ commands:
       - run:
           name: install dependencies
           command: |
-            bundle install --jobs=3 --retry=3 --path vendor/bundle
+            bundle config set path 'vendor/bundle'
+            bundle install --jobs=3 --retry=3
       - run: bundle exec standardrb
       - run:
           name: run tests
@@ -34,13 +35,12 @@ commands:
 jobs:
   build_3_x:
     docker:
-      - image: ruby:3.3.6
+      - image: ruby:3.4.5
     working_directory: ~/repo
     steps:
       - build
 
 workflows:
-  version: 3
-  build:
+  build_workflow:
     jobs:
       - build_3_x
