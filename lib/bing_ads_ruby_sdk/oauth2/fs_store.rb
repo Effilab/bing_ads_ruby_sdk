@@ -14,6 +14,7 @@ module BingAdsRubySdk
       # @return [self] if the filename don't exist.
       def write(value)
         return nil unless filename
+
         File.open(filename, "w") { |f| JSON.dump(value, f) }
         self
       end
@@ -23,6 +24,7 @@ module BingAdsRubySdk
       # @return [nil] if the file doesn't exist.
       def read
         return nil unless File.file?("./#{filename}")
+
         JSON.parse(File.read(filename))
       end
 

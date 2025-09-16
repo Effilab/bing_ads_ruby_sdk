@@ -24,6 +24,7 @@ module BingAdsRubySdk
       # @return [nil] if client.client_id is nil.
       def code_url
         return nil if client.client_id.nil?
+
         "#{AUTHORIZE_URI}?client_id=#{client.client_id}&" \
         "scope=offline_access+#{SCOPE}&response_type=code&" \
         "redirect_uri=#{REDIRECT_URI}"
@@ -35,6 +36,7 @@ module BingAdsRubySdk
         codes = extract_codes(url)
 
         return false if codes.none?
+
         fetch_from_code(codes.last)
       end
 
@@ -56,6 +58,7 @@ module BingAdsRubySdk
       def refresh_from_store
         ext_token = store.read
         raise "Cannot refresh token : Unable to read store data" if !ext_token&.is_a?(Hash) || ext_token.empty?
+
         client.update_token!(ext_token)
       end
 

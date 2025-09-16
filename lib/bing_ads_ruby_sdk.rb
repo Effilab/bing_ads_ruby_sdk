@@ -23,6 +23,7 @@ module BingAdsRubySdk
 
   def self.log(level, ...)
     return unless config.log
+
     config.logger.send(level, ...)
   end
 

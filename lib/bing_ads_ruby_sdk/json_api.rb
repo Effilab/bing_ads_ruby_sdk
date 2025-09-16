@@ -33,6 +33,7 @@ module BingAdsRubySdk
     )
       # Validate version format
       raise ArgumentError, "Invalid version format" unless version.to_s.match?(/\Av\d+\z/)
+
       @version = version
       @sandbox = (environment == :production) ? "" : "sandbox."
       @headers = {
