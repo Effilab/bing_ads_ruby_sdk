@@ -35,7 +35,7 @@ commands:
 jobs:
   build_3_x:
     docker:
-      - image: ruby:3.4.5
+      - image: ruby:3.4.6
     working_directory: ~/repo
     steps:
       - build
