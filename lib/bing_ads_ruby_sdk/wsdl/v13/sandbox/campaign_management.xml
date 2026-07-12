@@ -4930,6 +4930,8 @@
 <xs:element minOccurs="0" name="ConversionValue" nillable="true" type="xs:double"/>
 <xs:element minOccurs="0" name="ExternalAttributionCredit" nillable="true" type="xs:double"/>
 <xs:element minOccurs="0" name="ExternalAttributionModel" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="HashedEmailAddress" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="HashedPhoneNumber" nillable="true" type="xs:string"/>
 <xs:element minOccurs="0" name="MicrosoftClickId" nillable="true" type="xs:string"/>
 </xs:sequence>
 </xs:complexType>
