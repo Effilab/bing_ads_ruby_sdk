@@ -17,3 +17,7 @@ vendor/bundle/
 .byebug_history
 .env
 custom_setup.rb
+
+skills-lock.json
+.claude/skills
+.agents
