@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/UetTags/QueryByIds
+    body:
+      encoding: UTF-8
+      string: '{"UetTagIds":[211077200]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:03:33 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - aad0cf2e-bb92-47d6-97fd-f79618c27b0d
+      X-Ms-Trackingid:
+      - aad0cf2e-bb92-47d6-97fd-f79618c27b0d
+      Trackingid:
+      - aad0cf2e-bb92-47d6-97fd-f79618c27b0d
+    body:
+      encoding: UTF-8
+      string: '{"UetTags":[{"Name":"SDKTestUET","Description":"SDK REST UET test tag","TrackingScript":"\u003Cscript\u003E(function(w,d,t,r,u){var
+        f,n,i;w[u]=w[u]||[],f=function(){var o={ti:\u0022211077200\u0022};o.q=w[u],w[u]=new
+        UET(o),w[u].push(\u0022pageLoad\u0022)},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var
+        s=this.readyState;s\u0026\u0026s!==\u0022loaded\u0022\u0026\u0026s!==\u0022complete\u0022||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,\u0022script\u0022,\u0022//bat.bing.com/bat.js\u0022,\u0022uetq\u0022);\u003C/script\u003E\u003Cnoscript\u003E\u003Cimg
+        src=\u0022//bat.bing.com/action/0?ti=211077200\u0026Ver=2\u0022 height=\u00220\u0022
+        width=\u00220\u0022 style=\u0022display:none; visibility: hidden;\u0022 /\u003E\u003C/noscript\u003E","TrackingNoScript":"\u003Cimg
+        src=\u0022//bat.bing.com/action/0?ti=211077200\u0026Ver=2\u0022 height=\u00220\u0022
+        width=\u00220\u0022 style=\u0022display:none; visibility: hidden;\u0022 /\u003E","TrackingStatus":"Unverified","CustomerShare":{"OwnerCustomerId":"[BING_CUSTOMER_ID]","CustomerAccountShares":[]},"Id":"211077200"}],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:03:33 GMT
+recorded_with: VCR 6.4.0

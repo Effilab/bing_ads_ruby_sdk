@@ -5,7 +5,10 @@ require "lolsoap"
 
 require "bing_ads_ruby_sdk/version"
 require "bing_ads_ruby_sdk/configuration"
+require "bing_ads_ruby_sdk/bulk_file_builder"
+require "bing_ads_ruby_sdk/bulk_file_reader"
 require "bing_ads_ruby_sdk/api"
+require "bing_ads_ruby_sdk/json_api"
 require "bing_ads_ruby_sdk/string_utils"
 require "bing_ads_ruby_sdk/railtie" if defined?(Rails)
 

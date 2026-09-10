@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://clientcenter.api.bingads.microsoft.com/CustomerManagement/v13/AccountsOrCustomersInfo/Find
+    body:
+      encoding: UTF-8
+      string: '{"Predicate":{"Field":"AccountId","Operator":"Equals","Value":"[BING_ACCOUNT_ID]"}}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 11:04:39 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - c8b23f77-4ca7-4ec6-addb-a6a42c58a9b9
+      X-Ms-Trackingid:
+      - c8b23f77-4ca7-4ec6-addb-a6a42c58a9b9
+      Trackingid:
+      - c8b23f77-4ca7-4ec6-addb-a6a42c58a9b9
+    body:
+      encoding: UTF-8
+      string: '{"AccountInfoWithCustomerData":[{"CustomerId":"158800039","CustomerName":"Clinique
+        ","AccountId":"138006644","AccountName":"test - 2022-04-28 10:37:51
+        UTC","AccountNumber":"F1075ZCS","AccountLifeCycleStatus":"Active","PauseReason":null}]}'
+  recorded_at: Thu, 03 Sep 2026 11:04:41 GMT
+recorded_with: VCR 6.4.0

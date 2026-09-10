@@ -1,0 +1,171 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://login.microsoftonline.com/common/oauth2/v2.0/token
+    body:
+      encoding: ASCII-8BIT
+      string: grant_type=refresh_token&refresh_token=[BING_REFRESH_TOKEN]&client_id=[BING_CLIENT_ID]&client_secret=[BING_CLIENT_SECRET]&scope=https%3A%2F%2Fads.microsoft.com%2Fmsads.manage
+    headers:
+      User-Agent:
+      - Faraday v2.14.3
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store, no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Ms-Clientdata:
+      - m|||microsoftonline.com|none
+      P3p:
+      - CP="DSP CUR OTPi IND OTRi ONL FIN"
+      X-Ms-Request-Id:
+      - 021c051e-0623-422c-ab0c-d5385b813600
+      X-Ms-Ests-Server:
+      - 2.1.25181.4 - FRC ProdSlices
+      X-Ms-Srs:
+      - 1.P
+      Content-Security-Policy-Report-Only:
+      - object-src 'none'; base-uri 'self'; script-src 'self' 'nonce-DufpFfbVf-2grnzrLw-lqA'
+        'unsafe-inline' 'unsafe-eval' https://*.msauth.net https://*.msftauth.net
+        https://*.msftauthimages.net https://*.msauthimages.net https://*.msidentity.com
+        https://*.microsoftonline-p.com https://*.microsoftazuread-sso.com https://*.azureedge.net
+        https://*.outlook.com https://*.office.com https://*.office365.com https://*.microsoft.com
+        https://*.bing.com 'report-sample'; report-uri https://csp.microsoft.com/report/ESTS-UX-All
+      X-Xss-Protection:
+      - '0'
+      Set-Cookie:
+      - fpc=Au6-AN21SIZCivOyBHMZBj3b4vBWAQAAAN9YK-IOAAAA; expires=Sat, 03-Oct-2026
+        12:02:40 GMT; path=/; secure; HttpOnly; SameSite=None
+      - stsservicecookie=estsfd; path=/; secure; samesite=none; httponly
+      - x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly
+      Date:
+      - Thu, 03 Sep 2026 12:02:39 GMT
+      Content-Length:
+      - '1846'
+    body:
+      encoding: UTF-8
+      string: '{"token_type":"Bearer","scope":"https://ads.microsoft.com/msads.manage","expires_in":3599,"ext_expires_in":3599,"access_token":"[BING_ACCESS_TOKEN]"}'
+  recorded_at: Thu, 03 Sep 2026 12:02:40 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Budgets
+    body:
+      encoding: UTF-8
+      string: '{"Budgets":[{"Name":"SDK VCR Budget a7047874","Amount":1,"BudgetType":"DailyBudgetStandard"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:02:40 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - b2428cd0-10c5-431e-a28a-aee6bfebf768
+      X-Ms-Trackingid:
+      - b2428cd0-10c5-431e-a28a-aee6bfebf768
+      Trackingid:
+      - b2428cd0-10c5-431e-a28a-aee6bfebf768
+    body:
+      encoding: UTF-8
+      string: '{"BudgetIds":["7559143096782"],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:02:41 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Budgets
+    body:
+      encoding: UTF-8
+      string: '{"BudgetIds":["7559143096782"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:02:42 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 0a821420-ca1c-4093-8c08-2b7cd912bfce
+      X-Ms-Trackingid:
+      - 0a821420-ca1c-4093-8c08-2b7cd912bfce
+      Trackingid:
+      - 0a821420-ca1c-4093-8c08-2b7cd912bfce
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:02:42 GMT
+recorded_with: VCR 6.4.0

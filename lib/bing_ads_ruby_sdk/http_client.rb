@@ -2,6 +2,7 @@
 
 require "net/http"
 require "excon"
+require "securerandom"
 
 module BingAdsRubySdk
   class HttpClient
@@ -47,6 +48,53 @@ module BingAdsRubySdk
         raw_response.body
       end
 
+      def put(request)
+        uri = URI(request.url)
+        conn = connection("#{uri.scheme}://#{uri.host}")
+        raw_response = conn.put(
+          path: uri.path,
+          body: request.content,
+          headers: request.headers
+        )
+
+        raw_response.body
+      end
+
+      def post_multipart(url:, headers:, content:, filename:)
+        uri = URI(url)
+        boundary = "----BingAdsRubySdk#{SecureRandom.hex(16)}"
+        body = multipart_body(boundary, content, filename)
+        raw_response = connection("#{uri.scheme}://#{uri.host}").post(
+          path: uri.request_uri,
+          body: body,
+          headers: headers.merge(
+            "Content-Type" => "multipart/form-data; boundary=#{boundary}"
+          )
+        )
+
+        raw_response.body
+      end
+
+      def get(url, stream: false)
+        uri = URI(url)
+        return get_stream(uri) if stream
+
+        raw_response = connection("#{uri.scheme}://#{uri.host}").get(
+          path: uri.request_uri
+        )
+
+        raw_response.body
+      end
+
+      def get_stream(uri)
+        Enumerator.new do |chunks|
+          connection("#{uri.scheme}://#{uri.host}").get(
+            path: uri.request_uri,
+            response_block: ->(chunk, *) { chunks << chunk }
+          )
+        end
+      end
+
       def close_http_connections
         http_connections.values.each do |connection|
           connection.reset
@@ -71,6 +119,14 @@ module BingAdsRubySdk
           host,
           connection_settings
         )
+      end
+
+      def multipart_body(boundary, content, filename)
+        "--#{boundary}\r\n" \
+        "Content-Disposition: form-data; name=\"file\"; filename=\"#{filename}\"\r\n" \
+        "Content-Type: text/csv\r\n\r\n" \
+        "#{content}\r\n" \
+        "--#{boundary}--\r\n"
       end
     end
   end

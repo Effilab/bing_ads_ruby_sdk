@@ -1,0 +1,107 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Budgets
+    body:
+      encoding: UTF-8
+      string: '{"Budgets":[{"Name":"SDK VCR Budget 508a47e5","Amount":1,"BudgetType":"DailyBudgetStandard"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:02:49 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 9b3fda68-b41b-4f1a-ae42-30ece0508939
+      X-Ms-Trackingid:
+      - 9b3fda68-b41b-4f1a-ae42-30ece0508939
+      Trackingid:
+      - 9b3fda68-b41b-4f1a-ae42-30ece0508939
+    body:
+      encoding: UTF-8
+      string: '{"BudgetIds":["7559143096784"],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:02:49 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Budgets
+    body:
+      encoding: UTF-8
+      string: '{"BudgetIds":["7559143096784"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:02:49 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - aee88fc7-ceb5-4d87-899f-9bd8159933c1
+      X-Ms-Trackingid:
+      - aee88fc7-ceb5-4d87-899f-9bd8159933c1
+      Trackingid:
+      - aee88fc7-ceb5-4d87-899f-9bd8159933c1
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:02:50 GMT
+recorded_with: VCR 6.4.0

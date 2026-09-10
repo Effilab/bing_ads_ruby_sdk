@@ -1,0 +1,58 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://clientcenter.api.bingads.microsoft.com/CustomerManagement/v13/Account/Query
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 10:38:22 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 3b4c3e42-9c76-4927-bad5-197714406082
+      X-Ms-Trackingid:
+      - 3b4c3e42-9c76-4927-bad5-197714406082
+      Trackingid:
+      - 3b4c3e42-9c76-4927-bad5-197714406082
+    body:
+      encoding: UTF-8
+      string: '{"Account":{"BillToCustomerId":"[BING_CUSTOMER_ID]","CurrencyCode":"EUR","AccountFinancialStatus":"Hold","Id":"[BING_ACCOUNT_ID]","Language":"French","LastModifiedByUserId":"96163927","LastModifiedTime":"2026-09-03T09:38:14.497","Name":"Sandbox
+        1","Number":"F110XP1K","ParentCustomerId":"[BING_CUSTOMER_ID]","PaymentMethodId":"98136710","PaymentMethodType":null,"PrimaryUserId":"145057832","AccountLifeCycleStatus":"Active","TimeStamp":"AAAAAf3eP4o=","TimeZone":"BrusselsCopenhagenMadridParis","PauseReason":null,"ForwardCompatibilityMap":null,"LinkedAgencies":[],"SalesHouseCustomerId":null,"TaxInformation":[],"BackUpPaymentInstrumentId":null,"BillingThresholdAmount":null,"BusinessAddress":{"City":"Paris","CountryCode":"FR","Id":"152536617","Line1":"12
+        boulevard magenta","Line2":null,"Line3":null,"Line4":null,"PostalCode":"75016","StateOrProvince":"01","TimeStamp":null,"BusinessName":"Sandbox
+        Inc"},"AutoTagType":"Inactive","SoldToPaymentInstrumentId":"98136710"}}'
+  recorded_at: Thu, 03 Sep 2026 10:38:23 GMT
+recorded_with: VCR 6.4.0

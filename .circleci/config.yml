@@ -33,9 +33,9 @@ commands:
           destination: test-results
 
 jobs:
-  build_3_x:
+  build_4_x:
     docker:
-      - image: ruby:3.4.7
+      - image: ruby:4.0.6
     working_directory: ~/repo
     steps:
       - build
@@ -43,4 +43,4 @@ jobs:
 workflows:
   build_workflow:
     jobs:
-      - build_3_x
+      - build_4_x

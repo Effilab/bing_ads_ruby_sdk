@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://clientcenter.api.bingads.microsoft.com/CustomerBilling/v13/BillingDocumentsInfo/Query
+    body:
+      encoding: UTF-8
+      string: '{"AccountIds":["[BING_ACCOUNT_ID]"],"StartDate":"2025-09-03","EndDate":"2026-09-03","ReturnInvoiceNumber":false}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 11:04:44 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 7693a170-ff6c-4549-96db-30339f81b1e1
+      X-Ms-Trackingid:
+      - 7693a170-ff6c-4549-96db-30339f81b1e1
+      Trackingid:
+      - 7693a170-ff6c-4549-96db-30339f81b1e1
+    body:
+      encoding: UTF-8
+      string: '{"BillingDocumentsInfo":[]}'
+  recorded_at: Thu, 03 Sep 2026 11:04:44 GMT
+recorded_with: VCR 6.4.0

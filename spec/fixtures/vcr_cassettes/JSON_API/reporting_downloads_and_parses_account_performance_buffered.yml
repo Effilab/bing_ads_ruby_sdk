@@ -1,0 +1,163 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://reporting.api.bingads.microsoft.com/Reporting/v13/GenerateReport/Submit
+    body:
+      encoding: UTF-8
+      string: '{"ReportRequest":{"Type":"AccountPerformanceReportRequest","Format":"Csv","FormatVersion":"2.0","ReportName":"SDK
+        VCR Account Performance Data","ReturnOnlyCompleteData":true,"Aggregation":"Daily","Columns":["TimePeriod","AccountId","Impressions","Clicks","Spend"],"Scope":{"AccountIds":["[BING_ACCOUNT_ID]"]},"Time":{"CustomDateRangeStart":{"Year":2026,"Month":8,"Day":1},"CustomDateRangeEnd":{"Year":2026,"Month":9,"Day":3},"ReportTimeZone":"PacificTimeUSCanadaTijuana"}}}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 09 Sep 2026 08:25:39 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - d712dce1-2ba2-4517-8e63-6ff659effecb
+      X-Ms-Trackingid:
+      - d712dce1-2ba2-4517-8e63-6ff659effecb
+      Trackingid:
+      - d712dce1-2ba2-4517-8e63-6ff659effecb
+    body:
+      encoding: UTF-8
+      string: '{"ReportRequestId":"488263711979479041_1788942340462"}'
+  recorded_at: Wed, 09 Sep 2026 08:25:40 GMT
+- request:
+    method: post
+    uri: https://reporting.api.bingads.microsoft.com/Reporting/v13/GenerateReport/Poll
+    body:
+      encoding: UTF-8
+      string: '{"ReportRequestId":"488263711979479041_1788942340462"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 09 Sep 2026 08:25:40 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 04057ca6-eb8d-4a3d-ab3f-7a9a5a25bb6f
+      X-Ms-Trackingid:
+      - 04057ca6-eb8d-4a3d-ab3f-7a9a5a25bb6f
+      Trackingid:
+      - 04057ca6-eb8d-4a3d-ab3f-7a9a5a25bb6f
+    body:
+      encoding: UTF-8
+      string: '{"ReportRequestStatus":{"Status":"Success","ReportDownloadUrl":"https://bingadsappsstorageprod.blob.core.windows.net/dnx-reportdataapi-26-09-09/8d75d83f-7d6b-4765-91dc-ae68ff94cbaf/SDK_VCR_Account_Performance_Data.zip?skoid=e697f752-fbaf-4c0b-999c-e188178a9ed3\u0026sktid=975f013f-7f24-47e8-a7d3-abc4752bf346\u0026skt=2026-09-08T18%3A01%3A23Z\u0026ske=2026-09-15T18%3A01%3A23Z\u0026sks=b\u0026skv=2025-11-05\u0026sv=2025-11-05\u0026st=2026-09-09T08%3A25%3A41Z\u0026se=2026-09-09T08%3A35%3A41Z\u0026sr=b\u0026sp=r\u0026sig=nvN7TKqTgOmphI3t3w2krLIfstox6O2hqFu4V%2Fjy%2Frk%3D"}}'
+  recorded_at: Wed, 09 Sep 2026 08:25:41 GMT
+- request:
+    method: get
+    uri: https://bingadsappsstorageprod.blob.core.windows.net/dnx-reportdataapi-26-09-09/8d75d83f-7d6b-4765-91dc-ae68ff94cbaf/SDK_VCR_Account_Performance_Data.zip?se=2026-09-09T08:35:41Z&sig=nvN7TKqTgOmphI3t3w2krLIfstox6O2hqFu4V/jy/rk=&ske=2026-09-15T18:01:23Z&skoid=e697f752-fbaf-4c0b-999c-e188178a9ed3&sks=b&skt=2026-09-08T18:01:23Z&sktid=975f013f-7f24-47e8-a7d3-abc4752bf346&skv=2025-11-05&sp=r&sr=b&st=2026-09-09T08:25:41Z&sv=2025-11-05
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - "*/*"
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Length:
+      - '586'
+      Content-Type:
+      - application/zip
+      Content-Md5:
+      - VOyJ1kOAz8gXgPwR1Amu7w==
+      Last-Modified:
+      - Wed, 09 Sep 2026 08:25:41 GMT
+      Accept-Ranges:
+      - bytes
+      Etag:
+      - '"0x8DF0E4BEF596DD9"'
+      Vary:
+      - Origin
+      Server:
+      - Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0
+      X-Ms-Request-Id:
+      - ef6659be-701e-000f-7334-40c53e000000
+      X-Ms-Version:
+      - '2025-11-05'
+      X-Ms-Creation-Time:
+      - Wed, 09 Sep 2026 08:25:41 GMT
+      X-Ms-Lease-Status:
+      - unlocked
+      X-Ms-Lease-State:
+      - available
+      X-Ms-Blob-Type:
+      - BlockBlob
+      X-Ms-Server-Encrypted:
+      - 'true'
+      Date:
+      - Wed, 09 Sep 2026 08:25:41 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        UEsDBBQAAAAIADQLKV1bbkDivAEAAKQDAAAWAAAANDg4MjYzNzExOTc5NDc5MDQxLmNzdoSQwU7DMAyG75P2DlYOaJOGmm4CtnCqWgEVDFXb4MDNpF4VSJMqzUB7Ng48Eq+AEhWJE9x+2f782//XxyfbUGedh3tsScC2uIXHfAOZlPZgPFTk9ta1aCRBgR7ZePQD7FQAlkmazPn8fLZKFlGEidCCJ2tIwOR6vTvlS8H5FCqUaq9kJGHysIUTyNFgjdNL2KmXA5q4/w57D7ltO02easjeUGl81uGAo4BVwlfRCC7E4kxwDtk6ukz/ZG/swf0HD49lTeOoQa+sEVCg0sdfzSulPTkBoVRZT8Yr1FAaOXjGlATsUfcUMfveC0hTNh4NwVTklK3ZjA0Zl0GXbeeo75U1PZuxXCv5GsS2I1Oz8egbAAD//1ICuVnXwELXwFBJR8nQwsDcwNDMyBTEVtJRMgBhPQMDFIUmaAqNYYr1DM1RFJqiKTTAZaIZsQrN0RSaIKw2RVFoQaSJhiBBdBOxKkQPHhA2AonpGSBZbYkZjtitttQ1AOtGC0esCsEBjKQQpBFJIS+X0qGV4KTnm5lclF+cnwZKqEUF+UXglKan4JiTo1CUmZ5RUqxQlFqcWlSWmqIHSmYAAAAA//8DAFBLAQIUAxQAAAAIADQLKV1bbkDivAEAAKQDAAAWAAAAAAAAAAAAAACkgQAAAAA0ODgyNjM3MTE5Nzk0NzkwNDEuY3N2UEsFBgAAAAABAAEARAAAAPABAAAAAA==
+  recorded_at: Wed, 09 Sep 2026 08:25:41 GMT
+recorded_with: VCR 6.4.0

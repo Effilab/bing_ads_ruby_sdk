@@ -18,6 +18,5 @@ vendor/bundle/
 .env
 custom_setup.rb
 
-skills-lock.json
-.claude/skills
-.agents
+sandbox_token.json
+production_token.json

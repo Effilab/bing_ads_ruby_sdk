@@ -105,4 +105,72 @@ RSpec.describe BingAdsRubySdk::JsonApi do
       end
     end
   end
+
+  describe "#customer_management" do
+    let(:service) { double(:service) }
+    let(:url) { "https://clientcenter.api.bingads.microsoft.com/CustomerManagement/v13/" }
+
+    before do
+      expect_auth_handler
+      expect(BingAdsRubySdk::Services::Json::CustomerManagement)
+        .to receive(:new)
+        .with(base_url: url, headers: headers, auth_handler: auth_handler)
+        .and_return(service)
+    end
+
+    it "points to the customer management URL" do
+      expect(subject.customer_management).to eq(service)
+    end
+  end
+
+  describe "#bulk" do
+    let(:service) { double(:service) }
+    let(:url) { "https://bulk.api.bingads.microsoft.com/Bulk/v13/" }
+
+    before do
+      expect_auth_handler
+      expect(BingAdsRubySdk::Services::Json::Bulk)
+        .to receive(:new)
+        .with(base_url: url, headers: headers, auth_handler: auth_handler)
+        .and_return(service)
+    end
+
+    it "points to the bulk URL" do
+      expect(subject.bulk).to eq(service)
+    end
+  end
+
+  describe "#reporting" do
+    let(:service) { double(:service) }
+    let(:url) { "https://reporting.api.bingads.microsoft.com/Reporting/v13/" }
+
+    before do
+      expect_auth_handler
+      expect(BingAdsRubySdk::Services::Json::Reporting)
+        .to receive(:new)
+        .with(base_url: url, headers: headers, auth_handler: auth_handler)
+        .and_return(service)
+    end
+
+    it "points to the reporting URL" do
+      expect(subject.reporting).to eq(service)
+    end
+  end
+
+  describe "#customer_billing" do
+    let(:service) { double(:service) }
+    let(:url) { "https://clientcenter.api.bingads.microsoft.com/CustomerBilling/v13/" }
+
+    before do
+      expect_auth_handler
+      expect(BingAdsRubySdk::Services::Json::CustomerBilling)
+        .to receive(:new)
+        .with(base_url: url, headers: headers, auth_handler: auth_handler)
+        .and_return(service)
+    end
+
+    it "points to the customer billing URL" do
+      expect(subject.customer_billing).to eq(service)
+    end
+  end
 end

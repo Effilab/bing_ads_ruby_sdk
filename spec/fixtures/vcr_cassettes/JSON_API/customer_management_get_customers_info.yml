@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://clientcenter.api.bingads.microsoft.com/CustomerManagement/v13/CustomersInfo/Query
+    body:
+      encoding: UTF-8
+      string: '{"CustomerNameFilter":"","TopN":5}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 09:05:13 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - e444006e-65b1-48aa-8f15-cec154afb8d0
+      X-Ms-Trackingid:
+      - e444006e-65b1-48aa-8f15-cec154afb8d0
+      Trackingid:
+      - e444006e-65b1-48aa-8f15-cec154afb8d0
+    body:
+      encoding: UTF-8
+      string: '{"CustomersInfo":[{"Id":"251155502","Name":".Monlonguet Duffau.Christelle"},{"Id":"168974474","Name":"@Maplace"},{"Id":"251164045","Name":"@Xiom
+        Expertise"},{"Id":"252324822","Name":"006 Fast Plomb"},{"Id":"251371009","Name":"1
+        2 3 Taxis Manu"}]}'
+  recorded_at: Fri, 04 Sep 2026 09:05:13 GMT
+recorded_with: VCR 6.4.0

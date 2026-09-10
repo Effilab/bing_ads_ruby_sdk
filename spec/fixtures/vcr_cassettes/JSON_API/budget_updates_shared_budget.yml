@@ -1,0 +1,211 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Budgets
+    body:
+      encoding: UTF-8
+      string: '{"Budgets":[{"Name":"SDK VCR Budget 00f2074b","Amount":1,"BudgetType":"DailyBudgetStandard"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:02:43 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - d95a1a8d-34a0-4573-b397-c00e0789225a
+      X-Ms-Trackingid:
+      - d95a1a8d-34a0-4573-b397-c00e0789225a
+      Trackingid:
+      - d95a1a8d-34a0-4573-b397-c00e0789225a
+    body:
+      encoding: UTF-8
+      string: '{"BudgetIds":["7559143096783"],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:02:43 GMT
+- request:
+    method: put
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Budgets
+    body:
+      encoding: UTF-8
+      string: '{"Budgets":[{"Id":"7559143096783","Name":"SDK VCR Budget Updated","Amount":2,"BudgetType":"DailyBudgetStandard"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:02:46 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 428f8f6e-0869-4cc2-8b59-30601f9f2bc2
+      X-Ms-Trackingid:
+      - 428f8f6e-0869-4cc2-8b59-30601f9f2bc2
+      Trackingid:
+      - 428f8f6e-0869-4cc2-8b59-30601f9f2bc2
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:02:47 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Budgets/QueryByIds
+    body:
+      encoding: UTF-8
+      string: '{"BudgetIds":["7559143096783"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:02:47 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 2626b236-c2a7-4ea6-a3aa-f45ef78bfe7d
+      X-Ms-Trackingid:
+      - 2626b236-c2a7-4ea6-a3aa-f45ef78bfe7d
+      Trackingid:
+      - 2626b236-c2a7-4ea6-a3aa-f45ef78bfe7d
+    body:
+      encoding: UTF-8
+      string: '{"Budgets":[{"Name":"SDK VCR Budget Updated","Amount":2.00,"BudgetType":"DailyBudgetStandard","AssociationCount":0,"Id":"7559143096783"}],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:02:48 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Budgets
+    body:
+      encoding: UTF-8
+      string: '{"BudgetIds":["7559143096783"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:02:47 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 8b348389-a8e4-4360-adbf-9409c28c73a3
+      X-Ms-Trackingid:
+      - 8b348389-a8e4-4360-adbf-9409c28c73a3
+      Trackingid:
+      - 8b348389-a8e4-4360-adbf-9409c28c73a3
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:02:48 GMT
+recorded_with: VCR 6.4.0

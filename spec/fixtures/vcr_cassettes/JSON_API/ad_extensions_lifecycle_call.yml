@@ -1,0 +1,159 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdExtensions
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","AdExtensions":[{"Type":"CallAdExtension","CountryCode":"FR","IsCallOnly":false,"PhoneNumber":"+33155555555"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:51:54 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 95968632-5354-4b2d-ba4b-be112dac64d0
+      X-Ms-Trackingid:
+      - 95968632-5354-4b2d-ba4b-be112dac64d0
+      Trackingid:
+      - 95968632-5354-4b2d-ba4b-be112dac64d0
+    body:
+      encoding: UTF-8
+      string: '{"AdExtensionIdentities":[{"Id":"10239369969373","Version":1}],"NestedPartialErrors":[]}'
+  recorded_at: Fri, 04 Sep 2026 08:51:54 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdExtensions/QueryByIds
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","AdExtensionIds":["10239369969373"],"AdExtensionType":"CallAdExtension"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:51:54 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 6e4ddf82-1ea8-4f9e-a1ce-4484964e6a0d
+      X-Ms-Trackingid:
+      - 6e4ddf82-1ea8-4f9e-a1ce-4484964e6a0d
+      Trackingid:
+      - 6e4ddf82-1ea8-4f9e-a1ce-4484964e6a0d
+    body:
+      encoding: UTF-8
+      string: '{"AdExtensions":[{"PhoneNumber":"\u002B33155555555","CountryCode":"FR","IsCallOnly":false,"IsCallTrackingEnabled":false,"RequireTollFreeTrackingNumber":null,"Status":"Active","Scheduling":null,"DevicePreference":null,"Id":"10239369969373","Type":"CallAdExtension","Version":1,"ForwardCompatibilityMap":[]}],"PartialErrors":[]}'
+  recorded_at: Fri, 04 Sep 2026 08:51:55 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdExtensions
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","AdExtensionIds":["10239369969373"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:51:55 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 57fcffc0-f9ad-49e4-9ef1-860af17b5d9c
+      X-Ms-Trackingid:
+      - 57fcffc0-f9ad-49e4-9ef1-860af17b5d9c
+      Trackingid:
+      - 57fcffc0-f9ad-49e4-9ef1-860af17b5d9c
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Fri, 04 Sep 2026 08:51:56 GMT
+recorded_with: VCR 6.4.0

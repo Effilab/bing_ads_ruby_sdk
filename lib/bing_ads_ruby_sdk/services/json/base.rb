@@ -39,6 +39,16 @@ module BingAdsRubySdk
           response
         end
 
+        def put(operation, message)
+          json = client.put(request(operation, message))
+
+          response = JSON.parse(json, symbolize_names: true)
+
+          catch_errors(response)
+
+          response
+        end
+
         private
 
         attr_reader :client, :base_url, :headers, :auth_handler

@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://clientcenter.api.bingads.microsoft.com/CustomerManagement/v13/Customer/Signup
+    body:
+      encoding: UTF-8
+      string: '{"Customer":{"CustomerAddress":{"City":"Paris","PostalCode":"75001","Line1":"1
+        rue de Rivoli","CountryCode":"FR"},"Industry":"NA","MarketCountry":"FR","MarketLanguage":"French","Name":"SDK
+        VCR Customer c883df0e76eb"},"Account":{"Name":"SDK VCR Account c883df0e76eb","CurrencyCode":"EUR","PaymentMethodId":null},"ParentCustomerId":"[BING_CUSTOMER_ID]"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 09:10:40 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - f6e49262-3fe2-471e-b7e2-a5296b138506
+      X-Ms-Trackingid:
+      - f6e49262-3fe2-471e-b7e2-a5296b138506
+      Trackingid:
+      - f6e49262-3fe2-471e-b7e2-a5296b138506
+    body:
+      encoding: UTF-8
+      string: '{"CustomerId":"255042253","CustomerNumber":"K14500219C","AccountId":"187302033","AccountNumber":"G14558KE","CreateTime":"2026-09-04T09:10:39.933"}'
+  recorded_at: Fri, 04 Sep 2026 09:10:40 GMT
+recorded_with: VCR 6.4.0
