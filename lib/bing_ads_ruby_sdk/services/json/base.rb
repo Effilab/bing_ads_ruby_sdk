@@ -5,7 +5,7 @@ module BingAdsRubySdk
     module Json
       # Base class for the customer management and campaign management APIs
       class Base
-        Request = Struct.new(:url, :headers, :content, keyword_init: true)
+        Request = Struct.new(:url, :headers, :content)
         def initialize(base_url:, headers:, auth_handler:)
           @client = BingAdsRubySdk::HttpClient
           @base_url = base_url
