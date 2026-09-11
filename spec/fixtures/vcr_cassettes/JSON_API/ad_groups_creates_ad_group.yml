@@ -1,0 +1,160 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Campaigns
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","Campaigns":[{"Name":"SDK VCR Campaign
+        d710f6c4","DailyBudget":1,"BudgetType":"DailyBudgetStandard","TimeZone":"BrusselsCopenhagenMadridParis","Status":"Paused"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:07:58 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 85b369d2-ef03-4325-bd1e-25ffacfb045f
+      X-Ms-Trackingid:
+      - 85b369d2-ef03-4325-bd1e-25ffacfb045f
+      Trackingid:
+      - 85b369d2-ef03-4325-bd1e-25ffacfb045f
+    body:
+      encoding: UTF-8
+      string: '{"CampaignIds":["607373565"],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:07:59 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdGroups
+    body:
+      encoding: UTF-8
+      string: '{"CampaignId":"607373565","AdGroups":[{"Name":"SDK VCR Ad Group","Status":"Paused","Language":"English"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:07:59 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 332fa343-5e1e-4dd5-8692-3297cbd428ed
+      X-Ms-Trackingid:
+      - 332fa343-5e1e-4dd5-8692-3297cbd428ed
+      Trackingid:
+      - 332fa343-5e1e-4dd5-8692-3297cbd428ed
+    body:
+      encoding: UTF-8
+      string: '{"AdGroupIds":["1332610692654194"],"PartialErrors":[],"InheritedBidStrategyTypes":null}'
+  recorded_at: Thu, 03 Sep 2026 12:08:00 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Campaigns
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","CampaignIds":["607373565"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:08:00 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 90c83ee7-1c8c-4af8-99a9-65e2ca31841e
+      X-Ms-Trackingid:
+      - 90c83ee7-1c8c-4af8-99a9-65e2ca31841e
+      Trackingid:
+      - 90c83ee7-1c8c-4af8-99a9-65e2ca31841e
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:08:01 GMT
+recorded_with: VCR 6.4.0

@@ -1,0 +1,265 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Campaigns
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","Campaigns":[{"Name":"SDK VCR Campaign
+        2e2d6665","DailyBudget":1,"BudgetType":"DailyBudgetStandard","TimeZone":"BrusselsCopenhagenMadridParis","Status":"Paused"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:09:47 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - a28dd830-4095-4acb-920d-470eb98d39a4
+      X-Ms-Trackingid:
+      - a28dd830-4095-4acb-920d-470eb98d39a4
+      Trackingid:
+      - a28dd830-4095-4acb-920d-470eb98d39a4
+    body:
+      encoding: UTF-8
+      string: '{"CampaignIds":["607373576"],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:09:48 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdGroups
+    body:
+      encoding: UTF-8
+      string: '{"CampaignId":"607373576","AdGroups":[{"Name":"SDK VCR Ad Group 9300cca5","Status":"Paused","Language":"English"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:09:48 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 82b621c6-d623-4e53-882b-3efb35774e98
+      X-Ms-Trackingid:
+      - 82b621c6-d623-4e53-882b-3efb35774e98
+      Trackingid:
+      - 82b621c6-d623-4e53-882b-3efb35774e98
+    body:
+      encoding: UTF-8
+      string: '{"AdGroupIds":["1346904343498591"],"PartialErrors":[],"InheritedBidStrategyTypes":null}'
+  recorded_at: Thu, 03 Sep 2026 12:09:48 GMT
+- request:
+    method: put
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdGroups
+    body:
+      encoding: UTF-8
+      string: '{"CampaignId":"607373576","AdGroups":[{"Id":"1346904343498591","Name":"SDK
+        VCR Ad Group Updated","Status":"Paused"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:09:48 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - db2d53b1-7082-46c7-bd81-a54d608956bd
+      X-Ms-Trackingid:
+      - db2d53b1-7082-46c7-bd81-a54d608956bd
+      Trackingid:
+      - db2d53b1-7082-46c7-bd81-a54d608956bd
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[],"InheritedBidStrategyTypes":null}'
+  recorded_at: Thu, 03 Sep 2026 12:09:49 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdGroups
+    body:
+      encoding: UTF-8
+      string: '{"CampaignId":"607373576","AdGroupIds":["1346904343498591"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:09:50 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 373c1bf1-655b-4132-99fa-adb01f49f46b
+      X-Ms-Trackingid:
+      - 373c1bf1-655b-4132-99fa-adb01f49f46b
+      Trackingid:
+      - 373c1bf1-655b-4132-99fa-adb01f49f46b
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:09:50 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Campaigns
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","CampaignIds":["607373576"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:09:51 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 4f8a8da6-b86c-449f-aa0f-3131e32107c7
+      X-Ms-Trackingid:
+      - 4f8a8da6-b86c-449f-aa0f-3131e32107c7
+      Trackingid:
+      - 4f8a8da6-b86c-449f-aa0f-3131e32107c7
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:09:51 GMT
+recorded_with: VCR 6.4.0

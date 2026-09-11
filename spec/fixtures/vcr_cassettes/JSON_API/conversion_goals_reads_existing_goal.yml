@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/ConversionGoals/QueryByIds
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoalTypes":"Event","ConversionGoalIds":[172211594]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:03:35 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - f3461673-12d6-47ca-99b3-71822e6bc3cb
+      X-Ms-Trackingid:
+      - f3461673-12d6-47ca-99b3-71822e6bc3cb
+      Trackingid:
+      - f3461673-12d6-47ca-99b3-71822e6bc3cb
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoals":[{"CategoryExpression":null,"CategoryOperator":null,"ActionExpression":"sdk_test","ActionOperator":"Equals","LabelExpression":null,"LabelOperator":null,"ValueOperator":null,"Type":"Event","Value":null,"Name":"SDK
+        REST Goal 093107","Status":"Paused","Scope":"Customer","CountType":"All","Revenue":{"Type":"NoValue","Value":null,"CurrencyCode":null},"ConversionWindowInMinutes":43200,"TagId":"211077200","TrackingStatus":"TagUnverified","ExcludeFromBidding":false,"Id":"172211594"}],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:03:36 GMT
+recorded_with: VCR 6.4.0

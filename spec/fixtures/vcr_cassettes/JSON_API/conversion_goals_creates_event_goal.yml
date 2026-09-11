@@ -1,0 +1,162 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/ConversionGoals
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoals":[{"Type":"Event","Name":"SDK VCR Goal 244f9177","TagId":211077200,"Scope":"Account","Status":"Paused","GoalCategory":"Other","CountType":"All","ConversionWindowInMinutes":43200,"ActionOperator":"Equals","ActionExpression":"sdk_vcr_action"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:22:56 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - '0955a4bd-ea96-4f8f-8cca-a1dea7a008e6'
+      X-Ms-Trackingid:
+      - '0955a4bd-ea96-4f8f-8cca-a1dea7a008e6'
+      Trackingid:
+      - '0955a4bd-ea96-4f8f-8cca-a1dea7a008e6'
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoalIds":["172211608"],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:22:56 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/ConversionGoals/QueryByIds
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoalTypes":"Event","ConversionGoalIds":["172211608"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:23:36 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 2ff1f00b-5fa8-4b12-98fe-32095c31f82f
+      X-Ms-Trackingid:
+      - 2ff1f00b-5fa8-4b12-98fe-32095c31f82f
+      Trackingid:
+      - 2ff1f00b-5fa8-4b12-98fe-32095c31f82f
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoals":[{"CategoryExpression":null,"CategoryOperator":null,"ActionExpression":"sdk_vcr_action","ActionOperator":"Equals","LabelExpression":null,"LabelOperator":null,"ValueOperator":null,"Type":"Event","Value":null,"Name":"SDK
+        VCR Goal 244f9177","Status":"Paused","Scope":"Account","CountType":"All","Revenue":{"Type":"NoValue","Value":null,"CurrencyCode":null},"ConversionWindowInMinutes":43200,"TagId":"211077200","TrackingStatus":"TagUnverified","ExcludeFromBidding":false,"Id":"172211608"}],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:23:37 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/ConversionGoals/QueryByTagIds
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoalTypes":"Event","TagIds":[211077200]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:23:37 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - ab30320b-2840-4892-8852-1b177a3b1967
+      X-Ms-Trackingid:
+      - ab30320b-2840-4892-8852-1b177a3b1967
+      Trackingid:
+      - ab30320b-2840-4892-8852-1b177a3b1967
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoals":[{"CategoryExpression":null,"CategoryOperator":null,"ActionExpression":"sdk_test","ActionOperator":"Equals","LabelExpression":null,"LabelOperator":null,"ValueOperator":null,"Type":"Event","Value":null,"Name":"SDK
+        VCR Existing Goal","Status":"Paused","Scope":"Customer","CountType":"All","Revenue":{"Type":"NoValue","Value":null,"CurrencyCode":null},"ConversionWindowInMinutes":43200,"TagId":"211077200","TrackingStatus":"TagUnverified","ExcludeFromBidding":false,"Id":"172211594"},{"CategoryExpression":null,"CategoryOperator":null,"ActionExpression":"sdk_vcr_action","ActionOperator":"Equals","LabelExpression":null,"LabelOperator":null,"ValueOperator":null,"Type":"Event","Value":null,"Name":"SDK
+        VCR Goal 244f9177","Status":"Paused","Scope":"Account","CountType":"All","Revenue":{"Type":"NoValue","Value":null,"CurrencyCode":null},"ConversionWindowInMinutes":43200,"TagId":"211077200","TrackingStatus":"TagUnverified","ExcludeFromBidding":false,"Id":"172211608"}],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:23:37 GMT
+recorded_with: VCR 6.4.0

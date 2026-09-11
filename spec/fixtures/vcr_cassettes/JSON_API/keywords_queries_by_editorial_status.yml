@@ -1,0 +1,544 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://bulk.api.bingads.microsoft.com/Bulk/v13/BulkUploadUrl/Query
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","CompressUpload":false,"AccountUploadScope":"Customer","Entities":["Campaigns"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:46 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 6ad9b1f5-e282-4614-a147-f8236b655f55
+      X-Ms-Trackingid:
+      - 6ad9b1f5-e282-4614-a147-f8236b655f55
+      Trackingid:
+      - 6ad9b1f5-e282-4614-a147-f8236b655f55
+    body:
+      encoding: UTF-8
+      string: '{"UploadUrl":"https://campaign.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/FileUpload/File/UploadBulkFile/c65cf9c8-8b2a-46c9-b2b3-b959e71ef186?Ver=13","RequestId":"c65cf9c8-8b2a-46c9-b2b3-b959e71ef186"}'
+  recorded_at: Fri, 04 Sep 2026 08:49:47 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/Api/Advertiser/CampaignManagement/FileUpload/File/UploadBulkFile/c65cf9c8-8b2a-46c9-b2b3-b959e71ef186?Ver=13
+    body:
+      encoding: UTF-8
+      string: "------BingAdsRubySdkd21d42ba199cf912be4516524bfcf0a7\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"sdk-vcr-hierarchy.csv\"\r\nContent-Type:
+        text/csv\r\n\r\n\uFEFFType,Name,Status,Campaign,Campaign Type,Budget,Budget
+        Type,Time Zone,Ad Group,Ad Group Type,Language,Keyword,Bid,Match Type\nFormat
+        Version,6.0,,,,,,,,,,,,\nCampaign,,Paused,SDK VCR Hierarchy,Search,1,DailyBudgetStandard,RomanceStandardTime,,,,,,\nAd
+        Group,,Paused,SDK VCR Hierarchy,,,,,SDK VCR Ad Group,SearchStandard,English,,,\nKeyword,,Paused,SDK
+        VCR Hierarchy,,,,,SDK VCR Ad Group,,,sdk vcr keyword,0.1,Exact\n\r\n------BingAdsRubySdkd21d42ba199cf912be4516524bfcf0a7--\r\n"
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - multipart/form-data; boundary=----BingAdsRubySdkd21d42ba199cf912be4516524bfcf0a7
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authenticationtoken:
+      - eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIiwia2lkIjoiYWZ1M0RDMzRDS1hETFdGUy1ubVNseDZ5VlpHOTl1aTc0NklhbHgzelJJUSIsInppcCI6IkRFRiJ9..us8UTyvxBiqg_pcMnC59Yw.yw4gY0qEJQpBKI2077NGE7R_1jwcIfHz5RbNJEFdI-rbKT_w6S8YjuuRKtbIeUKh5jxPsLgXsW78o6T3_wXcI7FPMArdQGABSMlFDRS2m9ymmRJarwLWpYjuDj5rfSc-_vGQ-X7ooQgHp8px8AZFCFtPPOmYre4OWAV00atlQhMPtRQpOH7krncwIh8FF5_1BQZLzfjNCtU9RHgX5hO4x90wCpoUGQZ_two_iOeACYJcB5K8o_sWgEyJ9ur-LSGJjlpd6ZzBBzyoZuyuPQy10cwK21cx2LESWnnADtz5i5nohaCgY8eu52Ge-ERnBFLeCKvUNk0Jo4sjuZzhlAOEUmsBLi7I2iUj3G7tPSAMxfmycZ1REVoGRNXVqY7qhRVrsEIwP5IICL4GATgS3MyP6QXvLrn9yeooBG-FoViiUYJmG0nY_MA2sN6lGLz3woXZxZt5Oy7EV08cfSoATmrEgpa97n9KTpjfoKjXcbPPEfUN-GHq1lInXi9TV-EHGwiUMc24fPEuvUNhPCfgxcBnPVJ6_YphocVDhJIQNv7mqiCf4s54xDcfnV2q5PcWo8VtbvDlQilQs1UcBShSL9wTAiKt57ZH8LaGhgCG8kDuknaResOQIcUvox0IKwEU-j6AbpfgUHOJafW0ExCxT8zmkJc0ZKOhU_8OSHhC0tRhNll3dmXrrHon63eQMfdg0ph253Tcc-0Be4X6UI7v3Lo1eRUMQVtx5PnSyAo3YMWnVlLknE55S4bHzdmN_XLPNX46aTRcGMm438t7lC5Zkp9HBC2H8gJ2mvwjzyfE11gdtqolL01yvLYcDRiwQ3l4V1PGFOdXrZtFj49ND_McxqdC_Cd210S3olgjDRoTEF8jwdRLm_Q9YcfhthXGXNr4FJt-P6Keyv9T6I0Nh6qMjklxEigrBCFtNCzdm9mNcpR3fOs1UPqzEVA221QkzdI1RJs7aVdZihM0Okf7GDCOquusECTEeezZTOQ9rvl1RFCNn8BqI-zVsloSU_gjxwa4tzHucs9gv_J5FKu5Tv3-RoY6VMQuD9AXJONXae97ShoGw5LkoYylkTg1gzx0LJYtonMGWQItH8u3vhiznIUM10oyPN8K-bjZgEJudN9eBi7P9xqJUyOWbFonoDImM1_hkUW_8o-95xwnrJOuXmFJPhI_4edPcXf8HvqCNCAuV4oQgWoRNFmMeIC5StsD_BHjKbpiyLOPxY0iYFf8qki288LEK4Nt_WQsq3Kdz1kvxx5Zb01ocQfi4UpMUmg1jr-S56GTxOplk4O43t5jGTsT8nKWFiq5zJYL8ehlH0nzUdwUi0qxb8l4G2RPGoYo6a7swbmRiZauq4MuGWf_VcVaW-DvpefWPHFJ2BEB2FfSuB22zuuOH1zCPsSR0FKBSK5kemg3TIO9M1Q4swsW0Q7RUhEOGI-vdgFrnssBp4Za751K8_KGgjfqXnfSyaw0Bhn0Whp2.bsszNTsZgoLVdyqHr0jbPDiUK08cdYNYJizbqNZmFG4
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:47 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+    body:
+      encoding: UTF-8
+      string: '{"TrackingId":"6e71c011-317e-41a4-99c8-29c7559a5d99","RequestId":"c65cf9c8-8b2a-46c9-b2b3-b959e71ef186"}'
+  recorded_at: Fri, 04 Sep 2026 08:49:48 GMT
+- request:
+    method: post
+    uri: https://bulk.api.bingads.microsoft.com/Bulk/v13/BulkUploadStatus/Query
+    body:
+      encoding: UTF-8
+      string: '{"RequestId":"c65cf9c8-8b2a-46c9-b2b3-b959e71ef186"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:47 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 4b274dc1-bc32-4657-8694-dc4cc6a33f6a
+      X-Ms-Trackingid:
+      - 4b274dc1-bc32-4657-8694-dc4cc6a33f6a
+      Trackingid:
+      - 4b274dc1-bc32-4657-8694-dc4cc6a33f6a
+    body:
+      encoding: UTF-8
+      string: '{"RequestStatus":"InProgress","ResultFileUrl":null,"PercentComplete":0,"ForwardCompatibilityMap":[],"Errors":null}'
+  recorded_at: Fri, 04 Sep 2026 08:49:48 GMT
+- request:
+    method: post
+    uri: https://bulk.api.bingads.microsoft.com/Bulk/v13/BulkUploadStatus/Query
+    body:
+      encoding: UTF-8
+      string: '{"RequestId":"c65cf9c8-8b2a-46c9-b2b3-b959e71ef186"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:49 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 1e663dbe-cbb2-4857-b596-ad3750b9993c
+      X-Ms-Trackingid:
+      - 1e663dbe-cbb2-4857-b596-ad3750b9993c
+      Trackingid:
+      - 1e663dbe-cbb2-4857-b596-ad3750b9993c
+    body:
+      encoding: UTF-8
+      string: '{"RequestStatus":"Completed","ResultFileUrl":"https://bingadsappsstorageprod.blob.core.windows.net/bulkuploadresultfiles/b728db7e-90bf-47eb-900a-da966f1a5b58.zip?skoid=e697f752-fbaf-4c0b-999c-e188178a9ed3\u0026sktid=975f013f-7f24-47e8-a7d3-abc4752bf346\u0026skt=2026-09-03T16%3A14%3A19Z\u0026ske=2026-09-10T16%3A14%3A19Z\u0026sks=b\u0026skv=2025-11-05\u0026sv=2025-11-05\u0026st=2026-09-04T08%3A44%3A49Z\u0026se=2026-09-04T09%3A09%3A49Z\u0026sr=b\u0026sp=rl\u0026sig=wUyNomptq1ukeF4h1Ty8%2Fiy7GtpRoHURpHmKfnnwzA0%3D","PercentComplete":100,"ForwardCompatibilityMap":[],"Errors":null}'
+  recorded_at: Fri, 04 Sep 2026 08:49:49 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Campaigns/QueryByAccountId
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","Fields":["Id","Name"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:50 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 83730f50-66b0-4e7a-89e6-1654a28b8b96
+      X-Ms-Trackingid:
+      - 83730f50-66b0-4e7a-89e6-1654a28b8b96
+      Trackingid:
+      - 83730f50-66b0-4e7a-89e6-1654a28b8b96
+    body:
+      encoding: UTF-8
+      string: '{"Campaigns":[{"Id":"424586115","Name":"10200048 - 10200048 - SN -
+        B - Activit\u00E9 - Caisses Enregistreuses, Terminaux de Paiement - GeoLoc
+        - ETA - 106471","Status":"Paused","DailyBudget":0.05,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":"10239202337148","Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"424586117","Name":"10200048
+        - 10200048 - SN - E - Produits - Logiciels de Caisses - GeoLoc - ETA - 106474","Status":"Paused","DailyBudget":0.05,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":"10239202337148","Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"424849840","Name":"10200048
+        - 10200048 - SN - C - Prestation - Caisses Enregistreuses, Terminaux de Paiement
+        - GeoLoc - ETA - 106472","Status":"Paused","DailyBudget":0.05,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":"10239202337148","Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"424849841","Name":"10200048
+        - 10200048 - SN - E - Produits - Caisses Enregistreuses, Terminaux de Paiement
+        - GeoLoc - ETA - 106473","Status":"Paused","DailyBudget":0.05,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":"10239202337148","Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"424849842","Name":"10200048
+        - 10200284 - SN - E - Produits - Compteurs Esp\u00E8ces - GeoLoc - ETA - 106475","Status":"Paused","DailyBudget":0.05,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":"10239202337148","Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"424849843","Name":"10200048
+        - 10200284 - SN - E - Produits - D\u00E9tecteurs Esp\u00E8ces - GeoLoc - ETA
+        - 106476","Status":"Paused","DailyBudget":0.05,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":"10239202337148","Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"424853016","Name":"10200048
+        - SN - A - Caisses Enregistreuses, Terminaux de Paiement - Geozone_custom
+        - V6 - ETA - 479283","Status":"Paused","DailyBudget":0.05,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":"10239202337148","Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"436231048","Name":"10200048
+        - SN - B - Caisses Enregistreuses, Terminaux de Paiement - Geozone_custom
+        - V6 - ETA - 496283","Status":"Paused","DailyBudget":0.05,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":"10239202337148","Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"533654428","Name":"SDK
+        Live Campaign 1788510113","Status":"Paused","DailyBudget":1,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":null,"Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"533654429","Name":"SDK
+        Live Campaign 1788510245","Status":"Paused","DailyBudget":1,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":null,"Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]},{"Id":"533654439","Name":"SDK
+        VCR Hierarchy","Status":"Paused","DailyBudget":1,"BudgetType":"DailyBudgetStandard","TimeZone":"PacificTimeUSCanadaTijuana","Settings":null,"CampaignType":"Search","SubType":null,"AudienceAdsBidAdjustment":0,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"EnhancedCpc"},"BudgetId":null,"Languages":null,"ExperimentId":null,"ForwardCompatibilityMap":[]}]}'
+  recorded_at: Fri, 04 Sep 2026 08:49:50 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdGroups/QueryByCampaignId
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","CampaignId":"533654439","Fields":["Id","Name"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:50 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 2ec53731-c661-4e3c-a8ba-26340589dd70
+      X-Ms-Trackingid:
+      - 2ec53731-c661-4e3c-a8ba-26340589dd70
+      Trackingid:
+      - 2ec53731-c661-4e3c-a8ba-26340589dd70
+    body:
+      encoding: UTF-8
+      string: '{"AdGroups":[{"Id":"1355700564075735","Name":"SDK VCR Ad Group","StartDate":{"Year":2026,"Month":9,"Day":4},"EndDate":null,"Language":"English","Status":"Paused","PrivacyStatus":null,"CpcBid":{"Amount":0.05},"Network":"OwnedAndOperatedAndSyndicatedSearch","AdRotation":null,"AudienceAdsBidAdjustment":null,"TrackingUrlTemplate":null,"FinalUrlSuffix":null,"UrlCustomParameters":null,"BiddingScheme":{"Type":"InheritFromParent","InheritedBidStrategyType":"EnhancedCpc"},"Settings":null,"ForwardCompatibilityMap":[]}]}'
+  recorded_at: Fri, 04 Sep 2026 08:49:51 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Keywords/QueryByAdGroupId
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","AdGroupId":"1355700564075735","Fields":["Id","Keyword","Status"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:52 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - '08f8c221-9d17-4e61-994a-8553e35da35a'
+      X-Ms-Trackingid:
+      - '08f8c221-9d17-4e61-994a-8553e35da35a'
+      Trackingid:
+      - '08f8c221-9d17-4e61-994a-8553e35da35a'
+    body:
+      encoding: UTF-8
+      string: '{"Keywords":[{"Id":"84732540655252","Bid":{"Amount":0.1},"MatchType":"Exact","Param1":"","Param2":"","Param3":"","Text":"sdk
+        vcr keyword","Status":"Paused","EditorialStatus":"Active","DestinationUrl":"","TrackingUrlTemplate":null,"UrlCustomParameters":null,"FinalUrls":null,"FinalMobileUrls":null,"FinalAppUrls":null,"BiddingScheme":{"Type":"InheritFromParent","InheritedBidStrategyType":"EnhancedCpc"},"FinalUrlSuffix":null,"ForwardCompatibilityMap":[]}]}'
+  recorded_at: Fri, 04 Sep 2026 08:49:52 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Keywords
+    body:
+      encoding: UTF-8
+      string: '{"AdGroupId":"1355700564075735","Keywords":[{"Text":"sdk vcr editorial
+        keyword","MatchType":"Exact","Status":"Paused","Bid":{"Amount":0.1}}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:52 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 5b433853-929a-40a9-95d5-05c33e72b924
+      X-Ms-Trackingid:
+      - 5b433853-929a-40a9-95d5-05c33e72b924
+      Trackingid:
+      - 5b433853-929a-40a9-95d5-05c33e72b924
+    body:
+      encoding: UTF-8
+      string: '{"KeywordIds":["84732540655253"],"InheritedBidStrategyTypes":null,"PartialErrors":[]}'
+  recorded_at: Fri, 04 Sep 2026 08:49:53 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Keywords/QueryByEditorialStatus
+    body:
+      encoding: UTF-8
+      string: '{"AdGroupId":"1355700564075735","EditorialStatus":"Active"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:53 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - f5fd5acf-221c-4389-a40c-1e88ae3f5245
+      X-Ms-Trackingid:
+      - f5fd5acf-221c-4389-a40c-1e88ae3f5245
+      Trackingid:
+      - f5fd5acf-221c-4389-a40c-1e88ae3f5245
+    body:
+      encoding: UTF-8
+      string: '{"Keywords":[{"Id":"84732540655252","Bid":{"Amount":0.1},"MatchType":"Exact","Param1":"","Param2":"","Param3":"","Text":"sdk
+        vcr keyword","Status":"Paused","EditorialStatus":"Active","DestinationUrl":"","TrackingUrlTemplate":null,"UrlCustomParameters":null,"FinalUrls":null,"FinalMobileUrls":null,"FinalAppUrls":null,"BiddingScheme":{"Type":"InheritFromParent","InheritedBidStrategyType":"EnhancedCpc"},"FinalUrlSuffix":null,"ForwardCompatibilityMap":[]},{"Id":"84732540655253","Bid":{"Amount":0.1},"MatchType":"Exact","Param1":"","Param2":"","Param3":"","Text":"sdk
+        vcr editorial keyword","Status":"Paused","EditorialStatus":"Active","DestinationUrl":"","TrackingUrlTemplate":null,"UrlCustomParameters":null,"FinalUrls":null,"FinalMobileUrls":null,"FinalAppUrls":null,"BiddingScheme":{"Type":"InheritFromParent","InheritedBidStrategyType":"EnhancedCpc"},"FinalUrlSuffix":null,"ForwardCompatibilityMap":[]}]}'
+  recorded_at: Fri, 04 Sep 2026 08:49:54 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/Campaigns
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","CampaignIds":["533654439"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 08:49:54 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - fe4fa3d5-5cca-4881-a973-68ad173adc11
+      X-Ms-Trackingid:
+      - fe4fa3d5-5cca-4881-a973-68ad173adc11
+      Trackingid:
+      - fe4fa3d5-5cca-4881-a973-68ad173adc11
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Fri, 04 Sep 2026 08:49:54 GMT
+recorded_with: VCR 6.4.0

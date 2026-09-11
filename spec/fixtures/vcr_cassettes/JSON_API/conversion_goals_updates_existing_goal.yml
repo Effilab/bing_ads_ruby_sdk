@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/ConversionGoals
+    body:
+      encoding: UTF-8
+      string: '{"ConversionGoals":[{"Id":172211594,"Name":"SDK VCR Existing Goal","Type":"Event"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:04:02 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - fdf1a252-d000-425c-ac13-ed134e3f8a36
+      X-Ms-Trackingid:
+      - fdf1a252-d000-425c-ac13-ed134e3f8a36
+      Trackingid:
+      - fdf1a252-d000-425c-ac13-ed134e3f8a36
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:04:03 GMT
+recorded_with: VCR 6.4.0

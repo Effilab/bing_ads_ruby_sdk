@@ -1,0 +1,160 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdExtensions
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","AdExtensions":[{"Type":"CalloutAdExtension","Text":"SDK
+        VCR Callout"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:17:59 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - bee76d5b-2502-4202-9642-5fc858050fe0
+      X-Ms-Trackingid:
+      - bee76d5b-2502-4202-9642-5fc858050fe0
+      Trackingid:
+      - bee76d5b-2502-4202-9642-5fc858050fe0
+    body:
+      encoding: UTF-8
+      string: '{"AdExtensionIdentities":[{"Id":"7559423507070","Version":1}],"NestedPartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:18:00 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdExtensions/QueryByIds
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","AdExtensionIds":["7559423507070"],"AdExtensionType":"CalloutAdExtension"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:18:01 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 2ef743cf-1af6-4a58-895f-a2ecf548475b
+      X-Ms-Trackingid:
+      - 2ef743cf-1af6-4a58-895f-a2ecf548475b
+      Trackingid:
+      - 2ef743cf-1af6-4a58-895f-a2ecf548475b
+    body:
+      encoding: UTF-8
+      string: '{"AdExtensions":[{"Text":"SDK VCR Callout","Status":"Active","Scheduling":null,"DevicePreference":null,"Id":"7559423507070","Type":"CalloutAdExtension","Version":1,"ForwardCompatibilityMap":[]}],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:18:01 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/AdExtensions
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","AdExtensionIds":["7559423507070"]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:18:01 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 4847da8b-2097-440f-9ad7-f5a1b88eb620
+      X-Ms-Trackingid:
+      - 4847da8b-2097-440f-9ad7-f5a1b88eb620
+      Trackingid:
+      - 4847da8b-2097-440f-9ad7-f5a1b88eb620
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:18:02 GMT
+recorded_with: VCR 6.4.0

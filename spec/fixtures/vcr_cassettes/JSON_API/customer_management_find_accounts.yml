@@ -1,0 +1,63 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://clientcenter.api.bingads.microsoft.com/CustomerManagement/v13/Accounts/Find
+    body:
+      encoding: UTF-8
+      string: '{"CustomerId":"[BING_CUSTOMER_ID]","AccountFilter":"","TopN":5}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Fri, 04 Sep 2026 09:05:11 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 238dfded-f2d0-4c88-8068-902a8eb449c9
+      X-Ms-Trackingid:
+      - 238dfded-f2d0-4c88-8068-902a8eb449c9
+      Trackingid:
+      - 238dfded-f2d0-4c88-8068-902a8eb449c9
+    body:
+      encoding: UTF-8
+      string: '{"AccountsInfo":[{"Id":"163078021","Name":"[DEPRECATED] production
+        - 10214 - 61300035 - running - 150 - 50 - 5 - Miroiterie Elbeuvienne","Number":"F132D463","AccountLifeCycleStatus":"Active","PauseReason":null},{"Id":"163086225","Name":"[DEPRECATED]
+        production - 10253 - 61100351 - running - 400 - 46 - 9 - Ad Travaux","Number":"F1325Z6N","AccountLifeCycleStatus":"Active","PauseReason":null},{"Id":"173083909","Name":"[DEPRECATED]
+        production - 10221 - 61200121 - running - 150 - 75 - 11 - E. Leclerc Auch
+        Hyper Distrib","Number":"F142FXZM","AccountLifeCycleStatus":"Active","PauseReason":null},{"Id":"173084616","Name":"[DEPRECATED]
+        production - 10210 - 61000453 - running - 400 - 47 - 14 - Allo D\u00E9barras
+        06","Number":"F1423KGC","AccountLifeCycleStatus":"Active","PauseReason":null},{"Id":"173086995","Name":"[DEPRECATED]
+        production - 10220 - 61200215 - running - 150 - 120 - 38 - E. Leclerc Auch
+        Hyper Distri","Number":"F142QHRL","AccountLifeCycleStatus":"Active","PauseReason":null}]}'
+  recorded_at: Fri, 04 Sep 2026 09:05:12 GMT
+recorded_with: VCR 6.4.0

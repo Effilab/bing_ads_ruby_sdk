@@ -3,16 +3,28 @@
 require "bing_ads_ruby_sdk/header"
 require "bing_ads_ruby_sdk/oauth2/authorization_handler"
 require "bing_ads_ruby_sdk/services/json/campaign_management"
+require "bing_ads_ruby_sdk/services/json/customer_management"
+require "bing_ads_ruby_sdk/services/json/bulk"
+require "bing_ads_ruby_sdk/services/json/customer_billing"
+require "bing_ads_ruby_sdk/services/json/reporting"
 
 module BingAdsRubySdk
   class JsonApi
     attr_reader :headers
     URL_MAP = {
-      campaign_management: "https://campaign.api.%{sandbox}bingads.microsoft.com/CampaignManagement/%{version}/"
+      campaign_management: "https://campaign.api.%{sandbox}bingads.microsoft.com/CampaignManagement/%{version}/",
+      customer_management: "https://clientcenter.api.%{sandbox}bingads.microsoft.com/CustomerManagement/%{version}/",
+      customer_billing: "https://clientcenter.api.%{sandbox}bingads.microsoft.com/CustomerBilling/%{version}/",
+      bulk: "https://bulk.api.%{sandbox}bingads.microsoft.com/Bulk/%{version}/",
+      reporting: "https://reporting.api.%{sandbox}bingads.microsoft.com/Reporting/%{version}/"
     }.freeze
 
     SERVICE_CLASSES = {
-      campaign_management: Services::Json::CampaignManagement
+      campaign_management: Services::Json::CampaignManagement,
+      customer_management: Services::Json::CustomerManagement,
+      customer_billing: Services::Json::CustomerBilling,
+      bulk: Services::Json::Bulk,
+      reporting: Services::Json::Reporting
     }.freeze
 
     # @param developer_token
@@ -53,6 +65,22 @@ module BingAdsRubySdk
 
     def campaign_management
       @campaign_management ||= build_service(:campaign_management)
+    end
+
+    def customer_management
+      @customer_management ||= build_service(:customer_management)
+    end
+
+    def bulk
+      @bulk ||= build_service(:bulk)
+    end
+
+    def customer_billing
+      @customer_billing ||= build_service(:customer_billing)
+    end
+
+    def reporting
+      @reporting ||= build_service(:reporting)
     end
 
     def set_customer(account_id:, customer_id:)

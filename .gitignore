@@ -17,3 +17,6 @@ vendor/bundle/
 .byebug_history
 .env
 custom_setup.rb
+
+sandbox_token.json
+production_token.json

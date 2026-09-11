@@ -1,0 +1,108 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://reporting.api.bingads.microsoft.com/Reporting/v13/GenerateReport/Submit
+    body:
+      encoding: UTF-8
+      string: '{"ReportRequest":{"Type":"AccountPerformanceReportRequest","Format":"Csv","FormatVersion":"2.0","ReportName":"SDK
+        VCR Integration Report","ReturnOnlyCompleteData":true,"Aggregation":"Daily","Columns":["TimePeriod","AccountId","Impressions"],"Scope":{"AccountIds":["[BING_ACCOUNT_ID]"]},"Time":{"PredefinedTime":"Yesterday","ReportTimeZone":"PacificTimeUSCanadaTijuana"}}}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 09 Sep 2026 08:25:37 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 5ccbfe63-06b8-4a85-96d1-2b8672e1f5b0
+      X-Ms-Trackingid:
+      - 5ccbfe63-06b8-4a85-96d1-2b8672e1f5b0
+      Trackingid:
+      - 5ccbfe63-06b8-4a85-96d1-2b8672e1f5b0
+    body:
+      encoding: UTF-8
+      string: '{"ReportRequestId":"488263701757960193_1788942338019"}'
+  recorded_at: Wed, 09 Sep 2026 08:25:38 GMT
+- request:
+    method: post
+    uri: https://reporting.api.bingads.microsoft.com/Reporting/v13/GenerateReport/Poll
+    body:
+      encoding: UTF-8
+      string: '{"ReportRequestId":"488263701757960193_1788942338019"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 09 Sep 2026 08:25:39 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 18868c62-6935-4fb2-94a7-43c161363827
+      X-Ms-Trackingid:
+      - 18868c62-6935-4fb2-94a7-43c161363827
+      Trackingid:
+      - 18868c62-6935-4fb2-94a7-43c161363827
+    body:
+      encoding: UTF-8
+      string: '{"ReportRequestStatus":{"Status":"Pending","ReportDownloadUrl":null}}'
+  recorded_at: Wed, 09 Sep 2026 08:25:39 GMT
+recorded_with: VCR 6.4.0

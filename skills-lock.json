@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "rspec-best-practices": {
+      "source": "igmarin/rails-agent-skills",
+      "sourceType": "autoskills-registry",
+      "computedHash": "7e05ce8100fb727068781826af00eaaa00f5d8d754484a9b04c639cd11ff60d9"
+    },
+    "rspec-service-testing": {
+      "source": "igmarin/rails-agent-skills",
+      "sourceType": "autoskills-registry",
+      "computedHash": "cd89f5ebd76ede51d741e2b53c7583aee068bfe7072d130928b42af81a9825cc"
+    },
+    "ruby": {
+      "source": "lucianghinda/superpowers-ruby",
+      "sourceType": "autoskills-registry",
+      "computedHash": "3747fdec2cfd63444b9b4a0c6db092f753575a80cfb1c838606ee28eaf30268b"
+    },
+    "test-driven-development": {
+      "source": "lucianghinda/superpowers-ruby",
+      "sourceType": "autoskills-registry",
+      "computedHash": "e2186958e5490c40ed7365eeb56e8c1312caf5d45e5f0c4ccd26d7f4df6cf317"
+    }
+  }
+}

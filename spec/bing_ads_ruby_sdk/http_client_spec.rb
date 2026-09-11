@@ -68,6 +68,94 @@ RSpec.describe BingAdsRubySdk::HttpClient do
     end
   end
 
+  describe ".put" do
+    let(:request) do
+      double(:request,
+        url: "http://bing_url.com/foo",
+        content: "body",
+        headers: "headers")
+    end
+    let(:excon) { double(:excon) }
+    let(:response) { double(:response, body: response_body) }
+
+    before do
+      stub_connections
+      expect(::Excon).to receive(:new).once.and_return(excon)
+      expect(excon).to receive(:put).at_least(1).times.with(
+        path: "/foo",
+        body: "body",
+        headers: "headers"
+      ).and_return(response)
+    end
+
+    it "returns response's body" do
+      expect(described_class.put(request)).to eq(response_body)
+    end
+
+    it "pools the existing connection using the scheme and host" do
+      expect(described_class.put(request)).to eq(response_body)
+      expect(described_class.put(request)).to eq(response_body)
+      expect(connections).to eq("http://bing_url.com" => excon)
+    end
+  end
+
+  describe ".post_multipart" do
+    let(:excon) { double(:excon) }
+    let(:response) { double(:response, body: response_body) }
+
+    before do
+      stub_connections
+      expect(::Excon).to receive(:new).once.and_return(excon)
+      expect(excon).to receive(:post) do |request|
+        expect(request[:path]).to eq("/upload?sig=test")
+        expect(request[:body]).to include("filename=\"bulk.csv\"")
+        expect(request[:body]).to include("bulk content")
+        expect(request[:headers]["Content-Type"]).to match(%r{\Amultipart/form-data; boundary=})
+        response
+      end
+    end
+
+    it "uploads a multipart file and returns the response body" do
+      expect(
+        described_class.post_multipart(
+          url: "http://bing_url.com/upload?sig=test",
+          headers: {"DeveloperToken" => "token"},
+          content: "bulk content",
+          filename: "bulk.csv"
+        )
+      ).to eq(response_body)
+    end
+  end
+
+  describe ".get" do
+    let(:excon) { double(:excon) }
+    let(:response) { double(:response, body: response_body) }
+
+    before do
+      stub_connections
+      expect(::Excon).to receive(:new).once.and_return(excon)
+      allow(excon).to receive(:get).and_return(response)
+    end
+
+    it "returns the downloaded response body" do
+      expect(excon).to receive(:get).with(path: "/result.zip").and_return(response)
+
+      expect(described_class.get("https://bing_url.com/result.zip")).to eq(response_body)
+    end
+
+    it "returns response chunks when streaming" do
+      expect(excon).to receive(:get).with(path: "/result.zip", response_block: kind_of(Proc)) do |request|
+        request[:response_block].call("first ", 6, 12)
+        request[:response_block].call("chunk", 0, 12)
+        response
+      end
+
+      chunks = described_class.get("https://bing_url.com/result.zip", stream: true)
+
+      expect(chunks.to_a).to eq(["first ", "chunk"])
+    end
+  end
+
   describe ".close_http_connections" do
     let(:connection1) { double("connection1") }
     let(:connection2) { double("connection2") }

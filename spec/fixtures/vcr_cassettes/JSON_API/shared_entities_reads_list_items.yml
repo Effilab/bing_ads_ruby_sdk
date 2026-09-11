@@ -1,0 +1,159 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/SharedEntity
+    body:
+      encoding: UTF-8
+      string: '{"SharedEntity":{"Name":"SDK VCR Shared List 1af9ebc5","Type":"NegativeKeywordList"},"ListItems":[{"Type":"NegativeKeyword","Text":"sdk-vcr-shared-keyword","MatchType":"Exact"}],"SharedEntityScope":"Account"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:15:34 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - a5bccc41-edbb-4972-bf33-1317214d665c
+      X-Ms-Trackingid:
+      - a5bccc41-edbb-4972-bf33-1317214d665c
+      Trackingid:
+      - a5bccc41-edbb-4972-bf33-1317214d665c
+    body:
+      encoding: UTF-8
+      string: '{"SharedEntityId":"223201826589273","ListItemIds":["13960653971384"],"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:15:35 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/ListItems/QueryBySharedList
+    body:
+      encoding: UTF-8
+      string: '{"SharedList":{"Id":"223201826589273","Type":"NegativeKeywordList"},"SharedEntityScope":"Account"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:15:35 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 78cc41b1-8963-4c6d-8f33-fbf57cdf3e11
+      X-Ms-Trackingid:
+      - 78cc41b1-8963-4c6d-8f33-fbf57cdf3e11
+      Trackingid:
+      - 78cc41b1-8963-4c6d-8f33-fbf57cdf3e11
+    body:
+      encoding: UTF-8
+      string: '{"ListItems":[{"Id":"13960653971384","Text":"sdk-vcr-shared-keyword","MatchType":"Exact","Type":"NegativeKeyword","ForwardCompatibilityMap":[]}]}'
+  recorded_at: Thu, 03 Sep 2026 12:15:36 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/SharedEntities
+    body:
+      encoding: UTF-8
+      string: '{"SharedEntities":[{"Id":"223201826589273","Type":"NegativeKeywordList"}],"SharedEntityScope":"Account"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 12:15:36 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - ab53d4ce-5301-4066-85b7-24fc9a1f54b8
+      X-Ms-Trackingid:
+      - ab53d4ce-5301-4066-85b7-24fc9a1f54b8
+      Trackingid:
+      - ab53d4ce-5301-4066-85b7-24fc9a1f54b8
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Thu, 03 Sep 2026 12:15:37 GMT
+recorded_with: VCR 6.4.0

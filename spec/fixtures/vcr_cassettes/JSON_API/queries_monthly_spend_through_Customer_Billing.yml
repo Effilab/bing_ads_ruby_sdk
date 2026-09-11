@@ -1,0 +1,55 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://clientcenter.api.bingads.microsoft.com/CustomerBilling/v13/AccountMonthlySpend/Query
+    body:
+      encoding: UTF-8
+      string: '{"AccountId":"[BING_ACCOUNT_ID]","MonthYear":"2026-09-01"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Thu, 03 Sep 2026 10:38:18 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 651049e6-87ca-44a8-94ce-953fafa078cf
+      X-Ms-Trackingid:
+      - 651049e6-87ca-44a8-94ce-953fafa078cf
+      Trackingid:
+      - 651049e6-87ca-44a8-94ce-953fafa078cf
+    body:
+      encoding: UTF-8
+      string: '{"Amount":0}'
+  recorded_at: Thu, 03 Sep 2026 10:38:19 GMT
+recorded_with: VCR 6.4.0
