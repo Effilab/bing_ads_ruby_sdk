@@ -404,6 +404,11 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
         expect(subject).to receive(:post).with("UetTags/QueryByIds", payload)
         subject.get_uet_tags_by_ids(payload)
       end
+
+      it "queries all UET tags when no payload is provided" do
+        expect(subject).to receive(:post).with("UetTags/QueryByIds", {})
+        subject.get_uet_tags_by_ids
+      end
     end
 
     describe "#update_uet_tags" do
