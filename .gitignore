@@ -16,6 +16,7 @@ vendor/bundle/
 
 .byebug_history
 .env
+.env.prod
 custom_setup.rb
 
 sandbox_token.json
