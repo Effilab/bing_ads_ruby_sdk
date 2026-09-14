@@ -23,10 +23,10 @@ RSpec.describe "JSON Conversion Goals API" do
         }]
       )
 
-      expect(response[:ConversionGoalIds]).not_to be_empty
-      expect(response[:PartialErrors]).to eq([])
+      expect(response[:conversion_goal_ids]).not_to be_empty
+      expect(response[:partial_errors]).to eq([])
 
-      goal_id = response[:ConversionGoalIds].first
+      goal_id = response[:conversion_goal_ids].first
       by_id = api.campaign_management.get_conversion_goals_by_ids(
         conversion_goal_types: "Event",
         conversion_goal_ids: [goal_id]
@@ -36,8 +36,8 @@ RSpec.describe "JSON Conversion Goals API" do
         tag_ids: [uet_tag_id]
       )
 
-      expect(by_id[:ConversionGoals]).to include(a_hash_including(Id: goal_id))
-      expect(by_tag[:ConversionGoals]).to include(a_hash_including(Id: goal_id))
+      expect(by_id[:conversion_goals]).to include(a_hash_including(id: goal_id))
+      expect(by_tag[:conversion_goals]).to include(a_hash_including(id: goal_id))
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe "JSON Conversion Goals API" do
         conversion_goal_ids: [conversion_goal_id]
       )
 
-      expect(response[:ConversionGoals]).not_to be_empty
+      expect(response[:conversion_goals]).not_to be_empty
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe "JSON Conversion Goals API" do
         tag_ids: [uet_tag_id]
       )
 
-      expect(response[:ConversionGoals]).not_to be_empty
+      expect(response[:conversion_goals]).not_to be_empty
     end
   end
 
@@ -69,7 +69,7 @@ RSpec.describe "JSON Conversion Goals API" do
         conversion_goals: [{id: conversion_goal_id, name: "SDK VCR Existing Goal", type: "Event"}]
       )
 
-      expect(response[:PartialErrors]).to eq([])
+      expect(response[:partial_errors]).to eq([])
     end
   end
 end

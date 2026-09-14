@@ -31,6 +31,18 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
       it "returns the response" do
         expect(subject).to eq(response)
       end
+
+      it "returns snake_case keys like the SOAP response" do
+        allow(client).to receive(:post).and_return(
+          {
+            SharedEntities: [{SharedEntityId: "123", ItemCount: 2}]
+          }.to_json
+        )
+
+        expect(service.post("operation", {})).to eq(
+          shared_entities: [{shared_entity_id: "123", item_count: 2}]
+        )
+      end
     end
 
     context "when the response has a Batch error" do

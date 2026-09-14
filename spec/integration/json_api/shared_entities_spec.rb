@@ -6,7 +6,7 @@ RSpec.describe "JSON Shared Entities API" do
   it "creates a negative keyword list" do
     use_json_api_cassette("shared_entities_creates_negative_keyword_list") do
       with_shared_list do |shared_entity_id, response|
-        expect(response[:SharedEntityId]).to eq(shared_entity_id)
+        expect(response[:shared_entity_id]).to eq(shared_entity_id)
       end
     end
   end
@@ -19,7 +19,7 @@ RSpec.describe "JSON Shared Entities API" do
           shared_entity_scope: "Account"
         )
 
-        expect(response[:SharedEntities].map { |entity| entity[:Id] }).to include(shared_entity_id)
+        expect(response[:shared_entities].map { |entity| entity[:id] }).to include(shared_entity_id)
       end
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe "JSON Shared Entities API" do
           shared_entity_scope: "Account"
         )
 
-        expect(response[:ListItems]).not_to be_empty
+        expect(response[:list_items]).not_to be_empty
       end
     end
   end
@@ -46,7 +46,7 @@ RSpec.describe "JSON Shared Entities API" do
           shared_list: shared_list,
           shared_entity_scope: "Account"
         )
-        list_item_id = added.fetch(:ListItemIds).first
+        list_item_id = added.fetch(:list_item_ids).first
 
         response = api.campaign_management.delete_list_items_from_shared_list(
           list_item_ids: [list_item_id],
@@ -54,8 +54,8 @@ RSpec.describe "JSON Shared Entities API" do
           shared_entity_scope: "Account"
         )
 
-        expect(response).to include(:PartialErrors)
-        expect(response[:PartialErrors]).to be_nil
+        expect(response).to include(:partial_errors)
+        expect(response[:partial_errors]).to be_nil
       end
     end
   end
@@ -68,7 +68,7 @@ RSpec.describe "JSON Shared Entities API" do
           shared_entity_scope: "Account"
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @shared_entity_deleted = true
       end
     end

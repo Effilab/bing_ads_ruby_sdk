@@ -27,7 +27,7 @@ module BingAdsRubySdk
       end
 
       def snakize(string)
-        BingAdsRubySdk::StringUtils.snakize(string)
+        BingAdsRubySdk::StringUtils.snakize(string.to_s)
       end
     end
   end

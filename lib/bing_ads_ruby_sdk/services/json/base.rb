@@ -1,4 +1,5 @@
 require "bing_ads_ruby_sdk/services/json/api_error"
+require "bing_ads_ruby_sdk/postprocessors/snakize"
 
 module BingAdsRubySdk
   module Services
@@ -23,7 +24,7 @@ module BingAdsRubySdk
 
           catch_errors(response)
 
-          response
+          snakize(response)
         end
 
         # @param operation [String] API operation
@@ -36,7 +37,7 @@ module BingAdsRubySdk
 
           catch_errors(response)
 
-          response
+          snakize(response)
         end
 
         def put(operation, message)
@@ -46,7 +47,7 @@ module BingAdsRubySdk
 
           catch_errors(response)
 
-          response
+          snakize(response)
         end
 
         private
@@ -65,6 +66,10 @@ module BingAdsRubySdk
 
         def format_message(message)
           BingAdsRubySdk::Preprocessors::Camelize.new(message).call
+        end
+
+        def snakize(response)
+          BingAdsRubySdk::Postprocessors::Snakize.new(response).call
         end
 
         def catch_errors(response)

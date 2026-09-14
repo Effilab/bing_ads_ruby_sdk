@@ -47,7 +47,7 @@ RSpec.shared_context "json api with vcr" do
         status: "Paused"
       }]
     )
-    campaign_id = response.fetch(:CampaignIds).first
+    campaign_id = response.fetch(:campaign_ids).first
 
     yield campaign_id, response, campaign_name
   ensure
@@ -66,7 +66,7 @@ RSpec.shared_context "json api with vcr" do
         campaign_id: campaign_id,
         ad_groups: [{name: "SDK VCR Ad Group #{SecureRandom.hex(4)}", status: "Paused", language: "English"}]
       )
-      ad_group_id = response.fetch(:AdGroupIds).first
+      ad_group_id = response.fetch(:ad_group_ids).first
 
       begin
         yield campaign_id, ad_group_id
@@ -86,7 +86,7 @@ RSpec.shared_context "json api with vcr" do
     response = api.campaign_management.add_budgets(
       budgets: [{name: budget_name, amount: 1, budget_type: "DailyBudgetStandard"}]
     )
-    budget_id = response.fetch(:BudgetIds).first
+    budget_id = response.fetch(:budget_ids).first
 
     yield budget_id, response
   ensure
@@ -106,7 +106,7 @@ RSpec.shared_context "json api with vcr" do
         }],
         criterion_type: "Targets"
       )
-      criterion_id = response.fetch(:CampaignCriterionIds).first
+      criterion_id = response.fetch(:campaign_criterion_ids).first
 
       begin
         yield criterion_id, campaign_id, response
@@ -129,7 +129,7 @@ RSpec.shared_context "json api with vcr" do
       list_items: [{type: "NegativeKeyword", text: "sdk-vcr-shared-keyword", match_type: "Exact"}],
       shared_entity_scope: "Account"
     )
-    shared_entity_id = response.fetch(:SharedEntityId)
+    shared_entity_id = response.fetch(:shared_entity_id)
 
     yield shared_entity_id, response
   ensure
@@ -148,7 +148,7 @@ RSpec.shared_context "json api with vcr" do
       account_id: account_id,
       ad_extensions: [extension]
     )
-    extension_id = response.fetch(:AdExtensionIdentities).first.fetch(:Id)
+    extension_id = response.fetch(:ad_extension_identities).first.fetch(:id)
 
     yield extension_id, response
   ensure
@@ -193,7 +193,7 @@ RSpec.shared_context "json api with vcr" do
       .to_s
     upload_result = JSON.parse(
       api.bulk.upload_file(
-        upload_url: upload.fetch(:UploadUrl),
+        upload_url: upload.fetch(:upload_url),
         content: content,
         filename: "sdk-vcr-hierarchy.csv"
       ),
@@ -203,9 +203,9 @@ RSpec.shared_context "json api with vcr" do
     status = nil
     20.times do
       status = api.bulk.get_bulk_upload_status(request_id: upload_result.fetch(:RequestId))
-      break unless status[:RequestStatus].to_s == "InProgress"
+      break unless status[:request_status].to_s == "InProgress"
     end
-    raise "Bulk hierarchy upload did not complete" unless status[:RequestStatus].to_s == "Completed"
+    raise "Bulk hierarchy upload did not complete" unless status[:request_status].to_s == "Completed"
 
     campaign = nil
     20.times do
@@ -213,33 +213,33 @@ RSpec.shared_context "json api with vcr" do
         account_id: account_id,
         fields: ["Id", "Name"]
       )
-      campaign = (campaigns[:Campaigns] || []).find { |item| item[:Name] == campaign_name }
+      campaign = (campaigns[:campaigns] || []).find { |item| item[:name] == campaign_name }
       break if campaign
     end
     raise "Bulk hierarchy campaign was not created" unless campaign
 
     groups = api.campaign_management.get_ad_groups_by_campaign_id(
       account_id: account_id,
-      campaign_id: campaign.fetch(:Id),
+      campaign_id: campaign.fetch(:id),
       fields: ["Id", "Name"]
     )
-    group = (groups[:AdGroups] || []).find { |item| item[:Name] == ad_group_name }
+    group = (groups[:ad_groups] || []).find { |item| item[:name] == ad_group_name }
     raise "Bulk hierarchy ad group was not created" unless group
 
     keywords = api.campaign_management.get_keywords_by_ad_group_id(
       account_id: account_id,
-      ad_group_id: group.fetch(:Id),
+      ad_group_id: group.fetch(:id),
       fields: ["Id", "Keyword", "Status"]
     )
-    keyword = (keywords[:Keywords] || []).first
+    keyword = (keywords[:keywords] || []).first
     raise "Bulk hierarchy keyword was not created" unless keyword
 
-    yield campaign.fetch(:Id), group.fetch(:Id), keyword.fetch(:Id)
+    yield campaign.fetch(:id), group.fetch(:id), keyword.fetch(:id)
   ensure
     if campaign
       api.campaign_management.delete_campaigns(
         account_id: account_id,
-        campaign_ids: [campaign.fetch(:Id)]
+        campaign_ids: [campaign.fetch(:id)]
       )
     end
   end

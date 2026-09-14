@@ -6,7 +6,7 @@ RSpec.describe "JSON Ad Extensions API" do
   it "creates a callout extension" do
     use_json_api_cassette("ad_extensions_creates_callout_extension") do
       with_ad_extension do |extension_id, response|
-        expect(response[:AdExtensionIdentities].map { |identity| identity[:Id] }).to include(extension_id)
+        expect(response[:ad_extension_identities].map { |identity| identity[:id] }).to include(extension_id)
       end
     end
   end
@@ -20,7 +20,7 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_type: "CalloutAdExtension"
         )
 
-        expect(response[:AdExtensions].first[:Id]).to eq(extension_id)
+        expect(response[:ad_extensions].first[:id]).to eq(extension_id)
       end
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_type: "CalloutAdExtension"
         )
 
-        expect(response[:AdExtensionIds]).to include(extension_id)
+        expect(response[:ad_extension_ids]).to include(extension_id)
       end
     end
   end
@@ -46,7 +46,7 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_ids: [extension_id]
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @ad_extension_deleted = true
       end
     end
@@ -64,7 +64,7 @@ RSpec.describe "JSON Ad Extensions API" do
             association_type: "Campaign"
           }
           set_response = api.campaign_management.set_ad_extensions_associations(association)
-          expect(set_response[:PartialErrors]).to eq([])
+          expect(set_response[:partial_errors]).to eq([])
 
           queried = api.campaign_management.get_ad_extensions_associations(
             account_id: account_id,
@@ -72,10 +72,10 @@ RSpec.describe "JSON Ad Extensions API" do
             association_type: "Campaign",
             entity_ids: [campaign_id]
           )
-          expect(queried[:AdExtensionAssociationCollection]).not_to be_empty
+          expect(queried[:ad_extension_association_collection]).not_to be_empty
 
           delete_response = api.campaign_management.delete_ad_extensions_associations(association)
-          expect(delete_response[:PartialErrors]).to eq([])
+          expect(delete_response[:partial_errors]).to eq([])
         end
       end
     end
@@ -96,17 +96,17 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_ids: [extension_id],
           ad_extension_type: "CallAdExtension"
         )
-        expect(fetched[:AdExtensions].first).to include(
-          Id: extension_id,
-          Type: "CallAdExtension",
-          CountryCode: "FR"
+        expect(fetched[:ad_extensions].first).to include(
+          id: extension_id,
+          type: "CallAdExtension",
+          country_code: "FR"
         )
 
         response = api.campaign_management.delete_ad_extensions(
           account_id: account_id,
           ad_extension_ids: [extension_id]
         )
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @ad_extension_deleted = true
       end
     end
@@ -129,17 +129,17 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_ids: [extension_id],
           ad_extension_type: "SitelinkAdExtension"
         )
-        expect(fetched[:AdExtensions].first).to include(
-          Id: extension_id,
-          Type: "SitelinkAdExtension",
-          DisplayText: "SDK VCR Sitelink"
+        expect(fetched[:ad_extensions].first).to include(
+          id: extension_id,
+          type: "SitelinkAdExtension",
+          display_text: "SDK VCR Sitelink"
         )
 
         response = api.campaign_management.delete_ad_extensions(
           account_id: account_id,
           ad_extension_ids: [extension_id]
         )
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @ad_extension_deleted = true
       end
     end

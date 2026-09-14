@@ -22,10 +22,10 @@ RSpec.describe "JSON Reporting API" do
         }
       )
 
-      request_id = response.fetch(:ReportRequestId)
+      request_id = response.fetch(:report_request_id)
       status = api.reporting.poll_generate_report(report_request_id: request_id)
 
-      expect(status).to include(:ReportRequestStatus)
+      expect(status).to include(:report_request_status)
     end
   end
 
@@ -62,17 +62,17 @@ RSpec.describe "JSON Reporting API" do
           report_time_zone: "PacificTimeUSCanadaTijuana"
         }
       }
-    ).fetch(:ReportRequestId)
+    ).fetch(:report_request_id)
 
     status_response = nil
     20.times do
       status_response = api.reporting.poll_generate_report(report_request_id: request_id)
-      break if %w[Success Error Failed].include?(status_response.dig(:ReportRequestStatus, :Status))
+      break if %w[Success Error Failed].include?(status_response.dig(:report_request_status, :status))
     end
 
-    report_status = status_response.fetch(:ReportRequestStatus)
-    expect(report_status.fetch(:Status)).to eq("Success")
-    download_url = report_status.fetch(:ReportDownloadUrl)
+    report_status = status_response.fetch(:report_request_status)
+    expect(report_status.fetch(:status)).to eq("Success")
+    download_url = report_status.fetch(:report_download_url)
     expect(download_url).not_to be_empty
 
     content = api.reporting.download_file(url: download_url, stream: stream)

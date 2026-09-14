@@ -6,7 +6,7 @@ RSpec.describe "JSON Campaign Criterions API" do
   it "creates a location criterion" do
     use_json_api_cassette("campaign_criterions_creates_location_criterion") do
       with_campaign_criterion do |criterion_id, _campaign_id, response|
-        expect(response[:CampaignCriterionIds]).to include(criterion_id)
+        expect(response[:campaign_criterion_ids]).to include(criterion_id)
       end
     end
   end
@@ -20,7 +20,7 @@ RSpec.describe "JSON Campaign Criterions API" do
           criterion_type: "Location"
         )
 
-        expect(response[:CampaignCriterions].first[:Id]).to eq(criterion_id)
+        expect(response[:campaign_criterions].first[:id]).to eq(criterion_id)
       end
     end
   end
@@ -34,7 +34,7 @@ RSpec.describe "JSON Campaign Criterions API" do
           criterion_type: "Targets"
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @criterion_deleted = true
       end
     end

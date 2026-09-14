@@ -10,7 +10,7 @@ RSpec.describe "JSON Customer Billing API" do
         month_year: Date.new(Date.today.year, Date.today.month, 1).iso8601
       )
 
-      expect(response).to include(:Amount)
+      expect(response).to include(:amount)
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe "JSON Customer Billing API" do
         return_invoice_number: false
       )
 
-      expect(response).to include(:BillingDocumentsInfo)
+      expect(response).to include(:billing_documents_info)
     end
   end
 
@@ -35,7 +35,7 @@ RSpec.describe "JSON Customer Billing API" do
         page_info: {index: 0, size: 25}
       )
 
-      expect(response).to include(:InsertionOrders)
+      expect(response).to include(:insertion_orders)
     end
   end
 end
