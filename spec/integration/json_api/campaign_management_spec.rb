@@ -99,8 +99,7 @@ RSpec.describe "JSON Campaign Management API" do
 
   it "associates and removes a placement exclusion list" do
     use_json_api_cassette("campaign_management_associate_and_remove_placement_exclusion_list") do
-      lists = api.campaign_management.post(
-        "SharedEntities/Query",
+      lists = api.campaign_management.get_shared_entities(
         shared_entity_scope: "Customer",
         shared_entity_type: "PlacementExclusionList"
       ).fetch(:SharedEntities)
@@ -112,8 +111,7 @@ RSpec.describe "JSON Campaign Management API" do
         shared_entity_id: list_id,
         shared_entity_type: "PlacementExclusionList"
       }
-      existing = api.campaign_management.post(
-        "SharedEntityAssociations/QueryByEntityIds",
+      existing = api.campaign_management.get_shared_entity_associations_by_entity_ids(
         entity_ids: [account_id],
         entity_type: "Account",
         shared_entity_type: "PlacementExclusionList",
@@ -125,15 +123,13 @@ RSpec.describe "JSON Campaign Management API" do
       )
 
       begin
-        response = api.campaign_management.post(
-          "SharedEntityAssociations/Set",
+        response = api.campaign_management.set_shared_entity_associations(
           shared_entity_scope: "Customer",
           associations: [association]
         )
         expect(response[:PartialErrors]).to eq([])
 
-        associated = api.campaign_management.post(
-          "SharedEntityAssociations/QueryByEntityIds",
+        associated = api.campaign_management.get_shared_entity_associations_by_entity_ids(
           entity_ids: [account_id],
           entity_type: "Account",
           shared_entity_type: "PlacementExclusionList",
@@ -155,8 +151,7 @@ RSpec.describe "JSON Campaign Management API" do
         expect(response[:PartialErrors]).to eq([])
       end
 
-      remaining = api.campaign_management.post(
-        "SharedEntityAssociations/QueryByEntityIds",
+      remaining = api.campaign_management.get_shared_entity_associations_by_entity_ids(
         entity_ids: [account_id],
         entity_type: "Account",
         shared_entity_type: "PlacementExclusionList",
