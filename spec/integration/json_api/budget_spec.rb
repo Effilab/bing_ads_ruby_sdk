@@ -6,7 +6,7 @@ RSpec.describe "JSON Budget API" do
   it "creates a shared budget" do
     use_json_api_cassette("budget_creates_shared_budget") do
       with_budget do |budget_id, response|
-        expect(response[:BudgetIds]).to include(budget_id)
+        expect(response[:budget_ids]).to include(budget_id)
       end
     end
   end
@@ -18,9 +18,9 @@ RSpec.describe "JSON Budget API" do
           budgets: [{id: budget_id, name: "SDK VCR Budget Updated", amount: 2, budget_type: "DailyBudgetStandard"}]
         )
 
-        expect(response[:PartialErrors]).to eq([])
-        budget = api.campaign_management.get_budgets_by_ids(budget_ids: [budget_id])[:Budgets].first
-        expect(budget[:Name]).to eq("SDK VCR Budget Updated")
+        expect(response[:partial_errors]).to eq([])
+        budget = api.campaign_management.get_budgets_by_ids(budget_ids: [budget_id])[:budgets].first
+        expect(budget[:name]).to eq("SDK VCR Budget Updated")
       end
     end
   end
@@ -30,7 +30,7 @@ RSpec.describe "JSON Budget API" do
       with_budget do |budget_id|
         response = api.campaign_management.delete_budgets(budget_ids: [budget_id])
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @budget_deleted = true
       end
     end

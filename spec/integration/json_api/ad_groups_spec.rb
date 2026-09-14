@@ -11,7 +11,7 @@ RSpec.describe "JSON Ad Groups API" do
           ad_groups: [{name: "SDK VCR Ad Group", status: "Paused", language: "English"}]
         )
 
-        expect(response[:AdGroupIds]).not_to be_empty
+        expect(response[:ad_group_ids]).not_to be_empty
       end
     end
   end
@@ -24,7 +24,7 @@ RSpec.describe "JSON Ad Groups API" do
           ad_groups: [{id: ad_group_id, name: "SDK VCR Ad Group Updated", status: "Paused"}]
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
       end
     end
   end
@@ -37,7 +37,7 @@ RSpec.describe "JSON Ad Groups API" do
           ad_group_ids: [ad_group_id]
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @ad_group_deleted = true
       end
     end

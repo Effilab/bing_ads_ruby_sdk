@@ -11,7 +11,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name", "Status"]
         )
 
-        expect(response[:Campaigns]).not_to be_empty
+        expect(response[:campaigns]).not_to be_empty
       end
     end
   end
@@ -25,7 +25,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name", "Status"]
         )
 
-        expect(response[:Campaigns].first[:Id]).to eq(campaign_id)
+        expect(response[:campaigns].first[:id]).to eq(campaign_id)
       end
     end
   end
@@ -39,7 +39,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name", "Status"]
         )
 
-        expect(response[:Campaigns].first[:Id]).to eq(campaign_id)
+        expect(response[:campaigns].first[:id]).to eq(campaign_id)
       end
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe "JSON Campaign Management API" do
   it "creates a paused campaign" do
     use_json_api_cassette("campaign_management_add_campaigns") do
       with_campaign do |campaign_id, response|
-        expect(response[:CampaignIds]).to include(campaign_id)
+        expect(response[:campaign_ids]).to include(campaign_id)
       end
     end
   end
@@ -67,13 +67,13 @@ RSpec.describe "JSON Campaign Management API" do
           }]
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         updated = api.campaign_management.get_campaigns_by_ids(
           account_id: account_id,
           campaign_ids: [campaign_id],
           fields: ["Id", "Name", "Status"]
         )
-        expect(updated[:Campaigns].first[:Name]).to eq("SDK VCR Campaign Updated")
+        expect(updated[:campaigns].first[:name]).to eq("SDK VCR Campaign Updated")
       end
     end
   end
@@ -86,13 +86,13 @@ RSpec.describe "JSON Campaign Management API" do
           campaign_ids: [campaign_id]
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @campaign_deleted = true
         remaining = api.campaign_management.get_campaigns_by_account_id(
           account_id: account_id,
           fields: ["Id", "Name"]
         )
-        expect(remaining[:Campaigns].none? { |campaign| campaign[:Name] == campaign_name }).to be(true)
+        expect(remaining[:campaigns].none? { |campaign| campaign[:name] == campaign_name }).to be(true)
       end
     end
   end
@@ -102,9 +102,9 @@ RSpec.describe "JSON Campaign Management API" do
       lists = api.campaign_management.get_shared_entities(
         shared_entity_scope: "Customer",
         shared_entity_type: "PlacementExclusionList"
-      ).fetch(:SharedEntities)
-      list = lists.find { |entity| entity[:Name] == "BSA Managed 1" }
-      list_id = list.fetch(:Id)
+      ).fetch(:shared_entities)
+      list = lists.find { |entity| entity[:name] == "BSA Managed 1" }
+      list_id = list.fetch(:id)
       association = {
         entity_id: account_id,
         entity_type: "Account",
@@ -116,10 +116,10 @@ RSpec.describe "JSON Campaign Management API" do
         entity_type: "Account",
         shared_entity_type: "PlacementExclusionList",
         shared_entity_scope: "Customer"
-      ).fetch(:Associations)
+      ).fetch(:associations)
 
       expect(existing).not_to include(
-        hash_including(SharedEntityId: list_id.to_s)
+        hash_including(shared_entity_id: list_id.to_s)
       )
 
       begin
@@ -127,19 +127,19 @@ RSpec.describe "JSON Campaign Management API" do
           shared_entity_scope: "Customer",
           associations: [association]
         )
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
 
         associated = api.campaign_management.get_shared_entity_associations_by_entity_ids(
           entity_ids: [account_id],
           entity_type: "Account",
           shared_entity_type: "PlacementExclusionList",
           shared_entity_scope: "Customer"
-        ).fetch(:Associations)
+        ).fetch(:associations)
         expect(associated).to include(
           hash_including(
-            EntityId: account_id.to_s,
-            SharedEntityId: list_id.to_s,
-            SharedEntityType: "PlacementExclusionList"
+            entity_id: account_id.to_s,
+            shared_entity_id: list_id.to_s,
+            shared_entity_type: "PlacementExclusionList"
           )
         )
       ensure
@@ -148,7 +148,7 @@ RSpec.describe "JSON Campaign Management API" do
           shared_entity_scope: "Customer",
           associations: [association]
         )
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
       end
 
       remaining = api.campaign_management.get_shared_entity_associations_by_entity_ids(
@@ -156,9 +156,9 @@ RSpec.describe "JSON Campaign Management API" do
         entity_type: "Account",
         shared_entity_type: "PlacementExclusionList",
         shared_entity_scope: "Customer"
-      ).fetch(:Associations)
+      ).fetch(:associations)
       expect(remaining).not_to include(
-        hash_including(SharedEntityId: list_id.to_s)
+        hash_including(shared_entity_id: list_id.to_s)
       )
     end
   end
@@ -172,7 +172,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name"]
         )
 
-        expect(response[:AdGroups].map { |group| group[:Id] }).to include(group_id)
+        expect(response[:ad_groups].map { |group| group[:id] }).to include(group_id)
       end
     end
   end
@@ -186,7 +186,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Keyword", "Status"]
         )
 
-        expect(response[:Keywords].map { |keyword| keyword[:Id] }).to include(keyword_id)
+        expect(response[:keywords].map { |keyword| keyword[:id] }).to include(keyword_id)
       end
     end
   end
@@ -201,7 +201,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name", "Status"]
         )
 
-        expect(response[:AdGroups].first[:Id]).to eq(group_id)
+        expect(response[:ad_groups].first[:id]).to eq(group_id)
       end
     end
   end
@@ -216,7 +216,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Keyword", "Status"]
         )
 
-        expect(response[:Keywords].first[:Id]).to eq(keyword_id)
+        expect(response[:keywords].first[:id]).to eq(keyword_id)
       end
     end
   end

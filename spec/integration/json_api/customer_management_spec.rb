@@ -7,7 +7,7 @@ RSpec.describe "JSON Customer Management API" do
     use_json_api_cassette("queries_account_details_through_Customer_Management") do
       response = api.customer_management.get_account(account_id: account_id)
 
-      expect(response).to include(:Account)
+      expect(response).to include(:account)
     end
   end
 
@@ -21,7 +21,7 @@ RSpec.describe "JSON Customer Management API" do
         }
       )
 
-      expect(response[:AccountInfoWithCustomerData]).not_to be_empty
+      expect(response[:account_info_with_customer_data]).not_to be_empty
     end
   end
 
@@ -33,7 +33,7 @@ RSpec.describe "JSON Customer Management API" do
         top_n: 5
       )
 
-      expect(response[:AccountsInfo]).not_to be_empty
+      expect(response[:accounts_info]).not_to be_empty
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe "JSON Customer Management API" do
     use_json_api_cassette("customer_management_get_customer") do
       response = api.customer_management.get_customer(customer_id: customer_id)
 
-      expect(response[:Customer]).to include(Id: customer_id.to_s)
+      expect(response[:customer]).to include(id: customer_id.to_s)
     end
   end
 
@@ -52,27 +52,27 @@ RSpec.describe "JSON Customer Management API" do
         top_n: 5
       )
 
-      expect(response[:CustomersInfo]).not_to be_empty
+      expect(response[:customers_info]).not_to be_empty
     end
   end
 
   it "updates an account with its current values" do
     use_json_api_cassette("customer_management_update_account") do
-      account = api.customer_management.get_account(account_id: account_id).fetch(:Account)
+      account = api.customer_management.get_account(account_id: account_id).fetch(:account)
       account = BingAdsRubySdk::Postprocessors::Snakize.new(JSON.parse(account.to_json)).call
       response = api.customer_management.update_account(account: account)
 
-      expect(response).to include(:LastModifiedTime)
+      expect(response).to include(:last_modified_time)
     end
   end
 
   it "updates a customer with its current values" do
     use_json_api_cassette("customer_management_update_customer") do
-      customer = api.customer_management.get_customer(customer_id: customer_id).fetch(:Customer)
+      customer = api.customer_management.get_customer(customer_id: customer_id).fetch(:customer)
       customer = BingAdsRubySdk::Postprocessors::Snakize.new(JSON.parse(customer.to_json)).call
       response = api.customer_management.update_customer(customer: customer)
 
-      expect(response).to include(:LastModifiedTime)
+      expect(response).to include(:last_modified_time)
     end
   end
 end

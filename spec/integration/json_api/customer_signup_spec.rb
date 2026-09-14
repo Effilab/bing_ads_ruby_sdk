@@ -28,11 +28,11 @@ RSpec.describe "JSON Customer Signup API" do
       )
 
       expect(response).to include(
-        CustomerId: a_kind_of(String),
-        CustomerNumber: a_kind_of(String),
-        AccountId: a_kind_of(String),
-        AccountNumber: a_kind_of(String),
-        CreateTime: a_kind_of(String)
+        customer_id: a_kind_of(String),
+        customer_number: a_kind_of(String),
+        account_id: a_kind_of(String),
+        account_number: a_kind_of(String),
+        create_time: a_kind_of(String)
       )
     end
   end

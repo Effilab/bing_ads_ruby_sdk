@@ -157,7 +157,7 @@ module BingAdsRubySdk
           post("UetTags", payload)
         end
 
-        def get_uet_tags_by_ids(payload)
+        def get_uet_tags_by_ids(payload = {})
           post("UetTags/QueryByIds", payload)
         end
 

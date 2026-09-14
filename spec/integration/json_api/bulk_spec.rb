@@ -12,7 +12,7 @@ RSpec.describe "JSON Bulk API" do
         entities: ["Campaigns"]
       )
 
-      expect(response).to include(:RequestId, :UploadUrl)
+      expect(response).to include(:request_id, :upload_url)
     end
   end
 
@@ -24,9 +24,9 @@ RSpec.describe "JSON Bulk API" do
         account_upload_scope: "Customer",
         entities: ["Campaigns"]
       )
-      response = api.bulk.get_bulk_upload_status(request_id: upload.fetch(:RequestId))
+      response = api.bulk.get_bulk_upload_status(request_id: upload.fetch(:request_id))
 
-      expect(response).to include(:RequestStatus)
+      expect(response).to include(:request_status)
     end
   end
 
@@ -41,7 +41,7 @@ RSpec.describe "JSON Bulk API" do
         format_version: "6.0"
       )
 
-      expect(response).to include(:DownloadRequestId)
+      expect(response).to include(:download_request_id)
     end
   end
 end

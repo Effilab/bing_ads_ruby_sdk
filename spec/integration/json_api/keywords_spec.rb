@@ -11,7 +11,7 @@ RSpec.describe "JSON Keywords API" do
           keywords: [{text: "sdk vcr direct keyword", match_type: "Exact", status: "Paused", bid: {amount: 0.1}}]
         )
 
-        expect(response[:KeywordIds]).not_to be_empty
+        expect(response[:keyword_ids]).not_to be_empty
       end
     end
   end
@@ -24,7 +24,7 @@ RSpec.describe "JSON Keywords API" do
           keywords: [{id: keyword_id, status: "Paused", bid: {amount: 0.2}}]
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
       end
     end
   end
@@ -36,14 +36,14 @@ RSpec.describe "JSON Keywords API" do
           ad_group_id: group_id,
           keywords: [{text: "sdk vcr editorial keyword", match_type: "Exact", status: "Paused", bid: {amount: 0.1}}]
         )
-        keyword_id = keyword_response.fetch(:KeywordIds).first
+        keyword_id = keyword_response.fetch(:keyword_ids).first
 
         response = api.campaign_management.get_keywords_by_editorial_status(
           ad_group_id: group_id,
           editorial_status: "Active"
         )
 
-        expect(response.fetch(:Keywords).map { |keyword| keyword[:Id] }).to include(keyword_id.to_s)
+        expect(response.fetch(:keywords).map { |keyword| keyword[:id] }).to include(keyword_id.to_s)
       end
     end
   end
@@ -56,7 +56,7 @@ RSpec.describe "JSON Keywords API" do
           keyword_ids: [keyword_id]
         )
 
-        expect(response[:PartialErrors]).to eq([])
+        expect(response[:partial_errors]).to eq([])
         @keyword_deleted = true
       end
     end
