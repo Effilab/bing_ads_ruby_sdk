@@ -97,6 +97,77 @@ RSpec.describe "JSON Campaign Management API" do
     end
   end
 
+  it "associates and removes a placement exclusion list" do
+    use_json_api_cassette("campaign_management_associate_and_remove_placement_exclusion_list") do
+      lists = api.campaign_management.post(
+        "SharedEntities/Query",
+        shared_entity_scope: "Customer",
+        shared_entity_type: "PlacementExclusionList"
+      ).fetch(:SharedEntities)
+      list = lists.find { |entity| entity[:Name] == "BSA Managed 1" }
+      list_id = list.fetch(:Id)
+      association = {
+        entity_id: account_id,
+        entity_type: "Account",
+        shared_entity_id: list_id,
+        shared_entity_type: "PlacementExclusionList"
+      }
+      existing = api.campaign_management.post(
+        "SharedEntityAssociations/QueryByEntityIds",
+        entity_ids: [account_id],
+        entity_type: "Account",
+        shared_entity_type: "PlacementExclusionList",
+        shared_entity_scope: "Customer"
+      ).fetch(:Associations)
+
+      expect(existing).not_to include(
+        hash_including(SharedEntityId: list_id.to_s)
+      )
+
+      begin
+        response = api.campaign_management.post(
+          "SharedEntityAssociations/Set",
+          shared_entity_scope: "Customer",
+          associations: [association]
+        )
+        expect(response[:PartialErrors]).to eq([])
+
+        associated = api.campaign_management.post(
+          "SharedEntityAssociations/QueryByEntityIds",
+          entity_ids: [account_id],
+          entity_type: "Account",
+          shared_entity_type: "PlacementExclusionList",
+          shared_entity_scope: "Customer"
+        ).fetch(:Associations)
+        expect(associated).to include(
+          hash_including(
+            EntityId: account_id.to_s,
+            SharedEntityId: list_id.to_s,
+            SharedEntityType: "PlacementExclusionList"
+          )
+        )
+      ensure
+        response = api.campaign_management.delete(
+          "SharedEntityAssociations",
+          shared_entity_scope: "Customer",
+          associations: [association]
+        )
+        expect(response[:PartialErrors]).to eq([])
+      end
+
+      remaining = api.campaign_management.post(
+        "SharedEntityAssociations/QueryByEntityIds",
+        entity_ids: [account_id],
+        entity_type: "Account",
+        shared_entity_type: "PlacementExclusionList",
+        shared_entity_scope: "Customer"
+      ).fetch(:Associations)
+      expect(remaining).not_to include(
+        hash_including(SharedEntityId: list_id.to_s)
+      )
+    end
+  end
+
   it "queries a seeded ad group by campaign" do
     use_json_api_cassette("queries_a_seeded_ad_group_by_campaign") do
       with_bulk_hierarchy do |campaign_id, group_id|

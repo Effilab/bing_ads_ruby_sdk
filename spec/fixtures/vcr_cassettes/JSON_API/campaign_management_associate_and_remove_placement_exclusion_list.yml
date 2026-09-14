@@ -1,0 +1,318 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/SharedEntities/Query
+    body:
+      encoding: UTF-8
+      string: '{"SharedEntityScope":"Customer","SharedEntityType":"PlacementExclusionList"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 14 Sep 2026 10:29:12 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 61badbac-6bdd-449a-9b94-0da96c4fc604
+      X-Ms-Trackingid:
+      - 61badbac-6bdd-449a-9b94-0da96c4fc604
+      Trackingid:
+      - 61badbac-6bdd-449a-9b94-0da96c4fc604
+    body:
+      encoding: UTF-8
+      string: '{"SharedEntities":[{"ItemCount":2,"Id":"7421703487502","Name":"BSA
+        Managed 1","Type":"PlacementExclusionList","AssociationCount":49997,"ForwardCompatibilityMap":[]},{"ItemCount":2,"Id":"7421703488374","Name":"BSA
+        Managed 2","Type":"PlacementExclusionList","AssociationCount":711,"ForwardCompatibilityMap":[]},{"ItemCount":0,"Id":"7421703488382","Name":"BSA
+        Managed 3","Type":"PlacementExclusionList","AssociationCount":690,"ForwardCompatibilityMap":[]}]}'
+  recorded_at: Mon, 14 Sep 2026 10:29:13 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/SharedEntityAssociations/QueryByEntityIds
+    body:
+      encoding: UTF-8
+      string: '{"EntityIds":["[BING_ACCOUNT_ID]"],"EntityType":"Account","SharedEntityType":"PlacementExclusionList","SharedEntityScope":"Customer"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 14 Sep 2026 10:29:14 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - e4b0450c-b719-4e39-9f12-727f4918d889
+      X-Ms-Trackingid:
+      - e4b0450c-b719-4e39-9f12-727f4918d889
+      Trackingid:
+      - e4b0450c-b719-4e39-9f12-727f4918d889
+    body:
+      encoding: UTF-8
+      string: '{"Associations":[{"SharedEntityId":"7421703488374","SharedEntityType":"PlacementExclusionList","EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityCustomerId":"[BING_CUSTOMER_ID]"},{"SharedEntityId":"7421703488382","SharedEntityType":"PlacementExclusionList","EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityCustomerId":"[BING_CUSTOMER_ID]"}],"PartialErrors":[]}'
+  recorded_at: Mon, 14 Sep 2026 10:29:14 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/SharedEntityAssociations/Set
+    body:
+      encoding: UTF-8
+      string: '{"SharedEntityScope":"Customer","Associations":[{"EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityId":"7421703487502","SharedEntityType":"PlacementExclusionList"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 14 Sep 2026 10:29:15 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 25689be9-af6f-4b6b-9661-af5dcfbb2da8
+      X-Ms-Trackingid:
+      - 25689be9-af6f-4b6b-9661-af5dcfbb2da8
+      Trackingid:
+      - 25689be9-af6f-4b6b-9661-af5dcfbb2da8
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Mon, 14 Sep 2026 10:29:16 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/SharedEntityAssociations/QueryByEntityIds
+    body:
+      encoding: UTF-8
+      string: '{"EntityIds":["[BING_ACCOUNT_ID]"],"EntityType":"Account","SharedEntityType":"PlacementExclusionList","SharedEntityScope":"Customer"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 14 Sep 2026 10:29:16 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 99a6ec91-6546-4ab5-bcc7-643c58fe2190
+      X-Ms-Trackingid:
+      - 99a6ec91-6546-4ab5-bcc7-643c58fe2190
+      Trackingid:
+      - 99a6ec91-6546-4ab5-bcc7-643c58fe2190
+    body:
+      encoding: UTF-8
+      string: '{"Associations":[{"SharedEntityId":"7421703487502","SharedEntityType":"PlacementExclusionList","EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityCustomerId":"[BING_CUSTOMER_ID]"},{"SharedEntityId":"7421703488374","SharedEntityType":"PlacementExclusionList","EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityCustomerId":"[BING_CUSTOMER_ID]"},{"SharedEntityId":"7421703488382","SharedEntityType":"PlacementExclusionList","EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityCustomerId":"[BING_CUSTOMER_ID]"}],"PartialErrors":[]}'
+  recorded_at: Mon, 14 Sep 2026 10:29:17 GMT
+- request:
+    method: delete
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/SharedEntityAssociations
+    body:
+      encoding: UTF-8
+      string: '{"SharedEntityScope":"Customer","Associations":[{"EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityId":"7421703487502","SharedEntityType":"PlacementExclusionList"}]}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 14 Sep 2026 10:29:18 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 6496a610-ff7b-4775-9535-d9fbe95a718b
+      X-Ms-Trackingid:
+      - 6496a610-ff7b-4775-9535-d9fbe95a718b
+      Trackingid:
+      - 6496a610-ff7b-4775-9535-d9fbe95a718b
+    body:
+      encoding: UTF-8
+      string: '{"PartialErrors":[]}'
+  recorded_at: Mon, 14 Sep 2026 10:29:18 GMT
+- request:
+    method: post
+    uri: https://campaign.api.bingads.microsoft.com/CampaignManagement/v13/SharedEntityAssociations/QueryByEntityIds
+    body:
+      encoding: UTF-8
+      string: '{"EntityIds":["[BING_ACCOUNT_ID]"],"EntityType":"Account","SharedEntityType":"PlacementExclusionList","SharedEntityScope":"Customer"}'
+    headers:
+      User-Agent:
+      - excon/1.7.1
+      Accept:
+      - application/json
+      Developertoken:
+      - "[BING_DEVELOPER_TOKEN]"
+      Clientid:
+      - "[BING_CLIENT_ID]"
+      Clientsecret:
+      - "[BING_CLIENT_SECRET]"
+      Content-Type:
+      - application/json
+      Customeraccountid:
+      - "[BING_ACCOUNT_ID]"
+      Customerid:
+      - "[BING_CUSTOMER_ID]"
+      Authorization:
+      - Bearer [BING_ACCESS_TOKEN]
+      Accept-Encoding:
+      - deflate, gzip
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Mon, 14 Sep 2026 10:29:18 GMT
+      Server:
+      - Kestrel
+      Content-Encoding:
+      - ''
+      Vary:
+      - Accept-Encoding
+      X-Ms-Requestid:
+      - 30d56b3f-01bf-4f12-a55a-010ba00a0b7b
+      X-Ms-Trackingid:
+      - 30d56b3f-01bf-4f12-a55a-010ba00a0b7b
+      Trackingid:
+      - 30d56b3f-01bf-4f12-a55a-010ba00a0b7b
+    body:
+      encoding: UTF-8
+      string: '{"Associations":[{"SharedEntityId":"7421703488374","SharedEntityType":"PlacementExclusionList","EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityCustomerId":"[BING_CUSTOMER_ID]"},{"SharedEntityId":"7421703488382","SharedEntityType":"PlacementExclusionList","EntityId":"[BING_ACCOUNT_ID]","EntityType":"Account","SharedEntityCustomerId":"[BING_CUSTOMER_ID]"}],"PartialErrors":[]}'
+  recorded_at: Mon, 14 Sep 2026 10:29:19 GMT
+recorded_with: VCR 6.4.0
