@@ -69,8 +69,13 @@ module BingAdsRubySdk
       # The fault hash from the API response detail element
       # @return [Hash] containing the fault information if provided
       # @return [Hash] empty hash if no fault information
+      # JSON API responses have no `detail` wrapper; the lists live at the root
+      # (e.g. GetBulkUploadStatus's top-level `Errors` field).
       def fault_hash
-        raw_response[:detail][fault_key] || {}
+        detail = raw_response[:detail]
+        return raw_response unless detail
+
+        detail[fault_key] || {}
       end
 
       # The fault key that corresponds to the inherited class

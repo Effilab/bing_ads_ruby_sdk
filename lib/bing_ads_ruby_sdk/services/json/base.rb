@@ -7,12 +7,13 @@ module BingAdsRubySdk
       # Base class for the customer management and campaign management APIs
       class Base
         Request = Struct.new(:url, :headers, :content)
-        # Per learn.microsoft.com/en-us/advertising/campaign-management-service,
-        # JSON responses only ever expose these two fields (never SOAP's
-        # detail-wrapped BatchErrors/OperationErrors).
+        # Per learn.microsoft.com/en-us/advertising docs, JSON responses only
+        # ever expose these fields (never SOAP's detail-wrapped BatchErrors/
+        # OperationErrors); `errors` covers Bulk's GetBulkUploadStatus.Errors.
         FAULT_CLASSES = {
           partial_errors: BingAdsRubySdk::Errors::PartialError,
-          nested_partial_errors: BingAdsRubySdk::Errors::NestedPartialError
+          nested_partial_errors: BingAdsRubySdk::Errors::NestedPartialError,
+          errors: BingAdsRubySdk::Errors::AdApiFaultDetail
         }.freeze
 
         def initialize(base_url:, headers:, auth_handler:)

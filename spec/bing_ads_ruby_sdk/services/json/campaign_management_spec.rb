@@ -63,6 +63,16 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
         end
       end
     end
+
+    context "when the response has an Errors field (e.g. GetBulkUploadStatus)" do
+      let(:response) { {Errors: error_list} }
+
+      it "raises an AdApiFaultDetail with errors populated" do
+        expect { subject }.to raise_error(BingAdsRubySdk::Errors::AdApiFaultDetail, error_message) do |error|
+          expect(error.errors.length).to eq(6)
+        end
+      end
+    end
   end
 
   describe "#post" do

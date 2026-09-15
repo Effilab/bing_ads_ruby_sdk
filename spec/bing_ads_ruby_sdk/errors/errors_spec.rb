@@ -52,3 +52,24 @@ RSpec.describe BingAdsRubySdk::Errors::NestedPartialError do
     end
   end
 end
+
+# Per learn.microsoft.com/en-us/advertising/bulk-service/getbulkuploadstatus,
+# GetBulkUploadStatus responses expose a top-level `Errors` (OperationError[])
+# field, matching AdApiFaultDetail's `errors` list.
+RSpec.describe BingAdsRubySdk::Errors::AdApiFaultDetail do
+  let(:error) { {error_code: "InvalidCredentials", message: "Authentication failed"} }
+
+  subject(:fault) { described_class.new(response) }
+
+  context "when given a JSON API response" do
+    let(:response) { {errors: [error]} }
+
+    it "populates errors from the response root" do
+      expect(fault.errors).to eq([error])
+    end
+
+    it "formats the message the same way as SOAP" do
+      expect(fault.message).to eq("InvalidCredentials - Authentication failed")
+    end
+  end
+end
