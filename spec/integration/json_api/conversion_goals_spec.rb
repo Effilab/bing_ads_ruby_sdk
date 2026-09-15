@@ -36,8 +36,8 @@ RSpec.describe "JSON Conversion Goals API" do
         tag_ids: [uet_tag_id]
       )
 
-      expect(by_id[:conversion_goals]).to include(a_hash_including(id: goal_id))
-      expect(by_tag[:conversion_goals]).to include(a_hash_including(id: goal_id))
+      expect(by_id).to include(a_hash_including(id: goal_id))
+      expect(by_tag).to include(a_hash_including(id: goal_id))
     end
   end
 
@@ -48,7 +48,7 @@ RSpec.describe "JSON Conversion Goals API" do
         conversion_goal_ids: [conversion_goal_id]
       )
 
-      expect(response[:conversion_goals]).not_to be_empty
+      expect(response).not_to be_empty
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe "JSON Conversion Goals API" do
         tag_ids: [uet_tag_id]
       )
 
-      expect(response[:conversion_goals]).not_to be_empty
+      expect(response).not_to be_empty
     end
   end
 

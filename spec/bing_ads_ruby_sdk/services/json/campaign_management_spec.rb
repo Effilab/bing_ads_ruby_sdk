@@ -106,14 +106,14 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
 
     describe "#get_shared_entities" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("SharedEntities/Query", payload)
+        expect(subject).to receive(:post).with("SharedEntities/Query", payload).and_return({})
         subject.get_shared_entities(payload)
       end
     end
 
     describe "#get_shared_entities_by_account_id" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("SharedEntities/QueryByAccountId", payload)
+        expect(subject).to receive(:post).with("SharedEntities/QueryByAccountId", payload).and_return({})
         subject.get_shared_entities_by_account_id(payload)
       end
     end
@@ -141,14 +141,14 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
 
     describe "#get_campaigns_by_account_id" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("Campaigns/QueryByAccountId", payload)
+        expect(subject).to receive(:post).with("Campaigns/QueryByAccountId", payload).and_return({})
         subject.get_campaigns_by_account_id(payload)
       end
     end
 
     describe "#get_campaigns_by_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("Campaigns/QueryByIds", payload)
+        expect(subject).to receive(:post).with("Campaigns/QueryByIds", payload).and_return({})
         subject.get_campaigns_by_ids(payload)
       end
     end
@@ -310,7 +310,7 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
 
     describe "#get_shared_entity_associations_by_entity_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("SharedEntityAssociations/QueryByEntityIds", payload)
+        expect(subject).to receive(:post).with("SharedEntityAssociations/QueryByEntityIds", payload).and_return({})
         subject.get_shared_entity_associations_by_entity_ids(payload)
       end
     end
@@ -324,14 +324,14 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
 
     describe "#get_ad_extension_ids_by_account_id" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("AdExtensionIds/QueryByAccountId", payload)
+        expect(subject).to receive(:post).with("AdExtensionIds/QueryByAccountId", payload).and_return({})
         subject.get_ad_extension_ids_by_account_id(payload)
       end
     end
 
     describe "#get_ad_extensions_by_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("AdExtensions/QueryByIds", payload)
+        expect(subject).to receive(:post).with("AdExtensions/QueryByIds", payload).and_return({})
         subject.get_ad_extensions_by_ids(payload)
       end
     end
@@ -373,14 +373,14 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
 
     describe "#get_conversion_goals_by_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("ConversionGoals/QueryByIds", payload)
+        expect(subject).to receive(:post).with("ConversionGoals/QueryByIds", payload).and_return({})
         subject.get_conversion_goals_by_ids(payload)
       end
     end
 
     describe "#get_conversion_goals_by_tag_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("ConversionGoals/QueryByTagIds", payload)
+        expect(subject).to receive(:post).with("ConversionGoals/QueryByTagIds", payload).and_return({})
         subject.get_conversion_goals_by_tag_ids(payload)
       end
     end
@@ -401,12 +401,12 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
 
     describe "#get_uet_tags_by_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("UetTags/QueryByIds", payload)
+        expect(subject).to receive(:post).with("UetTags/QueryByIds", payload).and_return({})
         subject.get_uet_tags_by_ids(payload)
       end
 
       it "queries all UET tags when no payload is provided" do
-        expect(subject).to receive(:post).with("UetTags/QueryByIds", {})
+        expect(subject).to receive(:post).with("UetTags/QueryByIds", {}).and_return({})
         subject.get_uet_tags_by_ids
       end
     end
@@ -420,63 +420,71 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
 
     describe "#get_ad_groups_by_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("AdGroups/QueryByIds", payload)
+        expect(subject).to receive(:post).with("AdGroups/QueryByIds", payload).and_return({})
         subject.get_ad_groups_by_ids(payload)
       end
     end
 
     describe "#get_ad_groups_by_campaign_id" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("AdGroups/QueryByCampaignId", payload)
+        expect(subject).to receive(:post).with("AdGroups/QueryByCampaignId", payload).and_return({})
         subject.get_ad_groups_by_campaign_id(payload)
       end
     end
 
     describe "#get_ads_by_ad_group_id" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("Ads/QueryByAdGroupId", payload)
+        expect(subject).to receive(:post).with("Ads/QueryByAdGroupId", payload).and_return({})
         subject.get_ads_by_ad_group_id(payload)
       end
     end
 
     describe "#get_budgets_by_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("Budgets/QueryByIds", payload)
+        expect(subject).to receive(:post).with("Budgets/QueryByIds", payload).and_return({})
         subject.get_budgets_by_ids(payload)
+      end
+
+      it "returns the budgets array" do
+        allow(subject).to receive(:post).with("Budgets/QueryByIds", payload).and_return(
+          budgets: [{id: "123"}]
+        )
+
+        expect(subject.get_budgets_by_ids(payload)).to eq([{id: "123"}])
       end
     end
 
     describe "#get_campaign_criterions_by_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("CampaignCriterions/QueryByIds", payload)
+        expect(subject).to receive(:post).with("CampaignCriterions/QueryByIds", payload).and_return({})
         subject.get_campaign_criterions_by_ids(payload)
       end
     end
 
     describe "#get_keywords_by_ad_group_id" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("Keywords/QueryByAdGroupId", payload)
+        expect(subject).to receive(:post).with("Keywords/QueryByAdGroupId", payload).and_return({})
         subject.get_keywords_by_ad_group_id(payload)
       end
     end
 
     describe "#get_keywords_by_editorial_status" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("Keywords/QueryByEditorialStatus", payload)
+        expect(subject).to receive(:post).with("Keywords/QueryByEditorialStatus", payload).and_return({})
         subject.get_keywords_by_editorial_status(payload)
       end
     end
 
     describe "#get_keywords_by_ids" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("Keywords/QueryByIds", payload)
+        expect(subject).to receive(:post).with("Keywords/QueryByIds", payload).and_return({})
         subject.get_keywords_by_ids(payload)
       end
     end
 
     describe "#get_list_items_by_shared_list" do
       it "calls post with the correct operation and payload" do
-        expect(subject).to receive(:post).with("ListItems/QueryBySharedList", payload)
+        expect(subject).to receive(:post).with("ListItems/QueryBySharedList", payload).and_return({})
         subject.get_list_items_by_shared_list(payload)
       end
     end

@@ -24,7 +24,7 @@ RSpec.describe "JSON UET Tags API" do
     use_json_api_cassette("uet_tags_reads_existing_tag") do
       response = api.campaign_management.get_uet_tags_by_ids(uet_tag_ids: [uet_tag_id])
 
-      expect(response[:uet_tags]).not_to be_empty
+      expect(response).not_to be_empty
     end
   end
 

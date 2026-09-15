@@ -43,7 +43,7 @@ RSpec.describe "JSON Keywords API" do
           editorial_status: "Active"
         )
 
-        expect(response.fetch(:keywords).map { |keyword| keyword[:id] }).to include(keyword_id.to_s)
+        expect(response.map { |keyword| keyword[:id] }).to include(keyword_id.to_s)
       end
     end
   end

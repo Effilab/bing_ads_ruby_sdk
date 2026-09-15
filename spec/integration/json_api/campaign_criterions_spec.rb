@@ -20,7 +20,7 @@ RSpec.describe "JSON Campaign Criterions API" do
           criterion_type: "Location"
         )
 
-        expect(response[:campaign_criterions].first[:id]).to eq(criterion_id)
+        expect(response.first[:id]).to eq(criterion_id)
       end
     end
   end

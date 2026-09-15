@@ -20,7 +20,7 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_type: "CalloutAdExtension"
         )
 
-        expect(response[:ad_extensions].first[:id]).to eq(extension_id)
+        expect(response.first[:id]).to eq(extension_id)
       end
     end
   end
@@ -33,7 +33,7 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_type: "CalloutAdExtension"
         )
 
-        expect(response[:ad_extension_ids]).to include(extension_id)
+        expect(response).to include(extension_id)
       end
     end
   end
@@ -96,7 +96,7 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_ids: [extension_id],
           ad_extension_type: "CallAdExtension"
         )
-        expect(fetched[:ad_extensions].first).to include(
+        expect(fetched.first).to include(
           id: extension_id,
           type: "CallAdExtension",
           country_code: "FR"
@@ -129,7 +129,7 @@ RSpec.describe "JSON Ad Extensions API" do
           ad_extension_ids: [extension_id],
           ad_extension_type: "SitelinkAdExtension"
         )
-        expect(fetched[:ad_extensions].first).to include(
+        expect(fetched.first).to include(
           id: extension_id,
           type: "SitelinkAdExtension",
           display_text: "SDK VCR Sitelink"

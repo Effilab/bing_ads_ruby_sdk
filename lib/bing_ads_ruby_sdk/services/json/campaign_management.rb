@@ -15,11 +15,11 @@ module BingAdsRubySdk
         end
 
         def get_campaigns_by_account_id(payload)
-          post("Campaigns/QueryByAccountId", payload)
+          query("Campaigns/QueryByAccountId", payload, :campaigns)
         end
 
         def get_campaigns_by_ids(payload)
-          post("Campaigns/QueryByIds", payload)
+          query("Campaigns/QueryByIds", payload, :campaigns)
         end
 
         def update_campaigns(payload)
@@ -106,7 +106,7 @@ module BingAdsRubySdk
         end
 
         def get_shared_entity_associations_by_entity_ids(payload)
-          post("SharedEntityAssociations/QueryByEntityIds", payload)
+          query("SharedEntityAssociations/QueryByEntityIds", payload, :associations)
         end
 
         def add_ad_extensions(payload)
@@ -114,11 +114,11 @@ module BingAdsRubySdk
         end
 
         def get_ad_extension_ids_by_account_id(payload)
-          post("AdExtensionIds/QueryByAccountId", payload)
+          query("AdExtensionIds/QueryByAccountId", payload, :ad_extension_ids)
         end
 
         def get_ad_extensions_by_ids(payload)
-          post("AdExtensions/QueryByIds", payload)
+          query("AdExtensions/QueryByIds", payload, :ad_extensions)
         end
 
         def get_ad_extensions_associations(payload)
@@ -142,11 +142,11 @@ module BingAdsRubySdk
         end
 
         def get_conversion_goals_by_ids(payload)
-          post("ConversionGoals/QueryByIds", payload)
+          query("ConversionGoals/QueryByIds", payload, :conversion_goals)
         end
 
         def get_conversion_goals_by_tag_ids(payload)
-          post("ConversionGoals/QueryByTagIds", payload)
+          query("ConversionGoals/QueryByTagIds", payload, :conversion_goals)
         end
 
         def update_conversion_goals(payload)
@@ -158,7 +158,7 @@ module BingAdsRubySdk
         end
 
         def get_uet_tags_by_ids(payload = {})
-          post("UetTags/QueryByIds", payload)
+          query("UetTags/QueryByIds", payload, :uet_tags)
         end
 
         def update_uet_tags(payload)
@@ -166,35 +166,35 @@ module BingAdsRubySdk
         end
 
         def get_ad_groups_by_ids(payload)
-          post("AdGroups/QueryByIds", payload)
+          query("AdGroups/QueryByIds", payload, :ad_groups)
         end
 
         def get_ad_groups_by_campaign_id(payload)
-          post("AdGroups/QueryByCampaignId", payload)
+          query("AdGroups/QueryByCampaignId", payload, :ad_groups)
         end
 
         def get_ads_by_ad_group_id(payload)
-          post("Ads/QueryByAdGroupId", payload)
+          query("Ads/QueryByAdGroupId", payload, :ads)
         end
 
-        def get_budgets_by_ids(payload)
-          post("Budgets/QueryByIds", payload)
+        def get_budgets_by_ids(payload = {})
+          query("Budgets/QueryByIds", payload, :budgets)
         end
 
         def get_campaign_criterions_by_ids(payload)
-          post("CampaignCriterions/QueryByIds", payload)
+          query("CampaignCriterions/QueryByIds", payload, :campaign_criterions)
         end
 
         def get_keywords_by_ad_group_id(payload)
-          post("Keywords/QueryByAdGroupId", payload)
+          query("Keywords/QueryByAdGroupId", payload, :keywords)
         end
 
         def get_keywords_by_editorial_status(payload)
-          post("Keywords/QueryByEditorialStatus", payload)
+          query("Keywords/QueryByEditorialStatus", payload, :keywords)
         end
 
         def get_keywords_by_ids(payload)
-          post("Keywords/QueryByIds", payload)
+          query("Keywords/QueryByIds", payload, :keywords)
         end
 
         # @param payload [Hash]
@@ -246,15 +246,15 @@ module BingAdsRubySdk
         #   ]
         # }
         def get_shared_entities(payload)
-          post("SharedEntities/Query", payload)
+          query("SharedEntities/Query", payload, :shared_entities)
         end
 
         def get_shared_entities_by_account_id(payload)
-          post("SharedEntities/QueryByAccountId", payload)
+          query("SharedEntities/QueryByAccountId", payload, :shared_entities)
         end
 
         def get_list_items_by_shared_list(payload)
-          post("ListItems/QueryBySharedList", payload)
+          query("ListItems/QueryBySharedList", payload, :list_items)
         end
 
         def add_list_items_to_shared_list(payload)
@@ -263,6 +263,12 @@ module BingAdsRubySdk
 
         def delete_list_items_from_shared_list(payload)
           delete("ListItems", payload)
+        end
+
+        private
+
+        def query(operation, payload, response_key)
+          post(operation, payload).fetch(response_key, [])
         end
       end
     end

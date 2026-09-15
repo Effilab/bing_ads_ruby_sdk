@@ -19,7 +19,7 @@ RSpec.describe "JSON Budget API" do
         )
 
         expect(response[:partial_errors]).to eq([])
-        budget = api.campaign_management.get_budgets_by_ids(budget_ids: [budget_id])[:budgets].first
+        budget = api.campaign_management.get_budgets_by_ids(budget_ids: [budget_id]).first
         expect(budget[:name]).to eq("SDK VCR Budget Updated")
       end
     end

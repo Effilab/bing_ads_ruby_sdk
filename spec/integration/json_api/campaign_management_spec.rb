@@ -11,7 +11,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name", "Status"]
         )
 
-        expect(response[:campaigns]).not_to be_empty
+        expect(response).not_to be_empty
       end
     end
   end
@@ -25,7 +25,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name", "Status"]
         )
 
-        expect(response[:campaigns].first[:id]).to eq(campaign_id)
+        expect(response.first[:id]).to eq(campaign_id)
       end
     end
   end
@@ -39,7 +39,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name", "Status"]
         )
 
-        expect(response[:campaigns].first[:id]).to eq(campaign_id)
+        expect(response.first[:id]).to eq(campaign_id)
       end
     end
   end
@@ -73,7 +73,7 @@ RSpec.describe "JSON Campaign Management API" do
           campaign_ids: [campaign_id],
           fields: ["Id", "Name", "Status"]
         )
-        expect(updated[:campaigns].first[:name]).to eq("SDK VCR Campaign Updated")
+        expect(updated.first[:name]).to eq("SDK VCR Campaign Updated")
       end
     end
   end
@@ -92,7 +92,7 @@ RSpec.describe "JSON Campaign Management API" do
           account_id: account_id,
           fields: ["Id", "Name"]
         )
-        expect(remaining[:campaigns].none? { |campaign| campaign[:name] == campaign_name }).to be(true)
+        expect(remaining.none? { |campaign| campaign[:name] == campaign_name }).to be(true)
       end
     end
   end
@@ -102,7 +102,7 @@ RSpec.describe "JSON Campaign Management API" do
       lists = api.campaign_management.get_shared_entities(
         shared_entity_scope: "Customer",
         shared_entity_type: "PlacementExclusionList"
-      ).fetch(:shared_entities)
+      )
       list = lists.find { |entity| entity[:name] == "BSA Managed 1" }
       list_id = list.fetch(:id)
       association = {
@@ -116,7 +116,7 @@ RSpec.describe "JSON Campaign Management API" do
         entity_type: "Account",
         shared_entity_type: "PlacementExclusionList",
         shared_entity_scope: "Customer"
-      ).fetch(:associations)
+      )
 
       expect(existing).not_to include(
         hash_including(shared_entity_id: list_id.to_s)
@@ -134,7 +134,7 @@ RSpec.describe "JSON Campaign Management API" do
           entity_type: "Account",
           shared_entity_type: "PlacementExclusionList",
           shared_entity_scope: "Customer"
-        ).fetch(:associations)
+        )
         expect(associated).to include(
           hash_including(
             entity_id: account_id.to_s,
@@ -156,7 +156,7 @@ RSpec.describe "JSON Campaign Management API" do
         entity_type: "Account",
         shared_entity_type: "PlacementExclusionList",
         shared_entity_scope: "Customer"
-      ).fetch(:associations)
+      )
       expect(remaining).not_to include(
         hash_including(shared_entity_id: list_id.to_s)
       )
@@ -172,7 +172,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name"]
         )
 
-        expect(response[:ad_groups].map { |group| group[:id] }).to include(group_id)
+        expect(response.map { |group| group[:id] }).to include(group_id)
       end
     end
   end
@@ -186,7 +186,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Keyword", "Status"]
         )
 
-        expect(response[:keywords].map { |keyword| keyword[:id] }).to include(keyword_id)
+        expect(response.map { |keyword| keyword[:id] }).to include(keyword_id)
       end
     end
   end
@@ -201,7 +201,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Name", "Status"]
         )
 
-        expect(response[:ad_groups].first[:id]).to eq(group_id)
+        expect(response.first[:id]).to eq(group_id)
       end
     end
   end
@@ -216,7 +216,7 @@ RSpec.describe "JSON Campaign Management API" do
           fields: ["Id", "Keyword", "Status"]
         )
 
-        expect(response[:keywords].first[:id]).to eq(keyword_id)
+        expect(response.first[:id]).to eq(keyword_id)
       end
     end
   end
