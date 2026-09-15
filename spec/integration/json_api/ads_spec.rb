@@ -39,7 +39,7 @@ RSpec.describe "JSON Ads API" do
         updated_ads = api.campaign_management.get_ads_by_ad_group_id(
           ad_group_id: ad_group_id,
           ad_types: ["ResponsiveSearch"]
-        ).fetch(:ads, [])
+        )
         updated_ad = updated_ads.find { |ad| ad[:id].to_s == ad_id.to_s }
         expect(updated_ad).to include(id: ad_id.to_s, type: "ResponsiveSearch", path1: "after")
 
@@ -52,7 +52,7 @@ RSpec.describe "JSON Ads API" do
         remaining_ads = api.campaign_management.get_ads_by_ad_group_id(
           ad_group_id: ad_group_id,
           ad_types: ["ResponsiveSearch"]
-        ).fetch(:ads, [])
+        )
         expect(remaining_ads.map { |ad| ad[:id].to_s }).not_to include(ad_id.to_s)
 
         api.campaign_management.delete_ad_groups(

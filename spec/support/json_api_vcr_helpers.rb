@@ -213,7 +213,7 @@ RSpec.shared_context "json api with vcr" do
         account_id: account_id,
         fields: ["Id", "Name"]
       )
-      campaign = (campaigns[:campaigns] || []).find { |item| item[:name] == campaign_name }
+      campaign = campaigns.find { |item| item[:name] == campaign_name }
       break if campaign
     end
     raise "Bulk hierarchy campaign was not created" unless campaign
@@ -223,7 +223,7 @@ RSpec.shared_context "json api with vcr" do
       campaign_id: campaign.fetch(:id),
       fields: ["Id", "Name"]
     )
-    group = (groups[:ad_groups] || []).find { |item| item[:name] == ad_group_name }
+    group = groups.find { |item| item[:name] == ad_group_name }
     raise "Bulk hierarchy ad group was not created" unless group
 
     keywords = api.campaign_management.get_keywords_by_ad_group_id(
@@ -231,7 +231,7 @@ RSpec.shared_context "json api with vcr" do
       ad_group_id: group.fetch(:id),
       fields: ["Id", "Keyword", "Status"]
     )
-    keyword = (keywords[:keywords] || []).first
+    keyword = keywords.first
     raise "Bulk hierarchy keyword was not created" unless keyword
 
     yield campaign.fetch(:id), group.fetch(:id), keyword.fetch(:id)

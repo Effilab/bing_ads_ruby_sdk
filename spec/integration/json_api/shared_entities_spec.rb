@@ -19,7 +19,7 @@ RSpec.describe "JSON Shared Entities API" do
           shared_entity_scope: "Account"
         )
 
-        expect(response[:shared_entities].map { |entity| entity[:id] }).to include(shared_entity_id)
+        expect(response.map { |entity| entity[:id] }).to include(shared_entity_id)
       end
     end
   end
@@ -32,7 +32,7 @@ RSpec.describe "JSON Shared Entities API" do
           shared_entity_scope: "Account"
         )
 
-        expect(response[:list_items]).not_to be_empty
+        expect(response).not_to be_empty
       end
     end
   end
