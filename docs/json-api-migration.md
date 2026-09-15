@@ -20,7 +20,7 @@ The tracker describes **repository coverage**, not the complete Microsoft Advert
 | SOAP | `BingAdsRubySdk::Api` | Six WSDL-backed services | `call` with WSDL ordering and XML |
 | REST/JSON | `BingAdsRubySdk::JsonApi` | Campaign Management only | `post`, `put`, and `delete` with JSON |
 
-JSON payload keys are supplied in snake_case and recursively camelized before serialization. JSON responses are symbolized while retaining Microsoft response key casing. JSON error arrays are raised as `Services::Json::ApiError`.
+JSON payload keys are supplied in snake_case and recursively camelized before serialization. JSON responses are recursively snakized like SOAP responses. Per Microsoft's docs, JSON responses only ever expose `PartialErrors`/`NestedPartialErrors` (never SOAP's `BatchErrors`/`OperationErrors`), so JSON errors raise `Errors::PartialError`/`Errors::NestedPartialError`, the same SOAP classes used for those categories.
 
 ## Campaign Management
 

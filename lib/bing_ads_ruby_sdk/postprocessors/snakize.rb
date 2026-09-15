@@ -15,14 +15,15 @@ module BingAdsRubySdk
 
       # NOTE: there is a potential for high memory usage here as we're using recursive method calling
       def process(obj)
-        return obj unless obj.is_a?(Hash)
-
-        obj.each_with_object({}) do |(k, v), h|
-          case v
-          when Hash then v = process(v)
-          when Array then v = v.map { |elt| process(elt) }
+        case obj
+        when Hash
+          obj.each_with_object({}) do |(k, v), h|
+            h[snakize(k)] = process(v)
           end
-          h[snakize(k)] = v
+        when Array
+          obj.map { |elt| process(elt) }
+        else
+          obj
         end
       end
 

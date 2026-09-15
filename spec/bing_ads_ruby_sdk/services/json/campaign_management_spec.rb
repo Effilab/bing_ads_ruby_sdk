@@ -22,8 +22,7 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
       }
     end
     let(:error_list) { Array.new(6, error) }
-    let(:error_class) { BingAdsRubySdk::Services::Json::ApiError }
-    let(:error_message) { "0: 4317 - Error, 0: 4317 - Error (+4 not shown)" }
+    let(:error_message) { "CampaignServiceSharedListIdInvalid - Error" }
 
     context "when the response has no errors" do
       let(:response) { {foo: "bar"} }
@@ -45,27 +44,23 @@ RSpec.describe BingAdsRubySdk::Services::Json::CampaignManagement do
       end
     end
 
-    context "when the response has a Batch error" do
-      let(:response) { {BatchErrors: error_list} }
-
-      it "raises an error" do
-        expect { subject }.to raise_error(error_class, "BatchErrors: #{error_message}")
-      end
-    end
-
-    context "when the response has an Operation error" do
-      let(:response) { {OperationErrors: error_list} }
-
-      it "raises an error" do
-        expect { subject }.to raise_error(error_class, "OperationErrors: #{error_message}")
-      end
-    end
-
     context "when the response has a Partial error" do
       let(:response) { {PartialErrors: error_list} }
 
-      it "raises an error" do
-        expect { subject }.to raise_error(error_class, "PartialErrors: #{error_message}")
+      it "raises a PartialError with batch_error populated" do
+        expect { subject }.to raise_error(BingAdsRubySdk::Errors::PartialError, error_message) do |error|
+          expect(error.batch_error.length).to eq(6)
+        end
+      end
+    end
+
+    context "when the response has a Nested Partial error" do
+      let(:response) { {NestedPartialErrors: [error_list]} }
+
+      it "raises a NestedPartialError with batch_error_collection populated" do
+        expect { subject }.to raise_error(BingAdsRubySdk::Errors::NestedPartialError, error_message) do |error|
+          expect(error.batch_error_collection.flatten.length).to eq(6)
+        end
       end
     end
   end
