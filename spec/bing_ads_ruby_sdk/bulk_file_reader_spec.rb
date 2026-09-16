@@ -131,6 +131,20 @@ RSpec.describe BingAdsRubySdk::BulkFileReader do
       expect(rows).to eq([{"TimePeriod" => "2026-08-02", "Clicks" => "1"}])
     end
 
+    it "processes binary chunks from a streamed ZIP" do
+      zip = Zip::OutputStream.write_buffer do |archive|
+        archive.put_next_entry("campaign.csv")
+        archive.write(csv)
+      end
+      chunks = zip.string.bytes.each_slice(7).map { |bytes| bytes.pack("C*") }
+      rows = []
+      expect(Tempfile).to receive(:create).with("bing-ads-bulk", binmode: true).and_call_original
+
+      described_class.new(chunks.each).each_row { |row| rows << row["Campaign"] }
+
+      expect(rows).to eq(["SDK Bulk Test"])
+    end
+
     it "decompresses GZIP CSV" do
       buffer = StringIO.new(String.new(encoding: Encoding::BINARY))
       gzip = Zlib::GzipWriter.wrap(buffer)
