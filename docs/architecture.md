@@ -53,7 +53,7 @@ Application
 
 `JsonApi` validates versions in `vN` format, creates the JSON headers and OAuth handler, and currently exposes `campaign_management`, `customer_management`, and `bulk`. The JSON Campaign Management service contains selected helpers such as shared-entity, campaign, UET, conversion-goal, and list-item operations. The JSON Customer Management service provides account lookup, account/customer discovery, account update, and customer signup helpers. The JSON Bulk service provides bulk upload URL/status and campaign download/status helpers. `Services::Json::Base#post`, `#put`, and `#delete` remain the generic escape hatches for supported URL paths.
 
-JSON responses are symbolized but retain Microsoft’s response key casing. `Base` raises `Services::Json::ApiError` when `BatchErrors`, `OperationErrors`, or `PartialErrors` contains entries. This differs from SOAP, whose normalized response is checked by `Errors::ErrorHandler`.
+JSON responses are symbolized then recursively snakized like SOAP responses. Per Microsoft's JSON reference docs, JSON responses only ever expose `PartialErrors` (`BatchError[]`), `NestedPartialErrors` (`BatchError[][]`, some Campaign Management operations), and `Errors` (`OperationError[]`, Bulk's `GetBulkUploadStatus`) — never SOAP's `detail`-wrapped `BatchErrors`/`OperationErrors`. `Base` raises the matching SOAP class for each: `Errors::PartialError`, `Errors::NestedPartialError`, `Errors::AdApiFaultDetail`. No JSON-specific error classes exist.
 
 ## Authentication and context
 
@@ -89,7 +89,7 @@ Keep persistence secure and ensure token files are excluded from version control
 
 - OAuth failures originate in Signet or the store and should be handled as authentication/configuration failures.
 - SOAP API faults and partial errors are mapped by `Errors::ErrorHandler` to typed error classes under `lib/bing_ads_ruby_sdk/errors/`.
-- JSON batch, operation, and partial errors raise `Services::Json::ApiError`.
+- JSON partial, nested partial, and Bulk upload-status errors raise the exact same typed classes as SOAP (`Errors::PartialError`, `Errors::NestedPartialError`, `Errors::AdApiFaultDetail`); no JSON-specific error classes exist.
 - Network failures originate in Excon through `HttpClient`; timeout retry behavior is configured centrally.
 
 ## Repository map

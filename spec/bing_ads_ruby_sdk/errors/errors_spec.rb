@@ -11,3 +11,65 @@ RSpec.describe BingAdsRubySdk::Errors::ApplicationFault do
     end
   end
 end
+
+# Per learn.microsoft.com/en-us/advertising/campaign-management-service, JSON API
+# responses only ever expose `PartialErrors` (BatchError[]) and, for some
+# operations, `NestedPartialErrors` (BatchError[][]) at the response root ---
+# never `BatchErrors`/`OperationErrors`, which are SOAP-only `detail` fields.
+RSpec.describe BingAdsRubySdk::Errors::PartialError do
+  let(:error) { {error_code: "CampaignServiceSharedListIdInvalid", message: "Error"} }
+
+  subject(:fault) { described_class.new(response) }
+
+  context "when given a JSON API response" do
+    let(:response) { {partial_errors: [error, error]} }
+
+    it "populates batch_error from the flat array" do
+      expect(fault.batch_error).to eq([error, error])
+    end
+
+    it "deduplicates identical error messages" do
+      expect(fault.message).to eq("CampaignServiceSharedListIdInvalid - Error")
+    end
+  end
+end
+
+RSpec.describe BingAdsRubySdk::Errors::NestedPartialError do
+  let(:error) { {error_code: "CampaignServiceSharedListIdInvalid", message: "Error"} }
+  let(:other_error) { {error_code: "OtherCode", message: "Other error"} }
+
+  subject(:fault) { described_class.new(response) }
+
+  context "when given a JSON API response" do
+    let(:response) { {nested_partial_errors: [[error, error], [other_error]]} }
+
+    it "populates batch_error_collection from the array of arrays" do
+      expect(fault.batch_error_collection).to eq([[error, error], [other_error]])
+    end
+
+    it "flattens nested lists and deduplicates identical error messages" do
+      expect(fault.message).to eq("CampaignServiceSharedListIdInvalid - Error, OtherCode - Other error")
+    end
+  end
+end
+
+# Per learn.microsoft.com/en-us/advertising/bulk-service/getbulkuploadstatus,
+# GetBulkUploadStatus responses expose a top-level `Errors` (OperationError[])
+# field, matching AdApiFaultDetail's `errors` list.
+RSpec.describe BingAdsRubySdk::Errors::AdApiFaultDetail do
+  let(:error) { {error_code: "InvalidCredentials", message: "Authentication failed"} }
+
+  subject(:fault) { described_class.new(response) }
+
+  context "when given a JSON API response" do
+    let(:response) { {errors: [error]} }
+
+    it "populates errors from the response root" do
+      expect(fault.errors).to eq([error])
+    end
+
+    it "formats the message the same way as SOAP" do
+      expect(fault.message).to eq("InvalidCredentials - Authentication failed")
+    end
+  end
+end

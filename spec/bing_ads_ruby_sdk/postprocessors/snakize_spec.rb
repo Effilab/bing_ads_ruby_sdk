@@ -36,4 +36,16 @@ RSpec.describe BingAdsRubySdk::Postprocessors::Snakize do
       long: "1"
     })
   end
+
+  it "recurses into arrays nested inside arrays" do
+    expect(action({
+      "NestedPartialErrors" => [
+        [{"ErrorCode" => "Foo"}, {"ErrorCode" => "Bar"}]
+      ]
+    })).to eq({
+      nested_partial_errors: [
+        [{error_code: "Foo"}, {error_code: "Bar"}]
+      ]
+    })
+  end
 end

@@ -69,8 +69,13 @@ module BingAdsRubySdk
       # The fault hash from the API response detail element
       # @return [Hash] containing the fault information if provided
       # @return [Hash] empty hash if no fault information
+      # JSON API responses have no `detail` wrapper; the lists live at the root
+      # (e.g. GetBulkUploadStatus's top-level `Errors` field).
       def fault_hash
-        raw_response[:detail][fault_key] || {}
+        detail = raw_response[:detail]
+        return raw_response unless detail
+
+        detail[fault_key] || {}
       end
 
       # The fault key that corresponds to the inherited class
@@ -127,11 +132,22 @@ module BingAdsRubySdk
         raw_response[fault_key] || {}
       end
 
+      # JSON API responses put the error list directly under fault_key instead
+      # of nesting it one level deeper as SOAP does (e.g. `batch_error`).
+      def populate_error_lists
+        self.class.error_lists.each do |key|
+          value = fault_hash.is_a?(Array) ? fault_hash : fault_hash[key]
+          instance_variable_set(:"@#{key}", array_wrap(value))
+        end
+      end
+
       # This is overridden because partial errors are structured differently
       # to application faults
       # @return [Hash] containing the details of the error
+      # `.flatten` supports both PartialError's flat BatchError[] and
+      # NestedPartialError's BatchError[][] shape without special-casing either.
       def concatenated_error_messages(error_list)
-        error_list.map do |error|
+        error_list.flatten.map do |error|
           format_message(error[:error_code], error[:message])
         end.uniq.join(", ")
       end
