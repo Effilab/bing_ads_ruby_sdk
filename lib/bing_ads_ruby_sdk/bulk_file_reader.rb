@@ -119,7 +119,7 @@ module BingAdsRubySdk
 
       measure(:each_row) do
         if streamed_content?
-          Tempfile.create("bing-ads-bulk") do |file|
+          Tempfile.create("bing-ads-bulk", binmode: true) do |file|
             content.each { |chunk| file.write(chunk) }
             file.flush
             file.rewind
@@ -254,6 +254,7 @@ module BingAdsRubySdk
           each_row_from_parser(CSV.new(gzip_source, headers: false)) { |row| yield row }
         end
       else
+        file.set_encoding(Encoding::UTF_8)
         each_row_from_parser(CSV.new(file, headers: false)) { |row| yield row }
         output_bytes = input_bytes
       end
